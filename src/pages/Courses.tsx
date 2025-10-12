@@ -88,13 +88,19 @@ const Courses = ({showFooter=true}) => {
   ];
 
   return (
-    <div className="min-h-screen bg-vision-bg">
+    <div className="min-h-screen bg-gradient-to-b from-vision-bg to-white relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute top-40 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+      
       <Header />
-      <main className="pt-16">
+      <main className="pt-16 relative z-10">
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-7xl">
-            <div className="text-center mb-16">
-              <h1 className="text-5xl font-bold mb-6">Courses Offered</h1>
+            <div className="text-center mb-16 animate-fade-in">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+                Courses Offered
+              </h1>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Discover your path to success. We offer a wide range of undergraduate and postgraduate programs designed to nurture your talents and prepare you for the future.
               </p>
@@ -102,12 +108,27 @@ const Courses = ({showFooter=true}) => {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {courses.map((course, index) => (
-                <Card key={index} className="p-6 bg-background text-center flex flex-col justify-between">
+                <Card 
+                  key={index} 
+                  className="p-6 bg-background text-center flex flex-col justify-between group hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 border border-border hover:border-primary/30 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
                   <div>
-                    <h3 className="text-xl font-bold mb-3">{course.title}</h3>
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                      <span className="text-2xl font-bold text-primary">
+                        {course.title.charAt(0)}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                      {course.title}
+                    </h3>
                     <p className="text-sm text-muted-foreground mb-6">{course.description}</p>
                   </div>
-                  <Button variant="outline" size="sm" className="w-fit mx-auto">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-fit mx-auto hover:scale-110 transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
+                  >
                     {course.buttonText}
                   </Button>
                 </Card>
