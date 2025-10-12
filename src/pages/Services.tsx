@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Lightbulb, Compass, Award, GraduationCap } from "lucide-react";
 
-const Services = () => {
+const Services = ({showFooter=true}) => {
   const services = [
     {
       icon: Lightbulb,
@@ -87,7 +87,7 @@ const Services = () => {
           </div>
         </section>
       </main>
-      <Footer />
+     {showFooter && <Footer />}
     </div>
   );
 };

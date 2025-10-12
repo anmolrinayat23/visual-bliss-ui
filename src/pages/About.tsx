@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const About = () => {
+const About = ({showFooter=true}) => {
   const team = [
     {
       name: "Sarah Chen, CEO",
@@ -119,7 +119,7 @@ const About = () => {
           </div>
         </section>
       </main>
-      <Footer />
+     {showFooter && <Footer />}
     </div>
   );
 };

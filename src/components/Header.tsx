@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Blocks } from "lucide-react";
 import { Link } from "react-router-dom";
+import finalLogo from "@/assets/final logo.png";
 
 const Header = () => {
   const navItems = [
@@ -18,7 +19,8 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <Blocks className="w-8 h-8 text-primary" />
+               <img 
+          src={finalLogo}  alt=""   className="w-10 h-10 text-primary" />
             <span className="text-xl font-bold text-foreground">Educate Me</span>
           </Link>
 

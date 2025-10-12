@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const EmMat = () => {
+const EmMat = ({showFooter=true}) => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -130,7 +130,7 @@ const EmMat = () => {
           </div>
         </section>
       </main>
-      <Footer />
+    { showFooter && <Footer />}
     </div>
   );
 };

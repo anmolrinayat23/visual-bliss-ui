@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import counsellingImage from "@/assets/counselling.jpg";
 
-const BookSession = () => {
+const BookSession = ({showFooter=true}) => {
   return (
     <div className="min-h-screen bg-vision-bg">
       <Header />
@@ -63,7 +63,7 @@ const BookSession = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   );
 };

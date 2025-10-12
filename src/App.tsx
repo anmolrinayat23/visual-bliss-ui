@@ -26,7 +26,6 @@ const App = () => (
           <Route path="/em-mat" element={<EmMat />} />
           <Route path="/session" element={<BookSession />} />
           <Route path="/about" element={<About />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const Courses = () => {
+const Courses = ({showFooter=true}) => {
   const courses = [
     {
       title: "B.Tech",
@@ -116,7 +116,7 @@ const Courses = () => {
           </div>
         </section>
       </main>
-      <Footer />
+     {showFooter && <Footer />}
     </div>
   );
 };
