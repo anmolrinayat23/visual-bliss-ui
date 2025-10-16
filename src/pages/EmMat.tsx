@@ -9,28 +9,40 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 const EmMat = ({showFooter=true}) => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Decorative blur elements */}
+      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      
       <Header />
-      <main className="pt-16">
+      <main className="pt-16 relative z-10">
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
-            <div className="mb-12">
-              <h1 className="text-5xl font-bold mb-6">EM-MAT Exam</h1>
+            <div className="mb-12 animate-fade-in">
+              <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+                EM-MAT Exam
+              </h1>
               <p className="text-lg text-muted-foreground max-w-3xl">
                 The Educate Me Aptitude Test (EM-MAT) is a standardized test used for admissions into various undergraduate and postgraduate programs. It assesses a candidate's aptitude in areas such as quantitative reasoning, verbal reasoning, and analytical skills.
               </p>
             </div>
 
-            <Tabs defaultValue="ug" className="w-full">
-              <TabsList className="mb-8">
-                <TabsTrigger value="ug" className="text-base px-8">UG Track</TabsTrigger>
-                <TabsTrigger value="pg" className="text-base px-8">PG Track</TabsTrigger>
+            <Tabs defaultValue="ug" className="w-full animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <TabsList className="mb-8 bg-gradient-to-r from-muted to-muted/50 border border-border/50">
+                <TabsTrigger value="ug" className="text-base px-8 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">
+                  UG Track
+                </TabsTrigger>
+                <TabsTrigger value="pg" className="text-base px-8 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">
+                  PG Track
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="ug">
                 <div className="grid lg:grid-cols-3 gap-8">
-                  <Card className="lg:col-span-2 p-8">
-                    <h2 className="text-3xl font-bold mb-8">Application Form</h2>
+                  <Card className="lg:col-span-2 p-8 shadow-soft hover:shadow-hover transition-all duration-300 border-border/50 backdrop-blur-sm bg-card/95">
+                    <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+                      Application Form
+                    </h2>
                     
                     <form className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-6">
@@ -106,16 +118,24 @@ const EmMat = ({showFooter=true}) => {
                         </div>
                       </div>
 
-                      <Button size="lg" className="w-full">Apply Now</Button>
+                      <Button size="lg" className="w-full group hover:scale-[1.02] transition-all duration-300">
+                        Apply Now
+                        <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </Button>
                     </form>
                   </Card>
 
-                  <Card className="p-8 bg-gradient-to-br from-muted to-muted/50 flex flex-col justify-center">
-                    <h3 className="text-3xl font-bold mb-4">Super 100 Batch</h3>
-                    <p className="text-muted-foreground mb-8">
+                  <Card className="p-8 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 flex flex-col justify-center border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+                    <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent relative z-10">
+                      Super 100 Batch
+                    </h3>
+                    <p className="text-muted-foreground mb-8 relative z-10">
                       Join our exclusive Super 100 Batch for personalized guidance and enhanced preparation for the EM-MAT exam.
                     </p>
-                    <Button size="lg">Learn More</Button>
+                    <Button size="lg" className="relative z-10 group-hover:scale-105 transition-transform duration-300">
+                      Learn More
+                    </Button>
                   </Card>
                 </div>
               </TabsContent>
