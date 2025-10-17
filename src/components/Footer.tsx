@@ -24,7 +24,6 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-hero-dark to-black text-white py-16 relative overflow-hidden">
       {/* Decorative gradient line */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
       
       {/* Background decorative elements */}
       <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
@@ -35,10 +34,18 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4 group">
             <Link to="/" className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
-              <Blocks className="w-8 h-8 text-primary animate-pulse" />
-              <span className="text-xl font-bold bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
-                Educate Me
-              </span>
+
+
+            <img 
+  src="/logo.png" 
+  alt="Educate Me Logo" 
+  className="w-20 h-20 rounded-full object-contain "
+/>
+<span className="text-2xl font-bold bg-white bg-clip-text text-transparent">
+  Educate Me
+</span>
+
+
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed transition-colors duration-300 group-hover:text-gray-300">
               Empowering students to achieve their academic dreams through expert guidance and personalized counselling.
