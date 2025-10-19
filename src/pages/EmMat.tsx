@@ -7,150 +7,280 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const EmMat = ({showFooter=true}) => {
+const EmMat = ({ showFooter = true }) => {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Decorative blur elements */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-16 relative z-10">
-        <section className="py-20 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="mb-12 animate-fade-in">
-              <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+      <main className="pt-20">
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-8xl">
+            {/* Header Section */}
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 EM-MAT Exam
               </h1>
-              <p className="text-lg text-muted-foreground max-w-3xl">
-                The Educate Me Aptitude Test (EM-MAT) is a standardized test used for admissions into various undergraduate and postgraduate programs. It assesses a candidate's aptitude in areas such as quantitative reasoning, verbal reasoning, and analytical skills.
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                The Educate Me Aptitude Test (EM-MAT) is a standardized test used for admissions into various 
+                undergraduate and postgraduate programs. It assesses quantitative reasoning, verbal reasoning, 
+                and analytical skills.
               </p>
             </div>
 
-            <Tabs defaultValue="ug" className="w-full animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <TabsList className="mb-8 bg-gradient-to-r from-muted to-muted/50 border border-border/50">
-                <TabsTrigger value="ug" className="text-base px-8 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">
-                  UG Track
-                </TabsTrigger>
-                <TabsTrigger value="pg" className="text-base px-8 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">
-                  PG Track
-                </TabsTrigger>
-              </TabsList>
+          <Tabs defaultValue="ug" className="w-full ">
 
-              <TabsContent value="ug">
-                <div className="grid lg:grid-cols-3 gap-8">
-                  <Card className="lg:col-span-2 p-8 shadow-soft hover:shadow-hover transition-all duration-300 border-border/50 backdrop-blur-sm bg-card/95">
-                    <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                      Application Form
-                    </h2>
-                    
-                    <form className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <Label htmlFor="name">Candidate Name</Label>
-                          <Input id="name" placeholder="Enter your full name" className="mt-2" />
-                        </div>
-                        <div>
-                          <Label htmlFor="class">Class</Label>
-                          <Select>
-                            <SelectTrigger className="mt-2">
-                              <SelectValue placeholder="Select your class" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="10">Class 10</SelectItem>
-                              <SelectItem value="11">Class 11</SelectItem>
-                              <SelectItem value="12">Class 12</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
+<TabsList className="flex w-full max-w-md mx-auto mb-12  bg-[#f4f9fc] rounded-2xl p-1.5 gap-8">
 
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <Label htmlFor="stream">Stream</Label>
-                          <Select>
-                            <SelectTrigger className="mt-2">
-                              <SelectValue placeholder="Select your stream" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="science">Science</SelectItem>
-                              <SelectItem value="commerce">Commerce</SelectItem>
-                              <SelectItem value="arts">Arts</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div>
-                          <Label htmlFor="email">Email</Label>
-                          <Input id="email" type="email" placeholder="you@example.com" className="mt-2" />
-                        </div>
-                      </div>
+    <TabsTrigger
+      value="ug"
+      className="flex-1 text-base font-semibold rounded-xl data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-center py-3.5 hover:bg-gray-200"
+    >
+      UG Track
+    </TabsTrigger>
 
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <Label htmlFor="mobile">Mobile</Label>
-                          <Input id="mobile" placeholder="Enter your mobile number" className="mt-2" />
-                        </div>
-                        <div>
-                          <Label htmlFor="city">City</Label>
-                          <Input id="city" placeholder="Enter your city" className="mt-2" />
-                        </div>
-                      </div>
+    <TabsTrigger
+      value="pg"
+      className="flex-1 text-base font-semibold rounded-xl data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-center py-3.5 hover:bg-gray-200"
+    >
+      PG Track
+    </TabsTrigger>
+</TabsList>
 
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <Label htmlFor="state">State</Label>
-                          <Input id="state" placeholder="Enter your state" className="mt-2" />
-                        </div>
-                        <div>
-                          <Label htmlFor="grade10">10th Grade (%)</Label>
-                          <Input id="grade10" placeholder="e.g. 85.5" className="mt-2" />
-                        </div>
-                      </div>
+  <TabsContent value="ug" className="space-y-8">
+    <div className="grid lg:grid-cols-3 gap-8">
+      {/* Application Form */}
+      <Card className="lg:col-span-2 p-8 bg-white border border-gray-200  rounded-xl">
+        <div className="mb-10">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">Application Form</h2>
+          <p className="text-gray-600 text-lg">Fill in your details to apply for the EM-MAT exam</p>
+        </div>
 
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <Label htmlFor="grade12">12th Grade (%)</Label>
-                          <Input id="grade12" placeholder="e.g. 92.0" className="mt-2" />
-                        </div>
-                        <div>
-                          <Label htmlFor="cgpa">Semester Grade (CGPA)</Label>
-                          <Input id="cgpa" placeholder="e.g. 8.8" className="mt-2" />
-                        </div>
-                      </div>
+        <form className="space-y-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <Label htmlFor="name" className="text-sm font-semibold text-gray-800">
+                Candidate Name *
+              </Label>
+              <Input 
+                id="name" 
+                placeholder="Enter your full name" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+            <div className="space-y-3">
+              <Label htmlFor="class" className="text-sm font-semibold text-gray-800">
+                Class *
+              </Label>
+              <Select>
+                <SelectTrigger className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300">
+                  <SelectValue placeholder="Select your class" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="12">Class 12</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
 
-                      <Button size="lg" className="w-full group hover:scale-[1.02] transition-all duration-300">
-                        Apply Now
-                        <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
-                      </Button>
-                    </form>
-                  </Card>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <Label htmlFor="stream" className="text-sm font-semibold text-gray-800">
+                Stream *
+              </Label>
+              <Select>
+                <SelectTrigger className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300">
+                  <SelectValue placeholder="Select your stream" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="science">Science</SelectItem>
+                  <SelectItem value="commerce">Commerce</SelectItem>
+                  <SelectItem value="arts">Arts</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-3">
+              <Label htmlFor="email" className="text-sm font-semibold text-gray-800">
+                Email Address *
+              </Label>
+              <Input 
+                id="email" 
+                type="email" 
+                placeholder="you@example.com" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+          </div>
 
-                  <Card className="p-8 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 flex flex-col justify-center border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
-                    <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent relative z-10">
-                      Super 100 Batch
-                    </h3>
-                    <p className="text-muted-foreground mb-8 relative z-10">
-                      Join our exclusive Super 100 Batch for personalized guidance and enhanced preparation for the EM-MAT exam.
-                    </p>
-                    <Button size="lg" className="relative z-10 group-hover:scale-105 transition-transform duration-300">
-                      Learn More
-                    </Button>
-                  </Card>
-                </div>
-              </TabsContent>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <Label htmlFor="mobile" className="text-sm font-semibold text-gray-800">
+                Mobile Number *
+              </Label>
+              <Input 
+                id="mobile" 
+                placeholder="Enter your mobile number" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+            <div className="space-y-3">
+              <Label htmlFor="city" className="text-sm font-semibold text-gray-800">
+                City *
+              </Label>
+              <Input 
+                id="city" 
+                placeholder="Enter your city" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+          </div>
 
-              <TabsContent value="pg">
-                <Card className="p-8">
-                  <h2 className="text-3xl font-bold mb-4">PG Track Application</h2>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </Card>
-              </TabsContent>
-            </Tabs>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <Label htmlFor="state" className="text-sm font-semibold text-gray-800">
+                State *
+              </Label>
+              <Input 
+                id="state" 
+                placeholder="Enter your state" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+            <div className="space-y-3">
+              <Label htmlFor="grade10" className="text-sm font-semibold text-gray-800">
+                10th Grade (%) *
+              </Label>
+              <Input 
+                id="grade10" 
+                placeholder="e.g. 85.5" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <Label htmlFor="grade12" className="text-sm font-semibold text-gray-800">
+                12th Grade (%) *
+              </Label>
+              <Input 
+                id="grade12" 
+                placeholder="e.g. 92.0" 
+                className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+              />
+            </div>
+           
+          </div>
+
+          <Button 
+            size="lg" 
+            className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6"
+          >
+            Apply Now
+          </Button>
+        </form>
+      </Card>
+
+      {/* Super 100 Batch Card */}
+     <Card className="p-8 bg-white border border-gray-200 relative overflow-hidden rounded-xl shadow-lg">
+  <div className="relative z-10">
+    <div className="mb-6">
+      <span className="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
+        Exclusive Offer
+      </span>
+      <h3 className="text-2xl font-bold text-gray-900 mb-4">Super 100 Batch</h3>
+      <p className="text-gray-600 mb-6 leading-relaxed text-base">
+        Join our exclusive Super 100 Batch for personalized guidance and enhanced preparation for the EM-MAT exam.
+      </p>
+    </div>
+    
+    <ul className="space-y-4 mb-8">
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Personalized mentorship</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Comprehensive study material</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Regular mock tests</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Expert faculty guidance</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Performance Growth Report</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Student Progress Review</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+          <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+        </div>
+        <span className="text-gray-700 font-medium">Achievement Tracking Tool</span>
+      </li>
+    </ul>
+
+    {/* Why Join Section */}
+    <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
+      <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3>
+      <p className="text-gray-600 text-center text-sm leading-relaxed">
+        Because success needs strategy — and the Super 100 Batch gives you everything you need to crack EM-MAT with confidence!
+      </p>
+    </div>
+    
+    <Button 
+      size="lg" 
+      className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 py-6"
+    >
+      Learn More
+    </Button>
+  </div>
+  
+  {/* Background Pattern - Light blur boxes */}
+  <div className="absolute top-0 right-0 w-40 h-40 bg-orange-50 rounded-full -translate-y-20 translate-x-20 blur-xl opacity-60"></div>
+  <div className="absolute bottom-0 left-0 w-32 h-32 bg-orange-50 rounded-full translate-y-16 -translate-x-16 blur-xl opacity-60"></div>
+</Card>
+    </div>
+  </TabsContent>
+
+  <TabsContent value="pg">
+    <Card className="p-16 text-center bg-white border border-gray-200 shadow-xl rounded-3xl">
+      <div className="max-w-lg mx-auto">
+        <div className="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <span className="text-2xl">🎓</span>
+        </div>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">PG Track Application</h2>
+        <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+          The PG track application will be available soon. We're working hard to bring you the best experience.
+        </p>
+        <Button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-lg px-8 py-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+          Notify Me When Available
+        </Button>
+      </div>
+    </Card>
+  </TabsContent>
+</Tabs>
           </div>
         </section>
       </main>
-    { showFooter && <Footer />}
+      {showFooter && <Footer />}
     </div>
   );
 };
