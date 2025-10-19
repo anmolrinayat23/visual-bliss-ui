@@ -2,142 +2,235 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useInView } from "react-intersection-observer";
+import { useState } from "react";
 
-const Courses = ({showFooter=true}) => {
+// Animation wrapper component
+const AnimatedCard = ({ children, delay = 0 }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${
+        inView
+          ? "opacity-100 transform translate-y-0"
+          : "opacity-0 transform translate-y-8"
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const Courses = ({ showFooter = true }) => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  
   const courses = [
     {
+      title: "MBA",
+      description: "Master of Business Administration for strategic leadership and advanced management skills.",
+      buttonText: "Apply Now",
+      category: "Management",
+    },
+    {
       title: "B.Tech",
-      description: "Engineering principles and technological innovation.",
-      buttonText: "Learn More"
+      description: "Engineering program with hands-on learning in AI, data science, electronics, and mechanical systems.",
+      buttonText: "Learn More",
+      category: "Engineering",
     },
     {
       title: "BBA",
-      description: "Fundamentals of business management and leadership.",
-      buttonText: "Learn More"
+      description: "Business administration program focusing on global markets, management strategies, and entrepreneurship.",
+      buttonText: "Learn More",
+      category: "Management",
     },
     {
       title: "BA",
-      description: "Exploration of humanities, arts, and social sciences.",
-      buttonText: "Learn More"
+      description: "Arts program nurturing analytical thinking and communication skills for media, education, and civil services.",
+      buttonText: "Learn More",
+      category: "Arts",
     },
     {
       title: "Liberal Arts",
-      description: "Interdisciplinary studies for critical thinking.",
-      buttonText: "Learn More"
+      description: "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
+      buttonText: "Learn More",
+      category: "Arts",
     },
     {
       title: "Law",
-      description: "Legal studies for justice and advocacy.",
-      buttonText: "Learn More"
+      description: "Legal studies program with moot courts and internships for constitutional, civil, and corporate law.",
+      buttonText: "Learn More",
+      category: "Law",
     },
     {
       title: "B.Com",
-      description: "Commerce, finance, and accounting expertise.",
-      buttonText: "Learn More"
+      description: "Commerce degree for accounting, finance, taxation, and business analytics careers.",
+      buttonText: "Learn More",
+      category: "Commerce",
     },
     {
       title: "B.Sc",
-      description: "Scientific inquiry and research foundation.",
-      buttonText: "Learn More"
+      description: "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
+      buttonText: "Learn More",
+      category: "Science",
     },
     {
       title: "BCA",
-      description: "Computer applications and software development.",
-      buttonText: "Learn More"
+      description: "IT program developing expertise in programming, software design, and database management.",
+      buttonText: "Learn More",
+      category: "Computer",
     },
     {
       title: "MCA",
-      description: "Advanced concepts in computer applications.",
-      buttonText: "Apply Now"
+      description: "Advanced computing program with AI, machine learning, cybersecurity, and full-stack development.",
+      buttonText: "Apply Now",
+      category: "Computer",
     },
     {
       title: "PGDM",
-      description: "Postgraduate diploma in management studies.",
-      buttonText: "Apply Now"
+      description: "Management program bridging theory with practice through case-based learning and leadership workshops.",
+      buttonText: "Apply Now",
+      category: "Management",
     },
     {
       title: "MA",
-      description: "Master of Arts in various specializations.",
-      buttonText: "Apply Now"
+      description: "Advanced arts program emphasizing research and critical thinking for academic and creative professions.",
+      buttonText: "Apply Now",
+      category: "Arts",
     },
     {
       title: "M.Tech",
-      description: "Master of Technology for advanced engineering.",
-      buttonText: "Apply Now"
+      description: "Advanced engineering training with specialized coursework and research projects for technological innovation.",
+      buttonText: "Apply Now",
+      category: "Engineering",
     },
     {
       title: "Designing",
-      description: "Creative design in fashion, graphics, and more.",
-      buttonText: "Learn More"
+      description: "Creative program for fashion, interior, and graphic design with focus on visual communication.",
+      buttonText: "Learn More",
+      category: "Design",
     },
     {
       title: "Architecture",
-      description: "Designing buildings and structural systems.",
-      buttonText: "Learn More"
+      description: "Program integrating creativity, technology, and sustainability for urban planning and environmental design.",
+      buttonText: "Learn More",
+      category: "Design",
     },
     {
       title: "BMS",
-      description: "Bachelor of Management Studies.",
-      buttonText: "Learn More"
+      description: "Management studies foundation for organizational behavior, marketing, and strategic management.",
+      buttonText: "Learn More",
+      category: "Management",
     },
     {
       title: "BPT",
-      description: "Bachelor of Physiotherapy program.",
-      buttonText: "Learn More"
-    }
+      description: "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
+      buttonText: "Learn More",
+      category: "Medical",
+    },
   ];
 
+  // Get unique categories for filtering
+  const categories = ["All", ...new Set(courses.map(course => course.category))];
+
+  // Filter courses based on selected category
+  const filteredCourses = selectedCategory === "All" 
+    ? courses 
+    : courses.filter(course => course.category === selectedCategory);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-vision-bg to-white relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute top-40 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
-      
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-16 relative z-10">
-        <section className="py-20 px-6">
+      <main className="pt-20">
+        <section className="py-12 px-6">
           <div className="container mx-auto max-w-7xl">
-            <div className="text-center mb-16 animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+            {/* Header Section */}
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Courses Offered
               </h1>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Discover your path to success. We offer a wide range of undergraduate and postgraduate programs designed to nurture your talents and prepare you for the future.
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Discover your path to success with our comprehensive range of undergraduate and postgraduate programs.
               </p>
+              
+              {/* Category Filters */}
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                {categories.map((category, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                      selectedCategory === category
+                        ? "bg-orange-500 text-white"
+                        : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {courses.map((course, index) => (
-                <Card 
-                  key={index} 
-                  className="p-6 bg-background text-center flex flex-col justify-between group hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 border border-border hover:border-primary/30 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  <div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                      <span className="text-2xl font-bold text-primary">
-                        {course.title.charAt(0)}
+            {/* Courses Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredCourses.map((course, index) => (
+                <AnimatedCard key={index} delay={index * 100}>
+                  <Card className="p-6 bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300 group hover:shadow-lg h-full flex flex-col cursor-pointer">
+                    {/* Course Icon - Centered */}
+                    <div className="flex justify-center mb-4">
+                      <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <span className="text-xl font-bold text-orange-500">
+                          {course.title.charAt(0)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Course Category */}
+                    <div className="mb-3 text-center">
+                      <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                        {course.category}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+
+                    {/* Course Title */}
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-blue-600 transition-colors duration-300">
                       {course.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-6">{course.description}</p>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="w-fit mx-auto hover:scale-110 transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
-                  >
-                    {course.buttonText}
-                  </Button>
-                </Card>
+
+                    {/* Course Description */}
+                    <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow text-center">
+                      {course.description}
+                    </p>
+
+                    {/* Action Button - Orange Only */}
+                    <div className="mt-auto">
+                      <Button
+                        size="sm"
+                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+                      >
+                        {course.buttonText}
+                      </Button>
+                    </div>
+                  </Card>
+                </AnimatedCard>
               ))}
             </div>
+
+            {/* Show message if no courses found */}
+            {filteredCourses.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">No courses found in this category.</p>
+              </div>
+            )}
           </div>
         </section>
       </main>
-     {showFooter && <Footer />}
+      {showFooter && <Footer />}
     </div>
   );
 };

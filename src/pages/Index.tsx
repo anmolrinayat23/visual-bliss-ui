@@ -28,13 +28,13 @@ const Index = () => {
         <Header />
         <main className="pt-16">
           <Hero />
-          <Vision />
           <Services showFooter={false}/>
           <Courses showFooter={false}/>
           <EmMat showFooter={false}/>
           <BookSession showFooter={false}/>
           <About showFooter={false}/>
         </main>
+        
         <Footer />
       </div>
     </div>
