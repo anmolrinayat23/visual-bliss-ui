@@ -10,29 +10,29 @@ const About = ({showFooter=true}) => {
     {
       name: "Mr. Nikhil Sewaramani",
       role: "Founder & CEO",
-      description: "From call center professional to education visionary, Nikhil's journey embodies ambition and purpose. IIHM Kolkata graduate with international exposure from Portland, USA.",
-      achievement: "5+ years in education leadership at Bennett University & Sharda University. Founded Educate-Me to empower young minds through innovative guidance.",
+      description: "From call center professional to education visionary, Nikhil's journey embodies ambition and purpose.",
+      achievement: "IIHM Kolkata graduate with 5+ years in education leadership at Bennett & Sharda University.",
       avatar: "NS",
-       image: "/nikhil.jpg",
-      highlight: "Inspiring growth, purpose, and excellence in every student"
+      image: "/nikhil.jpg",
+      highlight: "Inspiring growth, purpose, and excellence"
     },
     {
       name: "Mr. Nilesh Raut",
       role: "Financial Strategist",
       description: "3.5+ years as Financial Analyst with expertise in inventory management and financial operations.",
-      achievement: "Bachelor's from NRI College Bhopal, PGDCA from Makhanlal Institute, MBA from SAM Global University.",
+      achievement: "Bachelor's from NRI College, PGDCA from Makhanlal Institute, MBA from SAM Global University.",
       avatar: "NR",
-       image: "/nilesh.jpg",
-      highlight: "Analytical mindset driving operational excellence"
+      image: "/nilesh.jpg",
+      highlight: "Analytical mindset driving excellence"
     },
     {
       name: "Ms. Sarkar",
       role: "Student Counseling Head",
-      description: "10+ years transforming student lives through counseling and academic administration.",
-      achievement: "Expert in student support, tutoring, and guiding educational journeys with precision.",
+      description: "Over a decade of experience in student counseling, mentoring, and academic administration.",
+      achievement: "Expert in guiding educational journeys with empathy and strong administrative skills.",
       avatar: "MS",
-       image: "/sulekha.jpg",
-      highlight: "Empathetic mentor unlocking student potential"
+      image: "/sulekha.jpg",
+      highlight: "Empathetic mentor unlocking potential"
     }
   ];
 
@@ -63,9 +63,8 @@ const About = ({showFooter=true}) => {
               <span className="text-sm font-semibold text-gray-700">Transforming Education Since 2018</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6 leading-tight">
-              Redefining   Education
+              Redefining Education
               <span className="block bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
-              
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
@@ -73,7 +72,6 @@ const About = ({showFooter=true}) => {
             </p>
           </div>
         </section>
-
 
         {/* Vision Section - Modern Grid */}
         <section className="py-20 px-6 bg-gradient-to-br from-orange-50 to-blue-50">
@@ -136,51 +134,45 @@ const About = ({showFooter=true}) => {
               <p className="text-xl text-gray-600">Meet the leaders shaping the future of education</p>
             </div>
 
-         <div className="grid lg:grid-cols-3 gap-8">
-  {leadershipTeam.map((member, index) => (
-    <Card key={index} className="group bg-white border-2 border-gray-200 hover:border-blue-300  transition-all duration-500 overflow-hidden">
-      <div className="p-8">
-        <div className="flex flex-col items-center text-center mb-6">
-          <div className="relative mb-4">
-            {/* Replace Avatar with Image */}
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-orange-500 border-4 border-white shadow-lg group-hover:scale-110 transition-transform duration-500 rounded-full overflow-hidden">
-              <img 
-                src={member.image} // Add image URL to your team data
-                alt={member.name}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to avatar if image fails to load
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
-              />
-              {/* Fallback Avatar */}
-              <div className="w-full h-full hidden items-center justify-center text-white font-bold text-xl">
-                {member.avatar}
-              </div>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {leadershipTeam.map((member, index) => (
+                <Card key={index} className="group bg-white border-2 border-gray-200 hover:border-blue-300 transition-all duration-500 overflow-hidden">
+                  <div className="p-8">
+                    <div className="flex flex-col items-center text-center mb-6">
+                      <div className="relative mb-4">
+                        <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-orange-500 border-4 border-white shadow-lg group-hover:scale-110 transition-transform duration-500 rounded-full overflow-hidden">
+                          <img 
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                          <div className="w-full h-full hidden items-center justify-center text-white font-bold text-xl">
+                            {member.avatar}
+                          </div>
+                        </div>
+                        <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
+                      </div>
+                      <h3 className="text-xl font-black text-gray-900">{member.name}</h3>
+                      <p className="text-orange-500 font-bold">{member.role}</p>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <p className="text-gray-600 leading-relaxed text-sm">{member.description}</p>
+                      <p className="text-gray-700 font-medium text-sm">{member.achievement}</p>
+                      <div className="bg-blue-100 p-4 rounded-lg border border-blue-200">
+                        <p className="text-black font-semibold text-sm text-center">{member.highlight}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
-            <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
-          </div>
-          <h3 className="text-xl font-black text-gray-900">{member.name}</h3>
-          <p className="text-orange-500 font-bold">{member.role}</p>
-        </div>
-        
-        <div className="space-y-4">
-          <p className="text-gray-600 leading-relaxed">{member.description}</p>
-          <p className="text-gray-700 font-medium">{member.achievement}</p>
-          <div className="bg-blue-100  p-4 rounded-lg border border-blue-200">
-            <p className="text-black font-semibold text-sm text-center">{member.highlight}</p>
-          </div>
-        </div>
-      </div>
-    </Card>
-  ))}
-</div>
-
           </div>
         </section>
-
-       
       </main>
       {showFooter && <Footer />}
     </div>
