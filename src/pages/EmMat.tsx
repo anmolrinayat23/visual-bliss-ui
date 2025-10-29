@@ -448,7 +448,7 @@ const EmMat = ({ showFooter = true }) => {
                         </li>
                         <li className="flex items-center">
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            <div className="w-2 h-2 bg-orange-500 gitrounded-full"></div>
                           </div>
                           <span className="text-gray-700 font-medium">Regular mock tests</span>
                         </li>
