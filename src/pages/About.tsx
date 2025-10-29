@@ -146,8 +146,12 @@ const About = ({showFooter=true}) => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                             onError={(e) => {
-                              e.target.style.display = 'none';
-                              e.target.nextSibling.style.display = 'flex';
+                              const target = e.target as HTMLImageElement;
+                              const nextSibling = target.nextSibling as HTMLElement;
+                              if (nextSibling) {
+                                target.style.display = 'none';
+                                nextSibling.style.display = 'flex';
+                              }
                             }}
                           />
                           <div className="w-full h-full hidden items-center justify-center text-white font-bold text-xl">
