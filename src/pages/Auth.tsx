@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,12 +10,16 @@ import { LogIn, UserPlus, Mail, Lock, User, ArrowRight, Sparkles } from "lucide-
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     // Add your auth logic here
-    setTimeout(() => setIsLoading(false), 2000);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/dashboard");
+    }, 2000);
   };
 
   return (
@@ -79,17 +83,17 @@ const Auth = () => {
           {/* Auth Card */}
           <Card className="backdrop-blur-xl bg-white/80 border-white/50 shadow-2xl overflow-hidden">
             <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-gray-100/80">
+              <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-orange-50 to-orange-100/80">
                 <TabsTrigger
                   value="login"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white transition-all duration-300"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-orange-600 data-[state=active]:text-white transition-all duration-300 data-[state=active]:shadow-lg"
                 >
                   <LogIn className="w-4 h-4 mr-2" />
                   Login
                 </TabsTrigger>
                 <TabsTrigger
                   value="signup"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-orange-600 data-[state=active]:text-white transition-all duration-300"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-orange-600 data-[state=active]:text-white transition-all duration-300 data-[state=active]:shadow-lg"
                 >
                   <UserPlus className="w-4 h-4 mr-2" />
                   Sign Up
@@ -108,14 +112,16 @@ const Auth = () => {
                     <div className="space-y-4 mb-6">
                       <div className="text-center mb-6">
                         <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ type: "spring", delay: 0.2 }}
-                          className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 mb-4 shadow-lg"
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ type: "spring", delay: 0.2, duration: 0.6 }}
+                          className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 mb-4 shadow-lg animate-pulse-ring"
                         >
-                          <Sparkles className="w-8 h-8 text-white" />
+                          <Sparkles className="w-8 h-8 text-white animate-sparkle" />
                         </motion.div>
-                        <h2 className="text-2xl font-bold text-gray-900">Welcome Back!</h2>
+                        <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
+                          Welcome Back!
+                        </h2>
                         <p className="text-gray-600 mt-2">Continue your learning journey</p>
                       </div>
 
@@ -130,12 +136,12 @@ const Auth = () => {
                             Email Address
                           </Label>
                           <div className="relative group">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-orange-500 transition-all group-focus-within:scale-110" />
                             <Input
                               id="login-email"
                               type="email"
                               placeholder="you@example.com"
-                              className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all"
+                              className="pl-10 h-12 border-gray-300 focus:border-orange-500 focus:ring-orange-500 focus:ring-2 transition-all"
                               required
                             />
                           </div>
@@ -151,12 +157,12 @@ const Auth = () => {
                             Password
                           </Label>
                           <div className="relative group">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-orange-500 transition-all group-focus-within:scale-110 group-focus-within:rotate-12" />
                             <Input
                               id="login-password"
                               type="password"
                               placeholder="••••••••"
-                              className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all"
+                              className="pl-10 h-12 border-gray-300 focus:border-orange-500 focus:ring-orange-500 focus:ring-2 transition-all"
                               required
                             />
                           </div>
@@ -177,7 +183,7 @@ const Auth = () => {
                               Remember me
                             </span>
                           </label>
-                          <a href="#" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors">
+                          <a href="#" className="text-orange-600 hover:text-orange-700 hover:underline transition-colors">
                             Forgot password?
                           </a>
                         </motion.div>
@@ -189,20 +195,23 @@ const Auth = () => {
                         >
                           <Button
                             type="submit"
-                            className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                            className="w-full h-12 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
                             disabled={isLoading}
                           >
-                            {isLoading ? (
-                              <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                Logging in...
-                              </div>
-                            ) : (
-                              <div className="flex items-center gap-2">
-                                Sign In
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                              </div>
-                            )}
+                            <span className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+                            <span className="relative">
+                              {isLoading ? (
+                                <div className="flex items-center gap-2">
+                                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                  Logging in...
+                                </div>
+                              ) : (
+                                <div className="flex items-center gap-2">
+                                  Sign In
+                                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </div>
+                              )}
+                            </span>
                           </Button>
                         </motion.div>
                       </form>
