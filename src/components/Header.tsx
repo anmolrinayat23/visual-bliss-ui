@@ -41,9 +41,14 @@ const Header = () => {
             ))}
           </nav>
 
-          <Button size="lg" className="hidden lg:flex hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-            Book Counselling
-          </Button>
+          <div className="hidden lg:flex items-center gap-3">
+            <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-all duration-300">
+              <Link to="/auth">Login</Link>
+            </Button>
+            <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Link to="/session">Book Counselling</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </header>
