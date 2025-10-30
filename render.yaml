@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: visual-bliss-ui
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: dist
+    buildFilter:
+      paths:
+        - package.json
+        - vite.config.*
+        - src/**
+        - public/**
