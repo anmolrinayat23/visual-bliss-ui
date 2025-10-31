@@ -105,63 +105,59 @@ const EmMat = ({ showFooter = true }) => {
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
                 EM-MAT Exam
               </h1>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0">
-                The Educate Me Aptitude Test (EM-MAT) is a standardized test used
-                for admissions into various undergraduate and postgraduate programs.
-                It assesses quantitative reasoning, verbal reasoning, and analytical
-                skills.
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                The Educate Me Aptitude Test (EM-MAT) is a standardized test used for admissions into various
+                undergraduate and postgraduate programs. It assesses quantitative reasoning, verbal reasoning,
+                and analytical skills.
               </p>
             </div>
 
-            <Tabs defaultValue="ug" className="w-full">
-              {/* Tabs List */}
-              <TabsList className="flex w-full max-w-full sm:max-w-md mx-auto mb-8 sm:mb-12 bg-[#f4f9fc] rounded-xl sm:rounded-2xl p-1 sm:p-1.5 gap-2 sm:gap-8">
+            <Tabs defaultValue="ug" className="w-full ">
+
+              <TabsList className="flex w-full max-w-md mx-auto mb-12  bg-[#f4f9fc] rounded-2xl p-1.5 gap-8">
+
                 <TabsTrigger
                   value="ug"
-                  className="flex-1 text-xs sm:text-base font-semibold rounded-lg sm:rounded-xl data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-center py-2 sm:py-3.5 hover:bg-gray-200"
+                  className="flex-1 text-base font-semibold rounded-xl data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-center py-3.5 hover:bg-gray-200"
                 >
                   UG Track
                 </TabsTrigger>
+
                 <TabsTrigger
                   value="pg"
-                  className="flex-1 text-xs sm:text-base font-semibold rounded-lg sm:rounded-xl data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-center py-2 sm:py-3.5 hover:bg-gray-200"
+                  className="flex-1 text-base font-semibold rounded-xl data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-center py-3.5 hover:bg-gray-200"
                 >
                   PG Track
                 </TabsTrigger>
               </TabsList>
 
-              {/* UG FORM */}
-              <TabsContent value="ug" className="space-y-6 sm:space-y-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+              <TabsContent value="ug" className="space-y-8">
+                <div className="grid lg:grid-cols-3 gap-8">
                   {/* Application Form */}
-                  <Card className="lg:col-span-2 p-4 sm:p-6 md:p-8 bg-white border border-gray-200 rounded-xl w-full">
-                    <div className="mb-6 sm:mb-8 md:mb-10">
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-                        Application Form
-                      </h2>
-                      <p className="text-gray-600 text-sm sm:text-base md:text-lg">
-                        Fill in your details to apply for the EM-MAT exam
-                      </p>
+                  <Card className="lg:col-span-2 p-8 bg-white border border-gray-200  rounded-xl">
+                    <div className="mb-10">
+                      <h2 className="text-3xl font-bold text-gray-900 mb-3">Application Form</h2>
+                      <p className="text-gray-600 text-lg">Fill in your details to apply for the EM-MAT exam</p>
                     </div>
 
-                    <form onSubmit={handleApplyNow} className="space-y-6 sm:space-y-8">
-                      {/* Candidate Name */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="name">Candidate Name *</Label>
+                    <form className="space-y-8">
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="name" className="text-sm font-semibold text-gray-800">
+                            Candidate Name *
+                          </Label>
                           <Input
                             id="name"
                             placeholder="Enter your full name"
-                            value={formData.name}
-                            onChange={(e) => handleChange("name", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="class">Class *</Label>
-                          <Select
-                            onValueChange={(v) => handleChange("class", v)}
-                          >
-                            <SelectTrigger>
+                        <div className="space-y-3">
+                          <Label htmlFor="class" className="text-sm font-semibold text-gray-800">
+                            Class *
+                          </Label>
+                          <Select>
+                            <SelectTrigger className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300">
                               <SelectValue placeholder="Select your class" />
                             </SelectTrigger>
                             <SelectContent>
@@ -171,14 +167,13 @@ const EmMat = ({ showFooter = true }) => {
                         </div>
                       </div>
 
-                      {/* Stream / Email */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="stream">Stream *</Label>
-                          <Select
-                            onValueChange={(v) => handleChange("stream", v)}
-                          >
-                            <SelectTrigger>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="stream" className="text-sm font-semibold text-gray-800">
+                            Stream *
+                          </Label>
+                          <Select>
+                            <SelectTrigger className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300">
                               <SelectValue placeholder="Select your stream" />
                             </SelectTrigger>
                             <SelectContent>
@@ -188,137 +183,406 @@ const EmMat = ({ showFooter = true }) => {
                             </SelectContent>
                           </Select>
                         </div>
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="email">Email Address *</Label>
+                        <div className="space-y-3">
+                          <Label htmlFor="email" className="text-sm font-semibold text-gray-800">
+                            Email Address *
+                          </Label>
                           <Input
                             id="email"
                             type="email"
                             placeholder="you@example.com"
-                            value={formData.email}
-                            onChange={(e) => handleChange("email", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
                       </div>
 
-                      {/* Mobile / City */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="mobile">Mobile Number *</Label>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="mobile" className="text-sm font-semibold text-gray-800">
+                            Mobile Number *
+                          </Label>
                           <Input
                             id="mobile"
                             placeholder="Enter your mobile number"
-                            value={formData.mobile}
-                            onChange={(e) => handleChange("mobile", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="city">City *</Label>
+                        <div className="space-y-3">
+                          <Label htmlFor="city" className="text-sm font-semibold text-gray-800">
+                            City *
+                          </Label>
                           <Input
                             id="city"
                             placeholder="Enter your city"
-                            value={formData.city}
-                            onChange={(e) => handleChange("city", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
                       </div>
 
-                      {/* State / Grades */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="state">State *</Label>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="state" className="text-sm font-semibold text-gray-800">
+                            State *
+                          </Label>
                           <Input
                             id="state"
                             placeholder="Enter your state"
-                            value={formData.state}
-                            onChange={(e) => handleChange("state", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="grade10">10th Grade (%) *</Label>
+                        <div className="space-y-3">
+                          <Label htmlFor="grade10" className="text-sm font-semibold text-gray-800">
+                            10th Grade (%) *
+                          </Label>
                           <Input
                             id="grade10"
                             placeholder="e.g. 85.5"
-                            value={formData.grade10}
-                            onChange={(e) => handleChange("grade10", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                        <div className="space-y-2 sm:space-y-3">
-                          <Label htmlFor="grade12">12th Grade (%) *</Label>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="grade12" className="text-sm font-semibold text-gray-800">
+                            12th Grade (%) *
+                          </Label>
                           <Input
                             id="grade12"
                             placeholder="e.g. 92.0"
-                            value={formData.grade12}
-                            onChange={(e) => handleChange("grade12", e.target.value)}
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
-                        <div></div>
+
                       </div>
 
                       <Button
                         size="lg"
-                        type="submit"
-                        disabled={loading}
-                        className="w-full h-12 sm:h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-sm sm:text-md rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-4 sm:mt-6"
+                        className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6"
                       >
-                        {loading ? "Processing..." : "Apply Now & Pay ₹500"}
+                        Apply Now
                       </Button>
                     </form>
                   </Card>
 
-                    {/* Super 100 Batch Card */}
-                  <Card className="p-4 sm:p-6 md:p-8 bg-white border border-gray-200 relative overflow-hidden rounded-xl shadow-lg w-full">
+                  {/* Super 100 Batch Card */}
+                  <Card className="p-8 bg-white border border-gray-200 relative overflow-hidden rounded-xl shadow-lg">
                     <div className="relative z-10">
-                      <div className="mb-4 sm:mb-6">
-                        <span className="inline-block bg-orange-100 text-orange-600 text-xs sm:text-sm font-bold px-3 sm:px-4 py-1 sm:py-2 rounded-full mb-3 sm:mb-4">
-                          Exclusive Offer
-                        </span>
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Super 100 Batch</h3>
-                        <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
-                          Join our exclusive Super 100 Batch for personalized guidance and enhanced preparation for the EM-MAT exam.
+                      <div className="mb-6">
+                        {/* <span className="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
+        Exclusive Offer
+      </span> */}
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">About EM-MAT</h3>
+                        <p className="text-gray-600 mb-6 leading-relaxed text-base">
+                          EM-MAT opens doors to India’s best private universities. Show your aptitude, stand out among the brightest, and join the top 200 for our elite Final Preparation Program — where preparation meets transformation.
                         </p>
                       </div>
-                      
-                      <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                        {[
-                          "Personalized mentorship",
-                          "Comprehensive study material",
-                          "Regular mock tests",
-                          "Expert faculty guidance",
-                          "Performance Growth Report",
-                          "Student Progress Review",
-                          "Achievement Tracking Tool"
-                        ].map((item, index) => (
-                          <li key={index} className="flex items-center">
-                            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-orange-100 rounded-full flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
-                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full"></div>
-                            </div>
-                            <span className="text-gray-700 font-medium text-xs sm:text-sm">{item}</span>
-                          </li>
-                        ))}
+
+                      <ul className="space-y-4 mb-8">
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Personalized, data-driven guidance</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Trusted academic collaborations</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Affordable access to world-class education</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Industry-recognized certifications</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Career pathways that ensure employability</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">End-to-end student lifecycle support</span>
+                        </li>
                       </ul>
 
                       {/* Why Join Section */}
-                      <div className="mt-6 sm:mt-8 mb-6 sm:mb-8 p-4 sm:p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg sm:rounded-xl border border-orange-100">
-                        <h3 className="font-semibold text-base sm:text-xl text-gray-900 text-center mb-2 sm:mb-3">Why Join Super 100?</h3>
-                        <p className="text-gray-600 text-center text-xs sm:text-sm leading-relaxed">
+                      <div className="mt-8 mb-8 mt-[200px] p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
+                        {/* <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3> */}
+                        <p className="text-gray-600 text-center text-sm leading-relaxed font-bold">
+                          “Educate-Me — Bridging education, innovation, and opportunity.”
+                        </p>
+                      </div>
+
+                      {/* <Button 
+      size="lg" 
+      className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 py-6"
+    >
+      Learn More
+    </Button> */}
+                    </div>
+
+                    {/* Background Pattern - Light blur boxes */}
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-orange-50 rounded-full -translate-y-20 translate-x-20 blur-xl opacity-60"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-orange-50 rounded-full translate-y-16 -translate-x-16 blur-xl opacity-60"></div>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="pg" className="space-y-8">
+                <div className="grid lg:grid-cols-3 gap-8">
+                  {/* Application Form */}
+                  <Card className="lg:col-span-2 p-8 bg-white border border-gray-200  rounded-xl">
+                    <div className="mb-10">
+                      <h2 className="text-3xl font-bold text-gray-900 mb-3">Application Form</h2>
+                      <p className="text-gray-600 text-lg">Fill in your details to apply for the EM-MAT exam</p>
+                    </div>
+
+                    <form className="space-y-8">
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="name" className="text-sm font-semibold text-gray-800">
+                            Candidate Name *
+                          </Label>
+                          <Input
+                            id="name"
+                            placeholder="Enter your full name"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                        <div className="space-y-3">
+                          <Label htmlFor="class" className="text-sm font-semibold text-gray-800">
+                            Class *
+                          </Label>
+                          <Select>
+                            <SelectTrigger className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300">
+                              <SelectValue placeholder="Select your class" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="12">Class 12</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="stream" className="text-sm font-semibold text-gray-800">
+                            Stream *
+                          </Label>
+                          <Select>
+                            <SelectTrigger className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300">
+                              <SelectValue placeholder="Select your stream" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="science">Science</SelectItem>
+                              <SelectItem value="commerce">Commerce</SelectItem>
+                              <SelectItem value="arts">Arts</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-3">
+                          <Label htmlFor="email" className="text-sm font-semibold text-gray-800">
+                            Email Address *
+                          </Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="mobile" className="text-sm font-semibold text-gray-800">
+                            Mobile Number *
+                          </Label>
+                          <Input
+                            id="mobile"
+                            placeholder="Enter your mobile number"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                        <div className="space-y-3">
+                          <Label htmlFor="city" className="text-sm font-semibold text-gray-800">
+                            City *
+                          </Label>
+                          <Input
+                            id="city"
+                            placeholder="Enter your city"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="state" className="text-sm font-semibold text-gray-800">
+                            State *
+                          </Label>
+                          <Input
+                            id="state"
+                            placeholder="Enter your state"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                        <div className="space-y-3">
+                          <Label htmlFor="grade10" className="text-sm font-semibold text-gray-800">
+                            10th Grade (%) *
+                          </Label>
+                          <Input
+                            id="grade10"
+                            placeholder="e.g. 85.5"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="grade12" className="text-sm font-semibold text-gray-800">
+                            12th Grade (%) *
+                          </Label>
+                          <Input
+                            id="grade12"
+                            placeholder="e.g. 92.0"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                        <div className="space-y-3">
+                          <Label htmlFor="grade12" className="text-sm font-semibold text-gray-800">
+                            Graduation Score *
+                          </Label>
+                          <Input
+                            id="grade12"
+                            placeholder="e.g. 8.5 CGPA or 82%"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <Label htmlFor="graduationStream" className="text-sm font-semibold text-gray-800">
+                            Graduation Stream *
+                          </Label>
+                          <Input
+                            id="graduationStream"
+                            placeholder="e.g. Bachelor of Science (B.Sc) in Computer Science"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+
+                        <div className="space-y-3">
+                          <Label htmlFor="passingYear" className="text-sm font-semibold text-gray-800">
+                            Passing Year *
+                          </Label>
+                          <Input
+                            id="passingYear"
+                            placeholder="e.g. 2024"
+                            className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+
+                      <Button
+                        size="lg"
+                        className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6"
+                      >
+                        Apply Now
+                      </Button>
+                    </form>
+                  </Card>
+
+                  {/* Super 100 Batch Card */}
+                  <Card className="p-8 bg-white border border-gray-200 relative overflow-hidden rounded-xl shadow-lg">
+                    <div className="relative z-10">
+                      <div className="mb-6">
+                        <span className="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
+                          Exclusive Offer
+                        </span>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Super 100 Batch</h3>
+                        <p className="text-gray-600 mb-6 leading-relaxed text-base">
+                          Join our exclusive Super 100 Batch for personalized guidance and enhanced preparation for the EM-MAT exam.
+                        </p>
+                      </div>
+
+                      <ul className="space-y-4 mb-8">
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Personalized mentorship</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Comprehensive study material</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 gitrounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Regular mock tests</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Expert faculty guidance</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Performance Growth Report</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Student Progress Review</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                          </div>
+                          <span className="text-gray-700 font-medium">Achievement Tracking Tool</span>
+                        </li>
+                      </ul>
+
+                      {/* Why Join Section */}
+                      <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
+                        <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3>
+                        <p className="text-gray-600 text-center text-sm leading-relaxed">
                           Because success needs strategy — and the Super 100 Batch gives you everything you need to crack EM-MAT with confidence!
                         </p>
                       </div>
-                      
-                      <Button 
-                        size="lg" 
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm sm:text-md rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 py-4 sm:py-6"
+
+                      <Button
+                        size="lg"
+                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 py-6"
                       >
                         Learn More
                       </Button>
                     </div>
-                    
-                    {/* Background Pattern */}
-                    <div className="absolute top-0 right-0 w-20 h-20 sm:w-40 sm:h-40 bg-orange-50 rounded-full -translate-y-10 sm:-translate-y-20 translate-x-10 sm:translate-x-20 blur-xl opacity-60"></div>
-                    <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-32 sm:h-32 bg-orange-50 rounded-full translate-y-8 sm:translate-y-16 -translate-x-8 sm:-translate-x-16 blur-xl opacity-60"></div>
+
+                    {/* Background Pattern - Light blur boxes */}
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-orange-50 rounded-full -translate-y-20 translate-x-20 blur-xl opacity-60"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-orange-50 rounded-full translate-y-16 -translate-x-16 blur-xl opacity-60"></div>
                   </Card>
                 </div>
               </TabsContent>
