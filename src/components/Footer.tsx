@@ -54,13 +54,13 @@ const Footer = () => {
               <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+              {/* <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Twitter size={20} />
-              </a>
+              </a> */}
               <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+              <a href="https://www.instagram.com/educateme.nikhil_?igsh=dXY3NXpxamNweTh6" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Instagram size={20} />
               </a>
             </div>
@@ -100,14 +100,14 @@ const Footer = () => {
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={18} className="text-primary mt-1 flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-sm text-gray-400 hover:text-primary transition-colors">
-                  +1 (234) 567-890
+                <a href="tel:+917974163158" className="text-sm text-gray-400 hover:text-primary transition-colors">
+                  +917974163158
                 </a>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-primary mt-1 flex-shrink-0" />
                 <p className="text-sm text-gray-400">
-                  123 Education Street,<br />Learning City, LC 12345
+                 335 kalpana nagar<br />Piplani,Bhopal
                 </p>
               </div>
             </div>

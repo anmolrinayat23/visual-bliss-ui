@@ -228,7 +228,7 @@ His analytical mindset and commitment to excellence make him an invaluable asset
             <div className="md:flex">
               {/* Image Section */}
               <div className="md:w-1/3 bg-gradient-to-br from-blue-500 to-orange-500 p-8 flex items-center justify-center">
-                <div className="w-48 h-48 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+                <div className="w-96 h-100 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}
