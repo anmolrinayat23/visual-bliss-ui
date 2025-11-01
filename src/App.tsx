@@ -10,6 +10,7 @@ import EmMat from "./pages/EmMat";
 import BookSession from "./pages/BookSession";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import TeamMemberDetail from "./pages/TeamMemberDetail";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/em-mat" element={<EmMat />} />
           <Route path="/session" element={<BookSession />} />
           <Route path="/about" element={<About />} />
+            <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
