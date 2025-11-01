@@ -63,8 +63,8 @@ const Services = ({ showFooter = true }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-16">
-        <section className="py-16 px-6">
+      <main className="pt-10">
+        <section className="py-12 md:py-16 px-4 sm:px-6">
           <div className="container mx-auto max-w-7xl">
             {/* Section Header */}
             <motion.div
@@ -72,12 +72,12 @@ const Services = ({ showFooter = true }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-8 md:mb-12"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 text-gray-900">
                 Our Services
               </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2 sm:px-0">
                 Comprehensive support for every stage of your educational journey.
                 Achieve your academic and career goals with our expert guidance.
               </p>
@@ -89,20 +89,20 @@ const Services = ({ showFooter = true }) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 sm:gap-6"
             >
               {services.map((service, index) => (
                 <motion.div key={index} variants={itemVariants}>
-                  <Card className="p-6 border border-gray-200 hover:border-blue-300 transition-all duration-300 hover:shadow-lg group hover:scale-105">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 group-hover:scale-110 transition-all duration-300">
-                        <service.icon className="w-6 h-6 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+                  <Card className="p-4 sm:p-6 border border-gray-200 hover:border-blue-300 transition-all duration-300 hover:shadow-lg group hover:scale-105">
+                    <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 group-hover:scale-110 transition-all duration-300">
+                        <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
                       </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                      <div className="flex-1">
+                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 group-hover:text-blue-600 transition-colors duration-300">
                           {service.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed">
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -110,14 +110,24 @@ const Services = ({ showFooter = true }) => {
 
                     <Button
                       variant={service.buttonVariant}
-                      className="w-full mt-4 group-hover:shadow-md transition-all duration-300"
-                      size="lg"
+                      className="w-full mt-3 sm:mt-4 group-hover:shadow-md transition-all duration-300 text-sm sm:text-base"
+                      size="sm"
                     >
                       {service.button}
                     </Button>
                   </Card>
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* Additional Call to Action for Mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="mt-8 md:mt-12 text-center"
+            >
             </motion.div>
           </div>
         </section>

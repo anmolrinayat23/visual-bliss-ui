@@ -40,49 +40,49 @@ const Courses = ({ showFooter = true }) => {
     {
       title: "B.Tech",
       description: "Engineering program with hands-on learning in AI, data science, electronics, and mechanical systems.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Engineering",
     },
     {
       title: "BBA",
       description: "Business administration program focusing on global markets, management strategies, and entrepreneurship.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Management",
     },
     {
       title: "BA",
       description: "Arts program nurturing analytical thinking and communication skills for media, education, and civil services.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Arts",
     },
     {
       title: "Liberal Arts",
       description: "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Arts",
     },
     {
       title: "Law",
       description: "Legal studies program with moot courts and internships for constitutional, civil, and corporate law.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Law",
     },
     {
       title: "B.Com",
       description: "Commerce degree for accounting, finance, taxation, and business analytics careers.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Commerce",
     },
     {
       title: "B.Sc",
       description: "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Science",
     },
     {
       title: "BCA",
       description: "IT program developing expertise in programming, software design, and database management.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Computer",
     },
     {
@@ -112,25 +112,25 @@ const Courses = ({ showFooter = true }) => {
     {
       title: "Designing",
       description: "Creative program for fashion, interior, and graphic design with focus on visual communication.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Design",
     },
     {
       title: "Architecture",
       description: "Program integrating creativity, technology, and sustainability for urban planning and environmental design.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Design",
     },
     {
       title: "BMS",
       description: "Management studies foundation for organizational behavior, marketing, and strategic management.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Management",
     },
     {
       title: "BPT",
       description: "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
-      buttonText: "Learn More",
+      buttonText: "Apply Now",
       category: "Medical",
     },
   ];
@@ -146,7 +146,7 @@ const Courses = ({ showFooter = true }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-20">
+      <main className="">
         <section className="py-12 px-6">
           <div className="container mx-auto max-w-7xl">
             {/* Header Section */}
@@ -215,7 +215,11 @@ const Courses = ({ showFooter = true }) => {
                       >
                         {course.buttonText}
                       </Button>
+
+
                     </div>
+
+                    
                   </Card>
                 </AnimatedCard>
               ))}

@@ -1,3 +1,7 @@
+"use client";
+
+import React, { useState } from "react";
+import axios from "axios";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -5,18 +9,100 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+// Razorpay global type
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 const EmMat = ({ showFooter = true }) => {
+  // ✅ form states
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    city: "",
+    state: "",
+    class: "",
+    stream: "",
+    grade10: "",
+    grade12: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (key: string, value: string) => {
+    setFormData({ ...formData, [key]: value });
+  };
+
+  // ✅ handle payment
+  const handleApplyNow = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // simple validation
+    if (!formData.name || !formData.email || !formData.mobile) {
+      alert("Please fill all required fields!");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // 1️⃣ create order from backend
+      const { data } = await axios.post("http://localhost:5000/api/payments/create-order", {
+        amount: 500, // ₹100
+      });
+
+      const { key, order } = data;
+
+      // 2️⃣ open Razorpay checkout
+      const options = {
+        key,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Educate Me",
+        description: "EM-MAT Application Fee",
+        order_id: order.id,
+        handler: function (response: any) {
+          alert("✅ Payment successful!");
+          console.log("Payment:", response);
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.mobile,
+        },
+        theme: { color: "#f97316" },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong during payment.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-20">
-        <section className="py-12 px-4">
+      <main className="pt-10">
+        <section className="py-8 sm:py-12 px-3 sm:px-4">
           <div className="container mx-auto max-w-8xl">
             {/* Header Section */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-8 sm:mb-12">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
                 EM-MAT Exam
               </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -232,7 +318,7 @@ const EmMat = ({ showFooter = true }) => {
                       </ul>
 
                       {/* Why Join Section */}
-                      <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
+                      <div className="mt-8 mb-8 mt-[200px] p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
                         {/* <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3> */}
                         <p className="text-gray-600 text-center text-sm leading-relaxed font-bold">
                           “Educate-Me — Bridging education, innovation, and opportunity.”
