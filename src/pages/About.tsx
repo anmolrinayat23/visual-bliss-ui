@@ -26,7 +26,7 @@ const leadershipTeam = [
     description: "Distinguished banking academician with two decades of BFSI leadership and expertise in financial risk management and NPAs.",
     achievement: "Ph.D. in Finance with leadership roles at Yes Bank, ABN AMRO, HDFC Bank, and publications in SCOPUS journals.",
     avatar: "AS",
-     image: "/public/pp.jpg",
+     image: "/pp.jpg",
     highlight: "Thought leader shaping financial acumen and industry readiness",
     fullDescription: `Welcome Dr. Awanish Kumar Sinha, a distinguished academician and seasoned banking and financial services expert, as our esteemed guest lecturer at Educate Me. Dr. Sinha brings over two decades of rich professional experience across the BFSI sector, having held key leadership roles with reputed institutions such as Yes Bank, ABN AMRO, and HDFC Bank.`
   },
@@ -37,7 +37,7 @@ const leadershipTeam = [
     description: "Accomplished legal scholar specializing in Media Law, Women & Criminal Law with extensive research publications.",
     achievement: "Ph.D. from Indian Law Institute, UGC-NET scholar with 10+ publications and edited books with global publishers.",
     avatar: "VA",
-    image: "/public/DR VAISHALI ARORA.PNG",
+    image: "/DR VAISHALI ARORA.PNG",
     highlight: "Empowering next-generation legal professionals with excellence",
     fullDescription: `We are privileged to welcome Dr. Vaishali Arora, an accomplished legal academic and distinguished expert in Media Law and Women & Criminal Law. A graduate of the University of Delhi in both Commerce and Law, Dr. Arora pursued her LL.M from GGSIP University and went on to achieve her Ph.D. from the prestigious Indian Law Institute, New Delhi.`
   },
@@ -48,7 +48,7 @@ const leadershipTeam = [
     description: "Visionary Physics educator with three decades of excellence, making science engaging and inspiring for generations.",
     achievement: "M.Sc. Physics, honored by Ministry of HRD for exceptional CBSE results and multiple teaching excellence awards.",
     avatar: "SV",
-     image: "/public/shipla.jpg",
+     image: "/shipla.jpg",
     highlight: "Inspiring curiosity and building confident, curious learners",
     fullDescription: `We are proud to welcome Mrs. Shilpa Agrawal Vishnoi, a visionary educator with over three decades of excellence in Physics education, as an Expert Guest Faculty at Educate Me. A dynamic mentor and lifelong learner, she has been a cornerstone of academic excellence and student empowerment since 1995.`
   },
@@ -59,21 +59,11 @@ const leadershipTeam = [
     description: "Innovation-driven mentor with 18+ years expertise in entrepreneurship development and strategic business leadership.",
     achievement: "MBA & Ph.D., certified entrepreneurship trainer with Wadhwani Foundation, 20+ research publications.",
     avatar: "DK",
-     image: "/public/dipali.jpg",
+     image: "/dipali.jpg",
     highlight: "Transforming student potential into startup reality",
     fullDescription: `At Educate Me, we proudly welcome Dr. Deepa Kumari, an accomplished academic leader and innovation-driven mentor with 18+ years of expertise in entrepreneurship development, corporate communication, and strategic leadership.`
   },
-  {
-    id: "dr-avinish",
-    name: "Dr. Avinish",
-    role: "Student Mentor & Visiting Faculty",
-    description: "Dedicated education mentor with extensive experience in holistic student development and academic excellence.",
-    achievement: "Expert in personalized student guidance, academic counseling, and building confident future professionals.",
-    avatar: "AV",
-    image: "/dr-avinish.jpg",
-    highlight: "Compassionate mentoring for academic and personal growth",
-    fullDescription: `Dr. Avinish brings extensive experience as a student mentor and visiting faculty expert, dedicated to holistic student development and academic excellence. With a passion for nurturing young minds, Dr. Avinish has been instrumental in guiding students towards their academic and career goals.`
-  },
+ 
   {
     id: "kajol-samtani",
     name: "Ms. Kajol Samtani",

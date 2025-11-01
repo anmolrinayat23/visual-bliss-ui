@@ -97,7 +97,7 @@ const EmMat = ({ showFooter = true }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-10">
+      <main className="pt-15 mt-20">
         <section className="py-8 sm:py-12 px-3 sm:px-4">
           <div className="container mx-auto max-w-8xl">
             {/* Header Section */}
