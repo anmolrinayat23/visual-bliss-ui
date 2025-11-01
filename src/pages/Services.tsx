@@ -1,19 +1,21 @@
+"use client";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Lightbulb, Compass, Award, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // ✅ import navigation
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const itemVariants = {
@@ -23,45 +25,55 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const Services = ({ showFooter = true }) => {
+  const navigate = useNavigate(); 
+
   const services = [
     {
       icon: Lightbulb,
-      title: "Student Counselling",
-      description: "Personalized one-on-one sessions to address academic pressures, personal challenges, and career uncertainties.",
-      button: "Book Session",
+      title: "Expert feedback",
+      description:
+        "Educate-Me offers students exclusive access to an extensive network of distinguished guest faculty, comprising doctoral experts from renowned institutions Pan India",
+      button: "Apply link",
       buttonVariant: "default" as const,
+      link: "/em-mat", // ✅ navigate here on click
     },
     {
       icon: Compass,
-      title: "Student Guidance",
-      description: "Expert advice on course selection, trending career paths, and creating your success roadmap.",
+      title: "Student Couselling",
+      description:
+        "At EducateMe, students get 1-on-1 mentorship, expert course guidance, and career counseling to make informed academic and career choices.",
       button: "Get Guidance",
       buttonVariant: "outline" as const,
+      link: "/session", // optional — you can leave null if not needed
     },
     {
       icon: Award,
       title: "Certifications",
-      description: "Boost your resume with industry-recognized certifications to enhance your skills and career prospects.",
+      description:
+        "Earn essential certificates to master the basics, gain program-specific skills, and boost your resume—all while preparing to excel in your chosen domain from admissions itself.",
       button: "Explore",
       buttonVariant: "outline" as const,
+      link: "/em-mat",
     },
     {
       icon: GraduationCap,
       title: "Admissions",
-      description: "Navigate admissions with expert assistance from application strategies to interview preparation.",
+      description:
+        "EM MAT by EducateMe is a specialized test assessing students for ideal course and career choices, offering access to top institutions, scholarships, mentorship, campus guidance, and personalized insights.",
       button: "Apply Now",
       buttonVariant: "default" as const,
+      link: "/em-mat",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-100 bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
       <main className="pt-10">
         <section className="py-12 md:py-16 px-4 sm:px-6">
@@ -112,22 +124,13 @@ const Services = ({ showFooter = true }) => {
                       variant={service.buttonVariant}
                       className="w-full mt-3 sm:mt-4 group-hover:shadow-md transition-all duration-300 text-sm sm:text-base"
                       size="sm"
+                      onClick={() => navigate(service.link)} // ✅ navigate on click
                     >
                       {service.button}
                     </Button>
                   </Card>
                 </motion.div>
               ))}
-            </motion.div>
-
-            {/* Additional Call to Action for Mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="mt-8 md:mt-12 text-center"
-            >
             </motion.div>
           </div>
         </section>

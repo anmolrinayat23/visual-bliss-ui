@@ -510,12 +510,12 @@ const EmMat = ({ showFooter = true }) => {
                   <Card className="p-8 bg-white border border-gray-200 relative overflow-hidden rounded-xl shadow-lg">
                     <div className="relative z-10">
                       <div className="mb-6">
-                        <span className="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
-                          Exclusive Offer
-                        </span>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Super 100 Batch</h3>
+                        {/* <span className="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
+        Exclusive Offer
+      </span> */}
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">About EM-MAT</h3>
                         <p className="text-gray-600 mb-6 leading-relaxed text-base">
-                          Join our exclusive Super 100 Batch for personalized guidance and enhanced preparation for the EM-MAT exam.
+                          EM-MAT opens doors to India’s best private universities. Show your aptitude, stand out among the brightest, and join the top 200 for our elite Final Preparation Program — where preparation meets transformation.
                         </p>
                       </div>
 
@@ -524,60 +524,54 @@ const EmMat = ({ showFooter = true }) => {
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                           </div>
-                          <span className="text-gray-700 font-medium">Personalized mentorship</span>
+                          <span className="text-gray-700 font-medium">Personalized, data-driven guidance</span>
                         </li>
                         <li className="flex items-center">
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                           </div>
-                          <span className="text-gray-700 font-medium">Comprehensive study material</span>
-                        </li>
-                        <li className="flex items-center">
-                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
-                            <div className="w-2 h-2 bg-orange-500 gitrounded-full"></div>
-                          </div>
-                          <span className="text-gray-700 font-medium">Regular mock tests</span>
+                          <span className="text-gray-700 font-medium">Trusted academic collaborations</span>
                         </li>
                         <li className="flex items-center">
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                           </div>
-                          <span className="text-gray-700 font-medium">Expert faculty guidance</span>
+                          <span className="text-gray-700 font-medium">Affordable access to world-class education</span>
                         </li>
                         <li className="flex items-center">
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                           </div>
-                          <span className="text-gray-700 font-medium">Performance Growth Report</span>
+                          <span className="text-gray-700 font-medium">Industry-recognized certifications</span>
                         </li>
                         <li className="flex items-center">
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                           </div>
-                          <span className="text-gray-700 font-medium">Student Progress Review</span>
+                          <span className="text-gray-700 font-medium">Career pathways that ensure employability</span>
                         </li>
                         <li className="flex items-center">
                           <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                           </div>
-                          <span className="text-gray-700 font-medium">Achievement Tracking Tool</span>
+                          <span className="text-gray-700 font-medium">End-to-end student lifecycle support</span>
                         </li>
                       </ul>
 
                       {/* Why Join Section */}
                       <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
-                        <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3>
-                        <p className="text-gray-600 text-center text-sm leading-relaxed">
-                          Because success needs strategy — and the Super 100 Batch gives you everything you need to crack EM-MAT with confidence!
+                        {/* <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3> */}
+                        <p className="text-gray-600 text-center text-sm leading-relaxed font-bold">
+                          “Educate-Me — Bridging education, innovation, and opportunity.”
                         </p>
                       </div>
 
-                      <Button
-                        size="lg"
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 py-6"
-                      >
-                        Learn More
-                      </Button>
+                      {/* <Button 
+      size="lg" 
+      className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 py-6"
+    >
+      Learn More
+    </Button> */}
                     </div>
 
                     {/* Background Pattern - Light blur boxes */}

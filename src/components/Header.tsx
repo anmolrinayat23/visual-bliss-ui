@@ -1,10 +1,16 @@
+"use client";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ✅ Added useNavigate
 import { useState } from "react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate(); // ✅ Initialize navigate hook
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -13,7 +19,7 @@ const Header = () => {
     { label: "EM-MAT", href: "/em-mat" },
     { label: "Book Session", href: "/session" },
     { label: "Explore", href: "/explore" },
-    { label: "About", href: "/about" },
+    { label: "About Us", href: "/about" },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -32,7 +38,7 @@ const Header = () => {
             <img
               src="/logo.png"
               alt="Educate Me Logo"
-              className="w-8 h-12 sm:w-15 sm:h-15 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+              className="w-14 h-12 sm:w-15 sm:h-15 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
             />
             <span className="text-base sm:text-lg font-bold text-foreground transition-colors duration-300 whitespace-nowrap">
               Educate Me
@@ -55,9 +61,13 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Desktop Button */}
+          {/* ✅ Desktop Button (Now Navigates to /session) */}
           <div className="hidden md:flex flex-shrink-0 ml-4">
-            <Button size="sm" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-xs whitespace-nowrap">
+            <Button
+              size="sm"
+              className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-xs whitespace-nowrap"
+              onClick={() => navigate("/session")} // ✅ Added navigation
+            >
               Book Counselling
             </Button>
           </div>
@@ -97,12 +107,15 @@ const Header = () => {
               </Link>
             ))}
 
-            {/* Mobile Button */}
+            {/* ✅ Mobile Button (optional: also navigate) */}
             <div className="pt-4 mt-2 border-t border-muted/30">
               <Button
                 size="lg"
                 className="w-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={closeMobileMenu}
+                onClick={() => {
+                  navigate("/session");
+                  closeMobileMenu();
+                }}
               >
                 Book Counselling
               </Button>
