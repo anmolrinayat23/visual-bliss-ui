@@ -35,15 +35,18 @@ const Header = () => {
             className="flex items-center gap-2 group flex-shrink-0"
             onClick={closeMobileMenu}
           >
-            <img
-              src="/logo.png"
-              alt="Educate Me Logo"
-              className="w-14 h-12 sm:w-15 sm:h-15 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-            />
+          <img
+  src="/logo.png"
+  alt="Educate Me Logo"
+  className="w-16 h-16 sm:w-15 sm:h-15 rounded-full object-cover transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+/>
+
             <span className="text-base sm:text-lg font-bold text-foreground transition-colors duration-300 whitespace-nowrap">
               Educate Me
             </span>
           </Link>
+
+
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center">
@@ -52,7 +55,7 @@ const Header = () => {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="relative text-xs lg:text-sm font-semibold text-foreground hover:text-primary transition-all duration-200 whitespace-nowrap px-2 py-1 rounded-md hover:bg-primary/5 flex-shrink-0
+                  className="relative text-md lg:text-md font-semibold text-foreground hover:text-primary transition-all duration-200 whitespace-nowrap px-2 py-1 rounded-md hover:bg-primary/5 flex-shrink-0
                     after:absolute after:left-2 after:right-2 after:bottom-0 after:h-[2px] after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300"
                 >
                   {item.label}
@@ -63,11 +66,7 @@ const Header = () => {
 
           {/* ✅ Desktop Button (Now Navigates to /session) */}
           <div className="hidden md:flex flex-shrink-0 ml-4">
-            <Button
-              size="sm"
-              className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-xs whitespace-nowrap"
-              onClick={() => navigate("/session")} // ✅ Added navigation
-            >
+            <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
               Book Counselling
             </Button>
           </div>
