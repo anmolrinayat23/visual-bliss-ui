@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
+import { useNavigate } from "react-router-dom";
 
 // Animation wrapper component
 const AnimatedCard = ({ children, delay = 0 }) => {
@@ -32,7 +32,7 @@ const AnimatedCard = ({ children, delay = 0 }) => {
 
 const Courses = ({ showFooter = true }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const navigate = useNavigate(); // ✅ Initialize navigation
+  const navigate = useNavigate();
 
   const courses = [
     {
@@ -41,41 +41,47 @@ const Courses = ({ showFooter = true }) => {
         "Master of Business Administration for strategic leadership and advanced management skills.",
       buttonText: "Apply Now",
       category: "Management",
+      image: "https://plus.unsplash.com/premium_photo-1713296256339-08682fb13217?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2054"
     },
-        {
+    {
       title: "PGDM",
       description:
         "Management program bridging theory with practice through case-based learning and leadership workshops.",
       buttonText: "Apply Now",
       category: "Management",
+      image: "/courses/pgdm.jpg"
     },
-        {
+    {
       title: "BBA",
       description:
         "Business administration program focusing on global markets, management strategies, and entrepreneurship.",
       buttonText: "Apply Now",
       category: "Management",
+      image: "/courses/bba.jpg"
     },
-        {
+    {
       title: "Law",
       description:
         "Legal studies program with moot courts and internships for constitutional, civil, and corporate law.",
       buttonText: "Apply Now",
       category: "Law",
+      image: "/courses/law.jpg"
     },
-        {
+    {
       title: "B.Com",
       description:
         "Commerce degree for accounting, finance, taxation, and business analytics careers.",
       buttonText: "Apply Now",
       category: "Commerce",
+      image: "/courses/bcom.jpg"
     },
-        {
+    {
       title: "Designing",
       description:
         "Creative program for fashion, interior, and graphic design with focus on visual communication.",
       buttonText: "Apply Now",
       category: "Design",
+      image: "/courses/design.jpg"
     },
     {
       title: "B.Tech",
@@ -83,14 +89,15 @@ const Courses = ({ showFooter = true }) => {
         "Engineering program with hands-on learning in AI, data science, electronics, and mechanical systems.",
       buttonText: "Apply Now",
       category: "Engineering",
+      image: "/courses/btech.jpg"
     },
-
     {
       title: "BA",
       description:
         "Arts program nurturing analytical thinking and communication skills for media, education, and civil services.",
       buttonText: "Apply Now",
       category: "Arts",
+      image: "/courses/ba.jpg"
     },
     {
       title: "Liberal Arts",
@@ -98,15 +105,15 @@ const Courses = ({ showFooter = true }) => {
         "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
       buttonText: "Apply Now",
       category: "Arts",
+      image: "/courses/liberal-arts.jpg"
     },
-
-
     {
       title: "B.Sc",
       description:
         "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
       buttonText: "Apply Now",
       category: "Science",
+      image: "/courses/bsc.jpg"
     },
     {
       title: "BCA",
@@ -114,6 +121,7 @@ const Courses = ({ showFooter = true }) => {
         "IT program developing expertise in programming, software design, and database management.",
       buttonText: "Apply Now",
       category: "Computer",
+      image: "/courses/bca.jpg"
     },
     {
       title: "MCA",
@@ -121,14 +129,15 @@ const Courses = ({ showFooter = true }) => {
         "Advanced computing program with AI, machine learning, cybersecurity, and full-stack development.",
       buttonText: "Apply Now",
       category: "Computer",
+      image: "/courses/mca.jpg"
     },
-
     {
       title: "MA",
       description:
         "Advanced arts program emphasizing research and critical thinking for academic and creative professions.",
       buttonText: "Apply Now",
       category: "Arts",
+      image: "/courses/ma.jpg"
     },
     {
       title: "M.Tech",
@@ -136,14 +145,15 @@ const Courses = ({ showFooter = true }) => {
         "Advanced engineering training with specialized coursework and research projects for technological innovation.",
       buttonText: "Apply Now",
       category: "Engineering",
+      image: "/courses/mtech.jpg"
     },
-
     {
       title: "Architecture",
       description:
         "Program integrating creativity, technology, and sustainability for urban planning and environmental design.",
       buttonText: "Apply Now",
       category: "Design",
+      image: "/courses/architecture.jpg"
     },
     {
       title: "BMS",
@@ -151,6 +161,7 @@ const Courses = ({ showFooter = true }) => {
         "Management studies foundation for organizational behavior, marketing, and strategic management.",
       buttonText: "Apply Now",
       category: "Management",
+      image: "/courses/bms.jpg"
     },
     {
       title: "BPT",
@@ -158,6 +169,7 @@ const Courses = ({ showFooter = true }) => {
         "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
       buttonText: "Apply Now",
       category: "Medical",
+      image: "/courses/bpt.jpg"
     },
   ];
 
@@ -174,7 +186,7 @@ const Courses = ({ showFooter = true }) => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
       <main>
-        <section className="py-12 px-6">
+        <section className="py-12 mt-10 px-6">
           <div className="container mx-auto max-w-7xl">
             {/* Header Section */}
             <div className="text-center mb-12">
@@ -207,42 +219,58 @@ const Courses = ({ showFooter = true }) => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredCourses.map((course, index) => (
                 <AnimatedCard key={index} delay={index * 100}>
-                  <Card  className="p-6 bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300 group hover:shadow-lg h-full flex flex-col cursor-pointer">
-                    {/* Course Icon */}
-                    <div  className="flex justify-center mb-4">
-                      <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-xl font-bold text-orange-500">
+                  <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300 group hover:shadow-lg h-full flex flex-col cursor-pointer overflow-hidden">
+                    {/* Full Width Top Image */}
+                    <div className="w-full h-32 bg-gray-200 overflow-hidden relative">
+                      <img
+                        src={course.image}
+                        alt={course.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          // If image fails to load, show gradient fallback
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                      {/* Fallback Gradient Background */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-br from-blue-500 to-orange-500 flex items-center justify-center"
+                        style={{ display: course.image ? 'none' : 'flex' }}
+                      >
+                        <span className="text-4xl font-bold text-white">
                           {course.title.charAt(0)}
                         </span>
                       </div>
                     </div>
 
-                    {/* Course Category */}
-                    <div className="mb-3 text-center">
-                      <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                        {course.category}
-                      </span>
-                    </div>
+                    {/* Content Section */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      {/* Course Category */}
+                      <div className="mb-3 text-center">
+                        <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                          {course.category}
+                        </span>
+                      </div>
 
-                    {/* Course Title */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-blue-600 transition-colors duration-300">
-                      {course.title}
-                    </h3>
+                      {/* Course Title */}
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-blue-600 transition-colors duration-300">
+                        {course.title}
+                      </h3>
 
-                    {/* Course Description */}
-                    <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow text-center">
-                      {course.description}
-                    </p>
+                      {/* Course Description */}
+                      <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow text-center">
+                        {course.description}
+                      </p>
 
-                    {/* Action Button */}
-                    <div className="mt-auto">
-                      <Button
-                        size="sm"
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium transition-all duration-300 shadow-md hover:shadow-lg"
-                        onClick={() => navigate("/em-mat")} // ✅ Navigate to /em-mat
-                      >
-                        {course.buttonText}
-                      </Button>
+                      {/* Action Button */}
+                      <div className="mt-auto">
+                        <Button
+                          size="sm"
+                          className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+                          onClick={() => navigate("/em-mat")}
+                        >
+                          {course.buttonText}
+                        </Button>
+                      </div>
                     </div>
                   </Card>
                 </AnimatedCard>

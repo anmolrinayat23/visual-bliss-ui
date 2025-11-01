@@ -31,7 +31,7 @@ I am not just building a company; I am building a movement—to educate, empower
     "dr-awanish-sinha": {
       name: "Dr. Awanish Kumar Sinha",
       role: "Guest Faculty Expert - Finance",
-    image: "/public/pp.jpg",
+      image: "/public/pp.jpg",
       fullDescription: `Welcome Dr. Awanish Kumar Sinha, a distinguished academician and seasoned banking and financial services expert, as our esteemed guest lecturer at Educate Me. Dr. Sinha brings over two decades of rich professional experience across the BFSI sector, having held key leadership roles with reputed institutions such as Yes Bank, ABN AMRO, and HDFC Bank.
 
 A Ph.D. in Finance with extensive expertise in Non-Performing Assets and their impact on financial performance, Dr. Sinha has also made remarkable contributions to academia as a permanent faculty member at Sharda University, where he led critical initiatives in accreditation, curriculum development, and industry-academia collaborations. His work spans diverse domains including corporate banking, treasury management, trade finance, risk management, insurance, and global financial strategies.
@@ -69,7 +69,7 @@ A recipient of the Best Paper Presenter Award at the Law Commission of India's C
     "mrs-shilpa-vishnoi": {
       name: "Mrs. Shilpa Agrawal Vishnoi",
       role: "Expert Guest Faculty - Physics & Student Advisory",
-     image: "/public/shipla.jpg",
+      image: "/public/shipla.jpg",
       fullDescription: `We are proud to welcome Mrs. Shilpa Agrawal Vishnoi, a visionary educator with over three decades of excellence in Physics education, as an Expert Guest Faculty at Educate Me. A dynamic mentor and lifelong learner, she has been a cornerstone of academic excellence and student empowerment since 1995.
 
 An alumna of the Regional Institute of Education (RIE), Bhopal, and an M.Sc. in Physics from Barkatullah Vishwavidyalaya, Mrs. Vishnoi has dedicated her career to making Physics engaging, relatable, and deeply inspiring. She has served at Carmel Convent School, Bhopal — one of India's top institutions renowned for its world-class education — where she guided senior secondary students toward board and competitive exam success with clarity, confidence, and compassion.
@@ -96,7 +96,7 @@ Learning with her is more than studying Physics — it's discovering the joy of 
     "dr-deepa-kumari": {
       name: "Dr. Deepa Kumari",
       role: "Expert Guest Faculty - Corporate Communication & Entrepreneurial Development",
-     image: "/public/dipali.jpg",
+      image: "/public/dipali.jpg",
       fullDescription: `At Educate Me, we proudly welcome Dr. Deepa Kumari, an accomplished academic leader and innovation-driven mentor with 18+ years of expertise in entrepreneurship development, corporate communication, and strategic leadership.
 
 Dr. Kumari brings an exceptional record from Sharda University, where she has played a pivotal role in nurturing entrepreneurial talent and building real-world business competencies among students. An MBA & Ph.D. scholar, she has designed and taught industry-aligned courses including Social Entrepreneurship, Launch of New Ventures, and Technology & Platform Business Strategy — empowering learners with the mindset and tools to build and lead in the modern business world.
@@ -138,6 +138,8 @@ With expertise in student development and academic counseling, Dr. Avinish plays
         "Focus on building student confidence and clarity"
       ]
     },
+
+    
     "kajol-samtani": {
       name: "Ms. Kajol Samtani",
       role: "Academic Excellence Lead",
@@ -186,6 +188,7 @@ His analytical mindset and commitment to excellence make him an invaluable asset
       ]
     }
   };
+
   const member = teamMembers[id];
 
   if (!member) {
@@ -212,7 +215,7 @@ His analytical mindset and commitment to excellence make him an invaluable asset
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
       <main className="pt-20">
-        <div className="container mx-auto max-w-4xl py-12 px-6">
+        <div className="container mx-auto max-w-6xl py-12 px-6">
           {/* Back Button */}
           <Button
             onClick={() => navigate('/about')}
@@ -225,10 +228,10 @@ His analytical mindset and commitment to excellence make him an invaluable asset
 
           {/* Member Detail Card */}
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-            <div className="md:flex">
-              {/* Image Section */}
-              <div className="md:w-1/3 bg-gradient-to-br from-blue-500 to-orange-500 p-8 flex items-center justify-center">
-                <div className="w-96 h-100 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+            <div className="flex flex-col md:flex-row">
+              {/* Image Section - Fixed at top */}
+              <div className="md:w-2/5 bg-gradient-to-br from-blue-500 to-orange-500 p-8 flex items-start justify-center order-1">
+                <div className="w-64 h-64 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden mt-0">
                   <img
                     src={member.image}
                     alt={member.name}
@@ -240,8 +243,8 @@ His analytical mindset and commitment to excellence make him an invaluable asset
                 </div>
               </div>
 
-              {/* Content Section */}
-              <div className="md:w-2/3 p-8">
+              {/* Content Section - Wider now */}
+              <div className="md:w-3/5 p-8 order-2">
                 <div className="mb-6">
                   <h1 className="text-3xl font-black text-gray-900 mb-2">{member.name}</h1>
                   <p className="text-xl text-orange-500 font-bold mb-4">{member.role}</p>
