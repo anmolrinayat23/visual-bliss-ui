@@ -129,7 +129,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced computing program with AI, machine learning, cybersecurity, and full-stack development.",
       buttonText: "Apply Now",
       category: "Computer",
-      image: "/public/mca.png"
+      image: "/mca.png"
     },
     {
       title: "MA",
