@@ -59,6 +59,14 @@ const Courses = ({ showFooter = true }) => {
       category: "Management",
       image: "/bba.png"
     },
+        {
+      title: "Liberal Arts",
+      description:
+        "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
+      buttonText: "Apply Now",
+      category: "Arts",
+       image: "/art.png"
+    },
     {
       title: "Law",
       description:
@@ -99,14 +107,7 @@ const Courses = ({ showFooter = true }) => {
       category: "Arts",
        image: "/ba.png"
     },
-    {
-      title: "Liberal Arts",
-      description:
-        "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
-      buttonText: "Apply Now",
-      category: "Arts",
-       image: "/art.png"
-    },
+
     {
       title: "B.Sc",
       description:
