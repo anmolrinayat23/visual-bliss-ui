@@ -67,6 +67,7 @@ const Courses = ({ showFooter = true }) => {
       category: "Arts",
        image: "/art.png"
     },
+    
     {
       title: "Law",
       description:
