@@ -41,7 +41,7 @@ const Courses = ({ showFooter = true }) => {
         "Master of Business Administration for strategic leadership and advanced management skills.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/public/mba.png"
+      image: "/mba.png"
     },
     {
       title: "PGDM",
@@ -49,7 +49,7 @@ const Courses = ({ showFooter = true }) => {
         "Management program bridging theory with practice through case-based learning and leadership workshops.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/public/pgdm.png"
+      image: "/pgdm.png"
     },
     {
       title: "BBA",
@@ -57,7 +57,7 @@ const Courses = ({ showFooter = true }) => {
         "Business administration program focusing on global markets, management strategies, and entrepreneurship.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/public/bba.png"
+      image: "/bba.png"
     },
     {
       title: "Law",
@@ -65,7 +65,7 @@ const Courses = ({ showFooter = true }) => {
         "Legal studies program with moot courts and internships for constitutional, civil, and corporate law.",
       buttonText: "Apply Now",
       category: "Law",
-    image: "/public/law.png"
+    image: "/law.png"
     },
     {
       title: "B.Com",
@@ -73,7 +73,7 @@ const Courses = ({ showFooter = true }) => {
         "Commerce degree for accounting, finance, taxation, and business analytics careers.",
       buttonText: "Apply Now",
       category: "Commerce",
-       image: "/public/bcom.png"
+       image: "/bcom.png"
     },
     {
       title: "Designing",
@@ -81,7 +81,7 @@ const Courses = ({ showFooter = true }) => {
         "Creative program for fashion, interior, and graphic design with focus on visual communication.",
       buttonText: "Apply Now",
       category: "Design",
-      image: "/public/designing.png"
+      image: "/designing.png"
     },
     {
       title: "B.Tech",
@@ -89,7 +89,7 @@ const Courses = ({ showFooter = true }) => {
         "Engineering program with hands-on learning in AI, data science, electronics, and mechanical systems.",
       buttonText: "Apply Now",
       category: "Engineering",
-      image: "/public/btech.png"
+      image: "/btech.png"
     },
     {
       title: "BA",
@@ -97,7 +97,7 @@ const Courses = ({ showFooter = true }) => {
         "Arts program nurturing analytical thinking and communication skills for media, education, and civil services.",
       buttonText: "Apply Now",
       category: "Arts",
-       image: "/public/ba.png"
+       image: "/ba.png"
     },
     {
       title: "Liberal Arts",
@@ -105,7 +105,7 @@ const Courses = ({ showFooter = true }) => {
         "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
       buttonText: "Apply Now",
       category: "Arts",
-       image: "/public/art.png"
+       image: "/art.png"
     },
     {
       title: "B.Sc",
@@ -113,7 +113,7 @@ const Courses = ({ showFooter = true }) => {
         "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
       buttonText: "Apply Now",
       category: "Science",
-     image: "/public/bsc.png"
+     image: "/bsc.png"
     },
     {
       title: "BCA",
@@ -137,7 +137,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced arts program emphasizing research and critical thinking for academic and creative professions.",
       buttonText: "Apply Now",
       category: "Arts",
-      image: "/public/ma.png"
+      image: "/ma.png"
     },
     {
       title: "M.Tech",
@@ -145,7 +145,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced engineering training with specialized coursework and research projects for technological innovation.",
       buttonText: "Apply Now",
       category: "Engineering",
-     image: "/public/m tech.png"
+     image: "/m tech.png"
     },
     {
       title: "Architecture",
@@ -153,7 +153,7 @@ const Courses = ({ showFooter = true }) => {
         "Program integrating creativity, technology, and sustainability for urban planning and environmental design.",
       buttonText: "Apply Now",
       category: "Design",
-     image: "/public/architecture.png"
+     image: "/architecture.png"
     },
     {
       title: "BMS",
@@ -161,7 +161,7 @@ const Courses = ({ showFooter = true }) => {
         "Management studies foundation for organizational behavior, marketing, and strategic management.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/public/bms.png"
+      image: "/bms.png"
     },
     {
       title: "BPT",
@@ -169,7 +169,7 @@ const Courses = ({ showFooter = true }) => {
         "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
       buttonText: "Apply Now",
       category: "Medical",
-      image: "/public/bpt.png"
+      image: "/bpt.png"
     },
   ];
 
