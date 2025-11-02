@@ -558,9 +558,8 @@ const EmMat = ({ showFooter = true }) => {
                         </li>
                       </ul>
 
-                      {/* Why Join Section */}
-                      <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
-                        {/* <h3 className="font-semibold text-xl text-gray-900 text-center mb-3">Why Join Super 100?</h3> */}
+                     
+                      <div className="mt-80 mb-8 p-6  bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
                         <p className="text-gray-600 text-center text-sm leading-relaxed font-bold">
                           “Educate-Me — Bridging education, innovation, and opportunity.”
                         </p>
