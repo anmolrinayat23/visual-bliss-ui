@@ -121,7 +121,7 @@ const Courses = ({ showFooter = true }) => {
         "IT program developing expertise in programming, software design, and database management.",
       buttonText: "Apply Now",
       category: "Computer",
-      image: "/public/bca.png"
+      image: "/bca.png"
     },
     {
       title: "MCA",
