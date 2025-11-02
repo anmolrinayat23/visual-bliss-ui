@@ -51,6 +51,7 @@ const Courses = ({ showFooter = true }) => {
       category: "Management",
       image: "/pgdm.png"
     },
+    
     {
       title: "BBA",
       description:
@@ -67,6 +68,7 @@ const Courses = ({ showFooter = true }) => {
       category: "Arts",
        image: "/art.png"
     },
+
     {
       title: "Law",
       description:
