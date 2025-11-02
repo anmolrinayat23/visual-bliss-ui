@@ -48,6 +48,7 @@ const Hero = () => {
           </Button>
 
           <Button
+          
             size="lg"
             variant="outline"
             onClick={() => navigate("/explore")} // ✅ Navigate to /explore
