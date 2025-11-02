@@ -41,7 +41,7 @@ const Courses = ({ showFooter = true }) => {
         "Master of Business Administration for strategic leadership and advanced management skills.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "https://plus.unsplash.com/premium_photo-1713296256339-08682fb13217?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2054"
+      image: "/public/mba.png"
     },
     {
       title: "PGDM",
@@ -49,7 +49,7 @@ const Courses = ({ showFooter = true }) => {
         "Management program bridging theory with practice through case-based learning and leadership workshops.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/courses/pgdm.jpg"
+      image: "/public/pgdm.png"
     },
     {
       title: "BBA",
@@ -57,7 +57,7 @@ const Courses = ({ showFooter = true }) => {
         "Business administration program focusing on global markets, management strategies, and entrepreneurship.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/courses/bba.jpg"
+      image: "/public/bba.png"
     },
     {
       title: "Law",
@@ -65,7 +65,7 @@ const Courses = ({ showFooter = true }) => {
         "Legal studies program with moot courts and internships for constitutional, civil, and corporate law.",
       buttonText: "Apply Now",
       category: "Law",
-      image: "/courses/law.jpg"
+    image: "/public/law.png"
     },
     {
       title: "B.Com",
@@ -73,7 +73,7 @@ const Courses = ({ showFooter = true }) => {
         "Commerce degree for accounting, finance, taxation, and business analytics careers.",
       buttonText: "Apply Now",
       category: "Commerce",
-      image: "/courses/bcom.jpg"
+       image: "/public/bcom.png"
     },
     {
       title: "Designing",
@@ -81,7 +81,7 @@ const Courses = ({ showFooter = true }) => {
         "Creative program for fashion, interior, and graphic design with focus on visual communication.",
       buttonText: "Apply Now",
       category: "Design",
-      image: "/courses/design.jpg"
+      image: "/public/designing.png"
     },
     {
       title: "B.Tech",
@@ -89,7 +89,7 @@ const Courses = ({ showFooter = true }) => {
         "Engineering program with hands-on learning in AI, data science, electronics, and mechanical systems.",
       buttonText: "Apply Now",
       category: "Engineering",
-      image: "/courses/btech.jpg"
+      image: "/public/btech.png"
     },
     {
       title: "BA",
@@ -97,7 +97,7 @@ const Courses = ({ showFooter = true }) => {
         "Arts program nurturing analytical thinking and communication skills for media, education, and civil services.",
       buttonText: "Apply Now",
       category: "Arts",
-      image: "/courses/ba.jpg"
+       image: "/public/ba.png"
     },
     {
       title: "Liberal Arts",
@@ -105,7 +105,7 @@ const Courses = ({ showFooter = true }) => {
         "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
       buttonText: "Apply Now",
       category: "Arts",
-      image: "/courses/liberal-arts.jpg"
+       image: "/public/art.png"
     },
     {
       title: "B.Sc",
@@ -113,7 +113,7 @@ const Courses = ({ showFooter = true }) => {
         "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
       buttonText: "Apply Now",
       category: "Science",
-      image: "/courses/bsc.jpg"
+     image: "/public/bsc.png"
     },
     {
       title: "BCA",
@@ -121,7 +121,7 @@ const Courses = ({ showFooter = true }) => {
         "IT program developing expertise in programming, software design, and database management.",
       buttonText: "Apply Now",
       category: "Computer",
-      image: "/courses/bca.jpg"
+      image: "/public/bca.png"
     },
     {
       title: "MCA",
@@ -129,7 +129,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced computing program with AI, machine learning, cybersecurity, and full-stack development.",
       buttonText: "Apply Now",
       category: "Computer",
-      image: "/courses/mca.jpg"
+      image: "/public/mca.png"
     },
     {
       title: "MA",
@@ -137,7 +137,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced arts program emphasizing research and critical thinking for academic and creative professions.",
       buttonText: "Apply Now",
       category: "Arts",
-      image: "/courses/ma.jpg"
+      image: "/public/ma.png"
     },
     {
       title: "M.Tech",
@@ -145,7 +145,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced engineering training with specialized coursework and research projects for technological innovation.",
       buttonText: "Apply Now",
       category: "Engineering",
-      image: "/courses/mtech.jpg"
+     image: "/public/m tech.png"
     },
     {
       title: "Architecture",
@@ -153,7 +153,7 @@ const Courses = ({ showFooter = true }) => {
         "Program integrating creativity, technology, and sustainability for urban planning and environmental design.",
       buttonText: "Apply Now",
       category: "Design",
-      image: "/courses/architecture.jpg"
+     image: "/public/architecture.png"
     },
     {
       title: "BMS",
@@ -161,7 +161,7 @@ const Courses = ({ showFooter = true }) => {
         "Management studies foundation for organizational behavior, marketing, and strategic management.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/courses/bms.jpg"
+      image: "/public/bms.png"
     },
     {
       title: "BPT",
@@ -169,7 +169,7 @@ const Courses = ({ showFooter = true }) => {
         "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
       buttonText: "Apply Now",
       category: "Medical",
-      image: "/courses/bpt.jpg"
+      image: "/public/bpt.png"
     },
   ];
 
@@ -213,6 +213,7 @@ const Courses = ({ showFooter = true }) => {
                   </button>
                 ))}
               </div>
+              
             </div>
 
             {/* Courses Grid */}
@@ -252,9 +253,9 @@ const Courses = ({ showFooter = true }) => {
                       </div>
 
                       {/* Course Title */}
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-blue-600 transition-colors duration-300">
+                      {/* <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-blue-600 transition-colors duration-300">
                         {course.title}
-                      </h3>
+                      </h3> */}
 
                       {/* Course Description */}
                       <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow text-center">
