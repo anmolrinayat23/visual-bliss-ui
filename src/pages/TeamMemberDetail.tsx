@@ -31,7 +31,7 @@ I am not just building a company; I am building a movement—to educate, empower
     "dr-awanish-sinha": {
       name: "Dr. Awanish Kumar Sinha",
       role: "Guest Faculty Expert - Finance",
-      image: "/public/pp.jpg",
+      image: "/pp.jpg",
       fullDescription: `Welcome Dr. Awanish Kumar Sinha, a distinguished academician and seasoned banking and financial services expert, as our esteemed guest lecturer at Educate Me. Dr. Sinha brings over two decades of rich professional experience across the BFSI sector, having held key leadership roles with reputed institutions such as Yes Bank, ABN AMRO, and HDFC Bank.
 
 A Ph.D. in Finance with extensive expertise in Non-Performing Assets and their impact on financial performance, Dr. Sinha has also made remarkable contributions to academia as a permanent faculty member at Sharda University, where he led critical initiatives in accreditation, curriculum development, and industry-academia collaborations. His work spans diverse domains including corporate banking, treasury management, trade finance, risk management, insurance, and global financial strategies.
@@ -49,7 +49,7 @@ Dr. Sinha is widely recognized as a thought leader, consultant, and motivational
     "dr-vaishali-arora": {
       name: "Dr. Vaishali Arora",
       role: "Visiting Faculty Expert - Law & Management",
-      image: "/public/DR VAISHALI ARORA.PNG",
+      image: "/DR VAISHALI ARORA.PNG",
       fullDescription: `We are privileged to welcome Dr. Vaishali Arora, an accomplished legal academic and distinguished expert in Media Law and Women & Criminal Law. A graduate of the University of Delhi in both Commerce and Law, Dr. Arora pursued her LL.M from GGSIP University and went on to achieve her Ph.D. from the prestigious Indian Law Institute, New Delhi. She is also a UGC-NET qualified scholar who has devoted her career to advancing legal education and research.
 
 With nearly a decade of rich academic experience across renowned institutions, Dr. Arora has made significant contributions to legal scholarship through ten research publications recognized in UGC-approved journals and two edited books published by globally reputed publishers such as Bloomsbury and Thomson Reuters. Her areas of expertise encompass Media Law, Women and Criminal Law, Contract Law, and Family Law, making her a leading voice in contemporary legal discourse.
@@ -69,7 +69,7 @@ A recipient of the Best Paper Presenter Award at the Law Commission of India's C
     "mrs-shilpa-vishnoi": {
       name: "Mrs. Shilpa Agrawal Vishnoi",
       role: "Expert Guest Faculty - Physics & Student Advisory",
-      image: "/public/shipla.jpg",
+      image: "/shipla.jpg",
       fullDescription: `We are proud to welcome Mrs. Shilpa Agrawal Vishnoi, a visionary educator with over three decades of excellence in Physics education, as an Expert Guest Faculty at Educate Me. A dynamic mentor and lifelong learner, she has been a cornerstone of academic excellence and student empowerment since 1995.
 
 An alumna of the Regional Institute of Education (RIE), Bhopal, and an M.Sc. in Physics from Barkatullah Vishwavidyalaya, Mrs. Vishnoi has dedicated her career to making Physics engaging, relatable, and deeply inspiring. She has served at Carmel Convent School, Bhopal — one of India's top institutions renowned for its world-class education — where she guided senior secondary students toward board and competitive exam success with clarity, confidence, and compassion.
@@ -96,7 +96,7 @@ Learning with her is more than studying Physics — it's discovering the joy of 
     "dr-deepa-kumari": {
       name: "Dr. Deepa Kumari",
       role: "Expert Guest Faculty - Corporate Communication & Entrepreneurial Development",
-      image: "/public/dipali.jpg",
+      image: "/dipali.jpg",
       fullDescription: `At Educate Me, we proudly welcome Dr. Deepa Kumari, an accomplished academic leader and innovation-driven mentor with 18+ years of expertise in entrepreneurship development, corporate communication, and strategic leadership.
 
 Dr. Kumari brings an exceptional record from Sharda University, where she has played a pivotal role in nurturing entrepreneurial talent and building real-world business competencies among students. An MBA & Ph.D. scholar, she has designed and taught industry-aligned courses including Social Entrepreneurship, Launch of New Ventures, and Technology & Platform Business Strategy — empowering learners with the mindset and tools to build and lead in the modern business world.
