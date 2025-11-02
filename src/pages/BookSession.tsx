@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import counsellingImage from "@/assets/counselling.jpg";
+import counsellingImage from "@/assets/BookCounselling.png";
+
 import { Calendar, Clock, User, Phone, GraduationCap } from "lucide-react";
 
 const BookSession = ({showFooter=true}) => {
@@ -28,30 +29,14 @@ const BookSession = ({showFooter=true}) => {
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Image Section */}
               <div className="order-2 lg:order-1">
-                <div className="relative">
-                  <img 
-                    src={counsellingImage} 
-                    alt="Student counselling session" 
-                    className="rounded-xl  w-full h-[660px] object-cover"
-                  />
-                  {/* Overlay Stats */}
-                  {/* <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      <div>
-                        <div className="text-2xl font-bold text-orange-500">5000+</div>
-                        <div className="text-sm text-gray-600">Students Guided</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-orange-500">98%</div>
-                        <div className="text-sm text-gray-600">Success Rate</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-orange-500">50+</div>
-                        <div className="text-sm text-gray-600">Expert Counsellors</div>
-                      </div>
-                    </div>
-                  </div> */}
-                </div>
+            <div className="relative">
+  <img
+    src={counsellingImage}
+    alt="Student counselling session"
+    className="rounded-xl w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] object-cover object-center transition-all duration-300"
+  />
+</div>
+
 
                 {/* Features List */}
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
