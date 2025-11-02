@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import counsellingImage from "@/assets/BookCounselling.png";
+
 import { Calendar, Clock, User, Phone, GraduationCap } from "lucide-react";
 
 const BookSession = ({showFooter=true}) => {
