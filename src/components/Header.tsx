@@ -113,6 +113,9 @@ const Header = () => {
             <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
               <Link to="/session">Book Counselling</Link>
             </Button>
+              <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Link to="/Dashboard">My Account</Link>
+            </Button>
           </div>
             {/* ✅ Mobile Button (optional: also navigate) */}
             <div className="pt-4 mt-2 border-t border-muted/30">
