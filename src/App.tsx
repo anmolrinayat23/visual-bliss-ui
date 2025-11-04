@@ -9,10 +9,9 @@ import Courses from "./pages/Courses";
 import EmMat from "./pages/EmMat";
 import BookSession from "./pages/BookSession";
 import About from "./pages/About";
-import Auth from "./pages/Auth";
-import Dashboard from "./pages/Dashboard";
 import Explore from "./pages/Explore";
 import NotFound from "./pages/NotFound";
+import TeamMemberDetail from "./pages/TeamMemberDetail";
 
 const queryClient = new QueryClient();
 
@@ -29,9 +28,9 @@ const App = () => (
           <Route path="/em-mat" element={<EmMat />} />
           <Route path="/session" element={<BookSession />} />
           <Route path="/about" element={<About />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/explore" element={<Explore />} />
+
+            <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
