@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import counsellingImage from "@/assets/counselling.jpg";
+import counsellingImage from "@/assets/BookCounselling.png";
+
 import { Calendar, Clock, User, Phone, GraduationCap } from "lucide-react";
 
 const BookSession = ({showFooter=true}) => {
@@ -17,59 +18,43 @@ const BookSession = ({showFooter=true}) => {
           <div className="container mx-auto max-w-7xl">
             {/* Header Section */}
             <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Book Your Free Counselling Session
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 w-2xl">
+              Let's Plan Your Roadmap for an Elevated Career Ahead.
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Take the first step towards your dream career. Get personalized guidance from our expert counsellors.
+    Don’t just dream it—plan it! Our counsellors help you discover your strengths and choose the right career path with confidence.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Image Section */}
               <div className="order-2 lg:order-1">
-                <div className="relative">
-                  <img 
-                    src={counsellingImage} 
-                    alt="Student counselling session" 
-                    className="rounded-xl  w-full h-[660px] object-cover"
-                  />
-                  {/* Overlay Stats */}
-                  <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      <div>
-                        <div className="text-2xl font-bold text-orange-500">5000+</div>
-                        <div className="text-sm text-gray-600">Students Guided</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-orange-500">98%</div>
-                        <div className="text-sm text-gray-600">Success Rate</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-orange-500">50+</div>
-                        <div className="text-sm text-gray-600">Expert Counsellors</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="relative">
+  <img
+    src={counsellingImage}
+    alt="Student counselling session"
+    className="rounded-xl w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] object-cover object-center transition-all duration-300"
+  />
+</div>
+
 
                 {/* Features List */}
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
                     <Calendar className="w-6 h-6 text-orange-500 mr-3" />
-                    <span className="text-gray-700 font-medium">Flexible Timing</span>
+                    <span className="text-gray-700 font-medium">Personal Tutoring</span>
                   </div>
                   <div className="flex items-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
                     <User className="w-6 h-6 text-orange-500 mr-3" />
-                    <span className="text-gray-700 font-medium">1-on-1 Sessions</span>
+                    <span className="text-gray-700 font-medium">Academic Mentorship</span>
                   </div>
                   <div className="flex items-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
                     <Clock className="w-6 h-6 text-orange-500 mr-3" />
-                    <span className="text-gray-700 font-medium">30 Min Free Session</span>
+                    <span className="text-gray-700 font-medium">Learning Facilitation</span>
                   </div>
                   <div className="flex items-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
                     <GraduationCap className="w-6 h-6 text-orange-500 mr-3" />
-                    <span className="text-gray-700 font-medium">Career Guidance</span>
+                    <span className="text-gray-700 font-medium">Scholastic Navigator</span>
                   </div>
                 </div>
               </div>
