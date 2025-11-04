@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { 
   User, Mail, Phone, MapPin, Calendar, BookOpen, 
   Award, TrendingUp, Settings, LogOut, Bell, 
-  Clock, CheckCircle2, ArrowRight, Sparkles, Edit
+  Clock, CheckCircle2, ArrowRight, Sparkles, Edit,
+  Download, Share2, Target, Zap, Trophy, Star,
+  GraduationCap, BarChart3, Home
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -24,17 +27,61 @@ const Dashboard = () => {
   });
 
   const [stats] = useState([
-    { label: "Courses Enrolled", value: "12", icon: BookOpen, color: "from-blue-500 to-blue-600" },
-    { label: "Completed", value: "8", icon: CheckCircle2, color: "from-green-500 to-green-600" },
-    { label: "Certificates", value: "5", icon: Award, color: "from-orange-500 to-orange-600" },
-    { label: "Hours Learned", value: "124", icon: Clock, color: "from-purple-500 to-purple-600" },
+    { label: "Courses Enrolled", value: "12", icon: BookOpen, color: "from-orange-500 to-orange-600", change: "+3 this month" },
+    { label: "Completed", value: "8", icon: CheckCircle2, color: "from-green-500 to-green-600", change: "+2 this week" },
+    { label: "Certificates", value: "5", icon: Award, color: "from-purple-500 to-purple-600", change: "+1 new" },
+    { label: "Hours Learned", value: "124", icon: Clock, color: "from-blue-500 to-blue-600", change: "+12 this week" },
+  ]);
+
+  const [achievements] = useState([
+    { title: "Quick Learner", description: "Completed 3 courses in a month", icon: Zap, unlocked: true },
+    { title: "Consistent", description: "7 day learning streak", icon: Target, unlocked: true },
+    { title: "Top Performer", description: "Scored 95%+ in 3 courses", icon: Trophy, unlocked: true },
+    { title: "Rising Star", description: "Complete 10 courses", icon: Star, unlocked: false },
   ]);
 
   const [enrolledCourses] = useState([
-    { id: 1, name: "Web Development Bootcamp", progress: 75, status: "In Progress", nextClass: "Tomorrow, 10:00 AM" },
-    { id: 2, name: "Data Science Fundamentals", progress: 40, status: "In Progress", nextClass: "Today, 3:00 PM" },
-    { id: 3, name: "Digital Marketing", progress: 100, status: "Completed", completedDate: "March 15, 2024" },
-    { id: 4, name: "Python Programming", progress: 30, status: "In Progress", nextClass: "Monday, 2:00 PM" },
+    { 
+      id: 1, 
+      name: "Web Development Bootcamp", 
+      progress: 75, 
+      status: "In Progress", 
+      nextClass: "Tomorrow, 10:00 AM",
+      instructor: "Dr. Sarah Johnson",
+      modules: { completed: 15, total: 20 },
+      rating: 4.8
+    },
+    { 
+      id: 2, 
+      name: "Data Science Fundamentals", 
+      progress: 40, 
+      status: "In Progress", 
+      nextClass: "Today, 3:00 PM",
+      instructor: "Prof. Michael Chen",
+      modules: { completed: 8, total: 20 },
+      rating: 4.9
+    },
+    { 
+      id: 3, 
+      name: "Digital Marketing", 
+      progress: 100, 
+      status: "Completed", 
+      completedDate: "March 15, 2024",
+      instructor: "Emily Davis",
+      modules: { completed: 12, total: 12 },
+      rating: 5.0,
+      certificate: true
+    },
+    { 
+      id: 4, 
+      name: "Python Programming", 
+      progress: 30, 
+      status: "In Progress", 
+      nextClass: "Monday, 2:00 PM",
+      instructor: "Prof. David Lee",
+      modules: { completed: 6, total: 20 },
+      rating: 4.7
+    },
   ]);
 
   const [upcomingSessions] = useState([
@@ -51,39 +98,69 @@ const Dashboard = () => {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0">
+      <motion.header 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 100 }}
+        className="relative z-10 bg-white/90 backdrop-blur-xl border-b border-orange-200/50 sticky top-0 shadow-sm"
+      >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 group">
-              <motion.img
-                src="/logo.png"
-                alt="Educate Me"
-                className="h-10 w-10"
+              <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
-              />
-              <span className="text-xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
-                Educate Me
-              </span>
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                <img
+                  src="/logo.png"
+                  alt="Educate Me"
+                  className="h-10 w-10 relative z-10"
+                />
+              </motion.div>
+              <div>
+                <span className="text-xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
+                  Educate Me
+                </span>
+                <p className="text-xs text-gray-500">Dashboard</p>
+              </div>
             </Link>
 
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-orange-500 rounded-full" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Settings className="w-5 h-5" />
-              </Button>
-              <Button asChild variant="outline" size="sm">
-                <Link to="/auth" className="flex items-center gap-2">
-                  <LogOut className="w-4 h-4" />
-                  Logout
-                </Link>
-              </Button>
+            <div className="flex items-center gap-3">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button asChild variant="ghost" size="icon" className="hover:bg-orange-50">
+                  <Link to="/">
+                    <Home className="w-5 h-5" />
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button variant="ghost" size="icon" className="relative hover:bg-orange-50">
+                  <Bell className="w-5 h-5" />
+                  <motion.span 
+                    className="absolute top-1 right-1 w-2 h-2 bg-orange-500 rounded-full"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button variant="ghost" size="icon" className="hover:bg-orange-50">
+                  <Settings className="w-5 h-5" />
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button asChild variant="outline" size="sm" className="border-orange-200 hover:bg-orange-50 hover:border-orange-300">
+                  <Link to="/auth" className="flex items-center gap-2">
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </Link>
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main Content */}
       <main className="relative z-10 container mx-auto px-6 py-8">
@@ -163,26 +240,102 @@ const Dashboard = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 + index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
             >
-              <Card className="p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 group overflow-hidden relative">
-                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${stat.color} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`} />
+              <Card className="p-6 border-2 border-orange-100 hover:border-orange-300 hover:shadow-2xl transition-all duration-300 group overflow-hidden relative bg-gradient-to-br from-white to-orange-50/30">
+                <motion.div 
+                  className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.color} opacity-10 rounded-full blur-2xl`}
+                  animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                />
                 
-                <div className="relative flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                    <p className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
-                      {stat.value}
-                    </p>
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-600 mb-2 font-medium">{stat.label}</p>
+                      <motion.p 
+                        className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + index * 0.1 }}
+                      >
+                        {stat.value}
+                      </motion.p>
+                    </div>
+                    <motion.div 
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-xl`}
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <stat.icon className="w-8 h-8 text-white" />
+                    </motion.div>
                   </div>
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                    <stat.icon className="w-7 h-7 text-white" />
+                  <div className="flex items-center gap-2 text-sm">
+                    <TrendingUp className="w-4 h-4 text-green-500" />
+                    <span className="text-green-600 font-medium">{stat.change}</span>
                   </div>
                 </div>
               </Card>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Achievements Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-8"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <Trophy className="w-6 h-6 text-orange-500" />
+              Achievements
+            </h2>
+            <Button variant="ghost" size="sm" className="text-orange-600 hover:text-orange-700 hover:bg-orange-50">
+              View All <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.7 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Card className={`p-4 border-2 transition-all duration-300 ${
+                  achievement.unlocked 
+                    ? 'border-orange-200 bg-gradient-to-br from-orange-50 to-white hover:shadow-lg' 
+                    : 'border-gray-200 bg-gray-50 opacity-60'
+                }`}>
+                  <div className="flex items-start gap-3">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md ${
+                      achievement.unlocked 
+                        ? 'bg-gradient-to-br from-orange-500 to-orange-600' 
+                        : 'bg-gray-300'
+                    }`}>
+                      <achievement.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1">{achievement.title}</h3>
+                      <p className="text-xs text-gray-600">{achievement.description}</p>
+                      {achievement.unlocked && (
+                        <Badge className="mt-2 bg-orange-500 hover:bg-orange-600 text-xs">
+                          <CheckCircle2 className="w-3 h-3 mr-1" />
+                          Unlocked
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Tabs Section */}
@@ -218,61 +371,127 @@ const Dashboard = () => {
 
             {/* Courses Tab */}
             <TabsContent value="courses" className="space-y-4">
-              {enrolledCourses.map((course, index) => (
-                <motion.div
-                  key={course.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="p-6 hover:shadow-lg transition-all duration-300 group border border-gray-200">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
-                          {course.name}
-                        </h3>
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                          <Badge variant={course.status === "Completed" ? "default" : "outline"}>
-                            {course.status}
-                          </Badge>
-                          {course.nextClass && (
-                            <span className="flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              {course.nextClass}
+              <AnimatePresence mode="wait">
+                {enrolledCourses.map((course, index) => (
+                  <motion.div
+                    key={course.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <Card className="p-6 hover:shadow-2xl transition-all duration-300 group border-2 border-orange-100 hover:border-orange-300 bg-gradient-to-br from-white to-orange-50/20">
+                      <div className="flex flex-col md:flex-row gap-6">
+                        {/* Course Icon/Image */}
+                        <motion.div 
+                          className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-xl flex-shrink-0"
+                          whileHover={{ rotate: 360 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <GraduationCap className="w-10 h-10 text-white" />
+                        </motion.div>
+
+                        {/* Course Details */}
+                        <div className="flex-1 space-y-4">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                                {course.name}
+                              </h3>
+                              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
+                                <Badge 
+                                  className={course.status === "Completed" 
+                                    ? "bg-green-500 hover:bg-green-600" 
+                                    : "bg-orange-500 hover:bg-orange-600"
+                                  }
+                                >
+                                  {course.status}
+                                </Badge>
+                                <span className="flex items-center gap-1">
+                                  <User className="w-4 h-4" />
+                                  {course.instructor}
+                                </span>
+                                <span className="flex items-center gap-1">
+                                  <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                                  {course.rating}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              {course.certificate && (
+                                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                                  <Button size="icon" variant="outline" className="border-orange-300 hover:bg-orange-50">
+                                    <Download className="w-4 h-4 text-orange-600" />
+                                  </Button>
+                                </motion.div>
+                              )}
+                              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                                <Button size="icon" variant="outline" className="border-orange-300 hover:bg-orange-50">
+                                  <Share2 className="w-4 h-4 text-orange-600" />
+                                </Button>
+                              </motion.div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-6 text-sm">
+                            {course.nextClass && (
+                              <span className="flex items-center gap-2 text-orange-600 font-medium">
+                                <Clock className="w-4 h-4" />
+                                {course.nextClass}
+                              </span>
+                            )}
+                            {course.completedDate && (
+                              <span className="flex items-center gap-2 text-green-600 font-medium">
+                                <CheckCircle2 className="w-4 h-4" />
+                                Completed: {course.completedDate}
+                              </span>
+                            )}
+                            <span className="text-gray-600">
+                              {course.modules.completed}/{course.modules.total} modules
                             </span>
-                          )}
-                          {course.completedDate && (
-                            <span className="flex items-center gap-1">
-                              <CheckCircle2 className="w-4 h-4" />
-                              {course.completedDate}
-                            </span>
-                          )}
+                          </div>
+
+                          {/* Progress Bar */}
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-gray-600 font-medium">Course Progress</span>
+                              <span className="font-bold text-orange-600">{course.progress}%</span>
+                            </div>
+                            <div className="relative">
+                              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <motion.div
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${course.progress}%` }}
+                                  transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
+                                  className="h-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 rounded-full relative overflow-hidden"
+                                >
+                                  <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                                    animate={{ x: ['-100%', '200%'] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                  />
+                                </motion.div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-3">
+                            <Button className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 group/btn">
+                              Continue Learning
+                              <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                            </Button>
+                            <Button variant="outline" className="border-orange-300 hover:bg-orange-50">
+                              <BarChart3 className="w-4 h-4 mr-2" />
+                              View Details
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                      <Button variant="ghost" size="sm" className="group/btn">
-                        Continue
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-600">Progress</span>
-                        <span className="font-semibold text-orange-600">{course.progress}%</span>
-                      </div>
-                      <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${course.progress}%` }}
-                          transition={{ duration: 1, delay: index * 0.1 }}
-                          className="h-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"
-                        />
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                    </Card>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </TabsContent>
 
             {/* Sessions Tab */}
