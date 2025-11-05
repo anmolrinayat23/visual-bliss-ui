@@ -12,6 +12,8 @@ import About from "./pages/About";
 import Explore from "./pages/Explore";
 import NotFound from "./pages/NotFound";
 import TeamMemberDetail from "./pages/TeamMemberDetail";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,10 @@ const App = () => (
           <Route path="/session" element={<BookSession />} />
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/Auth" element={<Auth />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+
+
 
             <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="*" element={<NotFound />} />
