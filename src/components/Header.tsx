@@ -65,9 +65,15 @@ const Header = () => {
           </nav>
 
           {/* ✅ Desktop Button (Now Navigates to /session) */}
-          <div className="hidden md:flex flex-shrink-0 ml-4">
+          <div className="hidden md:flex flex-shrink-0 ml-4 gap-3">
             <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
-              Book Counselling
+              Book Counsellings
+            </Button>
+              <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+             <Link to="/Auth">Login/SignUp</Link>
+            </Button>
+               <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+             <Link to="/Dashboard">Admin </Link>
             </Button>
           </div>
 
@@ -107,14 +113,9 @@ const Header = () => {
             ))}
 
           <div className="hidden lg:flex items-center gap-3">
-            <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-all duration-300">
-              <Link to="/auth">Login</Link>
-            </Button>
+        
             <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
               <Link to="/session">Book Counselling</Link>
-            </Button>
-              <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-              <Link to="/Dashboard">My Account</Link>
             </Button>
           </div>
             {/* ✅ Mobile Button (optional: also navigate) */}
