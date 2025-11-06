@@ -74,6 +74,9 @@ const Header = () => {
                <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
              <Link to="/Dashboard">Admin </Link>
             </Button>
+               <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+             <Link to="/Account">Account</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
