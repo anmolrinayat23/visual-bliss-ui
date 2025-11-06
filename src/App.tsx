@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import TeamMemberDetail from "./pages/TeamMemberDetail";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Account from "./pages/Account";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
 
 
             <Route path="/team/:id" element={<TeamMemberDetail />} />
+          <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
