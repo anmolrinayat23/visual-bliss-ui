@@ -15,6 +15,7 @@ import TeamMemberDetail from "./pages/TeamMemberDetail";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Account from "./pages/Account";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -34,10 +35,8 @@ const App = () => (
           <Route path="/explore" element={<Explore />} />
           <Route path="/Auth" element={<Auth />} />
           <Route path="/Dashboard" element={<Dashboard />} />
-
-
-
-            <Route path="/team/:id" element={<TeamMemberDetail />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
