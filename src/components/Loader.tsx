@@ -36,9 +36,12 @@ const Loader = () => {
               alt="Educate Me Logo" 
               className="w-full h-full object-contain animate-scale-pulse"
               onError={(e) => {
-                // Fallback if logo doesn't load
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'block';
+                const target = e.target as HTMLImageElement;
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  target.style.display = 'none';
+                  nextSibling.style.display = 'block';
+                }
               }}
             />
             {/* Fallback text if logo doesn't load */}
