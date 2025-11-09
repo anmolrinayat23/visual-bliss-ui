@@ -232,7 +232,7 @@ const Courses = ({ showFooter = true }) => {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                           // If image fails to load, show gradient fallback
-                          e.target.style.display = 'none';
+                          (e.target as HTMLImageElement).style.display = 'none';
                         }}
                       />
                       {/* Fallback Gradient Background */}

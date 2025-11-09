@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -65,9 +64,18 @@ const Header = () => {
           </nav>
 
           {/* ✅ Desktop Button (Now Navigates to /session) */}
-          <div className="hidden md:flex flex-shrink-0 ml-4">
+          <div className="hidden md:flex flex-shrink-0 ml-4 gap-3">
             <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
-              Book Counselling
+              Book Counsellings
+            </Button>
+              <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+             <Link to="/Auth">Login/SignUp</Link>
+            </Button>
+               <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+             <Link to="/Dashboard">Admin </Link>
+            </Button>
+               <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+             <Link to="/Account">Account</Link>
             </Button>
           </div>
 
@@ -106,6 +114,12 @@ const Header = () => {
               </Link>
             ))}
 
+          <div className="hidden lg:flex items-center gap-3">
+        
+            <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Link to="/session">Book Counselling</Link>
+            </Button>
+          </div>
             {/* ✅ Mobile Button (optional: also navigate) */}
             <div className="pt-4 mt-2 border-t border-muted/30">
               <Button
