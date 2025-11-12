@@ -34,11 +34,11 @@ const Header = () => {
             className="flex items-center gap-2 group flex-shrink-0"
             onClick={closeMobileMenu}
           >
-          <img
-  src="/logo.png"
-  alt="Educate Me Logo"
-  className="w-16 h-16 sm:w-15 sm:h-15 rounded-full object-cover transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-/>
+            <img
+              src="/logo.png"
+              alt="Educate Me Logo"
+              className="w-16 h-16 sm:w-15 sm:h-15 rounded-full object-cover transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+            />
 
             <span className="text-base sm:text-lg font-bold text-foreground transition-colors duration-300 whitespace-nowrap">
               Educate Me
@@ -68,15 +68,18 @@ const Header = () => {
             <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
               Book Counsellings
             </Button>
-              <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
-             <Link to="/Auth">Login/SignUp</Link>
+            <Button size="sm" className="hover:scale-105 transition-all cursor-pointer py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+              <Link to="/Auth">Login</Link>
             </Button>
-               <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
-             <Link to="/Dashboard">Admin </Link>
-            </Button>
-               <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
-             <Link to="/Account">Account</Link>
-            </Button>
+
+            {/* <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+              <Link to="/admin-dashboard">Admin </Link>
+            </Button> */}
+
+            {/* <Button size="sm" className="hover:scale-105 transition-all py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+              <Link to="/Account">Account</Link>
+            </Button> */}
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,11 +98,10 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`md:hidden fixed left-0 right-0 bg-background border-t transition-all duration-300 ease-in-out overflow-y-auto ${
-            isMobileMenuOpen
+          className={`md:hidden fixed left-0 right-0 bg-background border-t transition-all duration-300 ease-in-out overflow-y-auto ${isMobileMenuOpen
               ? "top-full max-h-[80vh] opacity-100 shadow-lg"
               : "top-0 max-h-0 opacity-0"
-          }`}
+            }`}
         >
           <nav className="flex flex-col p-4">
             {navItems.map((item) => (
@@ -114,12 +116,12 @@ const Header = () => {
               </Link>
             ))}
 
-          <div className="hidden lg:flex items-center gap-3">
-        
-            <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-              <Link to="/session">Book Counselling</Link>
-            </Button>
-          </div>
+            <div className="hidden lg:flex items-center gap-3">
+
+              <Button asChild size="lg" className="hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <Link to="/session">Book Counselling</Link>
+              </Button>
+            </div>
             {/* ✅ Mobile Button (optional: also navigate) */}
             <div className="pt-4 mt-2 border-t border-muted/30">
               <Button

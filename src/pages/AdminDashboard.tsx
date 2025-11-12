@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -17,50 +17,390 @@ import {
 import {
   User, Mail, Phone, Lock, Users, BookOpen, Calendar,
   TrendingUp, Download, Search, Filter, Eye, CheckCircle2,
-  Clock, GraduationCap, Home
+  Clock, GraduationCap, Home, Loader2
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+// Updated Types for our data based on actual API response
+interface Student {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  course: string;
+  preference: string;
+  score: number;
+  date: string;
+  status: string;
+}
+
+interface Session {
+  id: number;
+  studentName: string;
+  email: string;
+  phone: string;
+  sessionType: string;
+  preferredDate: string;
+  preferredTime: string;
+  status: string;
+  counselor: string;
+}
+
+interface Stat {
+  label: string;
+  value: string;
+  icon: any;
+  color: string;
+  change: string;
+}
+
+interface AdminData {
+  name: string;
+  email: string;
+  phone: string;
+  role: string;
+  avatar: string;
+}
+
+// Interface for actual API response
+interface UGApplication {
+  _id: string;
+  name: string;
+  email: string;
+  mobile: string;
+  city: string;
+  state: string;
+  class: string;
+  stream: string;
+  grade10: string;
+  grade12: string;
+  paymentStatus: string;
+  applicationDate: string;
+  __v: number;
+}
+
+interface PGApplication {
+  _id: string;
+  name: string;
+  email: string;
+  mobile: string;
+  city: string;
+  state: string;
+  class: string;
+  stream: string;
+  grade10: string;
+  grade12: string;
+  graduationScore: string;
+  graduationStream: string;
+  passingYear: string;
+  paymentStatus: string;
+  applicationDate: string;
+  __v: number;
+}
 
 const AdminDashboard = () => {
-  const [adminData] = useState({
-    name: "Admin User",
-    email: "admin@educateme.com",
-    phone: "+1 234 567 8900",
+  const [adminData, setAdminData] = useState<AdminData>({
+    name: "",
+    email: "",
+    phone: "",
     role: "Administrator",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
   });
 
-  const [stats] = useState([
-    { label: "Total EM-MAT Forms", value: "145", icon: BookOpen, color: "from-orange-500 to-orange-600", change: "+12 today" },
-    { label: "UG Track Students", value: "87", icon: GraduationCap, color: "from-blue-500 to-blue-600", change: "+8 this week" },
-    { label: "PG Track Students", value: "58", icon: Users, color: "from-purple-500 to-purple-600", change: "+4 this week" },
-    { label: "Book Sessions", value: "203", icon: Calendar, color: "from-green-500 to-green-600", change: "+15 today" },
-  ]);
-
-  const [emMatUGStudents] = useState([
-    { id: 1, name: "Alice Johnson", email: "alice@example.com", phone: "+1 234 567 8901", course: "B.Tech", preference: "Computer Science", score: 85, date: "2024-03-15", status: "Pending" },
-    { id: 2, name: "Bob Smith", email: "bob@example.com", phone: "+1 234 567 8902", course: "BBA", preference: "Marketing", score: 78, date: "2024-03-14", status: "Approved" },
-    { id: 3, name: "Charlie Brown", email: "charlie@example.com", phone: "+1 234 567 8903", course: "BCA", preference: "Software Dev", score: 92, date: "2024-03-15", status: "Approved" },
-    { id: 4, name: "Diana Prince", email: "diana@example.com", phone: "+1 234 567 8904", course: "B.Sc", preference: "Data Science", score: 88, date: "2024-03-13", status: "Pending" },
-    { id: 5, name: "Ethan Hunt", email: "ethan@example.com", phone: "+1 234 567 8905", course: "B.Com", preference: "Finance", score: 75, date: "2024-03-12", status: "Approved" },
-  ]);
-
-  const [emMatPGStudents] = useState([
-    { id: 1, name: "Frank Castle", email: "frank@example.com", phone: "+1 234 567 9001", course: "MBA", preference: "Business Analytics", score: 90, date: "2024-03-15", status: "Approved" },
-    { id: 2, name: "Grace Lee", email: "grace@example.com", phone: "+1 234 567 9002", course: "M.Tech", preference: "AI/ML", score: 95, date: "2024-03-14", status: "Approved" },
-    { id: 3, name: "Henry Ford", email: "henry@example.com", phone: "+1 234 567 9003", course: "MCA", preference: "Cloud Computing", score: 82, date: "2024-03-15", status: "Pending" },
-    { id: 4, name: "Ivy Chen", email: "ivy@example.com", phone: "+1 234 567 9004", course: "M.A", preference: "Psychology", score: 87, date: "2024-03-13", status: "Approved" },
-  ]);
-
-  const [bookSessions] = useState([
-    { id: 1, studentName: "John Doe", email: "john@example.com", phone: "+1 234 567 1001", sessionType: "Career Counselling", preferredDate: "2024-03-20", preferredTime: "10:00 AM", status: "Confirmed", counselor: "Dr. Sarah Johnson" },
-    { id: 2, studentName: "Jane Smith", email: "jane@example.com", phone: "+1 234 567 1002", sessionType: "Course Guidance", preferredDate: "2024-03-21", preferredTime: "2:00 PM", status: "Pending", counselor: "Prof. Michael Chen" },
-    { id: 3, studentName: "Mike Wilson", email: "mike@example.com", phone: "+1 234 567 1003", sessionType: "Admission Help", preferredDate: "2024-03-22", preferredTime: "11:00 AM", status: "Confirmed", counselor: "Emily Davis" },
-    { id: 4, studentName: "Sarah Connor", email: "sarah@example.com", phone: "+1 234 567 1004", sessionType: "Career Counselling", preferredDate: "2024-03-23", preferredTime: "3:00 PM", status: "Pending", counselor: "Dr. Sarah Johnson" },
-    { id: 5, studentName: "Tom Hardy", email: "tom@example.com", phone: "+1 234 567 1005", sessionType: "Course Guidance", preferredDate: "2024-03-24", preferredTime: "9:00 AM", status: "Confirmed", counselor: "Prof. David Lee" },
-  ]);
-
+  const [stats, setStats] = useState<Stat[]>([]);
+  const [emMatUGStudents, setEmMatUGStudents] = useState<Student[]>([]);
+  const [emMatPGStudents, setEmMatPGStudents] = useState<Student[]>([]);
+  const [bookSessions, setBookSessions] = useState<Session[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState({
+    admin: true,
+    stats: true,
+    ug: true,
+    pg: true,
+    sessions: true
+  });
+
+  const api = axios.create({
+    baseURL: "http://localhost:5000",
+    withCredentials: true,
+  });
+
+  // Get authentication token
+  const getAuthToken = () => {
+    return localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+  };
+
+
+const fetchAdminProfile = async () => {
+    try {
+      setLoading(prev => ({ ...prev, admin: true }));
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        console.warn("⚠️ No token found in localStorage");
+        throw new Error("Token Missing");
+      }
+
+      const response = await api.get("/admin/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true
+      });
+
+      console.log("RAW RESPONSE:", response.data);
+
+      // ✅ Auto detect admin data key
+      const data =
+        response.data.admin ||
+        response.data.user ||
+        response.data; // fallback
+
+      if (!data) {
+        console.error("❌ Admin data missing in response");
+        return;
+      }
+
+      setAdminData({
+        name: data.name || "Admin User",
+        email: data.email || "admin@educateme.com",
+        phone: data.phone || "+91 9876543210",
+        role: data.role || "Administrator",
+        avatar: data.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+      });
+
+    } catch (error) {
+      console.error("❌ Error fetching admin profile:", error);
+
+      setAdminData({
+        name: "Admin User",
+        email: "admin@educateme.com",
+        phone: "+91 9876543210",
+        role: "Administrator",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+      });
+
+    } finally {
+      setLoading(prev => ({ ...prev, admin: false }));
+    }
+  };
+
+  // Helper function to map API data to Student interface
+  const mapUGApplicationToStudent = (app: UGApplication): Student => {
+    return {
+      id: app._id,
+      name: app.name,
+      email: app.email,
+      phone: app.mobile,
+      course: app.stream,
+      preference: `${app.city}, ${app.state}`,
+      score: parseFloat(app.grade12) || 0,
+      date: new Date(app.applicationDate).toLocaleDateString('en-IN'),
+      status: app.paymentStatus === "pending" ? "Pending" : "Approved"
+    };
+  };
+
+  const mapPGApplicationToStudent = (app: PGApplication): Student => {
+    return {
+      id: app._id,
+      name: app.name,
+      email: app.email,
+      phone: app.mobile,
+      course: app.graduationStream || app.stream,
+      preference: `${app.city}, ${app.state}`,
+      score: parseFloat(app.graduationScore) || 0,
+      date: new Date(app.applicationDate).toLocaleDateString('en-IN'),
+      status: app.paymentStatus === "pending" ? "Pending" : "Approved"
+    };
+  };
+
+  const fetchUGApplications = async () => {
+    try {
+      setLoading(prev => ({ ...prev, ug: true }));
+
+      const token = getAuthToken();
+
+      const response = await api.get("/user/ug-applications/getug", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      console.log("✅ UG Applications Response:", response.data);
+
+      // Handle different response structures
+      let applications: UGApplication[] = [];
+      
+      if (Array.isArray(response.data)) {
+        applications = response.data;
+      } else if (Array.isArray(response.data.applications)) {
+        applications = response.data.applications;
+      } else if (response.data.data && Array.isArray(response.data.data)) {
+        applications = response.data.data;
+      }
+
+      // Map API data to Student interface
+      const mappedStudents = applications.map(mapUGApplicationToStudent);
+      setEmMatUGStudents(mappedStudents);
+
+    } catch (error) {
+      console.error("❌ Error fetching UG applications:", error);
+      setEmMatUGStudents([]);
+    } finally {
+      setLoading(prev => ({ ...prev, ug: false }));
+    }
+  };
+
+  const fetchPGApplications = async () => {
+    try {
+      setLoading(prev => ({ ...prev, pg: true }));
+      
+      const token = getAuthToken();
+      
+      const response = await api.get('/user/pg-applications/getpg', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      console.log("✅ PG Applications Response:", response.data);
+
+      // Handle different response structures
+      let applications: PGApplication[] = [];
+      
+      if (Array.isArray(response.data)) {
+        applications = response.data;
+      } else if (Array.isArray(response.data.applications)) {
+        applications = response.data.applications;
+      } else if (response.data.data && Array.isArray(response.data.data)) {
+        applications = response.data.data;
+      }
+
+      // Map API data to Student interface
+      const mappedStudents = applications.map(mapPGApplicationToStudent);
+      setEmMatPGStudents(mappedStudents);
+      
+    } catch (error) {
+      console.error('Error fetching PG applications:', error);
+      setEmMatPGStudents([]); 
+    } finally {
+      setLoading(prev => ({ ...prev, pg: false }));
+    }
+  };
+
+  const fetchBookSessions = async () => {
+    try {
+      setLoading(prev => ({ ...prev, sessions: true }));
+      // This would be your actual API call
+      // const response = await api.get('/sessions');
+      // setBookSessions(response.data);
+      
+      // Mock data for now
+      const mockSessions: Session[] = [
+        {
+          id: 1,
+          studentName: "John Doe",
+          email: "john@example.com",
+          phone: "+1 234 567 8901",
+          sessionType: "Career Counseling",
+          preferredDate: "2024-01-15",
+          preferredTime: "10:00 AM",
+          status: "Confirmed",
+          counselor: "Dr. Smith"
+        },
+        {
+          id: 2,
+          studentName: "Jane Smith",
+          email: "jane@example.com",
+          phone: "+1 234 567 8902",
+          sessionType: "Admission Guidance",
+          preferredDate: "2024-01-16",
+          preferredTime: "2:00 PM",
+          status: "Pending",
+          counselor: "Dr. Johnson"
+        }
+      ];
+      setBookSessions(mockSessions);
+    } catch (error) {
+      console.error('Error fetching sessions:', error);
+      setBookSessions([]);
+    } finally {
+      setLoading(prev => ({ ...prev, sessions: false }));
+    }
+  };
+
+  // Calculate stats based on fetched data
+  useEffect(() => {
+    const calculateStats = () => {
+      const ugStudents = Array.isArray(emMatUGStudents) ? emMatUGStudents : [];
+      const pgStudents = Array.isArray(emMatPGStudents) ? emMatPGStudents : [];
+      const sessions = Array.isArray(bookSessions) ? bookSessions : [];
+
+      const totalForms = ugStudents.length + pgStudents.length;
+      const ugCount = ugStudents.length;
+      const pgCount = pgStudents.length;
+      const sessionCount = sessions.length;
+
+      const newStats: Stat[] = [
+        { 
+          label: "Total EM-MAT Forms", 
+          value: totalForms.toString(), 
+          icon: BookOpen, 
+          color: "from-orange-500 to-orange-600", 
+          change: "+12 today" 
+        },
+        { 
+          label: "UG Track Students", 
+          value: ugCount.toString(), 
+          icon: GraduationCap, 
+          color: "from-blue-500 to-blue-600", 
+          change: "+8 this week" 
+        },
+        { 
+          label: "PG Track Students", 
+          value: pgCount.toString(), 
+          icon: Users, 
+          color: "from-purple-500 to-purple-600", 
+          change: "+4 this week" 
+        },
+        { 
+          label: "Book Sessions", 
+          value: sessionCount.toString(), 
+          icon: Calendar, 
+          color: "from-green-500 to-green-600", 
+          change: "+15 today" 
+        },
+      ];
+
+      setStats(newStats);
+      setLoading(prev => ({ ...prev, stats: false }));
+    };
+
+    // Only calculate stats when all data is loaded
+    if (!loading.ug && !loading.pg && !loading.sessions) {
+      calculateStats();
+    }
+  }, [emMatUGStudents, emMatPGStudents, bookSessions, loading.ug, loading.pg, loading.sessions]);
+
+  // Fetch all data on component mount
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        await Promise.all([
+          fetchAdminProfile(),
+          fetchUGApplications(),
+          fetchPGApplications(),
+          fetchBookSessions()
+        ]);
+      } catch (error) {
+        console.error("Error fetching all data:", error);
+      }
+    };
+
+    fetchAllData();
+  }, []);
 
   const getStatusBadge = (status: string) => {
     const variants: Record<string, string> = {
@@ -71,6 +411,18 @@ const AdminDashboard = () => {
     };
     return variants[status] || "bg-gray-100 text-gray-700";
   };
+
+  // Loading component
+  const LoadingRow = () => (
+    <TableRow>
+      <TableCell colSpan={10} className="text-center py-8">
+        <div className="flex items-center justify-center gap-2">
+          <Loader2 className="w-5 h-5 animate-spin text-orange-600" />
+          <span className="text-gray-600">Loading data...</span>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50">
@@ -124,71 +476,100 @@ const AdminDashboard = () => {
                   <img src={adminData.avatar} alt="Admin" className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl">{adminData.name}</CardTitle>
-                  <CardDescription className="text-orange-100">{adminData.role}</CardDescription>
+                  <CardTitle className="text-2xl">
+                    {loading.admin ? "Loading..." : adminData.name}
+                  </CardTitle>
+                  <CardDescription className="text-orange-100">
+                    {adminData.role}
+                  </CardDescription>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="pt-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="space-y-2">
-                  <Label className="text-gray-600 flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Name
-                  </Label>
-                  <Input value={adminData.name} disabled className="bg-gray-50" />
+              {loading.admin ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-orange-600" />
                 </div>
-                <div className="space-y-2">
-                  <Label className="text-gray-600 flex items-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Email
-                  </Label>
-                  <Input value={adminData.email} disabled className="bg-gray-50" />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <Label className="text-gray-600 flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      Name
+                    </Label>
+                    <Input value={adminData.name} disabled className="bg-gray-50" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-gray-600 flex items-center gap-2">
+                      <Mail className="w-4 h-4" />
+                      Email
+                    </Label>
+                    <Input value={adminData.email} disabled className="bg-gray-50" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-gray-600 flex items-center gap-2">
+                      <Phone className="w-4 h-4" />
+                      Phone
+                    </Label>
+                    <Input value={adminData.phone} disabled className="bg-gray-50" />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <Label className="text-gray-600 flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    Phone
-                  </Label>
-                  <Input value={adminData.phone} disabled className="bg-gray-50" />
-                </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         </motion.div>
 
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * (index + 2) }}
-            >
-              <Card className="relative overflow-hidden border-orange-200/50 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity`} />
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                      <stat.icon className="w-6 h-6 text-white" />
+          {loading.stats ? (
+            Array(4).fill(0).map((_, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * (index + 2) }}
+              >
+                <Card className="relative overflow-hidden border-orange-200/50 bg-white/80 backdrop-blur-sm">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-center py-8">
+                      <Loader2 className="w-6 h-6 animate-spin text-orange-600" />
                     </div>
-                    <TrendingUp className="w-5 h-5 text-green-500" />
-                  </div>
-                  <div>
-                    <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                      {stat.value}
-                    </p>
-                    <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
-                    <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
-                      <TrendingUp className="w-3 h-3" />
-                      {stat.change}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))
+          ) : (
+            stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * (index + 2) }}
+              >
+                <Card className="relative overflow-hidden border-orange-200/50 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity`} />
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
+                        <stat.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <TrendingUp className="w-5 h-5 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                        {stat.value}
+                      </p>
+                      <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
+                      <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
+                        <TrendingUp className="w-3 h-3" />
+                        {stat.change}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))
+          )}
         </div>
 
         {/* EM-MAT Forms Section */}
@@ -227,10 +608,10 @@ const AdminDashboard = () => {
               <Tabs defaultValue="ug" className="space-y-4">
                 <TabsList className="bg-orange-50">
                   <TabsTrigger value="ug" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
-                    UG Track ({emMatUGStudents.length})
+                    UG Track ({loading.ug ? "..." : emMatUGStudents.length})
                   </TabsTrigger>
                   <TabsTrigger value="pg" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
-                    PG Track ({emMatPGStudents.length})
+                    PG Track ({loading.pg ? "..." : emMatPGStudents.length})
                   </TabsTrigger>
                 </TabsList>
 
@@ -252,34 +633,44 @@ const AdminDashboard = () => {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {emMatUGStudents.map((student) => (
-                          <TableRow key={student.id} className="hover:bg-orange-50/50 transition-colors">
-                            <TableCell className="font-medium">#{student.id}</TableCell>
-                            <TableCell>{student.name}</TableCell>
-                            <TableCell className="text-gray-600">{student.email}</TableCell>
-                            <TableCell className="text-gray-600">{student.phone}</TableCell>
-                            <TableCell>
-                              <Badge variant="outline" className="border-blue-300 text-blue-700">
-                                {student.course}
-                              </Badge>
-                            </TableCell>
-                            <TableCell className="text-gray-600">{student.preference}</TableCell>
-                            <TableCell>
-                              <span className="font-semibold text-orange-600">{student.score}%</span>
-                            </TableCell>
-                            <TableCell className="text-gray-600">{student.date}</TableCell>
-                            <TableCell>
-                              <Badge className={getStatusBadge(student.status)}>
-                                {student.status}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>
-                              <Button variant="ghost" size="icon" className="hover:bg-orange-50">
-                                <Eye className="w-4 h-4 text-orange-600" />
-                              </Button>
+                        {loading.ug ? (
+                          <LoadingRow />
+                        ) : emMatUGStudents.length > 0 ? (
+                          emMatUGStudents.map((student) => (
+                            <TableRow key={student.id} className="hover:bg-orange-50/50 transition-colors">
+                              <TableCell className="font-medium">#{student.id.slice(-6)}</TableCell>
+                              <TableCell>{student.name}</TableCell>
+                              <TableCell className="text-gray-600">{student.email}</TableCell>
+                              <TableCell className="text-gray-600">{student.phone}</TableCell>
+                              <TableCell>
+                                <Badge variant="outline" className="border-blue-300 text-blue-700">
+                                  {student.course}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="text-gray-600">{student.preference}</TableCell>
+                              <TableCell>
+                                <span className="font-semibold text-orange-600">{student.score}%</span>
+                              </TableCell>
+                              <TableCell className="text-gray-600">{student.date}</TableCell>
+                              <TableCell>
+                                <Badge className={getStatusBadge(student.status)}>
+                                  {student.status}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <Button variant="ghost" size="icon" className="hover:bg-orange-50">
+                                  <Eye className="w-4 h-4 text-orange-600" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        ) : (
+                          <TableRow>
+                            <TableCell colSpan={10} className="text-center py-8 text-gray-500">
+                              No UG applications found
                             </TableCell>
                           </TableRow>
-                        ))}
+                        )}
                       </TableBody>
                     </Table>
                   </div>
@@ -303,34 +694,44 @@ const AdminDashboard = () => {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {emMatPGStudents.map((student) => (
-                          <TableRow key={student.id} className="hover:bg-orange-50/50 transition-colors">
-                            <TableCell className="font-medium">#{student.id}</TableCell>
-                            <TableCell>{student.name}</TableCell>
-                            <TableCell className="text-gray-600">{student.email}</TableCell>
-                            <TableCell className="text-gray-600">{student.phone}</TableCell>
-                            <TableCell>
-                              <Badge variant="outline" className="border-purple-300 text-purple-700">
-                                {student.course}
-                              </Badge>
-                            </TableCell>
-                            <TableCell className="text-gray-600">{student.preference}</TableCell>
-                            <TableCell>
-                              <span className="font-semibold text-orange-600">{student.score}%</span>
-                            </TableCell>
-                            <TableCell className="text-gray-600">{student.date}</TableCell>
-                            <TableCell>
-                              <Badge className={getStatusBadge(student.status)}>
-                                {student.status}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>
-                              <Button variant="ghost" size="icon" className="hover:bg-orange-50">
-                                <Eye className="w-4 h-4 text-orange-600" />
-                              </Button>
+                        {loading.pg ? (
+                          <LoadingRow />
+                        ) : emMatPGStudents.length > 0 ? (
+                          emMatPGStudents.map((student) => (
+                            <TableRow key={student.id} className="hover:bg-orange-50/50 transition-colors">
+                              <TableCell className="font-medium">#{student.id.slice(-6)}</TableCell>
+                              <TableCell>{student.name}</TableCell>
+                              <TableCell className="text-gray-600">{student.email}</TableCell>
+                              <TableCell className="text-gray-600">{student.phone}</TableCell>
+                              <TableCell>
+                                <Badge variant="outline" className="border-purple-300 text-purple-700">
+                                  {student.course}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="text-gray-600">{student.preference}</TableCell>
+                              <TableCell>
+                                <span className="font-semibold text-orange-600">{student.score}%</span>
+                              </TableCell>
+                              <TableCell className="text-gray-600">{student.date}</TableCell>
+                              <TableCell>
+                                <Badge className={getStatusBadge(student.status)}>
+                                  {student.status}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <Button variant="ghost" size="icon" className="hover:bg-orange-50">
+                                  <Eye className="w-4 h-4 text-orange-600" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        ) : (
+                          <TableRow>
+                            <TableCell colSpan={10} className="text-center py-8 text-gray-500">
+                              No PG applications found
                             </TableCell>
                           </TableRow>
-                        ))}
+                        )}
                       </TableBody>
                     </Table>
                   </div>
@@ -380,36 +781,46 @@ const AdminDashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {bookSessions.map((session) => (
-                      <TableRow key={session.id} className="hover:bg-orange-50/50 transition-colors">
-                        <TableCell className="font-medium">#{session.id}</TableCell>
-                        <TableCell>{session.studentName}</TableCell>
-                        <TableCell className="text-gray-600">{session.email}</TableCell>
-                        <TableCell className="text-gray-600">{session.phone}</TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className="border-green-300 text-green-700">
-                            {session.sessionType}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-gray-600">{session.preferredDate}</TableCell>
-                        <TableCell className="text-gray-600 flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {session.preferredTime}
-                        </TableCell>
-                        <TableCell className="text-gray-600">{session.counselor}</TableCell>
-                        <TableCell>
-                          <Badge className={getStatusBadge(session.status)}>
-                            {session.status === "Confirmed" && <CheckCircle2 className="w-3 h-3 mr-1" />}
-                            {session.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Button variant="ghost" size="icon" className="hover:bg-orange-50">
-                            <Eye className="w-4 h-4 text-orange-600" />
-                          </Button>
+                    {loading.sessions ? (
+                      <LoadingRow />
+                    ) : bookSessions.length > 0 ? (
+                      bookSessions.map((session) => (
+                        <TableRow key={session.id} className="hover:bg-orange-50/50 transition-colors">
+                          <TableCell className="font-medium">#{session.id}</TableCell>
+                          <TableCell>{session.studentName}</TableCell>
+                          <TableCell className="text-gray-600">{session.email}</TableCell>
+                          <TableCell className="text-gray-600">{session.phone}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="border-green-300 text-green-700">
+                              {session.sessionType}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-gray-600">{session.preferredDate}</TableCell>
+                          <TableCell className="text-gray-600 flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {session.preferredTime}
+                          </TableCell>
+                          <TableCell className="text-gray-600">{session.counselor}</TableCell>
+                          <TableCell>
+                            <Badge className={getStatusBadge(session.status)}>
+                              {session.status === "Confirmed" && <CheckCircle2 className="w-3 h-3 mr-1" />}
+                              {session.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Button variant="ghost" size="icon" className="hover:bg-orange-50">
+                              <Eye className="w-4 h-4 text-orange-600" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={10} className="text-center py-8 text-gray-500">
+                          No session requests found
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )}
                   </TableBody>
                 </Table>
               </div>
