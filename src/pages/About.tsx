@@ -86,17 +86,22 @@ const About = ({ showFooter = true }) => {
       highlight: "Empowering students through personalized guidance",
       fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.`
     },
-    {
-      id: "nilesh-raut",
-      name: "Mr. Nilesh Raut",
-      role: "Financial Strategist",
-      description: "Financial analyst with 3.5+ years corporate experience in inventory management and operational efficiency.",
-      achievement: "Bachelor's, PGDCA, and MBA qualifications with expertise in financial analysis and optimization.",
-      avatar: "NR",
-      image: "/nilesh.jpg",
-      highlight: "Analytical excellence driving financial strategy",
-      fullDescription: `Mr. Nilesh Raut brings over 3.5 years of corporate experience as a Financial Analyst, with diverse expertise in inventory management and financial operations. A dedicated and results-driven professional, he holds a Bachelor's degree from NRI College Bhopal.`
-    }
+{
+  id: "sanjana-sharma",
+  name: "Mrs. Sanjana Sharma",
+  role: "Senior Educational Counsellor",
+  description: "A compassionate counsellor helping students discover their strengths and make confident academic and career choices.",
+  achievement: "Brings creative and corporate experience with a warm, student-centric counselling approach.",
+  avatar: "SS",
+  image: "/sanjana.jpg",
+  highlight: "Inspiring learners with empathy, positivity, and purpose-driven guidance",
+  fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
+
+Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
+
+At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`
+}
+
   ];
 
   const visionPoints = [

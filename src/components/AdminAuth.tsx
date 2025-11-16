@@ -19,73 +19,66 @@ const AdminAuth = () => {
     { icon: Settings, title: "System Controls", description: "Manage platform settings and configurations" },
     { icon: Shield, title: "Admin Security", description: "Secure access with role-based permissions" },
   ];
+const handleAdminLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-  const handleAdminLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const email = (document.getElementById("admin-login-email") as HTMLInputElement).value;
+  const password = (document.getElementById("admin-login-password") as HTMLInputElement).value;
 
-    const email = (document.getElementById("admin-login-email") as HTMLInputElement).value;
-    const password = (document.getElementById("admin-login-password") as HTMLInputElement).value;
+  try {
+    const res = await axios.post("http://localhost:5000/admin/login", {
+      email,
+      password,
+    });
 
-    try {
-      const res = await axios.post("http://localhost:5000/admin/login", {
-        email,
-        password,
-      });
+    const adminData = res.data.data;
 
-      // Debugging ke liye response check karo
-      console.log("Login Response:", res.data);
+    localStorage.setItem("adminToken", adminData.token);
+    localStorage.setItem("adminUser", JSON.stringify(adminData));
 
-      // Token aur admin data save karo
-      localStorage.setItem("adminToken", res.data.token);
-      localStorage.setItem("adminUser", JSON.stringify(res.data.admin));
+    navigate("/admin-dashboard", { replace: true });
 
-      // Force navigation to admin dashboard
-      setTimeout(() => {
-        navigate("/admin-dashboard", { replace: true });
-      }, 100);
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Admin login failed");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-    } catch (err: any) {
-      console.error("Login Error:", err);
-      alert(err.response?.data?.message || "Admin login failed");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  const handleAdminSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+const handleAdminSignup = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    const name = (document.getElementById("admin-signup-name") as HTMLInputElement).value;
-    const email = (document.getElementById("admin-signup-email") as HTMLInputElement).value;
-    const phone = (document.getElementById("admin-signup-phone") as HTMLInputElement).value;
-    const password = (document.getElementById("admin-signup-password") as HTMLInputElement).value;
+  const name = (document.getElementById("admin-signup-name") as HTMLInputElement).value;
+  const email = (document.getElementById("admin-signup-email") as HTMLInputElement).value;
+  const phone = (document.getElementById("admin-signup-phone") as HTMLInputElement).value;
+  const password = (document.getElementById("admin-signup-password") as HTMLInputElement).value;
 
-    try {
-      const res = await axios.post("http://localhost:5000/admin/register", {
-        name,
-        email,
-        phone,
-        password
-      });
+  try {
+    const res = await axios.post("http://localhost:5000/admin/register", {
+      name,
+      email,
+      phone,
+      password,
+      secretKey: "EDUCATEME-ADMIN-2024", // REQUIRED
+    });
 
-      // Debugging ke liye response check karo
-      console.log("Signup Response:", res.data);
+    const adminData = res.data.data;
 
-      localStorage.setItem("adminToken", res.data.token);
-      localStorage.setItem("adminUser", JSON.stringify(res.data.admin));
+    localStorage.setItem("adminToken", adminData.token);
+    localStorage.setItem("adminUser", JSON.stringify(adminData));
 
-      // Use navigate instead of window.location.href
-      navigate("/admin-dashboard", { replace: true });
+    navigate("/admin-dashboard", { replace: true });
 
-    } catch (err: any) {
-      console.error("Signup Error:", err);
-      alert(err.response?.data?.message || "Admin registration failed");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Admin registration failed");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-100">
       {/* Animated Background */}

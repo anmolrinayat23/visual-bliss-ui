@@ -79,12 +79,19 @@ const AccountPage = () => {
 
     const user = data.data; // ✅ FIX
 
+     const DEFAULT_AVATAR = "/avtar.webp";
+
+       setUserData({
+      ...user,
+      avatar: DEFAULT_AVATAR, 
+    });
+
     setUserData(user);
     setFormData({
       name: user.name || "",
       email: user.email || "",
       phone: user.phone || "",
-      avatar: user.avatar || "/api/placeholder/100/100",
+     avatar: DEFAULT_AVATAR,
     });
 
   } catch (error: any) {
@@ -244,15 +251,16 @@ const AccountPage = () => {
               <Button
                 onClick={() => navigate('/')}
                 variant="outline"
-                className="border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-200 shadow-sm"
+                className="border-orange-200 text-orange-600 hover:bg-orange-500 hover:border-orange-300 transition-all duration-200 shadow-sm"
               >
                 <Home className="w-4 h-4 mr-2" />
                 Home
               </Button>
+
               <Button
                 onClick={handleLogout}
                 variant="outline"
-                className="border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-200 shadow-sm"
+                className="border-orange-200 text-orange-600 hover:bg-orange-500 hover:border-orange-300 transition-all duration-200 shadow-sm"
               >
                 <Lock className="w-4 h-4 mr-2" />
                 Logout
@@ -274,15 +282,15 @@ const AccountPage = () => {
                   <div className="flex flex-col items-center text-center mb-8">
                     <div className="relative mb-4 group">
                       <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 p-1">
-                        <img
-                          src={userData.avatar}
-                          alt="Profile"
-                          className="w-full h-full rounded-full border-2 border-white object-cover"
-                        />
+                      <img
+  src={userData.avatar || "/avtar.webp"}
+  alt="Profile"
+  className="w-full h-full rounded-full border-2 border-white object-cover"
+  onError={(e) => (e.currentTarget.src = "/images/default-user.png")}
+/>
+
                       </div>
-                      <button className="absolute bottom-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-orange-500 shadow-lg hover:scale-110 transition-transform duration-200">
-                        <Camera className="w-4 h-4 text-orange-600" />
-                      </button>
+                     
                     </div>
                     
                     {/* User Info */}
@@ -305,8 +313,6 @@ const AccountPage = () => {
                     {[
                       { id: 'profile', icon: User, label: 'Profile', badge: null },
                       { id: 'security', icon: Shield, label: 'Security', badge: null },
-                      { id: 'billing', icon: CreditCard, label: 'Billing', badge: 'Pro' },
-                      { id: 'preferences', icon: Settings, label: 'Preferences', badge: null }
                     ].map((item) => (
                       <motion.button
                         key={item.id}
