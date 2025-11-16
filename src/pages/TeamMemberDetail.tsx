@@ -48,7 +48,7 @@ Dr. Sinha is widely recognized as a thought leader, consultant, and motivational
     },
     "dr-vaishali-arora": {
       name: "Dr. Vaishali Arora",
-      role: "Visiting Faculty Expert - Law & Management",
+      role: "Visiting Faculty Expert Law & Management",
       image: "/DR VAISHALI ARORA.PNG",
       fullDescription: `We are privileged to welcome Dr. Vaishali Arora, an accomplished legal academic and distinguished expert in Media Law and Women & Criminal Law. A graduate of the University of Delhi in both Commerce and Law, Dr. Arora pursued her LL.M from GGSIP University and went on to achieve her Ph.D. from the prestigious Indian Law Institute, New Delhi. She is also a UGC-NET qualified scholar who has devoted her career to advancing legal education and research.
 
@@ -163,7 +163,7 @@ Fluent in French and certified in Taxation, Kajol blends analytical depth with c
     },
     "sulekha-sarkar": {
       name: "Ms. Sulekha Sarkar",
-      role: "Student Counseling Head",
+      role: "Administrive Supervisor",
       image: "/sulekha.jpg",
       fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.
 

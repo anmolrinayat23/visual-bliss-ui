@@ -34,7 +34,7 @@ const About = ({ showFooter = true }) => {
     {
       id: "dr-vaishali-arora",
       name: "Dr. Vaishali Arora",
-      role: "Visiting Faculty Expert - Law & Management",
+      role: "Visiting Faculty Expert Law & Management",
       description: "Accomplished legal scholar specializing in Media Law, Women & Criminal Law with extensive research publications.",
       achievement: "Ph.D. from Indian Law Institute, UGC-NET scholar with 10+ publications and edited books with global publishers.",
       avatar: "VA",
@@ -78,7 +78,7 @@ const About = ({ showFooter = true }) => {
     {
       id: "sulekha-sarkar",
       name: "Ms. Sulekha Sarkar",
-      role: "Student Counseling Head",
+      role: "Administrive Supervisor",
       description: "Empathetic student counselor with over a decade of experience in academic guidance and mentorship.",
       achievement: "Expert in educational journey planning with strong administrative skills and personalized support.",
       avatar: "MS",
@@ -163,8 +163,8 @@ At Educate Me, Sanjana’s mission is simple — to inspire learners to believe 
                 </p>
                 <div className="bg-gradient-to-r from-blue-50 to-orange-50 p-4 md:p-6 rounded-xl border-l-4 border-orange-500">
                   <p className="text-gray-800 font-semibold text-center text-sm md:text-base">
-                    Beyond placement, we mentor holistically—guiding each student to courses that align with their strengths,
-                    aspirations, and potential for long-term impact.
+                    Beyond placement, we mentor holistically guiding each student to courses that align with their strengths,
+                    aspirations, and potential for long term impact.
                   </p>
                 </div>
               </div>

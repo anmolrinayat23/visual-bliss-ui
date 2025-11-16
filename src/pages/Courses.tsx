@@ -18,11 +18,10 @@ const AnimatedCard = ({ children, delay = 0 }) => {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        inView
+      className={`transition-all duration-700 ease-out ${inView
           ? "opacity-100 transform translate-y-0"
           : "opacity-0 transform translate-y-8"
-      }`}
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -41,7 +40,7 @@ const Courses = ({ showFooter = true }) => {
         "Master of Business Administration for strategic leadership and advanced management skills.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/mba.png"
+      image: "/mba_new.jpeg"
     },
     {
       title: "PGDM",
@@ -49,24 +48,24 @@ const Courses = ({ showFooter = true }) => {
         "Management program bridging theory with practice through case-based learning and leadership workshops.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/pgdm.png"
+      image: "/pgdm_new.jpeg"
     },
-    
+
     {
       title: "BBA",
       description:
         "Business administration program focusing on global markets, management strategies, and entrepreneurship.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/bba.png"
+      image: "/bba_new.jpeg"
     },
-        {
+    {
       title: "Liberal Arts",
       description:
         "Interdisciplinary program integrating philosophy, literature, sociology, and science for creative thinkers.",
       buttonText: "Apply Now",
       category: "Arts",
-       image: "/art.png"
+      image: "/libart.png"
     },
 
     {
@@ -75,7 +74,7 @@ const Courses = ({ showFooter = true }) => {
         "Legal studies program with moot courts and internships for constitutional, civil, and corporate law.",
       buttonText: "Apply Now",
       category: "Law",
-    image: "/law.png"
+      image: "/law_new.jpeg"
     },
     {
       title: "B.Com",
@@ -83,7 +82,7 @@ const Courses = ({ showFooter = true }) => {
         "Commerce degree for accounting, finance, taxation, and business analytics careers.",
       buttonText: "Apply Now",
       category: "Commerce",
-       image: "/bcom.png"
+      image: "/bcom_new.jpeg"
     },
     {
       title: "Designing",
@@ -91,7 +90,7 @@ const Courses = ({ showFooter = true }) => {
         "Creative program for fashion, interior, and graphic design with focus on visual communication.",
       buttonText: "Apply Now",
       category: "Design",
-      image: "/designing.png"
+      image: "/bdesign_new.jpeg"
     },
     {
       title: "B.Tech",
@@ -99,7 +98,7 @@ const Courses = ({ showFooter = true }) => {
         "Engineering program with hands-on learning in AI, data science, electronics, and mechanical systems.",
       buttonText: "Apply Now",
       category: "Engineering",
-      image: "/btech.png"
+      image: "/btech_new.jpeg"
     },
     {
       title: "BA",
@@ -107,7 +106,7 @@ const Courses = ({ showFooter = true }) => {
         "Arts program nurturing analytical thinking and communication skills for media, education, and civil services.",
       buttonText: "Apply Now",
       category: "Arts",
-       image: "/ba.png"
+      image: "/ba_new.jpeg"
     },
 
     {
@@ -116,7 +115,7 @@ const Courses = ({ showFooter = true }) => {
         "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
       buttonText: "Apply Now",
       category: "Science",
-     image: "/bsc.png"
+      image: "/bsc_new.jpeg"
     },
     {
       title: "BCA",
@@ -124,7 +123,7 @@ const Courses = ({ showFooter = true }) => {
         "IT program developing expertise in programming, software design, and database management.",
       buttonText: "Apply Now",
       category: "Computer",
-      image: "/bca.png"
+      image: "/bca_new.jpeg"
     },
     {
       title: "MCA",
@@ -132,7 +131,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced computing program with AI, machine learning, cybersecurity, and full-stack development.",
       buttonText: "Apply Now",
       category: "Computer",
-      image: "/mca.png"
+      image: "/mca_new.jpeg"
     },
     {
       title: "MA",
@@ -140,7 +139,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced arts program emphasizing research and critical thinking for academic and creative professions.",
       buttonText: "Apply Now",
       category: "Arts",
-      image: "/ma.png"
+      image: "/ma_new.jpeg"
     },
     {
       title: "M.Tech",
@@ -148,7 +147,7 @@ const Courses = ({ showFooter = true }) => {
         "Advanced engineering training with specialized coursework and research projects for technological innovation.",
       buttonText: "Apply Now",
       category: "Engineering",
-     image: "/m tech.png"
+      image: "/mtech_new.jpeg"
     },
     {
       title: "Architecture",
@@ -156,7 +155,7 @@ const Courses = ({ showFooter = true }) => {
         "Program integrating creativity, technology, and sustainability for urban planning and environmental design.",
       buttonText: "Apply Now",
       category: "Design",
-     image: "/architecture.png"
+      image: "/barch_new.jpeg"
     },
     {
       title: "BMS",
@@ -164,7 +163,7 @@ const Courses = ({ showFooter = true }) => {
         "Management studies foundation for organizational behavior, marketing, and strategic management.",
       buttonText: "Apply Now",
       category: "Management",
-      image: "/bms.png"
+      image: "/bms_new.jpeg"
     },
     {
       title: "BPT",
@@ -172,8 +171,17 @@ const Courses = ({ showFooter = true }) => {
         "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
       buttonText: "Apply Now",
       category: "Medical",
-      image: "/bpt.png"
+      image: "/bpt_new.jpeg"
     },
+    {
+      title: "BSc Nursing",
+      description:
+        "Undergraduate nursing program focusing on clinical skills, patient care, and healthcare practices.",
+      buttonText: "Apply Now",
+      category: "Medical",
+      image: "/bscnursing_new.jpeg"
+    }
+
   ];
 
   // Get unique categories for filtering
@@ -206,17 +214,16 @@ const Courses = ({ showFooter = true }) => {
                   <button
                     key={index}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                      selectedCategory === category
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === category
                         ? "bg-orange-500 text-white"
                         : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-                    }`}
+                      }`}
                   >
                     {category}
                   </button>
                 ))}
               </div>
-              
+
             </div>
 
             {/* Courses Grid */}
@@ -225,18 +232,18 @@ const Courses = ({ showFooter = true }) => {
                 <AnimatedCard key={index} delay={index * 100}>
                   <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300 group hover:shadow-lg h-full flex flex-col cursor-pointer overflow-hidden">
                     {/* Full Width Top Image */}
-                    <div className="w-full h-32 bg-gray-200 overflow-hidden relative">
+                    <div className="w-full h-22 bg-gray-200 overflow-hidden relative">
                       <img
                         src={course.image}
                         alt={course.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-48 ml-12 h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                           // If image fails to load, show gradient fallback
                           (e.target as HTMLImageElement).style.display = 'none';
                         }}
                       />
                       {/* Fallback Gradient Background */}
-                      <div 
+                      <div
                         className="absolute inset-0 bg-gradient-to-br from-blue-500 to-orange-500 flex items-center justify-center"
                         style={{ display: course.image ? 'none' : 'flex' }}
                       >
