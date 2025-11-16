@@ -17,13 +17,11 @@ const Auth = () => {
   const features = [
     { icon: BookOpen, title: "Expert Courses", description: "Access premium learning resources" },
     { icon: Award, title: "Certifications", description: "Earn recognized certificates" },
-    { icon: Users, title: "Expert Mentors", description: "Learn from industry professionals" },
-    { icon: Target, title: "Career Goals", description: "Achieve your career aspirations" },
   ];
 
 
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   setIsLoading(true);
 
@@ -32,70 +30,55 @@ const Auth = () => {
   const password = formData.get("password") as string;
 
   try {
-    console.log("📡 Sending LOGIN request...");
-
     const res = await axios.post("http://localhost:5000/user/login", {
       email,
       password,
     });
 
-    console.log("✅ Response received:", res.data);
-
     if (res.data.success) {
-      console.log("✅ Login successful");
-      console.log("🔑 Token:", res.data.data.token);
-
       localStorage.setItem("token", res.data.data.token);
-      navigate("/accountpage");
+      localStorage.setItem("user", JSON.stringify(res.data.data));
+
+      navigate("/em-mat"); // success
     } else {
-      alert(res.data.message || "Login failed");
+      alert(res.data.message);
     }
   } catch (err: any) {
-    console.error("❌ Login error:", err.response?.data);
-    alert(err.response?.data?.message || "Login failed. Please try again.");
+    alert(err.response?.data?.message || "Login failed");
   } finally {
     setIsLoading(false);
   }
 };
 
- const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   setIsLoading(true);
 
   const formData = new FormData(e.currentTarget);
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const phone = formData.get("phone") as string;
-  const password = formData.get("password") as string;
 
   try {
-    console.log("📡 Sending SIGNUP request...");
-
     const res = await axios.post("http://localhost:5000/user/register", {
-      name,
-      email,
-      phone,
-      password,
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      password: formData.get("password"),
     });
 
-    console.log("✅ Response received:", res.data);
-
     if (res.data.success) {
-      console.log("✅ Signup successful");
-      console.log("🔑 Token:", res.data.data.token);
-
       localStorage.setItem("token", res.data.data.token);
-      navigate("/accountpage");
+      localStorage.setItem("user", JSON.stringify(res.data.data));
+
+      navigate("/em-mat");
     } else {
-      alert(res.data.message || "Signup failed");
+      alert(res.data.message);
     }
   } catch (err: any) {
-    console.error("❌ Signup error:", err.response?.data);
-    alert(err.response?.data?.message || "Signup failed. Please try again.");
+    alert(err.response?.data?.message || "Signup failed");
   } finally {
     setIsLoading(false);
   }
 };
+
 
 
   return (
@@ -206,31 +189,12 @@ const Auth = () => {
               ))}
             </div>
 
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="flex gap-8"
-            >
-              {[
-                { value: "10K+", label: "Students" },
-                { value: "50+", label: "Courses" },
-                { value: "95%", label: "Success Rate" },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
+           
           </motion.div>
         </div>
 
         {/* Right Side - Auth Forms */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-12">
+        <div className="w-full lg:w-1/2 mb-40 flex items-center justify-center p-4 lg:p-12">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -251,7 +215,7 @@ const Auth = () => {
             </Link>
 
             {/* Auth Card */}
-            <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-orange-200/50 overflow-hidden">
+            <div className="bg-white/90  backdrop-blur-xl rounded-3xl shadow-2xl border border-orange-200/50 overflow-hidden">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="grid w-full grid-cols-2 bg-orange-50 p-2 rounded-none border-b border-orange-200/50">
                   <TabsTrigger
@@ -280,15 +244,8 @@ const Auth = () => {
                       transition={{ duration: 0.3 }}
                     >
                       <div className="text-center mb-8">
-                        <motion.div
-                          initial={{ scale: 0, rotate: -180 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          transition={{ type: "spring", delay: 0.2 }}
-                          className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 mb-4 shadow-xl"
-                        >
-                          <Sparkles className="w-10 h-10 text-white" />
-                        </motion.div>
-                        <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent mb-2">
+                      
+                        <h2 className="text-3xl mt-10 font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent mb-2">
                           Welcome Back!
                         </h2>
                         <p className="text-gray-600">Continue your learning journey</p>
@@ -300,7 +257,7 @@ const Auth = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.1 }}
                         >
-                          <Label htmlFor="login-email" className="text-gray-700 font-medium mb-2 block">
+                          <Label htmlFor="login-email"  className="text-gray-700 mt-10 font-medium mb-2 block">
                             Email Address
                           </Label>
                           <div className="relative group">
@@ -386,14 +343,7 @@ const Auth = () => {
                       transition={{ duration: 0.3 }}
                     >
                       <div className="text-center mb-8">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ type: "spring", delay: 0.2 }}
-                          className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 mb-4 shadow-xl"
-                        >
-                          <UserPlus className="w-10 h-10 text-white" />
-                        </motion.div>
+                      
                         <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent mb-2">
                           Create Account
                         </h2>
@@ -491,22 +441,8 @@ const Auth = () => {
                           transition={{ delay: 0.4 }}
                           className="flex items-start gap-2"
                         >
-                          <input
-                            type="checkbox"
-                            id="terms"
-                            className="w-4 h-4 mt-1 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
-                            required
-                          />
-                          <label htmlFor="terms" className="text-sm text-gray-600">
-                            I agree to the{" "}
-                            <a href="#" className="text-orange-600 hover:text-orange-700 hover:underline">
-                              Terms of Service
-                            </a>{" "}
-                            and{" "}
-                            <a href="#" className="text-orange-600 hover:text-orange-700 hover:underline">
-                              Privacy Policy
-                            </a>
-                          </label>
+                         
+                          
                         </motion.div>
 
                         <motion.div

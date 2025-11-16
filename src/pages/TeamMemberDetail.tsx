@@ -174,18 +174,21 @@ Known for her empathetic approach and strong administrative skills, Ms. Sarkar i
         "Strong administrative skills and dedicated mentoring approach"
       ]
     },
-    "nilesh-raut": {
-      name: "Mr. Nilesh Raut",
-      role: "Financial Strategist",
-      image: "/nilesh.jpg",
-      fullDescription: `Mr. Nilesh Raut brings over 3.5 years of corporate experience as a Financial Analyst, with diverse expertise in inventory management and financial operations. A dedicated and results-driven professional, he holds a Bachelor's degree from NRI College Bhopal, a PGDCA from Makhanlal Institute, Bhopal, and an MBA from SAM Global University, Bhopal.
+    "sanjana-sharma": {
+      name: "Mrs.Sanjana Sharma",
+      role: "Senior Educational Counsellor",
+      image: "/sanjana.jpg",
+fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
 
-His analytical mindset and commitment to excellence make him an invaluable asset to our financial strategy team. Nilesh's expertise spans across financial analysis, inventory optimization, and operational efficiency, ensuring that Educate Me maintains strong financial health while delivering exceptional value to our students.`,
-      achievements: [
-        "3.5+ years as Financial Analyst with inventory management expertise",
-        "Bachelor's from NRI College, PGDCA from Makhanlal Institute, MBA from SAM Global University",
-        "Expert in financial analysis and operational efficiency"
-      ]
+Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
+
+At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`,
+achievements: [
+  "Passionate and empathetic Senior Educational Counsellor",
+  "Experienced across creative and corporate fields",
+  "Helps students discover strengths and make confident educational & career choices"
+]
+
     }
   };
 
