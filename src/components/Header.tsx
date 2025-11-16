@@ -3,9 +3,9 @@
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom"; // ✅ Added useNavigate
-import { useState } from "react";
+import { Menu, X, User  ,Phone} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,7 +22,6 @@ const Header = () => {
     { label: "Services", href: "/services" },
     { label: "Courses", href: "/courses" },
     { label: "EM-MAT", href: "/em-mat" },
-    { label: "Book Session", href: "/session" },
     { label: "Explore", href: "/explore" },
     { label: "About Us", href: "/about" },
   ];
@@ -66,23 +65,17 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Desktop Actions */}
+          {/* Desktop Right Side */}
           <div className="hidden md:flex flex-shrink-0 ml-4 gap-3 items-center">
-            <a 
-              href="tel:9131005392" 
-              className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 group"
-            >
-              <Phone className="h-4 w-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-sm">9131005392</span>
-            </a>
-            <Button size="sm" className="hover:scale-105 transition-all cursor-pointer py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
-              <Link to="/Auth">Login</Link>
-            </Button>
 
             {/* Book Counselling */}
-            <Button size="sm" className="hover:scale-105 transition-all py-6 shadow-lg hover:shadow-xl">
-              <Link to="/session">Book Counselling</Link>
-            </Button>
+             <a 
+              href="tel:9131005392" 
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary/100 text-primary hover:bg-primary/20 transition-all duration-300 group"
+            >
+              <Phone className="h-6 w-4 group-hover:scale-110 text-white transition-transform" />
+              <span className="font-semibold text-white text-sm">9131005392</span>
+            </a>
 
             {/* LOGIN / PROFILE ICON */}
             {!isLoggedIn ? (
@@ -110,62 +103,61 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div
-          className={`md:hidden fixed left-0 right-0 bg-background border-t transition-all duration-300 ${
-            isMobileMenuOpen ? "top-full max-h-[70vh] opacity-100" : "top-0 max-h-0 opacity-0"
-          }`}
-        >
-          <nav className="flex flex-col p-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                onClick={closeMobileMenu}
-                className="text-base font-semibold py-3 border-b"
-              >
-                {item.label}
-              </Link>
-            ))}
+     {/* Mobile Navigation */}
+<div
+  className={`
+    md:hidden fixed left-0 right-0 bg-background border-t 
+    transition-all duration-300 overflow-hidden
+    ${isMobileMenuOpen ? "top-[72px] max-h-[70vh] opacity-100" : "top-0 max-h-0 opacity-0"}
+  `}
+>
+  <nav className="flex flex-col p-4">
+    {navItems.map((item) => (
+      <Link
+        key={item.label}
+        to={item.href}
+        onClick={closeMobileMenu}
+        className="text-base font-semibold py-3 border-b"
+      >
+        {item.label}
+      </Link>
+    ))}
 
-            {/* Book Counselling Button */}
-            <Button
-              size="lg"
-              className="w-full mt-4"
-              onClick={() => {
-                navigate("/session");
-                closeMobileMenu();
-              }}
-            >
-              Book Counselling
-            </Button>
+    <a 
+      href="tel:9131005392" 
+      className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 group"
+    >
+      <Phone className="h-4 w-4 group-hover:scale-110 transition-transform" />
+      <span className="font-semibold text-sm">9131005392</span>
+    </a>
 
-            {/* LOGIN / ACCOUNT MOBILE */}
-            {!isLoggedIn ? (
-              <Button
-                size="lg"
-                className="w-full mt-3"
-                onClick={() => {
-                  navigate("/Auth");
-                  closeMobileMenu();
-                }}
-              >
-                Login
-              </Button>
-            ) : (
-              <Button
-                size="lg"
-                className="w-full mt-3 flex gap-3 items-center"
-                onClick={() => {
-                  navigate("/accountpage");
-                  closeMobileMenu();
-                }}
-              >
-                <User className="h-6 w-6" />
-                My Account
-              </Button>
-            )}
-          </nav>
-        </div>
+    {!isLoggedIn ? (
+      <Button
+        size="lg"
+        className="w-full mt-3"
+        onClick={() => {
+          navigate("/Auth");
+          closeMobileMenu();
+        }}
+      >
+        Login
+      </Button>
+    ) : (
+      <Button
+        size="lg"
+        className="w-full mt-3 flex gap-3 items-center"
+        onClick={() => {
+          navigate("/accountpage");
+          closeMobileMenu();
+        }}
+      >
+        <User className="h-6 w-6" />
+        My Account
+      </Button>
+    )}
+  </nav>
+</div>
+
       </div>
     </header>
   );

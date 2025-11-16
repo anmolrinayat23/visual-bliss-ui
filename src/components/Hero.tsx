@@ -33,7 +33,7 @@ const Hero = () => {
 
         {/* Subheading */}
         <p className="text-lg sm:text-xl md:text-xl text-white/90 max-w-lg sm:max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed animate-fade-in [animation-delay:0.4s] opacity-0 [animation-fill-mode:forwards]">
-          Empowering learners to grow, lead, and succeed — with skills, confidence, and mindset to shape a brighter future.
+          Empowering learners to grow, lead, and succeed with skills, confidence, and mindset to shape a brighter future.
         </p>
 
         {/* Buttons */}
