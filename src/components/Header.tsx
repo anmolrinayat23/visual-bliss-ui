@@ -3,9 +3,9 @@
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Menu, X, Phone } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom"; // ✅ Added useNavigate
+import { useState } from "react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,8 +66,18 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Desktop Right Side */}
+          {/* Desktop Actions */}
           <div className="hidden md:flex flex-shrink-0 ml-4 gap-3 items-center">
+            <a 
+              href="tel:9131005392" 
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 group"
+            >
+              <Phone className="h-4 w-4 group-hover:scale-110 transition-transform" />
+              <span className="font-semibold text-sm">9131005392</span>
+            </a>
+            <Button size="sm" className="hover:scale-105 transition-all cursor-pointer py-6 duration-300 shadow-lg hover:shadow-xl text-sm whitespace-nowrap">
+              <Link to="/Auth">Login</Link>
+            </Button>
 
             {/* Book Counselling */}
             <Button size="sm" className="hover:scale-105 transition-all py-6 shadow-lg hover:shadow-xl">
