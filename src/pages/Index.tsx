@@ -30,8 +30,8 @@ const Index = () => {
           <Hero />
           <Services showFooter={false}/>
           <Courses showFooter={false}/>
-          <EmMat showFooter={false}/>
-          <BookSession showFooter={false}/>
+          {/* <EmMat showFooter={false}/> */}
+          {/* <BookSession showFooter={false}/> */}
           <About showFooter={false}/>
         </main>
         

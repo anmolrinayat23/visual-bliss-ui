@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yourdomain.com/</loc>
+    <loc>https://educate-me.in/</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/services</loc>
+    <loc>https://educate-me.in/em-mat</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/courses</loc>
+    <loc>https://educate-me.in/courses</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/em-mat</loc>
+    <loc>https://educate-me.in/services</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/session</loc>
+    <loc>https://educate-me.in/session</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/about</loc>
+    <loc>https://educate-me.in/about</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/explore</loc>
+    <loc>https://educate-me.in/explore</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
