@@ -8,7 +8,7 @@ Disallow: /account
 Disallow: /Auth
 
 # Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://educate-me.in/sitemap.xml
 
 # Crawl delay for all bots
 Crawl-delay: 1
