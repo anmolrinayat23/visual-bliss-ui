@@ -133,59 +133,55 @@ const AdminDashboard = () => {
 
 
 const fetchAdminProfile = async () => {
-    try {
-      setLoading(prev => ({ ...prev, admin: true }));
+  try {
+    setLoading(prev => ({ ...prev, admin: true }));
 
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("adminToken"); // FIXED ✅
 
-      if (!token) {
-        console.warn("⚠️ No token found in localStorage");
-        throw new Error("Token Missing");
-      }
-
-      const response = await api.get("/admin/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true
-      });
-
-      console.log("RAW RESPONSE:", response.data);
-
-      // ✅ Auto detect admin data key
-      const data =
-        response.data.admin ||
-        response.data.user ||
-        response.data; // fallback
-
-      if (!data) {
-        console.error("❌ Admin data missing in response");
-        return;
-      }
-
-      setAdminData({
-        name: data.name || "Admin User",
-        email: data.email || "admin@educateme.com",
-        phone: data.phone || "+91 9876543210",
-        role: data.role || "Administrator",
-        avatar: data.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
-      });
-
-    } catch (error) {
-      console.error("❌ Error fetching admin profile:", error);
-
-      setAdminData({
-        name: "Admin User",
-        email: "admin@educateme.com",
-        phone: "+91 9876543210",
-        role: "Administrator",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
-      });
-
-    } finally {
-      setLoading(prev => ({ ...prev, admin: false }));
+    if (!token) {
+      console.warn("⚠️ No admin token found");
+      throw new Error("Token Missing");
     }
-  };
+
+    const response = await api.get("/admin/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
+    console.log("RAW RESPONSE:", response.data);
+
+    const data = response.data.data; // backend returns { success, data: {...} }
+
+    if (!data) {
+      console.error("❌ Admin data not found");
+      return;
+    }
+
+    setAdminData({
+      name: data.name || "Admin User",
+      email: data.email || "admin@educateme.com",
+      phone: data.phone || "+91 9876543210",
+      role: data.role || "admin",
+      avatar: data.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+    });
+
+  } catch (error) {
+    console.error("❌ Error fetching admin profile:", error);
+
+    setAdminData({
+      name: "Admin User",
+      email: "admin@educateme.com",
+      phone: "+91 9876543210",
+      role: "admin",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+    });
+
+  } finally {
+    setLoading(prev => ({ ...prev, admin: false }));
+  }
+};
+
 
   // Helper function to map API data to Student interface
   const mapUGApplicationToStudent = (app: UGApplication): Student => {
@@ -290,48 +286,26 @@ const fetchAdminProfile = async () => {
     }
   };
 
-  const fetchBookSessions = async () => {
-    try {
-      setLoading(prev => ({ ...prev, sessions: true }));
-      // This would be your actual API call
-      // const response = await api.get('/sessions');
-      // setBookSessions(response.data);
-      
-      // Mock data for now
-      const mockSessions: Session[] = [
-        {
-          id: 1,
-          studentName: "John Doe",
-          email: "john@example.com",
-          phone: "+1 234 567 8901",
-          sessionType: "Career Counseling",
-          preferredDate: "2024-01-15",
-          preferredTime: "10:00 AM",
-          status: "Confirmed",
-          counselor: "Dr. Smith"
-        },
-        {
-          id: 2,
-          studentName: "Jane Smith",
-          email: "jane@example.com",
-          phone: "+1 234 567 8902",
-          sessionType: "Admission Guidance",
-          preferredDate: "2024-01-16",
-          preferredTime: "2:00 PM",
-          status: "Pending",
-          counselor: "Dr. Johnson"
-        }
-      ];
-      setBookSessions(mockSessions);
-    } catch (error) {
-      console.error('Error fetching sessions:', error);
-      setBookSessions([]);
-    } finally {
-      setLoading(prev => ({ ...prev, sessions: false }));
-    }
-  };
 
-  // Calculate stats based on fetched data
+const fetchBookSessions = async () => {
+  try {
+    setLoading((prev) => ({ ...prev, sessions: true }));
+
+    // FIXED API ROUTE
+    const response = await axios.get("http://localhost:5000/booking/allbooking");
+
+    setBookSessions(response.data || []);
+    console.log("a gya ",response)
+
+  } catch (error) {
+    console.error("Error fetching sessions:", error);
+    setBookSessions([]);
+  } finally {
+    setLoading((prev) => ({ ...prev, sessions: false }));
+  }
+};
+
+
   useEffect(() => {
     const calculateStats = () => {
       const ugStudents = Array.isArray(emMatUGStudents) ? emMatUGStudents : [];
@@ -636,9 +610,9 @@ const fetchAdminProfile = async () => {
                         {loading.ug ? (
                           <LoadingRow />
                         ) : emMatUGStudents.length > 0 ? (
-                          emMatUGStudents.map((student) => (
+                          emMatUGStudents.map((student , index) => (
                             <TableRow key={student.id} className="hover:bg-orange-50/50 transition-colors">
-                              <TableCell className="font-medium">#{student.id.slice(-6)}</TableCell>
+                              <TableCell className="font-medium">#{index + 1}</TableCell>
                               <TableCell>{student.name}</TableCell>
                               <TableCell className="text-gray-600">{student.email}</TableCell>
                               <TableCell className="text-gray-600">{student.phone}</TableCell>
@@ -697,7 +671,7 @@ const fetchAdminProfile = async () => {
                         {loading.pg ? (
                           <LoadingRow />
                         ) : emMatPGStudents.length > 0 ? (
-                          emMatPGStudents.map((student) => (
+                          emMatPGStudents.map((student ) => (
                             <TableRow key={student.id} className="hover:bg-orange-50/50 transition-colors">
                               <TableCell className="font-medium">#{student.id.slice(-6)}</TableCell>
                               <TableCell>{student.name}</TableCell>
@@ -742,91 +716,88 @@ const fetchAdminProfile = async () => {
         </motion.div>
 
         {/* Book Sessions Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-        >
-          <Card className="border-orange-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-2xl text-gray-900 flex items-center gap-2">
-                    <Calendar className="w-6 h-6 text-orange-600" />
-                    Book Session Requests
-                  </CardTitle>
-                  <CardDescription>Manage counselling session bookings</CardDescription>
-                </div>
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-lg border border-orange-200/50 overflow-hidden">
-                <Table>
-                  <TableHeader className="bg-orange-50">
-                    <TableRow>
-                      <TableHead className="font-semibold">ID</TableHead>
-                      <TableHead className="font-semibold">Student Name</TableHead>
-                      <TableHead className="font-semibold">Email</TableHead>
-                      <TableHead className="font-semibold">Phone</TableHead>
-                      <TableHead className="font-semibold">Session Type</TableHead>
-                      <TableHead className="font-semibold">Preferred Date</TableHead>
-                      <TableHead className="font-semibold">Time</TableHead>
-                      <TableHead className="font-semibold">Counselor</TableHead>
-                      <TableHead className="font-semibold">Status</TableHead>
-                      <TableHead className="font-semibold">Action</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {loading.sessions ? (
-                      <LoadingRow />
-                    ) : bookSessions.length > 0 ? (
-                      bookSessions.map((session) => (
-                        <TableRow key={session.id} className="hover:bg-orange-50/50 transition-colors">
-                          <TableCell className="font-medium">#{session.id}</TableCell>
-                          <TableCell>{session.studentName}</TableCell>
-                          <TableCell className="text-gray-600">{session.email}</TableCell>
-                          <TableCell className="text-gray-600">{session.phone}</TableCell>
-                          <TableCell>
-                            <Badge variant="outline" className="border-green-300 text-green-700">
-                              {session.sessionType}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-gray-600">{session.preferredDate}</TableCell>
-                          <TableCell className="text-gray-600 flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {session.preferredTime}
-                          </TableCell>
-                          <TableCell className="text-gray-600">{session.counselor}</TableCell>
-                          <TableCell>
-                            <Badge className={getStatusBadge(session.status)}>
-                              {session.status === "Confirmed" && <CheckCircle2 className="w-3 h-3 mr-1" />}
-                              {session.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>
-                            <Button variant="ghost" size="icon" className="hover:bg-orange-50">
-                              <Eye className="w-4 h-4 text-orange-600" />
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={10} className="text-center py-8 text-gray-500">
-                          No session requests found
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+      <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.7 }}
+>
+  <Card className="border-orange-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
+    <CardHeader>
+      <div className="flex items-center justify-between">
+        <div>
+          <CardTitle className="text-2xl text-gray-900 flex items-center gap-2">
+            <Calendar className="w-6 h-6 text-orange-600" />
+            Book Session Requests
+          </CardTitle>
+          <CardDescription>Manage counselling session bookings</CardDescription>
+        </div>
+        <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+          <Download className="w-4 h-4 mr-2" />
+          Export
+        </Button>
+      </div>
+    </CardHeader>
+
+    <CardContent>
+      <div className="rounded-lg border border-orange-200/50 overflow-hidden">
+        <Table>
+          <TableHeader className="bg-orange-50">
+            <TableRow>
+              <TableHead className="font-semibold">ID</TableHead>
+              <TableHead className="font-semibold">Name</TableHead>
+              <TableHead className="font-semibold">Email</TableHead>
+              <TableHead className="font-semibold">Mobile</TableHead>
+              <TableHead className="font-semibold">Class</TableHead>
+              <TableHead className="font-semibold">Interest</TableHead>
+              <TableHead className="font-semibold">Created At</TableHead>
+              <TableHead className="font-semibold">Action</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {loading.sessions ? (
+              <LoadingRow />
+            ) : bookSessions.length > 0 ? (
+              bookSessions.map((session , index) => (
+                <TableRow
+                  key={session._id}
+                  className="hover:bg-orange-50/50 transition-colors"
+                >
+                  <TableCell className="font-medium">#{index + 1}</TableCell>
+                  <TableCell>{session.name}</TableCell>
+                  <TableCell className="text-gray-600">{session.email}</TableCell>
+                  <TableCell className="text-gray-600">{session.mobile}</TableCell>
+                  <TableCell className="text-gray-600">{session.studentClass}</TableCell>
+                  <TableCell>
+                    <Badge variant="outline" className="border-green-300 text-green-700">
+                      {session.interest}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-gray-600">
+                    {new Date(session.createdAt).toLocaleDateString()}
+                  </TableCell>
+
+                  <TableCell>
+                    <Button variant="ghost" size="icon" className="hover:bg-orange-50">
+                      <Eye className="w-4 h-4 text-orange-600" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={10} className="text-center py-8 text-gray-500">
+                  No session requests found
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </CardContent>
+  </Card>
+</motion.div>
+
       </div>
     </div>
   );

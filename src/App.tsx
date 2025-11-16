@@ -13,6 +13,8 @@ import Explore from "./pages/Explore";
 import NotFound from "./pages/NotFound";
 import TeamMemberDetail from "./pages/TeamMemberDetail";
 import Auth from "./pages/Auth";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 
 // import Dashboard from "./pages/Dashboard";
 
@@ -20,6 +22,7 @@ import Account from "./pages/Account";
 import AdminDashboard from "./pages/AdminDashboard";
 
 import Accountpage from './pages/Accountpage';
+import AdminAuth from "./components/AdminAuth";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,18 +34,41 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
+
+
           <Route path="/courses" element={<Courses />} />
-          <Route path="/em-mat" element={<EmMat />} />
-          <Route path="/session" element={<BookSession />} />
+
+
+  <Route 
+  path="/em-mat" 
+  element={
+    <ProtectedRoute>
+      <EmMat />
+    </ProtectedRoute>
+  }
+/>
+
+
+     
+<Route 
+  path="/session" 
+  element={
+    <ProtectedRoute>
+      <BookSession />
+    </ProtectedRoute>
+  }
+/>
+
+
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
 
 
           <Route path="/Auth" element={<Auth />} />
 
-               <Route path="/accountpage" element={<Accountpage />} />
+            <Route path="/accountpage" element={<Accountpage />} />
              
-          <Route path="/admin/login" element={<Auth />} />
+          <Route path="/admin/login" element={<AdminAuth />} />
 
           {/* <Route path="/Dashboard" element={<Dashboard />} /> */}
 

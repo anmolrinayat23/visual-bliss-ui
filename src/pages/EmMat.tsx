@@ -272,7 +272,7 @@ const EmMat = ({ showFooter = true }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <Header />
-      <main className="pt-15 mt-20">
+      <main className="pt-16"> {/* Changed from pt-15 mt-20 to pt-16 */}
         <section className="py-8 sm:py-12 px-3 sm:px-4">
           <div className="container mx-auto max-w-8xl">
             {/* Header Section */}
@@ -505,7 +505,7 @@ const EmMat = ({ showFooter = true }) => {
                         </li>
                       </ul>
 
-                      <div className="mt-8 mb-8 mt-[200px] p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
+                      <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
                         <p className="text-gray-600 text-center text-sm leading-relaxed font-bold">
                           "Educate-Me — Bridging education, innovation, and opportunity."
                         </p>
@@ -757,7 +757,7 @@ const EmMat = ({ showFooter = true }) => {
                         </li>
                       </ul>
 
-                      <div className="mt-80 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
+                      <div className="mt-8 mb-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-100">
                         <p className="text-gray-600 text-center text-sm leading-relaxed font-bold">
                           "Educate-Me — Bridging education, innovation, and opportunity."
                         </p>
