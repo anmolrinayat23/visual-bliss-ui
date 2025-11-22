@@ -715,7 +715,6 @@ const fetchBookSessions = async () => {
           </Card>
         </motion.div>
 
-        {/* Book Sessions Section */}
       <motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
@@ -747,7 +746,7 @@ const fetchBookSessions = async () => {
               <TableHead className="font-semibold">Name</TableHead>
               <TableHead className="font-semibold">Email</TableHead>
               <TableHead className="font-semibold">Mobile</TableHead>
-              <TableHead className="font-semibold">Class</TableHead>
+              <TableHead className="font-semibold">Stream</TableHead>
               <TableHead className="font-semibold">Interest</TableHead>
               <TableHead className="font-semibold">Created At</TableHead>
               <TableHead className="font-semibold">Action</TableHead>

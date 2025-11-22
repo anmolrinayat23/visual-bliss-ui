@@ -142,7 +142,9 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <span className="text-white font-bold text-lg">EM</span>
+                {/* <span className="text-white font-bold text-lg">EM</span> */}
+             <img src="/logo.png" alt="" className="rounded-full" />
+
               </motion.div>
               <div>
                 <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
