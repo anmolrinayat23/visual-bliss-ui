@@ -187,7 +187,7 @@ const AccountPage = () => {
   useEffect(() => {
     const token = getAuthToken();
     if (!token) {
-      navigate('/auth');
+      navigate('/');
     } else {
       fetchUserProfile();
     }

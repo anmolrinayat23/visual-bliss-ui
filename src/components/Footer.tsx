@@ -51,7 +51,7 @@ const Footer = () => {
               Empowering students to achieve their academic dreams through expert guidance and personalized counselling.
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+              <a href="https://www.facebook.com/share/16Kt4vX8vG/?mibextid=wwXIfr" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Facebook size={20} />
               </a>
               {/* <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">

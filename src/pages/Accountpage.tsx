@@ -184,7 +184,7 @@ const AccountPage = () => {
       console.error("Error during logout:", error);
     } finally {
       localStorage.removeItem("token");
-      navigate("/auth");
+      navigate("/");
     }
   };
 
@@ -281,9 +281,9 @@ const AccountPage = () => {
                   {/* Profile Section */}
                   <div className="flex flex-col items-center text-center mb-8">
                     <div className="relative mb-4 group">
-                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 p-1">
+                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 p-1">
                       <img
-  src={userData.avatar || "/avtar.webp"}
+  src={userData.avatar || "/dp-user.avif"}
   alt="Profile"
   className="w-full h-full rounded-full border-2 border-white object-cover"
   onError={(e) => (e.currentTarget.src = "/images/default-user.png")}
