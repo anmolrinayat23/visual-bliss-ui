@@ -22,8 +22,10 @@ const Header = () => {
     { label: "Services", href: "/services" },
     { label: "Courses", href: "/courses" },
     { label: "EM-MAT", href: "/em-mat" },
+       {label: "Book-Session", href: "/session"},
     { label: "Explore", href: "/explore" },
-    { label: "About Us", href: "/about" },
+ 
+    { label: "About Us", href: "/about"},
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
