@@ -78,7 +78,7 @@ const About = ({ showFooter = true }) => {
     {
       id: "sulekha-sarkar",
       name: "Ms. Sulekha Sarkar",
-      role: "Administrive Supervisor",
+      role: "Administrative Supervisor",
       description: "Empathetic student counselor with over a decade of experience in academic guidance and mentorship.",
       achievement: "Expert in educational journey planning with strong administrative skills and personalized support.",
       avatar: "MS",
@@ -93,7 +93,7 @@ const About = ({ showFooter = true }) => {
   description: "A compassionate counsellor helping students discover their strengths and make confident academic and career choices.",
   achievement: "Brings creative and corporate experience with a warm, student-centric counselling approach.",
   avatar: "SS",
-  image: "/sanjana.jpg",
+  image: "/sajana.jpg",
   highlight: "Inspiring learners with empathy, positivity, and purpose-driven guidance",
   fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
 

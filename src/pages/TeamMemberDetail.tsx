@@ -163,7 +163,7 @@ Fluent in French and certified in Taxation, Kajol blends analytical depth with c
     },
     "sulekha-sarkar": {
       name: "Ms. Sulekha Sarkar",
-      role: "Administrive Supervisor",
+      role: "Administrative Supervisor",
       image: "/sulekha.jpg",
       fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.
 
@@ -177,7 +177,7 @@ Known for her empathetic approach and strong administrative skills, Ms. Sarkar i
     "sanjana-sharma": {
       name: "Mrs.Sanjana Sharma",
       role: "Senior Educational Counsellor",
-      image: "/sanjana.jpg",
+      image: "/sajana.jpg",
 fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
 
 Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.

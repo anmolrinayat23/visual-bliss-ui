@@ -36,6 +36,7 @@ const EmMat = ({ showFooter = true }) => {
     stream: "",
     grade10: "",
     grade12: "",
+    examDate: ""
   });
 
   // ✅ PG form states
@@ -52,6 +53,7 @@ const EmMat = ({ showFooter = true }) => {
     graduationScore: "",
     graduationStream: "",
     passingYear: "",
+    examDate: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -70,9 +72,9 @@ const EmMat = ({ showFooter = true }) => {
   // ✅ Validate form function
   const validateForm = (formData: any, isPg: boolean = false) => {
     const requiredFields = [
-      'name', 'email', 'mobile', 'city', 'state', 'class', 'stream', 'grade10', 'grade12'
+      'name', 'email', 'mobile', 'city', 'state', 'class', 'stream', 'grade10', 'grade12', 'examDate'
     ];
-    
+
     if (isPg) {
       requiredFields.push('graduationScore', 'graduationStream', 'passingYear');
     }
@@ -108,7 +110,7 @@ const EmMat = ({ showFooter = true }) => {
 
       // 1️⃣ Create payment order
       const { data } = await axios.post("http://localhost:5000/api/payments/create-order", {
-        amount: 500, // ₹500
+        amount: 1, // ₹500
       });
 
       if (!data.success) {
@@ -132,7 +134,7 @@ const EmMat = ({ showFooter = true }) => {
             // 3️⃣ Update application status to "completed"
             try {
               const updateUrl = `http://localhost:5000/user/${isPg ? "pg-applications" : "ug-applications"}/${applicationId}`;
-              
+
               const updateData = {
                 paymentStatus: "completed",
                 paymentId: response.razorpay_payment_id,
@@ -145,18 +147,18 @@ const EmMat = ({ showFooter = true }) => {
 
               if (updateResponse.data.success) {
                 alert("✅ Payment successful! Your application has been completed.");
-                
+
                 // Reset form
                 if (isPg) {
                   setPgFormData({
                     name: "", email: "", mobile: "", city: "", state: "",
                     class: "", stream: "", grade10: "", grade12: "",
-                    graduationScore: "", graduationStream: "", passingYear: ""
+                    graduationScore: "", graduationStream: "", passingYear: "", examDate: ""
                   });
                 } else {
                   setUgFormData({
                     name: "", email: "", mobile: "", city: "", state: "",
-                    class: "", stream: "", grade10: "", grade12: ""
+                    class: "", stream: "", grade10: "", grade12: "", examDate: ""
                   });
                 }
               } else {
@@ -205,7 +207,7 @@ const EmMat = ({ showFooter = true }) => {
       setLoading(true);
 
       const saveUrl = "http://localhost:5000/user/ug-applications/createug";
-      
+
       const applicationData = {
         ...ugFormData,
         paymentStatus: "pending",
@@ -219,7 +221,7 @@ const EmMat = ({ showFooter = true }) => {
       if (saveResponse.data.success) {
         const applicationId = saveResponse.data.application._id;
         alert("✅ Application saved! Now proceed with payment.");
-        
+
         await handlePayment(applicationId, ugFormData, false);
       } else {
         alert("❌ Application submission failed: " + saveResponse.data.message);
@@ -241,7 +243,7 @@ const EmMat = ({ showFooter = true }) => {
       setLoading(true);
 
       const saveUrl = "http://localhost:5000/user/pg-applications/createpg";
-      
+
       const applicationData = {
         ...pgFormData,
         paymentStatus: "pending",
@@ -255,7 +257,7 @@ const EmMat = ({ showFooter = true }) => {
       if (saveResponse.data.success) {
         const applicationId = saveResponse.data.application._id;
         alert("✅ Application saved! Now proceed with payment.");
-        
+
         // 2️⃣ Now open payment gateway
         await handlePayment(applicationId, pgFormData, true);
       } else {
@@ -441,7 +443,20 @@ const EmMat = ({ showFooter = true }) => {
                           />
                         </div>
                         <div className="space-y-3">
-                          {/* Empty div for layout consistency */}
+                          <Label htmlFor="ug-exam-date" className="text-sm font-semibold text-gray-800">
+                            Exam Date *
+                          </Label>
+                          <select
+                            id="ug-exam-date"
+                            value={ugFormData.examDate}
+                            onChange={(e) => handleUgChange('examDate', e.target.value)}
+                            className="w-full h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300 px-3 bg-white"
+                          >
+                            <option value="">Choose Exam Date</option>
+                            <option value="2026-02-01">5th April 2026</option>
+                            <option value="2026-03-08">3rd May 2026</option>
+                            <option value="2026-05-10">7th June 2026</option>
+                          </select>
                         </div>
                       </div>
 
@@ -451,7 +466,7 @@ const EmMat = ({ showFooter = true }) => {
                         size="lg"
                         className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {loading ? "Saving Application..." : "Apply Now - ₹500"}
+                        {loading ? "Saving Application..." : "Apply Now - ₹1"}
                       </Button>
                     </form>
                   </Card>
@@ -669,7 +684,7 @@ const EmMat = ({ showFooter = true }) => {
                           />
                         </div>
                       </div>
-                      
+
                       <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-3">
                           <Label htmlFor="pg-graduationStream" className="text-sm font-semibold text-gray-800">
@@ -683,6 +698,7 @@ const EmMat = ({ showFooter = true }) => {
                             className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
+
                         <div className="space-y-3">
                           <Label htmlFor="pg-passingYear" className="text-sm font-semibold text-gray-800">
                             Passing Year *
@@ -695,6 +711,23 @@ const EmMat = ({ showFooter = true }) => {
                             className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <Label htmlFor="pg-exam-date" className="text-sm font-semibold text-gray-800">
+                          Exam Date *
+                        </Label>
+                        <select
+                          id="pg-exam-date"
+                          value={pgFormData.examDate}
+                          onChange={(e) => handlePgChange('examDate', e.target.value)}
+                          className="w-full h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300 px-3 bg-white"
+                        >
+                          <option value="">Choose Exam Date</option>
+                          <option value="2026-02-01">1st February 2026</option>
+                          <option value="2026-03-08">8th March 2026</option>
+                          <option value="2026-05-10">10th May 2026</option>
+                        </select>
                       </div>
 
                       <Button
