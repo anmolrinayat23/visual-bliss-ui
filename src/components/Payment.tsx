@@ -48,7 +48,7 @@ const EmMat = ({ showFooter = true }) => {
       }
 
       // 2️⃣ Create order from backend (use your running backend port)
-      const { data } = await axios.post("http://127.0.0.1:5000/api/payments/create-order", {
+      const { data } = await axios.post(  `${import.meta.env.VITE_API_URL}/api/payments/create-order`, {
         amount: 100, // ₹100 for testing
       });
 

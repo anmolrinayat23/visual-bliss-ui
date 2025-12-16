@@ -63,7 +63,7 @@ const Courses = ({ showFooter = true }) => {
       image: "/bba_new.jpeg"
     },
     {
-      title: "BBA-LLB",
+      title: "BA-LLB",
       description:
         "A comprehensive five-year integrated course combining liberal arts with legal studies to build skilled advocates with strong analytical foundations.",
       buttonText: "Apply Now",
@@ -75,7 +75,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "A dynamic legal program blending business acumen with legal expertise, preparing students for corporate, litigation, and policy careers.",
       buttonText: "Apply Now",
-      category: "Master in LAW",
+      category: "LAW",
       image: "/bba.jpg"
     },
     {
@@ -83,7 +83,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "Advanced legal education designed for graduates seeking specialization, research depth, and professional excellence in the legal domain.",
       buttonText: "Apply Now",
-      category: "Master in LAW",
+      category: "LAW",
       image: "/llm.jpg"
     },
     {
@@ -115,7 +115,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "A postgraduate design pathway for innovators ready to push boundaries, explore emerging technologies, and shape tomorrow's user experiences.",
       buttonText: "Apply Now",
-      category: " M-Design",
+      category: "Design",
       image: "/m-d.jpg"
     },
     {
@@ -139,15 +139,15 @@ const Courses = ({ showFooter = true }) => {
       description:
         "Science program fostering scientific temperament through physics, chemistry, biology, and computer science.",
       buttonText: "Apply Now",
-      category: "Science",
-      image: "/bsc.png"
+      category: "Sciences",
+      image: "/BSC.png"
     },
     {
       title: "M.Sc",
       description:
         "A postgraduate science program focused on analytical skills, research excellence, and advanced scientific knowledge across specialized domains.",
       buttonText: "Apply Now",
-      category: " Masters Of Science",
+      category: "Sciences",
       image: "/msc.jpg"
     },
     {
@@ -155,7 +155,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "IT program developing expertise in programming, software design, and database management.",
       buttonText: "Apply Now",
-      category: "Computer",
+      category: "Computing",
       image: "/bca_new.jpeg"
     },
     {
@@ -163,7 +163,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "Advanced computing program with AI, machine learning, cybersecurity, and full-stack development.",
       buttonText: "Apply Now",
-      category: "Computer",
+      category: "Computing",
       image: "/mca_new.jpeg"
     },
     {
@@ -203,7 +203,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "Physiotherapy program focusing on movement science, rehabilitation, and therapeutic practices.",
       buttonText: "Apply Now",
-      category: "Medical",
+      category: "Medical Science",
       image: "/bpt_new.jpeg"
     },
     {
@@ -211,7 +211,7 @@ const Courses = ({ showFooter = true }) => {
       description:
         "Undergraduate nursing program focusing on clinical skills, patient care, and healthcare practices.",
       buttonText: "Apply Now",
-      category: "Medical",
+      category: "Medical Science",
       image: "/bscnursing_new.jpeg"
     },
   ];
@@ -282,7 +282,7 @@ const Courses = ({ showFooter = true }) => {
                 </h1>
                 
                 {/* Settings Button */}
-                <div className="relative">
+                {/* <div className="relative">
                   <Button
                     onClick={sequenceMode ? exitSequenceMode : startSequenceMode}
                     className={`${
@@ -324,7 +324,7 @@ const Courses = ({ showFooter = true }) => {
                       )}
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
 
               <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">

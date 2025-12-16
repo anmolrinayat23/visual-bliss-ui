@@ -27,7 +27,7 @@ const handleAdminLogin = async (e: React.FormEvent) => {
   const password = (document.getElementById("admin-login-password") as HTMLInputElement).value;
 
   try {
-    const res = await axios.post("http://localhost:5000/admin/login", {
+    const res = await axios.post(  `${import.meta.env.VITE_API_URL}/admin/login`,{
       email,
       password,
     });
@@ -57,7 +57,7 @@ const handleAdminSignup = async (e: React.FormEvent) => {
   const password = (document.getElementById("admin-signup-password") as HTMLInputElement).value;
 
   try {
-    const res = await axios.post("http://localhost:5000/admin/register", {
+    const res = await axios.post(  `${import.meta.env.VITE_API_URL}/admin/register`,{
       name,
       email,
       phone,

@@ -72,11 +72,11 @@ const Header = () => {
 
             {/* Book Counselling */}
              <a 
-              href="tel:9131005392" 
+              href="tel:+917974163158" 
               className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary/100 text-primary hover:bg-primary/20 transition-all duration-300 group"
             >
               <Phone className="h-6 w-4 group-hover:scale-110 text-white transition-transform" />
-              <span className="font-semibold text-white text-sm">9131005392</span>
+              <span className="font-semibold text-white text-sm">7974163158</span>
             </a>
 
             {/* LOGIN / PROFILE ICON */}
@@ -126,11 +126,11 @@ const Header = () => {
     ))}
 
     <a 
-      href="tel:9131005392" 
+      href="tel:917974163158" 
       className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 group"
     >
       <Phone className="h-4 w-4 group-hover:scale-110 transition-transform" />
-      <span className="font-semibold text-sm">9131005392</span>
+      <span className="font-semibold text-sm">7974163158</span>
     </a>
 
     {!isLoggedIn ? (
