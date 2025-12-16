@@ -36,15 +36,14 @@ interface Student {
 }
 
 interface Session {
-  id: number;
-  studentName: string;
+  _id: string;
+  name: string;
   email: string;
-  phone: string;
-  sessionType: string;
-  preferredDate: string;
-  preferredTime: string;
-  status: string;
-  counselor: string;
+  mobile: string;
+  studentClass: string;
+  interest: string;
+  createdAt: string;
+  __v?: number;
 }
 
 interface Stat {
