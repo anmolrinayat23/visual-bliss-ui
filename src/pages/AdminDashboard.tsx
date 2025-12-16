@@ -122,7 +122,7 @@ const AdminDashboard = () => {
   });
 
   const api = axios.create({
-    baseURL: "http://localhost:5000",
+  baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
   });
 
@@ -292,7 +292,7 @@ const fetchBookSessions = async () => {
     setLoading((prev) => ({ ...prev, sessions: true }));
 
     // FIXED API ROUTE
-    const response = await axios.get("http://localhost:5000/booking/allbooking");
+    const response = await api.get("/booking/allbooking");
 
     setBookSessions(response.data || []);
     console.log("a gya ",response)
