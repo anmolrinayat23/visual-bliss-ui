@@ -40,7 +40,7 @@ const AnnouncementPopup = () => {
             stiffness: 300, 
             damping: 25 
           }}
-          className="fixed top-24 right-4 z-50 max-w-sm w-full mx-4 md:mx-0"
+          className="fixed top-20 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 z-50 w-[calc(100%-2rem)] max-w-sm"
         >
           {/* Glow effect behind */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-orange-400/30 blur-xl rounded-2xl" />
