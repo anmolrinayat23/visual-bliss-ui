@@ -30,22 +30,18 @@ const Footer = () => {
       <div className="absolute bottom-20 left-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Brand Section */}
           <div className="space-y-4 group">
             <Link to="/" className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
-
-
-            <img 
-  src="/logo.png" 
-  alt="Educate Me Logo" 
-  className="w-20 h-20 rounded-full object-contain "
-/>
-<span className="text-2xl font-bold bg-white bg-clip-text text-transparent">
-  Educate Me
-</span>
-
-
+              <img 
+                src="/logo.png" 
+                alt="Educate Me Logo" 
+                className="w-20 h-20 rounded-full object-contain"
+              />
+              <span className="text-2xl font-bold bg-white bg-clip-text text-transparent">
+                Educate Me
+              </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed transition-colors duration-300 group-hover:text-gray-300">
               Empowering students to achieve their academic dreams through expert guidance and personalized counselling.
@@ -54,10 +50,7 @@ const Footer = () => {
               <a href="https://www.facebook.com/share/16Kt4vX8vG/?mibextid=wwXIfr" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Facebook size={20} />
               </a>
-              {/* <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
-                <Twitter size={20} />
-              </a> */}
-              <a href="https://www.linkedin.com/in/nikhil-sewaramani-937997219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app " className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+              <a href="https://www.linkedin.com/in/nikhil-sewaramani-937997219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Linkedin size={20} />
               </a>
               <a href="https://www.instagram.com/educate.me.in?igsh=dXY3NXpxamNweTh6" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
@@ -88,26 +81,45 @@ const Footer = () => {
             </nav>
           </div>
 
+          {/* Our Branches */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4 text-primary">Our Branches</h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors cursor-pointer">
+                <MapPin size={16} className="text-primary flex-shrink-0" />
+                <span>Bhopal (Head Office)</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors cursor-pointer">
+                <MapPin size={16} className="text-primary flex-shrink-0" />
+                <span>Pune</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors cursor-pointer">
+                <MapPin size={16} className="text-primary flex-shrink-0" />
+                <span>Noida</span>
+              </div>
+            </div>
+          </div>
+
           {/* Contact Info */}
           <div>
             <h3 className="font-semibold text-lg mb-4 text-primary">Contact Us</h3>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <Mail size={18} className="text-primary mt-1 flex-shrink-0" />
-                <a href="mailto:info@educateme.com" className="text-sm text-gray-400 hover:text-primary transition-colors">
-                 admissions@educate-me.in
+                <a href="mailto:admissions@educate-me.in" className="text-sm text-gray-400 hover:text-primary transition-colors">
+                  admissions@educate-me.in
                 </a>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={18} className="text-primary mt-1 flex-shrink-0" />
-                <a href="tel:+917974163158" className="text-sm text-gray-400 hover:text-primary transition-colors">
-                  +917974163158
+                <a href="tel:+919131005392" className="text-sm text-gray-400 hover:text-primary transition-colors">
+                  +91 9131005392
                 </a>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-primary mt-1 flex-shrink-0" />
                 <p className="text-sm text-gray-400">
-                 335 kalpana nagar<br />Piplani,Bhopal
+                  335 Kalpana Nagar<br />Piplani, Bhopal
                 </p>
               </div>
             </div>
