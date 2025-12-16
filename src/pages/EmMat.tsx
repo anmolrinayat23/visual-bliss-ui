@@ -109,9 +109,13 @@ const EmMat = ({ showFooter = true }) => {
       setLoading(true);
 
       // 1️⃣ Create payment order
-      const { data } = await axios.post("http://localhost:5000/api/payments/create-order", {
-        amount: 1, // ₹500
-      });
+    const { data } = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/payments/create-order`,
+  {
+    amount: 510, // ₹500
+  }
+);
+
 
       if (!data.success) {
         throw new Error(data.message || "Failed to create payment order");
@@ -133,7 +137,10 @@ const EmMat = ({ showFooter = true }) => {
           try {
             // 3️⃣ Update application status to "completed"
             try {
-              const updateUrl = `http://localhost:5000/user/${isPg ? "pg-applications" : "ug-applications"}/${applicationId}`;
+            const updateUrl = `${import.meta.env.VITE_API_URL}/user/${ 
+  isPg ? "pg-applications" : "ug-applications"
+}/${applicationId}`;
+
 
               const updateData = {
                 paymentStatus: "completed",
@@ -206,7 +213,8 @@ const EmMat = ({ showFooter = true }) => {
     try {
       setLoading(true);
 
-      const saveUrl = "http://localhost:5000/user/ug-applications/createug";
+    const saveUrl = `${import.meta.env.VITE_API_URL}/user/ug-applications/createug`;
+
 
       const applicationData = {
         ...ugFormData,
@@ -242,7 +250,8 @@ const EmMat = ({ showFooter = true }) => {
     try {
       setLoading(true);
 
-      const saveUrl = "http://localhost:5000/user/pg-applications/createpg";
+const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
+
 
       const applicationData = {
         ...pgFormData,
@@ -466,7 +475,7 @@ const EmMat = ({ showFooter = true }) => {
                         size="lg"
                         className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {loading ? "Saving Application..." : "Apply Now - ₹1"}
+                        {loading ? "Saving Application..." : "Apply Now - ₹500"}
                       </Button>
                     </form>
                   </Card>

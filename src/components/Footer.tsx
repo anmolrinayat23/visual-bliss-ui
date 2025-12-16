@@ -57,10 +57,10 @@ const Footer = () => {
               {/* <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Twitter size={20} />
               </a> */}
-              <a href="#" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+              <a href="https://www.linkedin.com/in/nikhil-sewaramani-937997219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app " className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Linkedin size={20} />
               </a>
-              <a href="https://www.instagram.com/educateme.nikhil_?igsh=dXY3NXpxamNweTh6" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+              <a href="https://www.instagram.com/educate.me.in?igsh=dXY3NXpxamNweTh6" className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1">
                 <Instagram size={20} />
               </a>
             </div>

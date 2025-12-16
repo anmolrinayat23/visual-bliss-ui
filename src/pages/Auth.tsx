@@ -30,10 +30,12 @@ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
   const password = formData.get("password") as string;
 
   try {
-    const res = await axios.post("http://localhost:5000/user/login", {
+    const res = await axios.post( `${import.meta.env.VITE_API_URL}/user/login`, {
       email,
       password,
+
     });
+    
 
     if (res.data.success) {
       localStorage.setItem("token", res.data.data.token);
@@ -57,12 +59,17 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
   const formData = new FormData(e.currentTarget);
 
   try {
-    const res = await axios.post("http://localhost:5000/user/register", {
+  const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/user/register`,
+ {
+      
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
       password: formData.get("password"),
     });
+
+    console.log("hitt", res)
 
     if (res.data.success) {
       localStorage.setItem("token", res.data.data.token);
