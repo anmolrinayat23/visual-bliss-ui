@@ -59,7 +59,7 @@ const App = () => (
           <Route path="/explore" element={<Explore />} />
           <Route path="/Auth" element={<Auth />} />
           <Route path="/accountpage" element={<Accountpage />} />
-          <Route path="/admin/login" element={<AdminAuth />} />
+          <Route path="/admin/nikhil45/login" element={<AdminAuth />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="/account" element={<Account />} />
