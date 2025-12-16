@@ -9,6 +9,7 @@ import Courses from "./Courses";
 import EmMat from "./EmMat";
 import BookSession from "./BookSession";
 import About from "./About";
+import AnnouncementPopup from "@/components/AnnouncementPopup";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -25,6 +26,7 @@ const Index = () => {
     <div className="min-h-screen">
       {loading && <Loader />}
       <div className={loading ? "opacity-0" : "animate-fade-in"}>
+        <AnnouncementPopup />
         <Header />
         <main className="pt-16">
           <Hero />
