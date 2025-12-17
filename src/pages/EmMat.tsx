@@ -58,6 +58,8 @@ const EmMat = ({ showFooter = true }) => {
 
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("ug");
+  const [ugDisclaimerChecked, setUgDisclaimerChecked] = useState(false);
+  const [pgDisclaimerChecked, setPgDisclaimerChecked] = useState(false);
 
   // ✅ Handle UG form changes
   const handleUgChange = (key: string, value: string) => {
@@ -469,11 +471,26 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                         </div>
                       </div>
 
+                      {/* Disclaimer Checkbox */}
+                      <div className="mt-6 p-4 bg-orange-50 border border-orange-200 rounded-xl">
+                        <label className="flex items-start gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={ugDisclaimerChecked}
+                            onChange={(e) => setUgDisclaimerChecked(e.target.checked)}
+                            className="mt-1 w-5 h-5 accent-orange-500 rounded"
+                          />
+                          <span className="text-sm text-gray-700 leading-relaxed">
+                            This test is to assess your Intellectual Competency and will be used for guidance and way forward in career advisory and in no way it guarantees admission in any institution, you will have to refer to the admission process of your desired institutions. EM-MAT only makes you eligible to apply in an institution and to get into guidance cohort of Educate Me.
+                          </span>
+                        </label>
+                      </div>
+
                       <Button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || !ugDisclaimerChecked}
                         size="lg"
-                        className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {loading ? "Saving Application..." : "Apply Now - ₹500"}
                       </Button>
@@ -739,11 +756,26 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                         </select>
                       </div>
 
+                      {/* Disclaimer Checkbox */}
+                      <div className="mt-6 p-4 bg-orange-50 border border-orange-200 rounded-xl">
+                        <label className="flex items-start gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={pgDisclaimerChecked}
+                            onChange={(e) => setPgDisclaimerChecked(e.target.checked)}
+                            className="mt-1 w-5 h-5 accent-orange-500 rounded"
+                          />
+                          <span className="text-sm text-gray-700 leading-relaxed">
+                            This test is to assess your Intellectual Competency and will be used for guidance and way forward in career advisory and in no way it guarantees admission in any institution, you will have to refer to the admission process of your desired institutions. EM-MAT only makes you eligible to apply in an institution and to get into guidance cohort of Educate Me.
+                          </span>
+                        </label>
+                      </div>
+
                       <Button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || !pgDisclaimerChecked}
                         size="lg"
-                        className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold text-md rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {loading ? "Saving Application..." : "Apply Now - ₹500"}
                       </Button>
