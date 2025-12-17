@@ -91,11 +91,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors cursor-pointer">
                 <MapPin size={16} className="text-primary flex-shrink-0" />
-                <span>Pune</span>
+                <span>Pune - Xion Mall Hinjewadi</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors cursor-pointer">
                 <MapPin size={16} className="text-primary flex-shrink-0" />
-                <span>Noida</span>
+                <span>Noida - Sector 4</span>
               </div>
             </div>
           </div>
