@@ -108,7 +108,7 @@ const AnnouncementPopup = () => {
               >
                 <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-yellow-400" />
-                  EM-MAT Round 1
+                  EM-MAT Round 1 PG
                 </h3>
                 
                 {/* Date highlight */}
@@ -123,7 +123,7 @@ const AnnouncementPopup = () => {
                 </div>
 
                 <p className="text-gray-300 text-sm mb-4">
-                  Don't miss the opportunity! Register now for EM-MAT Round 1 and take the first step towards your dream career.
+                  For all postgraduate aspirants get exposure to 160+ universities PAN India
                 </p>
 
                 {/* CTA Button */}
