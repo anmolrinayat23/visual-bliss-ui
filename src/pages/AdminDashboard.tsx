@@ -543,20 +543,20 @@ const AdminDashboard = () => {
             <CardContent className="p-0">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 {/* Tabs Navigation */}
-                <TabsList className="w-full bg-amber-50 p-1 m-4">
+                <TabsList className="w-[calc(100%-16px)] sm:w-[calc(100%-32px)] bg-amber-50 p-1 mx-2 sm:mx-4 mt-4 mb-2">
                   <TabsTrigger 
                     value="ug" 
-                    className="data-[state=active]:bg-amber-500 data-[state=active]:text-white px-4 sm:px-6 flex-1 text-xs sm:text-sm"
+                    className="data-[state=active]:bg-amber-500 data-[state=active]:text-white px-2 sm:px-6 flex-1 text-xs sm:text-sm"
                   >
-                    <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                    UG ({ugApplications.length})
+                    <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    <span className="truncate">UG ({ugApplications.length})</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="pg" 
-                    className="data-[state=active]:bg-amber-500 data-[state=active]:text-white px-4 sm:px-6 flex-1 text-xs sm:text-sm"
+                    className="data-[state=active]:bg-amber-500 data-[state=active]:text-white px-2 sm:px-6 flex-1 text-xs sm:text-sm"
                   >
-                    <User className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                    PG ({pgApplications.length})
+                    <User className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    <span className="truncate">PG ({pgApplications.length})</span>
                   </TabsTrigger>
                 </TabsList>
 
@@ -843,7 +843,7 @@ const AdminDashboard = () => {
 
       {/* Application Details Dialog - Responsive */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-amber-50 to-yellow-50 p-4 sm:p-6">
+        <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-amber-50 to-yellow-50 p-3 sm:p-6 rounded-lg">
           {selectedApplication && (
             <>
               <DialogHeader className="pr-6">
