@@ -12,12 +12,12 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img
-          src="/home.jpg"
+          src="/hero-bg.jpg"
           alt="Educate Me Background"
           className="w-full h-full object-cover object-center"
         />
         {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-black/70 sm:bg-black/50 backdrop-blur-[2px] sm:backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-black/60 sm:bg-black/50 backdrop-blur-[1px]"></div>
       </div>
 
       {/* Glow Circle (hidden on mobile) */}
