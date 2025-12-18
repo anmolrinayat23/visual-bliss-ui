@@ -61,7 +61,7 @@ const AccountPage = () => {
   const createApi = () => {
     const token = localStorage.getItem("token");
     return axios.create({
-      baseURL: 'http://localhost:5000',
+      baseURL: 'https://educate-me.in/api',
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
