@@ -114,7 +114,7 @@ const EmMat = ({ showFooter = true }) => {
     const { data } = await axios.post(
   `${import.meta.env.VITE_API_URL}/api/payments/create-order`,
   {
-    amount: 510, // ₹500
+    amount: 500, // ₹500
   }
 );
 
