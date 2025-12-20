@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AnnouncementPopup from "@/components/AnnouncementPopup";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, Target, Users, Award, Rocket } from "lucide-react";
@@ -117,6 +118,7 @@ At Educate Me, Sanjana’s mission is simple — to inspire learners to believe 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <AnnouncementPopup />
       <Header />
       <main className="pt-20">
         {/* Vision Section - Modern Grid */}
