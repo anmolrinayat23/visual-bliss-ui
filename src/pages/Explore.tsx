@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AnnouncementPopup from "@/components/AnnouncementPopup";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, Brain, MessageSquare, TrendingUp, Users, Lightbulb, BookMarked, GraduationCap } from "lucide-react";
@@ -106,6 +107,7 @@ const Explore = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <AnnouncementPopup />
       <Header />
       
       {/* Hero Section */}
