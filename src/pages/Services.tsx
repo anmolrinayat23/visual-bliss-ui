@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AnnouncementPopup from "@/components/AnnouncementPopup";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Lightbulb, Compass, Award, GraduationCap } from "lucide-react";
@@ -73,6 +74,7 @@ const Services = ({ showFooter = true }) => {
 
   return (
     <div className="min-h-100 bg-gradient-to-br from-gray-50 to-blue-50">
+      <AnnouncementPopup />
       <Header />
       <main className="pt-10">
         <section className="py-12 md:py-16 px-4 sm:px-6">
