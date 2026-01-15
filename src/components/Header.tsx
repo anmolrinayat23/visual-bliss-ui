@@ -21,11 +21,11 @@ const Header = () => {
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Courses", href: "/courses" },
+    { label: "Universities", href: "/universities" },
     { label: "EM-MAT", href: "/em-mat" },
-       {label: "Book-Session", href: "/session"},
+    { label: "Book-Session", href: "/session" },
     { label: "Explore", href: "/explore" },
- 
-    { label: "About Us", href: "/about"},
+    { label: "About Us", href: "/about" },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
