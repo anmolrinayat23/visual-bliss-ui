@@ -9,6 +9,7 @@ import ScrollToTop from "./components/ScrollToTop"; // ← NEW IMPORT
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Courses from "./pages/Courses";
+import Universities from "./pages/Universities";
 import EmMat from "./pages/EmMat";
 import BookSession from "./pages/BookSession";
 import About from "./pages/About";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/universities" element={<Universities />} />
 
           <Route 
             path="/em-mat" 
