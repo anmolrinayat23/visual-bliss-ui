@@ -311,9 +311,9 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
                             />
                             <span className="text-gray-600">Remember me</span>
                           </label>
-                          <a href="#" className="text-orange-600 hover:text-orange-700 font-medium">
+                          {/* <a href="#" className="text-orange-600 hover:text-orange-700 font-medium">
                             Forgot password?
-                          </a>
+                          </a> */}
                         </div>
 
                         <motion.div

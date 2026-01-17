@@ -117,7 +117,7 @@ const AnnouncementPopup = () => {
                     <Calendar className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-lg">1st February 2025</p>
+                    <p className="text-white font-bold text-lg">1st February 2026</p>
                     <p className="text-gray-400 text-xs">Mark your calendar!</p>
                   </div>
                 </div>
