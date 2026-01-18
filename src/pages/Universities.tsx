@@ -5,8 +5,7 @@ import Footer from "@/components/Footer";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Search, Building2, GraduationCap, Star, ChevronDown } from "lucide-react";
+import { MapPin, Search, Building2, GraduationCap, Users, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface University {
@@ -15,115 +14,110 @@ interface University {
   location: string;
   city: string;
   state: string;
-  category: "Premier" | "Tier-1" | "Tier-2" | "Emerging";
   logo?: string;
 }
 
 const universities: University[] = [
-  { name: "IIM Rohtak", shortName: "IIM-R", location: "Rohtak, Haryana", city: "Rohtak", state: "Haryana", category: "Premier" },
-  { name: "SP Jain Institute of Management and Research", shortName: "SPJIMR", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", category: "Premier" },
-  { name: "NL Dalmia Institute of Management Studies", shortName: "NL Dalmia", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", category: "Tier-1" },
-  { name: "IMT Ghaziabad", shortName: "IMT-G", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", category: "Premier" },
-  { name: "IMT Hyderabad", shortName: "IMT-HY", location: "Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", category: "Tier-1" },
-  { name: "International Management Institute", shortName: "IMI", location: "Delhi & Kolkata", city: "Delhi", state: "Delhi", category: "Premier" },
-  { name: "MDI Murshidabad", shortName: "MDI-M", location: "Murshidabad, West Bengal", city: "Murshidabad", state: "West Bengal", category: "Tier-1" },
-  { name: "Lal Bahadur Shastri Institute of Management", shortName: "LBSIM", location: "Delhi", city: "Delhi", state: "Delhi", category: "Tier-1" },
-  { name: "Great Lakes Institute of Management", shortName: "Great Lakes", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Premier" },
-  { name: "Symbiosis Institute of Business Management", shortName: "SIBM", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", category: "Premier" },
-  { name: "NMIMS School of Business Management", shortName: "NMIMS", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", category: "Premier" },
-  { name: "FORE School of Management", shortName: "FORE", location: "Delhi", city: "Delhi", state: "Delhi", category: "Tier-1" },
-  { name: "Jaipuria Institute of Management", shortName: "Jaipuria Noida", location: "Noida, Uttar Pradesh", city: "Noida", state: "Uttar Pradesh", category: "Tier-1" },
-  { name: "SOIL Institute of Management", shortName: "SOIL", location: "Manesar, Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-1" },
-  { name: "Maharaja Agrasen Business School", shortName: "MABS", location: "Rohini Sector 22, Delhi", city: "Delhi", state: "Delhi", category: "Tier-2" },
-  { name: "University of Petroleum and Energy Studies", shortName: "UPES", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", category: "Tier-1" },
-  { name: "New Delhi Institute of Management", shortName: "NDIM", location: "Tughlakabad, Delhi", city: "Delhi", state: "Delhi", category: "Tier-2" },
-  { name: "Indira University", shortName: "IU", location: "Tathawade, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "FOSTIIMA Business School", shortName: "FOSTIIMA", location: "Dwarka, Delhi", city: "Delhi", state: "Delhi", category: "Tier-2" },
-  { name: "Dr. DY Patil B-School", shortName: "DY Patil", location: "Tathawade, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "BML Munjal University", shortName: "BMU", location: "Kapriwas, Haryana", city: "Kapriwas", state: "Haryana", category: "Tier-1" },
-  { name: "GL Bajaj Institute of Management", shortName: "GL Bajaj", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Christ Academy Institute for Advanced Studies", shortName: "CHRIST", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Tier-1" },
-  { name: "Bennett University", shortName: "Bennett", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-1" },
-  { name: "Quantum University", shortName: "Quantum", location: "Roorkee-Dehradun Highway, Uttarakhand", city: "Mandawar", state: "Uttarakhand", category: "Tier-2" },
-  { name: "Atlas SkillTech University", shortName: "Atlas", location: "Kurla, Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", category: "Emerging" },
-  { name: "Jaipuria Institute of Management Lucknow", shortName: "Jaipuria Lucknow", location: "Lucknow, Uttar Pradesh", city: "Lucknow", state: "Uttar Pradesh", category: "Tier-1" },
-  { name: "Jaipuria Institute of Management Indore", shortName: "Jaipuria Indore", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", category: "Tier-2" },
-  { name: "Jaipuria Institute of Management Ghaziabad", shortName: "Jaipuria Ghaziabad", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Harsha Institutions", shortName: "Harsha", location: "Madavara, Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Tier-2" },
-  { name: "Asian Business School", shortName: "ABS", location: "Noida, Uttar Pradesh", city: "Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Amity University", shortName: "Amity", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-1" },
-  { name: "Alliance University", shortName: "Alliance", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Tier-1" },
-  { name: "FMS-IIRM Jaipur", shortName: "FMS-IIRM", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan", category: "Tier-2" },
-  { name: "Doon Business School", shortName: "DBS", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", category: "Tier-2" },
-  { name: "Woxsen University", shortName: "Woxsen", location: "Sadasivpet, Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", category: "Tier-1" },
-  { name: "Universal AI University", shortName: "UAI", location: "Karjat, Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", category: "Emerging" },
-  { name: "Unique Institute of Business Management", shortName: "UIBM", location: "Katraj, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Thiagarajar School of Management", shortName: "TSM", location: "Madurai, Tamil Nadu", city: "Madurai", state: "Tamil Nadu", category: "Tier-2" },
-  { name: "Ajeenkya DY Patil University (Sunstone)", shortName: "ADYPU", location: "Charholi Budruk, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "St. Andrews Institute of Technology & Management", shortName: "St. Andrews", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-2" },
-  { name: "Sparsh Global Business School", shortName: "SPARSH", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Shanti Business School", shortName: "SBS", location: "Ahmedabad, Gujarat", city: "Ahmedabad", state: "Gujarat", category: "Tier-2" },
-  { name: "Sai Balaji International Institute", shortName: "SBIIMS", location: "Hinjewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Ramachandran International Institute of Management", shortName: "RIIM", location: "Bavdhan, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Pune Institute of Business Management", shortName: "PIBM", location: "Pirangut, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Pimpri Chinchwad University", shortName: "PCU", location: "Mohitewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Pune Business School", shortName: "PBS", location: "Nigdi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Noida International University", shortName: "NIU", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Narayana Business School", shortName: "NBS", location: "Sanathal, Ahmedabad, Gujarat", city: "Ahmedabad", state: "Gujarat", category: "Tier-2" },
-  { name: "Mangalmay Institute of Management & Technology", shortName: "Mangalmay", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Lloyd Business School", shortName: "Lloyd", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "KR Mangalam University", shortName: "KRM", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-2" },
-  { name: "Jaipuria School of Business", shortName: "JSB", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Jagdish Sheth School of Management", shortName: "JAGSoM", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Tier-1" },
-  { name: "Jagannath International Management School", shortName: "JIMS", location: "Kalkaji, Delhi", city: "Delhi", state: "Delhi", category: "Tier-2" },
-  { name: "ITM Business School", shortName: "ITM", location: "Kharghar, Navi Mumbai, Maharashtra", city: "Navi Mumbai", state: "Maharashtra", category: "Tier-1" },
-  { name: "International School of Management Studies", shortName: "ISMS", location: "Ambegaon Budruk, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "ISBS Gurgaon", shortName: "ISBS", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-2" },
-  { name: "Indus Business School", shortName: "IIEBM", location: "Wakad, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Indian School of Business and Research", shortName: "ISBR", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Tier-1" },
-  { name: "IMS Unison University", shortName: "IMS", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", category: "Tier-2" },
-  { name: "Imperial School of Business", shortName: "Imperial", location: "Hinjewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "IILM Institute Jaipur", shortName: "IILM Jaipur", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan", category: "Tier-2" },
-  { name: "IILM Institute Lucknow", shortName: "IILM Lucknow", location: "Lucknow, Uttar Pradesh", city: "Lucknow", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "IILM Institute Lodhi Road", shortName: "IILM Delhi", location: "Lodhi Road, Delhi", city: "Delhi", state: "Delhi", category: "Tier-1" },
-  { name: "IILM Institute Gurgaon", shortName: "IILM Gurgaon", location: "Golf Road, Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-1" },
-  { name: "IILM Institute Greater Noida", shortName: "IILM G.Noida", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "IBMR Business School", shortName: "IBMR", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-2" },
-  { name: "HIMT Group of Institutions", shortName: "HIMT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Greater Noida Institute of Technology", shortName: "GNIOT", location: "Knowledge Park II, Greater Noida, UP", city: "Greater Noida", state: "Uttar Pradesh", category: "Tier-2" },
-  { name: "Global Institute of Business Studies", shortName: "GIBS", location: "Electronic City, Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Tier-2" },
-  { name: "GD Goenka University", shortName: "GD Goenka", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", category: "Tier-1" },
-  { name: "Fortune Institute of International Business", shortName: "FIIB", location: "Vasant Vihar, New Delhi", city: "Delhi", state: "Delhi", category: "Tier-2" },
-  { name: "ASM Institute of International Business and Research", shortName: "ASM IIBR", location: "Pimpri, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "Aureole School of Business Management", shortName: "ASBM", location: "Ambi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
-  { name: "AKEMI Business School", shortName: "AKEMI", location: "Marunji Road, Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Tier-2" },
+  { name: "IIM Rohtak", shortName: "IIM-R", location: "Rohtak, Haryana", city: "Rohtak", state: "Haryana", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/IIM_Rohtak_Logo.svg/1200px-IIM_Rohtak_Logo.svg.png" },
+  { name: "SP Jain Institute of Management and Research", shortName: "SPJIMR", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/SPJIMR_Logo.svg/1200px-SPJIMR_Logo.svg.png" },
+  { name: "NL Dalmia Institute of Management Studies", shortName: "NL Dalmia", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "https://www.nldalmia.in/images/logo.png" },
+  { name: "IMT Ghaziabad", shortName: "IMT-G", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/IMT_Ghaziabad_logo.svg/1200px-IMT_Ghaziabad_logo.svg.png" },
+  { name: "IMT Hyderabad", shortName: "IMT-HY", location: "Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", logo: "https://www.imthyderabad.edu.in/storage/app/public/page-builder/IMT%20Hyd%20Logo.png" },
+  { name: "International Management Institute", shortName: "IMI", location: "Delhi & Kolkata", city: "Delhi", state: "Delhi", logo: "https://upload.wikimedia.org/wikipedia/en/7/7d/International_Management_Institute_logo.png" },
+  { name: "MDI Murshidabad", shortName: "MDI-M", location: "Murshidabad, West Bengal", city: "Murshidabad", state: "West Bengal", logo: "https://www.mdim.ac.in/assets/images/logo.png" },
+  { name: "Lal Bahadur Shastri Institute of Management", shortName: "LBSIM", location: "Delhi", city: "Delhi", state: "Delhi", logo: "https://www.lbsim.ac.in/images/logo.png" },
+  { name: "Great Lakes Institute of Management", shortName: "Great Lakes", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", logo: "https://www.greatlakes.edu.in/sites/all/themes/developer/images/logo.png" },
+  { name: "Symbiosis Institute of Business Management", shortName: "SIBM", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/Symbiosis_International_University_logo.svg/1200px-Symbiosis_International_University_logo.svg.png" },
+  { name: "NMIMS School of Business Management", shortName: "NMIMS", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/58/NMIMS_Logo.svg/1200px-NMIMS_Logo.svg.png" },
+  { name: "FORE School of Management", shortName: "FORE", location: "Delhi", city: "Delhi", state: "Delhi", logo: "https://www.fsm.ac.in/images/logo.png" },
+  { name: "Jaipuria Institute of Management", shortName: "Jaipuria Noida", location: "Noida, Uttar Pradesh", city: "Noida", state: "Uttar Pradesh", logo: "https://www.jaipuria.ac.in/wp-content/uploads/2021/09/jaipuria-logo.png" },
+  { name: "SOIL Institute of Management", shortName: "SOIL", location: "Manesar, Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", logo: "https://www.soilindia.net/images/logo.png" },
+  { name: "Maharaja Agrasen Business School", shortName: "MABS", location: "Rohini Sector 22, Delhi", city: "Delhi", state: "Delhi" },
+  { name: "University of Petroleum and Energy Studies", shortName: "UPES", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/UPES_Logo.svg/1200px-UPES_Logo.svg.png" },
+  { name: "New Delhi Institute of Management", shortName: "NDIM", location: "Tughlakabad, Delhi", city: "Delhi", state: "Delhi", logo: "https://ndimdelhi.org/wp-content/uploads/2023/03/NDIM-Logo.png" },
+  { name: "Indira University", shortName: "IU", location: "Tathawade, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "https://indirauniversity.edu.in/images/logo.png" },
+  { name: "FOSTIIMA Business School", shortName: "FOSTIIMA", location: "Dwarka, Delhi", city: "Delhi", state: "Delhi" },
+  { name: "Dr. DY Patil B-School", shortName: "DY Patil", location: "Tathawade, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/DPU_Logo.svg/1200px-DPU_Logo.svg.png" },
+  { name: "BML Munjal University", shortName: "BMU", location: "Kapriwas, Haryana", city: "Kapriwas", state: "Haryana", logo: "https://www.bmu.edu.in/wp-content/uploads/2020/01/BMU-Logo.png" },
+  { name: "GL Bajaj Institute of Management", shortName: "GL Bajaj", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "Christ Academy Institute for Advanced Studies", shortName: "CHRIST", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Christ_University_logo.svg/1200px-Christ_University_logo.svg.png" },
+  { name: "Bennett University", shortName: "Bennett", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", logo: "https://www.bennett.edu.in/wp-content/uploads/2020/12/bennett-logo.png" },
+  { name: "Quantum University", shortName: "Quantum", location: "Roorkee-Dehradun Highway, Uttarakhand", city: "Mandawar", state: "Uttarakhand" },
+  { name: "Atlas SkillTech University", shortName: "Atlas", location: "Kurla, Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "https://atlasuniversity.edu.in/wp-content/uploads/2022/01/atlas-logo.png" },
+  { name: "Jaipuria Institute of Management Lucknow", shortName: "Jaipuria Lucknow", location: "Lucknow, Uttar Pradesh", city: "Lucknow", state: "Uttar Pradesh", logo: "https://www.jaipuria.ac.in/wp-content/uploads/2021/09/jaipuria-logo.png" },
+  { name: "Jaipuria Institute of Management Indore", shortName: "Jaipuria Indore", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", logo: "https://www.jaipuria.ac.in/wp-content/uploads/2021/09/jaipuria-logo.png" },
+  { name: "Jaipuria Institute of Management Ghaziabad", shortName: "Jaipuria Ghaziabad", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", logo: "https://www.jaipuria.ac.in/wp-content/uploads/2021/09/jaipuria-logo.png" },
+  { name: "Harsha Institutions", shortName: "Harsha", location: "Madavara, Bangalore, Karnataka", city: "Bangalore", state: "Karnataka" },
+  { name: "Asian Business School", shortName: "ABS", location: "Noida, Uttar Pradesh", city: "Noida", state: "Uttar Pradesh" },
+  { name: "Amity University", shortName: "Amity", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/Amity_University_logo.svg/1200px-Amity_University_logo.svg.png" },
+  { name: "Alliance University", shortName: "Alliance", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", logo: "https://www.alliance.edu.in/images/logo.png" },
+  { name: "FMS-IIRM Jaipur", shortName: "FMS-IIRM", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan" },
+  { name: "Doon Business School", shortName: "DBS", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand" },
+  { name: "Woxsen University", shortName: "Woxsen", location: "Sadasivpet, Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", logo: "https://www.woxsen.edu.in/assets/images/woxsen-logo.svg" },
+  { name: "Universal AI University", shortName: "UAI", location: "Karjat, Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra" },
+  { name: "Unique Institute of Business Management", shortName: "UIBM", location: "Katraj, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Thiagarajar School of Management", shortName: "TSM", location: "Madurai, Tamil Nadu", city: "Madurai", state: "Tamil Nadu" },
+  { name: "Ajeenkya DY Patil University (Sunstone)", shortName: "ADYPU", location: "Charholi Budruk, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "St. Andrews Institute of Technology & Management", shortName: "St. Andrews", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana" },
+  { name: "Sparsh Global Business School", shortName: "SPARSH", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "Shanti Business School", shortName: "SBS", location: "Ahmedabad, Gujarat", city: "Ahmedabad", state: "Gujarat" },
+  { name: "Sai Balaji International Institute", shortName: "SBIIMS", location: "Hinjewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Ramachandran International Institute of Management", shortName: "RIIM", location: "Bavdhan, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Pune Institute of Business Management", shortName: "PIBM", location: "Pirangut, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Pimpri Chinchwad University", shortName: "PCU", location: "Mohitewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Pune Business School", shortName: "PBS", location: "Nigdi, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Noida International University", shortName: "NIU", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "Narayana Business School", shortName: "NBS", location: "Sanathal, Ahmedabad, Gujarat", city: "Ahmedabad", state: "Gujarat" },
+  { name: "Mangalmay Institute of Management & Technology", shortName: "Mangalmay", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "Lloyd Business School", shortName: "Lloyd", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "KR Mangalam University", shortName: "KRM", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana" },
+  { name: "Jaipuria School of Business", shortName: "JSB", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", logo: "https://www.jaipuria.ac.in/wp-content/uploads/2021/09/jaipuria-logo.png" },
+  { name: "Jagdish Sheth School of Management", shortName: "JAGSoM", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka" },
+  { name: "Jagannath International Management School", shortName: "JIMS", location: "Kalkaji, Delhi", city: "Delhi", state: "Delhi" },
+  { name: "ITM Business School", shortName: "ITM", location: "Kharghar, Navi Mumbai, Maharashtra", city: "Navi Mumbai", state: "Maharashtra" },
+  { name: "International School of Management Studies", shortName: "ISMS", location: "Ambegaon Budruk, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "ISBS Gurgaon", shortName: "ISBS", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana" },
+  { name: "Indus Business School", shortName: "IIEBM", location: "Wakad, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Indian School of Business and Research", shortName: "ISBR", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka" },
+  { name: "IMS Unison University", shortName: "IMS", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand" },
+  { name: "Imperial School of Business", shortName: "Imperial", location: "Hinjewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "IILM Institute Jaipur", shortName: "IILM Jaipur", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan", logo: "https://www.iilm.edu/wp-content/uploads/2021/03/IILM-Logo.png" },
+  { name: "IILM Institute Lucknow", shortName: "IILM Lucknow", location: "Lucknow, Uttar Pradesh", city: "Lucknow", state: "Uttar Pradesh", logo: "https://www.iilm.edu/wp-content/uploads/2021/03/IILM-Logo.png" },
+  { name: "IILM Institute Lodhi Road", shortName: "IILM Delhi", location: "Lodhi Road, Delhi", city: "Delhi", state: "Delhi", logo: "https://www.iilm.edu/wp-content/uploads/2021/03/IILM-Logo.png" },
+  { name: "IILM Institute Gurgaon", shortName: "IILM Gurgaon", location: "Golf Road, Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", logo: "https://www.iilm.edu/wp-content/uploads/2021/03/IILM-Logo.png" },
+  { name: "IILM Institute Greater Noida", shortName: "IILM G.Noida", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", logo: "https://www.iilm.edu/wp-content/uploads/2021/03/IILM-Logo.png" },
+  { name: "IBMR Business School", shortName: "IBMR", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana" },
+  { name: "HIMT Group of Institutions", shortName: "HIMT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "Greater Noida Institute of Technology", shortName: "GNIOT", location: "Knowledge Park II, Greater Noida, UP", city: "Greater Noida", state: "Uttar Pradesh" },
+  { name: "Global Institute of Business Studies", shortName: "GIBS", location: "Electronic City, Bangalore, Karnataka", city: "Bangalore", state: "Karnataka" },
+  { name: "GD Goenka University", shortName: "GD Goenka", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", logo: "https://www.gdgoenka.com/wp-content/uploads/2021/04/gd-goenka-logo.png" },
+  { name: "Fortune Institute of International Business", shortName: "FIIB", location: "Vasant Vihar, New Delhi", city: "Delhi", state: "Delhi" },
+  { name: "ASM Institute of International Business and Research", shortName: "ASM IIBR", location: "Pimpri, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "Aureole School of Business Management", shortName: "ASBM", location: "Ambi, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
+  { name: "AKEMI Business School", shortName: "AKEMI", location: "Marunji Road, Pune, Maharashtra", city: "Pune", state: "Maharashtra" },
 ];
-
-const categoryColors = {
-  "Premier": "bg-gradient-to-r from-amber-500 to-orange-500 text-white",
-  "Tier-1": "bg-gradient-to-r from-blue-500 to-indigo-500 text-white",
-  "Tier-2": "bg-gradient-to-r from-emerald-500 to-teal-500 text-white",
-  "Emerging": "bg-gradient-to-r from-purple-500 to-pink-500 text-white",
-};
 
 const statesList = [...new Set(universities.map(u => u.state))].sort();
 
 const Universities = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedState, setSelectedState] = useState<string>("All");
   const [showAll, setShowAll] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
   const filteredUniversities = universities.filter((uni) => {
     const matchesSearch = uni.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       uni.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (uni.shortName?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false);
-    const matchesCategory = selectedCategory === "All" || uni.category === selectedCategory;
     const matchesState = selectedState === "All" || uni.state === selectedState;
-    return matchesSearch && matchesCategory && matchesState;
+    return matchesSearch && matchesState;
   });
 
   const displayedUniversities = showAll ? filteredUniversities : filteredUniversities.slice(0, 12);
+
+  const handleImageError = (uniName: string) => {
+    setImageErrors(prev => new Set(prev).add(uniName));
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -147,13 +141,6 @@ const Universities = () => {
         damping: 12,
       },
     },
-  };
-
-  const stats = {
-    total: universities.length,
-    premier: universities.filter(u => u.category === "Premier").length,
-    tier1: universities.filter(u => u.category === "Tier-1").length,
-    states: statesList.length,
   };
 
   return (
@@ -201,13 +188,12 @@ const Universities = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-12"
+                className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto mt-12"
               >
                 {[
-                  { label: "Partner Universities", value: stats.total, icon: GraduationCap },
-                  { label: "Premier Institutes", value: stats.premier, icon: Star },
-                  { label: "Tier-1 Colleges", value: stats.tier1, icon: Building2 },
-                  { label: "States Covered", value: stats.states, icon: MapPin },
+                  { label: "Partner Universities", value: "150", icon: GraduationCap },
+                  { label: "States Covered", value: statesList.length.toString(), icon: MapPin },
+                  { label: "Students Placed", value: "10000", icon: Users },
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -234,7 +220,7 @@ const Universities = () => {
             transition={{ delay: 0.3 }}
             className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-primary/10"
           >
-            <div className="flex flex-col lg:flex-row gap-4 items-center">
+            <div className="flex flex-col md:flex-row gap-4 items-center">
               {/* Search */}
               <div className="relative flex-1 w-full">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -244,25 +230,6 @@ const Universities = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-12 py-6 text-base rounded-xl border-2 border-primary/20 focus:border-primary transition-colors"
                 />
-              </div>
-
-              {/* Category Filter */}
-              <div className="flex flex-wrap gap-2 justify-center">
-                {["All", "Premier", "Tier-1", "Tier-2", "Emerging"].map((cat) => (
-                  <Button
-                    key={cat}
-                    variant={selectedCategory === cat ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`rounded-full px-4 transition-all duration-300 ${
-                      selectedCategory === cat 
-                        ? "bg-primary text-white shadow-lg" 
-                        : "hover:bg-primary/10 hover:border-primary"
-                    }`}
-                  >
-                    {cat}
-                  </Button>
-                ))}
               </div>
 
               {/* State Filter */}
@@ -296,14 +263,24 @@ const Universities = () => {
               <motion.div key={`${uni.name}-${index}`} variants={itemVariants}>
                 <Card className="group h-full overflow-hidden bg-white/90 backdrop-blur-sm border-2 border-transparent hover:border-primary/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-2xl">
                   <CardContent className="p-6 flex flex-col h-full">
-                    {/* Logo Placeholder */}
+                    {/* Logo */}
                     <div className="relative mb-4">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-orange-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
-                        <GraduationCap className="w-8 h-8 text-primary" />
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-orange-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md overflow-hidden">
+                        {uni.logo && !imageErrors.has(uni.name) ? (
+                          <img 
+                            src={uni.logo} 
+                            alt={`${uni.shortName || uni.name} logo`}
+                            className="w-12 h-12 object-contain"
+                            onError={() => handleImageError(uni.name)}
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-orange-500 flex items-center justify-center">
+                            <span className="text-white font-bold text-lg">
+                              {(uni.shortName || uni.name).charAt(0)}
+                            </span>
+                          </div>
+                        )}
                       </div>
-                      <Badge className={`absolute -top-2 -right-2 text-[10px] px-2 py-0.5 ${categoryColors[uni.category]} shadow-md`}>
-                        {uni.category}
-                      </Badge>
                     </div>
 
                     {/* University Info */}
