@@ -20,10 +20,10 @@ interface University {
 
 const universities: University[] = [
   { name: "IIM Rohtak", shortName: "IIM-R", location: "Rohtak, Haryana", city: "Rohtak", state: "Haryana", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/IIM_Rohtak_Logo.svg/1200px-IIM_Rohtak_Logo.svg.png" },
-  { name: "SP Jain Institute of Management and Research", shortName: "SPJIMR", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/SPJIMR_Logo.svg/1200px-SPJIMR_Logo.svg.png" },
+  { name: "SP Jain Institute of Management and Research", shortName: "SPJIMR", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: '/' },
   { name: "NL Dalmia Institute of Management Studies", shortName: "NL Dalmia", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "https://www.nldalmia.in/images/logo.png" },
   { name: "IMT Ghaziabad", shortName: "IMT-G", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/IMT_Ghaziabad_logo.svg/1200px-IMT_Ghaziabad_logo.svg.png" },
-  { name: "IMT Hyderabad", shortName: "IMT-HY", location: "Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", logo: "https://www.imthyderabad.edu.in/storage/app/public/page-builder/IMT%20Hyd%20Logo.png" },
+  { name: "IMT Hyderabad", shortName: "IMT-HY", location: "Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", logo: "/IMT Hyderabad.png" },
   { name: "International Management Institute", shortName: "IMI", location: "Delhi & Kolkata", city: "Delhi", state: "Delhi", logo: "https://upload.wikimedia.org/wikipedia/en/7/7d/International_Management_Institute_logo.png" },
   { name: "MDI Murshidabad", shortName: "MDI-M", location: "Murshidabad, West Bengal", city: "Murshidabad", state: "West Bengal", logo: "https://www.mdim.ac.in/assets/images/logo.png" },
   { name: "Lal Bahadur Shastri Institute of Management", shortName: "LBSIM", location: "Delhi", city: "Delhi", state: "Delhi", logo: "https://www.lbsim.ac.in/images/logo.png" },
