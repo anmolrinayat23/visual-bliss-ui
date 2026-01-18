@@ -19,8 +19,7 @@ interface University {
 }
 
 const universities: University[] = [
-  { name: "IIM Rohtak", shortName: "IIM-R", location: "Rohtak, Haryana", city: "Rohtak", state: "Haryana", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/IIM_Rohtak_Logo.svg/1200px-IIM_Rohtak_Logo.svg.png" },
-  { name: "SP Jain Institute of Management and Research", shortName: "SPJIMR", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/SPJIMR_Logo.svg/1200px-SPJIMR_Logo.svg.png" },
+  { name: "SP Jain Institute of Management and Research", shortName: "SPJIMR", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "/SP Jain Institute of Management and Research.png" },
   { name: "NL Dalmia Institute of Management Studies", shortName: "NL Dalmia", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "/NL Dalmia Institute of Management Studies.png" },
   { name: "IMT Ghaziabad", shortName: "IMT-G", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", logo: "/IMT Ghaziabad.jpg" },
   { name: "IMT Hyderabad", shortName: "IMT-HY", location: "Hyderabad, Telangana", city: "Hyderabad", state: "Telangana", logo: "/IMT Hyderabad.webp" },
@@ -284,9 +283,9 @@ const Universities = () => {
               </select>
             </div>
 
-            <div className="mt-4 text-center text-sm text-muted-foreground">
+            {/* <div className="mt-4 text-center text-sm text-muted-foreground">
               Showing <span className="font-semibold text-primary">{filteredUniversities.length}</span> of {universities.length} universities
-            </div>
+            </div> */}
           </motion.div>
         </section>
 
@@ -386,7 +385,7 @@ const Universities = () => {
                 variant="outline"
                 className="rounded-full px-8 py-6 text-base font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl group"
               >
-                {showAll ? "Show Less" : `Show All ${filteredUniversities.length} Universities`}
+                {showAll ? "Show Less" : `Show All  Universities`}
                 <ChevronDown className={`ml-2 w-5 h-5 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} />
               </Button>
             </motion.div>
@@ -434,14 +433,14 @@ const Universities = () => {
                 >
                   Book a Counselling Session
                 </Button>
-                <Button
+                  <Button
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white/10 rounded-full px-8 py-6 text-base font-semibold transition-all duration-300"
+                  className="bg-white text-primary hover:bg-white/90 rounded-full px-8 py-6 text-base font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   onClick={() => window.location.href = "/courses"}
                 >
-                  Explore Courses
+                   Explore Courses
                 </Button>
+             
               </div>
             </div>
           </motion.div>
