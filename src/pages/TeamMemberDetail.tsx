@@ -161,35 +161,35 @@ Fluent in French and certified in Taxation, Kajol blends analytical depth with c
         "Organized Commercio 2k23 and RBI Outreach Program"
       ]
     },
-    "sulekha-sarkar": {
-      name: "Ms. Sulekha Sarkar",
-      role: "Administrative Supervisor",
-      image: "/sulekha.jpg",
-      fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.
+//     "sulekha-sarkar": {
+//       name: "Ms. Sulekha Sarkar",
+//       role: "Administrative Supervisor",
+//       image: "/sulekha.jpg",
+//       fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.
 
-Known for her empathetic approach and strong administrative skills, Ms. Sarkar is dedicated to mentoring young minds and helping them realize their full potential. Her patient guidance and deep understanding of student needs make her an exceptional leader in our counseling department, ensuring every student receives personalized attention and support throughout their educational journey.`,
-      achievements: [
-        "Over a decade of experience in student counseling and academic administration",
-        "Expert in guiding educational journeys with empathy and precision",
-        "Strong administrative skills and dedicated mentoring approach"
-      ]
-    },
-    "sanjana-sharma": {
-      name: "Mrs.Sanjana Sharma",
-      role: "Senior Educational Counsellor",
-      image: "/sajana.jpg",
-fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
+// Known for her empathetic approach and strong administrative skills, Ms. Sarkar is dedicated to mentoring young minds and helping them realize their full potential. Her patient guidance and deep understanding of student needs make her an exceptional leader in our counseling department, ensuring every student receives personalized attention and support throughout their educational journey.`,
+//       achievements: [
+//         "Over a decade of experience in student counseling and academic administration",
+//         "Expert in guiding educational journeys with empathy and precision",
+//         "Strong administrative skills and dedicated mentoring approach"
+//       ]
+//     },
+//     "sanjana-sharma": {
+//       name: "Mrs.Sanjana Sharma",
+//       role: "Senior Educational Counsellor",
+//       image: "/sajana.jpg",
+// fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
 
-Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
+// Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
 
-At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`,
-achievements: [
-  "Passionate and empathetic Senior Educational Counsellor",
-  "Experienced across creative and corporate fields",
-  "Helps students discover strengths and make confident educational & career choices"
-]
+// At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`,
+// achievements: [
+//   "Passionate and empathetic Senior Educational Counsellor",
+//   "Experienced across creative and corporate fields",
+//   "Helps students discover strengths and make confident educational & career choices"
+// ]
 
-    }
+//     }
   };
 
   const member = teamMembers[id];

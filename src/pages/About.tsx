@@ -76,32 +76,32 @@ const About = ({ showFooter = true }) => {
       highlight: "Academic brilliance combined with organizational excellence",
       fullDescription: `Kajol Samtani is an accomplished commerce professional and academic achiever from the Institute for Excellence in Higher Education (IEHE), Bhopal, where she secured 1st Rank in both B.Com (Accounts Hons.) and M.Com (Marketing Management) with distinction.`
     },
-    {
-      id: "sulekha-sarkar",
-      name: "Ms. Sulekha Sarkar",
-      role: "Administrative Supervisor",
-      description: "Empathetic student counselor with over a decade of experience in academic guidance and mentorship.",
-      achievement: "Expert in educational journey planning with strong administrative skills and personalized support.",
-      avatar: "MS",
-      image: "/sulekha.jpg",
-      highlight: "Empowering students through personalized guidance",
-      fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.`
-    },
-{
-  id: "sanjana-sharma",
-  name: "Mrs. Sanjana Sharma",
-  role: "Senior Educational Counsellor",
-  description: "A compassionate counsellor helping students discover their strengths and make confident academic and career choices.",
-  achievement: "Brings creative and corporate experience with a warm, student-centric counselling approach.",
-  avatar: "SS",
-  image: "/sajana.jpg",
-  highlight: "Inspiring learners with empathy, positivity, and purpose-driven guidance",
-  fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
+    // {
+    //   id: "sulekha-sarkar",
+    //   name: "Ms. Sulekha Sarkar",
+    //   role: "Administrative Supervisor",
+    //   description: "Empathetic student counselor with over a decade of experience in academic guidance and mentorship.",
+    //   achievement: "Expert in educational journey planning with strong administrative skills and personalized support.",
+    //   avatar: "MS",
+    //   image: "/sulekha.jpg",
+    //   highlight: "Empowering students through personalized guidance",
+    //   fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.`
+    // },
+// {
+//   id: "sanjana-sharma",
+//   name: "Mrs. Sanjana Sharma",
+//   role: "Senior Educational Counsellor",
+//   description: "A compassionate counsellor helping students discover their strengths and make confident academic and career choices.",
+//   achievement: "Brings creative and corporate experience with a warm, student-centric counselling approach.",
+//   avatar: "SS",
+//   image: "/sajana.jpg",
+//   highlight: "Inspiring learners with empathy, positivity, and purpose-driven guidance",
+//   fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
 
-Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
+// Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
 
-At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`
-}
+// At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`
+// }
 
   ];
 
