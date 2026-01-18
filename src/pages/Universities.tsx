@@ -150,10 +150,42 @@ const Universities = () => {
 
       <main className="pt-24 pb-16">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 md:py-24">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/5" />
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl animate-pulse delay-700" />
+        <section className="relative overflow-hidden py-20 md:py-28">
+          {/* Background Gradient Layers */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-orange-500 to-orange-600" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-300/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-amber-400/30 via-transparent to-transparent" />
+          
+          {/* Animated Geometric Shapes */}
+          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white/20 rounded-full animate-[spin_20s_linear_infinite]" />
+          <div className="absolute top-32 left-32 w-20 h-20 border-2 border-white/15 rounded-lg rotate-45 animate-[spin_15s_linear_infinite_reverse]" />
+          <div className="absolute bottom-20 right-20 w-40 h-40 border-2 border-white/20 rounded-full animate-[spin_25s_linear_infinite]" />
+          <div className="absolute bottom-32 right-40 w-24 h-24 border-2 border-white/15 rounded-lg rotate-12 animate-[spin_18s_linear_infinite_reverse]" />
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-white/10 rounded-full animate-pulse" />
+          <div className="absolute top-1/3 right-1/4 w-12 h-12 border border-white/10 rounded-lg rotate-45 animate-pulse delay-500" />
+          
+          {/* Floating Circles */}
+          <motion.div
+            animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-20 right-1/4 w-64 h-64 bg-white/10 rounded-full blur-2xl"
+          />
+          <motion.div
+            animate={{ y: [0, 15, 0], x: [0, -15, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-10 left-1/3 w-80 h-80 bg-orange-300/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/2 right-10 w-48 h-48 bg-amber-200/20 rounded-full blur-2xl"
+          />
+          
+          {/* Dot Pattern Overlay */}
+          <div className="absolute inset-0 opacity-10" style={{
+            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+            backgroundSize: '30px 30px'
+          }} />
           
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
@@ -166,19 +198,17 @@ const Universities = () => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-6"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium mb-6 border border-white/30 shadow-lg"
               >
                 <Building2 className="w-5 h-5" />
                 <span>Our Partner Network</span>
               </motion.div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-500 to-primary">
-                  Tied Up Universities
-                </span>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Tied Up Universities
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
                 Explore our extensive network of premier business schools and universities across India. 
                 Your gateway to world-class management education.
               </p>
@@ -188,7 +218,7 @@ const Universities = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto mt-12"
+                className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto mt-12"
               >
                 {[
                   { label: "Partner Universities", value: "150", icon: GraduationCap },
@@ -200,15 +230,23 @@ const Universities = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
-                    className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-primary/10 hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="bg-white/15 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/25 shadow-2xl hover:bg-white/25 transition-all duration-300 group"
                   >
-                    <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-                    <div className="text-2xl md:text-3xl font-bold text-primary">{stat.value}+</div>
-                    <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
+                    <stat.icon className="w-7 h-7 text-white mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                    <div className="text-3xl md:text-4xl font-bold text-white drop-shadow-md">{stat.value}+</div>
+                    <div className="text-sm text-white/80 mt-1">{stat.label}</div>
                   </motion.div>
                 ))}
               </motion.div>
             </motion.div>
+          </div>
+          
+          {/* Bottom Wave */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+              <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="rgb(249 250 251)" fillOpacity="1"/>
+            </svg>
           </div>
         </section>
 
