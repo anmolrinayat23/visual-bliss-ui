@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MapPin, Search, Building2, GraduationCap, Users, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface University {
   name: string;
@@ -323,18 +324,47 @@ const Universities = () => {
 
                     {/* University Info */}
                     <div className="flex-1">
-                      <h3 className="font-bold text-foreground text-lg mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                        {uni.shortName || uni.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-3 line-clamp-1">
-                        {uni.name !== uni.shortName && uni.shortName ? uni.name : ""}
-                      </p>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <h3 className="font-bold text-foreground text-lg mb-1 group-hover:text-primary transition-colors line-clamp-2 cursor-default">
+                              {uni.shortName || uni.name}
+                            </h3>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-xs">
+                            <p className="font-semibold">{uni.name}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      {uni.name !== uni.shortName && uni.shortName && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <p className="text-sm text-muted-foreground mb-3 line-clamp-1 cursor-default">
+                                {uni.name}
+                              </p>
+                            </TooltipTrigger>
+                            <TooltipContent side="top" className="max-w-xs">
+                              <p>{uni.name}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
                     </div>
 
                     {/* Location */}
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mt-auto pt-4 border-t border-gray-100">
                       <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span className="line-clamp-1">{uni.location}</span>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span className="line-clamp-1 cursor-default">{uni.location}</span>
+                          </TooltipTrigger>
+                          <TooltipContent side="bottom" className="max-w-xs">
+                            <p>{uni.location}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </CardContent>
                 </Card>
