@@ -152,137 +152,30 @@ const Universities = () => {
       <main className="pt-24 pb-16">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-20 md:py-28">
-          {/* Background Gradient Base */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-orange-500 to-orange-600" />
+          {/* Clean Background Base */}
+          <div className="absolute inset-0 bg-slate-900" />
           
-          {/* Logo Collage Background */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Animated Logo Grid - Row 1 */}
-            <motion.div 
-              className="absolute top-0 left-0 right-0 flex gap-6 items-center"
-              animate={{ x: [0, -1200] }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            >
-              {[...universities, ...universities].map((uni, index) => (
-                <div 
-                  key={`row1-${index}`}
-                  className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20"
-                >
-                  {uni.logo && (
-                    <img 
-                      src={uni.logo} 
-                      alt={uni.name}
-                      className="w-full h-full object-contain opacity-40 filter brightness-150"
-                    />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-            
-            {/* Animated Logo Grid - Row 2 */}
-            <motion.div 
-              className="absolute top-28 md:top-32 left-0 right-0 flex gap-6 items-center"
-              animate={{ x: [-600, 600] }}
-              transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-            >
-              {[...universities.slice(20), ...universities.slice(0, 20), ...universities].map((uni, index) => (
-                <div 
-                  key={`row2-${index}`}
-                  className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white/8 backdrop-blur-sm rounded-xl p-2 border border-white/15"
-                >
-                  {uni.logo && (
-                    <img 
-                      src={uni.logo} 
-                      alt={uni.name}
-                      className="w-full h-full object-contain opacity-30 filter brightness-150"
-                    />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-            
-            {/* Animated Logo Grid - Row 3 (Center - More Visible) */}
-            <motion.div 
-              className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex gap-8 items-center"
-              animate={{ x: [0, -800] }}
-              transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-            >
-              {[...universities.slice(40), ...universities, ...universities.slice(0, 40)].map((uni, index) => (
-                <div 
-                  key={`row3-${index}`}
-                  className="flex-shrink-0 w-24 h-24 md:w-28 md:h-28 bg-white/12 backdrop-blur-md rounded-2xl p-3 border border-white/25 shadow-lg"
-                >
-                  {uni.logo && (
-                    <img 
-                      src={uni.logo} 
-                      alt={uni.name}
-                      className="w-full h-full object-contain opacity-50 filter brightness-150"
-                    />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-            
-            {/* Animated Logo Grid - Row 4 */}
-            <motion.div 
-              className="absolute bottom-28 md:bottom-32 left-0 right-0 flex gap-6 items-center"
-              animate={{ x: [-300, -1500] }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-            >
-              {[...universities.slice(60), ...universities, ...universities.slice(0, 60)].map((uni, index) => (
-                <div 
-                  key={`row4-${index}`}
-                  className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white/8 backdrop-blur-sm rounded-xl p-2 border border-white/15"
-                >
-                  {uni.logo && (
-                    <img 
-                      src={uni.logo} 
-                      alt={uni.name}
-                      className="w-full h-full object-contain opacity-30 filter brightness-150"
-                    />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-            
-            {/* Animated Logo Grid - Row 5 */}
-            <motion.div 
-              className="absolute bottom-0 left-0 right-0 flex gap-6 items-center"
-              animate={{ x: [-800, 400] }}
-              transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            >
-              {[...universities.slice(30), ...universities, ...universities.slice(0, 30)].map((uni, index) => (
-                <div 
-                  key={`row5-${index}`}
-                  className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20"
-                >
-                  {uni.logo && (
-                    <img 
-                      src={uni.logo} 
-                      alt={uni.name}
-                      className="w-full h-full object-contain opacity-35 filter brightness-150"
-                    />
-                  )}
-                </div>
-              ))}
-            </motion.div>
+          {/* Static Logo Collage Grid */}
+          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4 opacity-90">
+            {universities.map((uni, index) => (
+              <div 
+                key={`logo-${index}`}
+                className="aspect-square bg-white rounded-xl p-3 shadow-lg flex items-center justify-center hover:scale-105 transition-transform duration-300"
+              >
+                {uni.logo && (
+                  <img 
+                    src={uni.logo} 
+                    alt={uni.name}
+                    className="w-full h-full object-contain"
+                  />
+                )}
+              </div>
+            ))}
           </div>
           
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-orange-500/60 to-orange-600/80" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,0,0,0.3)_100%)]" />
-          
-          {/* Accent Glow Effects */}
-          <motion.div
-            animate={{ opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-300/30 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{ opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-400/25 rounded-full blur-3xl"
-          />
+          {/* Subtle Gradient Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-orange-500/20" />
           
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
