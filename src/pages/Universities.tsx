@@ -206,10 +206,11 @@ const Universities = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-6 max-w-sm mx-auto mt-12"
+                className="flex flex-row justify-center gap-4 md:gap-6 mt-12"
               >
                 {[
                   { label: "Partner Universities", value: "150", icon: GraduationCap },
+                  { label: "Pan India", value: "28", icon: MapPin },
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -217,7 +218,7 @@ const Universities = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
-                    className="bg-gradient-to-br from-primary/30 to-orange-600/30 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-orange-500/40 shadow-2xl hover:border-orange-400 transition-all duration-300 group"
+                    className="bg-gradient-to-br from-primary/30 to-orange-600/30 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-orange-500/40 shadow-2xl hover:border-orange-400 transition-all duration-300 group min-w-[140px] md:min-w-[160px]"
                   >
                     <stat.icon className="w-7 h-7 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
                     <div className="text-3xl md:text-4xl font-bold text-orange-400 drop-shadow-md">{stat.value}+</div>
