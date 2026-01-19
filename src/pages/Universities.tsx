@@ -152,21 +152,15 @@ const Universities = () => {
       <main className="pt-24 pb-16">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-20 md:py-28">
-          {/* Vibrant Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-primary to-amber-500" />
-          
-          {/* Decorative Glow Effects */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-orange-300/40 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-0 w-64 h-64 bg-red-500/20 rounded-full blur-2xl" />
-          <div className="absolute top-1/3 right-0 w-72 h-72 bg-amber-400/30 rounded-full blur-2xl" />
+          {/* Clean Dark Background */}
+          <div className="absolute inset-0 bg-slate-900" />
           
           {/* Static Logo Collage Grid */}
-          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4">
+          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4 opacity-90">
             {universities.map((uni, index) => (
               <div 
                 key={`logo-${index}`}
-                className="aspect-square bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/50 flex items-center justify-center hover:scale-110 hover:bg-white hover:shadow-2xl hover:border-orange-300 transition-all duration-300"
+                className="aspect-square bg-white rounded-xl p-3 shadow-lg flex items-center justify-center hover:scale-105 transition-transform duration-300"
               >
                 {uni.logo && (
                   <img 
@@ -179,9 +173,8 @@ const Universities = () => {
             ))}
           </div>
           
-          {/* Gradient Overlay for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-orange-600/70 to-orange-700/95" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(234,88,12,0.4)_100%)]" />
+          {/* Subtle Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/90" />
           
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
@@ -194,17 +187,17 @@ const Universities = () => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-md rounded-full text-white font-medium mb-6 border border-white/30 shadow-xl"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-orange-500 backdrop-blur-md rounded-full text-white font-medium mb-6 border border-orange-400/50 shadow-xl"
               >
                 <Building2 className="w-5 h-5" />
                 <span>Our Partner Network</span>
               </motion.div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
-                Tied Up Universities
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl">
+                <span className="bg-gradient-to-r from-orange-400 via-primary to-amber-400 bg-clip-text text-transparent">Tied Up Universities</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/95 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
+              <p className="text-lg md:text-xl text-orange-100 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
               Access a powerful network of top universities and institutions across India, connected through exclusive admission partnerships for world-class education.
               </p>
 
@@ -224,11 +217,11 @@ const Universities = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
-                    className="bg-white/20 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-white/30 shadow-2xl hover:bg-white/30 transition-all duration-300 group"
+                    className="bg-gradient-to-br from-primary/30 to-orange-600/30 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-orange-500/40 shadow-2xl hover:border-orange-400 transition-all duration-300 group"
                   >
-                    <stat.icon className="w-7 h-7 text-white mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                    <div className="text-3xl md:text-4xl font-bold text-white drop-shadow-md">{stat.value}+</div>
-                    <div className="text-sm text-white/90 mt-1">{stat.label}</div>
+                    <stat.icon className="w-7 h-7 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                    <div className="text-3xl md:text-4xl font-bold text-orange-400 drop-shadow-md">{stat.value}+</div>
+                    <div className="text-sm text-orange-200 mt-1">{stat.label}</div>
                   </motion.div>
                 ))}
               </motion.div>
