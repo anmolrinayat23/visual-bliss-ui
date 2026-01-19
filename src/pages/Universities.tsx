@@ -152,15 +152,21 @@ const Universities = () => {
       <main className="pt-24 pb-16">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-20 md:py-28">
-          {/* Clean Background Base */}
-          <div className="absolute inset-0 bg-slate-900" />
+          {/* Vibrant Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-primary to-amber-500" />
+          
+          {/* Decorative Glow Effects */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-orange-300/40 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-0 w-64 h-64 bg-red-500/20 rounded-full blur-2xl" />
+          <div className="absolute top-1/3 right-0 w-72 h-72 bg-amber-400/30 rounded-full blur-2xl" />
           
           {/* Static Logo Collage Grid */}
-          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4 opacity-90">
+          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4">
             {universities.map((uni, index) => (
               <div 
                 key={`logo-${index}`}
-                className="aspect-square bg-white rounded-xl p-3 shadow-lg flex items-center justify-center hover:scale-105 transition-transform duration-300"
+                className="aspect-square bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/50 flex items-center justify-center hover:scale-110 hover:bg-white hover:shadow-2xl hover:border-orange-300 transition-all duration-300"
               >
                 {uni.logo && (
                   <img 
@@ -173,9 +179,9 @@ const Universities = () => {
             ))}
           </div>
           
-          {/* Subtle Gradient Overlay for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-orange-500/20" />
+          {/* Gradient Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-orange-600/70 to-orange-700/95" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(234,88,12,0.4)_100%)]" />
           
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
