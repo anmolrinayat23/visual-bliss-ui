@@ -208,23 +208,39 @@ const Universities = () => {
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="flex flex-row justify-center gap-4 md:gap-6 mt-12"
               >
-                {[
-                  { label: "Partner Universities", value: "150", icon: GraduationCap },
-                  { label: "Pan India", value: "28", icon: MapPin },
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="bg-gradient-to-br from-primary/30 to-orange-600/30 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-orange-500/40 shadow-2xl hover:border-orange-400 transition-all duration-300 group min-w-[140px] md:min-w-[160px]"
-                  >
-                    <stat.icon className="w-7 h-7 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                    <div className="text-3xl md:text-4xl font-bold text-orange-400 drop-shadow-md">{stat.value}+</div>
-                    <div className="text-sm text-orange-200 mt-1">{stat.label}</div>
-                  </motion.div>
-                ))}
+                {/* Partner Universities Stat */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-gradient-to-br from-primary/30 to-orange-600/30 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-orange-500/40 shadow-2xl hover:border-orange-400 transition-all duration-300 group min-w-[140px] md:min-w-[160px]"
+                >
+                  <GraduationCap className="w-7 h-7 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                  <div className="text-3xl md:text-4xl font-bold text-orange-400 drop-shadow-md">150+</div>
+                  <div className="text-sm text-orange-200 mt-1">Partner Universities</div>
+                </motion.div>
+
+                {/* Pan India Stat - Special Design */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="relative bg-gradient-to-br from-amber-500/40 via-primary/50 to-orange-600/40 backdrop-blur-lg rounded-2xl p-5 md:p-6 border-2 border-amber-400/60 shadow-2xl hover:border-amber-300 transition-all duration-300 group min-w-[140px] md:min-w-[160px] overflow-hidden"
+                >
+                  {/* Decorative glow */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-amber-400/30 rounded-full blur-xl group-hover:bg-amber-400/50 transition-all duration-300" />
+                  
+                  <div className="relative z-10">
+                    <MapPin className="w-8 h-8 text-amber-300 mx-auto mb-3 group-hover:scale-110 group-hover:text-amber-200 transition-all duration-300" />
+                    <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-amber-200 via-orange-300 to-amber-200 bg-clip-text text-transparent drop-shadow-lg tracking-wide">
+                      Pan India
+                    </div>
+                    <div className="text-xs text-amber-200/80 mt-2 font-medium">Nationwide Network</div>
+                  </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
