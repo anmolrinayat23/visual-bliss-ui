@@ -58,45 +58,22 @@ const AnnouncementPopup = () => {
     setIsVisible(false);
   };
 
-  const CountdownUnit = ({ value, label, delay }: { value: number; label: string; delay: number }) => (
-    <motion.div
-      initial={{ scale: 0, rotateY: 180 }}
-      animate={{ scale: 1, rotateY: 0 }}
-      transition={{ delay, type: "spring", stiffness: 200, damping: 15 }}
-      className="relative group"
-    >
-      <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-xl p-2 md:p-3 border border-primary/40 shadow-lg overflow-hidden min-w-[52px] md:min-w-[60px]">
-        {/* Animated glow effect */}
-        <motion.div
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"
-        />
+  const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
+    <div className="relative group text-center">
+      <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-3 md:p-4 border border-primary/50 shadow-lg min-w-[55px] md:min-w-[65px]">
+        {/* Subtle glow */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent rounded-xl" />
         
-        {/* Number with flip animation */}
-        <motion.div
-          key={value}
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="relative z-10 text-2xl md:text-3xl font-bold bg-gradient-to-b from-white via-orange-100 to-orange-300 bg-clip-text text-transparent drop-shadow-lg"
-        >
+        {/* Number - stable, no key-based remount */}
+        <div className="relative z-10 text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
           {value.toString().padStart(2, '0')}
-        </motion.div>
-        
-        {/* Reflection effect */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-primary/10 to-transparent rounded-b-xl" />
+        </div>
       </div>
       
-      <motion.span 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: delay + 0.2 }}
-        className="block text-[10px] md:text-xs text-orange-300/80 mt-1.5 font-medium uppercase tracking-wider"
-      >
+      <span className="block text-[10px] md:text-xs text-orange-300 mt-2 font-medium uppercase tracking-wider">
         {label}
-      </motion.span>
-    </motion.div>
+      </span>
+    </div>
   );
 
   return (
@@ -215,31 +192,13 @@ const AnnouncementPopup = () => {
                 transition={{ delay: 0.4 }}
                 className="flex items-center justify-center gap-2 md:gap-3 mb-5"
               >
-                <CountdownUnit value={timeLeft.days} label="Days" delay={0.5} />
-                <motion.span
-                  animate={{ opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  className="text-2xl font-bold text-primary mt-[-20px]"
-                >
-                  :
-                </motion.span>
-                <CountdownUnit value={timeLeft.hours} label="Hours" delay={0.6} />
-                <motion.span
-                  animate={{ opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
-                  className="text-2xl font-bold text-primary mt-[-20px]"
-                >
-                  :
-                </motion.span>
-                <CountdownUnit value={timeLeft.minutes} label="Mins" delay={0.7} />
-                <motion.span
-                  animate={{ opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
-                  className="text-2xl font-bold text-primary mt-[-20px]"
-                >
-                  :
-                </motion.span>
-                <CountdownUnit value={timeLeft.seconds} label="Secs" delay={0.8} />
+                <CountdownUnit value={timeLeft.days} label="Days" />
+                <span className="text-2xl font-bold text-primary mt-[-20px]">:</span>
+                <CountdownUnit value={timeLeft.hours} label="Hours" />
+                <span className="text-2xl font-bold text-primary mt-[-20px]">:</span>
+                <CountdownUnit value={timeLeft.minutes} label="Mins" />
+                <span className="text-2xl font-bold text-primary mt-[-20px]">:</span>
+                <CountdownUnit value={timeLeft.seconds} label="Secs" />
               </motion.div>
 
               {/* CTA Button */}
