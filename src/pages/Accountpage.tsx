@@ -26,10 +26,32 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 interface UserData {
+  _id?: string;
   name: string;
   email: string;
   phone: string;
   avatar: string;
+}
+
+interface ApplicationData {
+  _id: string;
+  name: string;
+  email: string;
+  mobile: string;
+  city: string;
+  state: string;
+  class: string;
+  stream: string;
+  grade10: string;
+  grade12: string;
+  graduationScore?: string;
+  graduationStream?: string;
+  passingYear?: string;
+  paymentStatus: string;
+  paymentId?: string;
+  examDate: string;
+  orderId?: string;
+  applicationDate: string;
 }
 
 const AccountPage = () => {
@@ -38,6 +60,9 @@ const AccountPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [ugApplications, setUgApplications] = useState<ApplicationData[]>([]);
+  const [pgApplications, setPgApplications] = useState<ApplicationData[]>([]);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
   
   const [formData, setFormData] = useState<UserData>({
     name: '',
@@ -61,7 +86,8 @@ const AccountPage = () => {
   const createApi = () => {
     const token = localStorage.getItem("token");
     return axios.create({
-      baseURL: 'https://educate-me.in/api',
+      baseURL: 'http://localhost:7000',
+      // baseURL: 'https://educate-me.in/api',
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -79,14 +105,12 @@ const AccountPage = () => {
 
     const user = data.data; // ✅ FIX
 
-     const DEFAULT_AVATAR = "/avtar.webp";
+    const DEFAULT_AVATAR = "/avtar.webp";
 
-       setUserData({
+    setUserData({
       ...user,
-      avatar: DEFAULT_AVATAR, 
+      avatar: DEFAULT_AVATAR,
     });
-
-    setUserData(user);
     setFormData({
       name: user.name || "",
       email: user.email || "",
@@ -195,6 +219,48 @@ const AccountPage = () => {
     setIsEditing(false);
   };
 
+  // Fetch UG applications
+  const fetchUGApplications = async () => {
+    if (!userData?._id) return;
+
+    try {
+      setApplicationsLoading(true);
+      const { data } = await createApi().get(`/user/ug-applications/by-user/${userData._id}`);
+      if (data.success) {
+        setUgApplications(data.applications);
+      }
+
+      console.log("mil gya data:", data)
+    } catch (error: any) {
+      console.error('Error fetching UG applications:', error);
+      if (error.response?.status === 401) {
+        alert('Session expired. Please login again.');
+        handleLogout();
+      } else {
+        alert('Failed to load UG applications. Please try again.');
+      }
+    } finally {
+      setApplicationsLoading(false);
+    }
+  };
+
+  // Fetch PG applications
+  const fetchPGApplications = async () => {
+    if (!userData?._id) return;
+
+    try {
+      setApplicationsLoading(true);
+      const { data } = await createApi().get(`/user/pg-applications/by-user/${userData._id}`);
+      if (data.success) {
+        setPgApplications(data.applications);
+      }
+    } catch (error: any) {
+      console.error('Error fetching PG applications:', error);
+    } finally {
+      setApplicationsLoading(false);
+    }
+  };
+
   useEffect(() => {
     const token = getAuthToken();
     if (!token) {
@@ -203,6 +269,14 @@ const AccountPage = () => {
       fetchUserProfile();
     }
   }, [navigate]);
+
+  // Fetch applications when user data is loaded and applications tab is active
+  useEffect(() => {
+    if (userData?.email && activeTab === 'applications') {
+      fetchUGApplications();
+      fetchPGApplications();
+    }
+  }, [userData, activeTab]);
 
   if (!userData && isLoading) {
     return (
@@ -312,6 +386,7 @@ const AccountPage = () => {
                   <nav className="space-y-2">
                     {[
                       { id: 'profile', icon: User, label: 'Profile', badge: null },
+                      { id: 'applications', icon: CreditCard, label: 'Applications', badge: null },
                       { id: 'security', icon: Shield, label: 'Security', badge: null },
                     ].map((item) => (
                       <motion.button
@@ -519,6 +594,167 @@ const AccountPage = () => {
                             </motion.div>
                           )}
                         </form>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </TabsContent>
+
+                {/* Applications Tab */}
+                <TabsContent value="applications" className="space-y-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Card className="border-orange-200/50 bg-white/90 backdrop-blur-sm shadow-lg rounded-2xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-orange-50 to-orange-100/50 border-b border-orange-200/50">
+                        <div className="space-y-1">
+                          <CardTitle className="text-2xl text-gray-900 flex items-center gap-2">
+                            <CreditCard className="w-6 h-6 text-orange-500" />
+                            Your Applications
+                          </CardTitle>
+                          <CardDescription className="text-gray-600">
+                            View your UG and PG application details, exam information, and payment status
+                          </CardDescription>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-6">
+                        {applicationsLoading ? (
+                          <div className="text-center py-12">
+                            <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                            <p className="text-gray-600">Loading your applications...</p>
+                          </div>
+                        ) : (
+                          <div className="space-y-8">
+                            {/* UG Applications */}
+                            <div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                UG Applications ({ugApplications.length})
+                              </h3>
+                              {ugApplications.length === 0 ? (
+                                <div className="text-center py-8 bg-gray-50 rounded-xl">
+                                  <p className="text-gray-500">No UG applications found</p>
+                                </div>
+                              ) : (
+                                <div className="grid gap-4">
+                                  {ugApplications.map((app) => (
+                                    <Card key={app._id} className="border border-gray-200">
+                                      <CardContent className="p-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Exam Date</p>
+                                            <p className="text-sm text-gray-900">{app.examDate}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Payment Status</p>
+                                            <p className={`text-sm font-medium ${app.paymentStatus === 'completed' ? 'text-green-600' : 'text-orange-600'}`}>
+                                              {app.paymentStatus}
+                                            </p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Payment ID</p>
+                                            <p className="text-sm text-gray-900">{app.paymentId || 'N/A'}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Class</p>
+                                            <p className="text-sm text-gray-900">{app.class}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Stream</p>
+                                            <p className="text-sm text-gray-900">{app.stream}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">10th Grade</p>
+                                            <p className="text-sm text-gray-900">{app.grade10}%</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">12th Grade</p>
+                                            <p className="text-sm text-gray-900">{app.grade12}%</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Application Date</p>
+                                            <p className="text-sm text-gray-900">{new Date(app.applicationDate).toLocaleDateString()}</p>
+                                          </div>
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+
+                            {/* PG Applications */}
+                            <div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                PG Applications ({pgApplications.length})
+                              </h3>
+                              {pgApplications.length === 0 ? (
+                                <div className="text-center py-8 bg-gray-50 rounded-xl">
+                                  <p className="text-gray-500">No PG applications found</p>
+                                </div>
+                              ) : (
+                                <div className="grid gap-4">
+                                  {pgApplications.map((app) => (
+                                    <Card key={app._id} className="border border-gray-200">
+                                      <CardContent className="p-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Exam Date</p>
+                                            <p className="text-sm text-gray-900">{app.examDate}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Payment Status</p>
+                                            <p className={`text-sm font-medium ${app.paymentStatus === 'completed' ? 'text-green-600' : 'text-orange-600'}`}>
+                                              {app.paymentStatus}
+                                            </p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Payment ID</p>
+                                            <p className="text-sm text-gray-900">{app.paymentId || 'N/A'}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Class</p>
+                                            <p className="text-sm text-gray-900">{app.class}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Stream</p>
+                                            <p className="text-sm text-gray-900">{app.stream}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">10th Grade</p>
+                                            <p className="text-sm text-gray-900">{app.grade10}%</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">12th Grade</p>
+                                            <p className="text-sm text-gray-900">{app.grade12}%</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Graduation Score</p>
+                                            <p className="text-sm text-gray-900">{app.graduationScore}%</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Graduation Stream</p>
+                                            <p className="text-sm text-gray-900">{app.graduationStream}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Passing Year</p>
+                                            <p className="text-sm text-gray-900">{app.passingYear}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-sm font-medium text-gray-500">Application Date</p>
+                                            <p className="text-sm text-gray-900">{new Date(app.applicationDate).toLocaleDateString()}</p>
+                                          </div>
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </motion.div>

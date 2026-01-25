@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -226,7 +226,12 @@ const EmMat = ({ showFooter = true }) => {
 
       console.log("Saving UG application:", applicationData);
 
-      const saveResponse = await axios.post(saveUrl, applicationData);
+      const token = localStorage.getItem('token');
+      const saveResponse = await axios.post(saveUrl, applicationData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (saveResponse.data.success) {
         const applicationId = saveResponse.data.application._id;
@@ -263,7 +268,12 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
 
       console.log("Saving PG application:", applicationData);
 
-      const saveResponse = await axios.post(saveUrl, applicationData);
+      const token = localStorage.getItem('token');
+      const saveResponse = await axios.post(saveUrl, applicationData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (saveResponse.data.success) {
         const applicationId = saveResponse.data.application._id;
