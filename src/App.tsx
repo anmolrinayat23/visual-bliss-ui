@@ -60,7 +60,14 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/Auth" element={<Auth />} />
-          <Route path="/accountpage" element={<Accountpage />} />
+          <Route
+            path="/accountpage"
+            element={
+              <ProtectedRoute>
+                <Accountpage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/admin/nikhil45/login" element={<AdminAuth />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/team/:id" element={<TeamMemberDetail />} />

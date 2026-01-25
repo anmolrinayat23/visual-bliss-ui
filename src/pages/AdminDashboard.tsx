@@ -25,10 +25,12 @@ import {
   TrendingUp, Download, Search, Filter, Eye, CheckCircle,
   Clock, GraduationCap, Home, Loader2, MapPin, School,
   Award, CalendarDays, IndianRupee, CreditCard, Users,
-  XCircle, AlertCircle, ChevronLeft, ChevronRight, Video
+  XCircle, AlertCircle, ChevronLeft, ChevronRight, Video,
+  Edit, Trash2
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import jsPDF from 'jspdf';
 
 // Types
 interface UGApplication {
@@ -114,6 +116,10 @@ const AdminDashboard = () => {
   const [bookSessions, setBookSessions] = useState<Session[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedApplication, setSelectedApplication] = useState<UGApplication | PGApplication | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editFormData, setEditFormData] = useState<Partial<UGApplication | PGApplication>>({});
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [applicationToDelete, setApplicationToDelete] = useState<UGApplication | PGApplication | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState({
     admin: true,
@@ -123,9 +129,21 @@ const AdminDashboard = () => {
     sessions: true
   });
 
+  // Session State
+  const [sessionDeleteConfirmOpen, setSessionDeleteConfirmOpen] = useState(false);
+  const [sessionToDelete, setSessionToDelete] = useState<Session | null>(null);
+  const [sessionDialogOpen, setSessionDialogOpen] = useState(false);
+  const [selectedSession, setSelectedSession] = useState<Session | null>(null);
+  const [isEditingSession, setIsEditingSession] = useState(false);
+  const [editSessionFormData, setEditSessionFormData] = useState<Partial<Session>>({});
+
   // Pagination state
   const [ugCurrentPage, setUgCurrentPage] = useState(1);
   const [pgCurrentPage, setPgCurrentPage] = useState(1);
+  const [ugTotalPages, setUgTotalPages] = useState(1);
+  const [pgTotalPages, setPgTotalPages] = useState(1);
+  const [ugTotalItems, setUgTotalItems] = useState(0);
+  const [pgTotalItems, setPgTotalItems] = useState(0);
   const itemsPerPage = 10;
 
   const api = axios.create({
@@ -134,41 +152,25 @@ const AdminDashboard = () => {
   });
 
   const getAuthToken = () => {
-    return localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    return localStorage.getItem('authToken') || sessionStorage.getItem('authToken') || localStorage.getItem('adminToken');
   };
 
   // Pagination calculation functions
-  const getUgPaginatedData = () => {
-    const startIndex = (ugCurrentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return ugApplications.slice(startIndex, endIndex);
-  };
-
-  const getPgPaginatedData = () => {
-    const startIndex = (pgCurrentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return pgApplications.slice(startIndex, endIndex);
-  };
-
-  const getUgTotalPages = () => {
-    return Math.ceil(ugApplications.length / itemsPerPage);
-  };
-
-  const getPgTotalPages = () => {
-    return Math.ceil(pgApplications.length / itemsPerPage);
-  };
+  // Server-side pagination: fetch pages from backend
 
   // Pagination component
   const Pagination = ({ 
     currentPage, 
     totalPages, 
     onPageChange, 
-    type 
+    type,
+    totalItems
   }: { 
     currentPage: number; 
     totalPages: number; 
     onPageChange: (page: number) => void;
     type: 'ug' | 'pg';
+    totalItems: number;
   }) => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -184,19 +186,16 @@ const AdminDashboard = () => {
       pageNumbers.push(i);
     }
 
-    if (totalPages <= 1) return null;
+  if (totalPages <= 1) return null;
 
     return (
       <div className="flex items-center justify-between px-4 py-3 border-t border-orange-100 bg-white">
         <div className="text-sm text-gray-700">
           Showing <span className="font-semibold">
-            {((currentPage - 1) * itemsPerPage) + 1}-
-            {Math.min(currentPage * itemsPerPage, type === 'ug' ? ugApplications.length : pgApplications.length)}
+            {Math.min(((currentPage - 1) * itemsPerPage) + 1, totalItems)}-
+            {Math.min(currentPage * itemsPerPage, totalItems)}
           </span> of{" "}
-          <span className="font-semibold">
-            {type === 'ug' ? ugApplications.length : pgApplications.length}
-          </span>{" "}
-          applications
+          <span className="font-semibold">{totalItems}</span> applications
         </div>
         <div className="flex items-center gap-1">
           <Button
@@ -298,27 +297,38 @@ const AdminDashboard = () => {
     }
   };
 
-  const fetchUGApplications = async () => {
+  const fetchUGApplications = async (page?: number) => {
     try {
       setLoading(prev => ({ ...prev, ug: true }));
       const token = getAuthToken();
-
+      const usePage = page || ugCurrentPage || 1;
       const response = await api.get("/user/ug-applications/getug", {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        params: { page: usePage, limit: itemsPerPage, search: searchTerm }
       });
 
       let applications: UGApplication[] = [];
-      
+      let totalPages = 1;
+      let totalApplications = 0;
+
       if (Array.isArray(response.data)) {
         applications = response.data;
+        totalApplications = response.data.length;
+        totalPages = Math.ceil(totalApplications / itemsPerPage);
       } else if (Array.isArray(response.data.applications)) {
         applications = response.data.applications;
+        totalPages = response.data.totalPages || Math.ceil((response.data.totalApplications || applications.length) / itemsPerPage);
+        totalApplications = response.data.totalApplications || applications.length;
       } else if (response.data.data && Array.isArray(response.data.data)) {
         applications = response.data.data;
+        totalPages = response.data.totalPages || Math.ceil((response.data.totalApplications || applications.length) / itemsPerPage);
+        totalApplications = response.data.totalApplications || applications.length;
       }
 
       setUgApplications(applications);
-      setUgCurrentPage(1); // Reset to first page when data loads
+      setUgTotalPages(totalPages);
+      setUgTotalItems(totalApplications);
+      setUgCurrentPage(usePage);
     } catch (error) {
       console.error("Error fetching UG applications:", error);
       setUgApplications([]);
@@ -331,13 +341,13 @@ const AdminDashboard = () => {
     try {
       setLoading(prev => ({ ...prev, pg: true }));
       const token = getAuthToken();
-      
       const response = await api.get('/user/pg-applications/getpg', {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        params: { limit: 10000, search: searchTerm }
       });
 
       let applications: PGApplication[] = [];
-      
+
       if (Array.isArray(response.data)) {
         applications = response.data;
       } else if (Array.isArray(response.data.applications)) {
@@ -347,7 +357,9 @@ const AdminDashboard = () => {
       }
 
       setPgApplications(applications);
-      setPgCurrentPage(1); // Reset to first page when data loads
+      setPgTotalPages(1);
+      setPgTotalItems(applications.length);
+      setPgCurrentPage(1);
     } catch (error) {
       console.error('Error fetching PG applications:', error);
       setPgApplications([]); 
@@ -359,8 +371,21 @@ const AdminDashboard = () => {
   const fetchBookSessions = async () => {
     try {
       setLoading((prev) => ({ ...prev, sessions: true }));
-      const response = await api.get("/booking/allbooking");
-      setBookSessions(response.data || []);
+      const token = getAuthToken();
+      const response = await api.get("/booking/allbooking", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      let sessions: Session[] = [];
+      if (Array.isArray(response.data)) {
+        sessions = response.data;
+      } else if (Array.isArray(response.data.bookings)) {
+        sessions = response.data.bookings;
+      } else if (response.data.data && Array.isArray(response.data.data)) {
+        sessions = response.data.data;
+      }
+
+      setBookSessions(sessions);
     } catch (error) {
       console.error("Error fetching sessions:", error);
       setBookSessions([]);
@@ -369,9 +394,275 @@ const AdminDashboard = () => {
     }
   };
 
+
+  
+  const handleDownloadUGPDF = async () => {
+    try {
+      const token = getAuthToken();
+      const response = await api.get('/user/ug-applications/download-pdf', {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { search: searchTerm },
+        responseType: 'blob'
+      });
+
+      // Create blob link to download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `UG_Applications_${new Date().toISOString().split('T')[0]}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading UG PDF:', error);
+      // You could add a toast notification here
+    }
+  };
+
+
+
+  const handleDownloadPGPDF = async () => {
+    try {
+      const token = getAuthToken();
+      const response = await api.get('/user/pg-applications/download-pdf', {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { search: searchTerm },
+        responseType: 'blob'
+      });
+
+      // Create blob link to download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `PG_Applications_${new Date().toISOString().split('T')[0]}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading PG PDF:', error);
+      // You could add a toast notification here
+    }
+  };
+
+
+
+  const handleDownloadApplicationPDF = () => {
+    if (!selectedApplication) return;
+
+    const doc = new jsPDF();
+    
+    // Set up document
+    doc.setFontSize(20);
+    doc.text('Application Details', 20, 30);
+    
+    doc.setFontSize(12);
+    let yPosition = 50;
+    
+    // Personal Information
+    doc.setFontSize(14);
+    doc.text('Personal Information', 20, yPosition);
+    yPosition += 10;
+    
+    doc.setFontSize(12);
+    doc.text(`Full Name: ${selectedApplication.name}`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Email: ${selectedApplication.email}`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Mobile: ${selectedApplication.mobile}`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Location: ${selectedApplication.city}, ${selectedApplication.state}`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Class: ${selectedApplication.class}`, 20, yPosition);
+    yPosition += 20;
+    
+    // Academic Information
+    doc.setFontSize(14);
+    doc.text('Academic Information', 20, yPosition);
+    yPosition += 10;
+    
+    doc.setFontSize(12);
+    doc.text(`10th Grade: ${selectedApplication.grade10}%`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`12th Grade: ${selectedApplication.grade12}%`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Stream: ${selectedApplication.stream}`, 20, yPosition);
+    yPosition += 10;
+    
+    // PG specific fields
+    if ('graduationScore' in selectedApplication) {
+      doc.text(`Graduation Score: ${selectedApplication.graduationScore}%`, 20, yPosition);
+      yPosition += 10;
+      doc.text(`Graduation Stream: ${selectedApplication.graduationStream}`, 20, yPosition);
+      yPosition += 10;
+      doc.text(`Passing Year: ${selectedApplication.passingYear}`, 20, yPosition);
+      yPosition += 20;
+    } else {
+      yPosition += 10;
+    }
+    
+    // Exam Details
+    doc.setFontSize(14);
+    doc.text('EM-MAT Exam Details', 20, yPosition);
+    yPosition += 10;
+    
+    doc.setFontSize(12);
+    doc.text(`Selected Exam Date: ${selectedApplication.examDate}`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Application Date: ${formatDate(selectedApplication.applicationDate)}`, 20, yPosition);
+    yPosition += 20;
+    
+    // Payment Information
+    doc.setFontSize(14);
+    doc.text('Payment Information', 20, yPosition);
+    yPosition += 10;
+    
+    doc.setFontSize(12);
+    doc.text(`Payment Status: ${selectedApplication.paymentStatus}`, 20, yPosition);
+    yPosition += 10;
+    doc.text(`Amount: ₹500`, 20, yPosition);
+    yPosition += 10;
+    
+    if (selectedApplication.paymentId) {
+      doc.text(`Payment ID: ${selectedApplication.paymentId}`, 20, yPosition);
+      yPosition += 10;
+    }
+    
+    if (selectedApplication.orderId) {
+      doc.text(`Order ID: ${selectedApplication.orderId}`, 20, yPosition);
+      yPosition += 10;
+    }
+    
+    // Save the PDF
+    const fileName = `${selectedApplication.name.replace(/\s+/g, '_')}_Application_Details.pdf`;
+    doc.save(fileName);
+  };
+
   const handleViewDetails = (app: UGApplication | PGApplication) => {
     setSelectedApplication(app);
+    setIsEditing(false);
+    setEditFormData({});
     setDialogOpen(true);
+  };
+
+  const handleEditApplication = (app: UGApplication | PGApplication) => {
+    setSelectedApplication(app);
+    setEditFormData({ ...app });
+    setIsEditing(true);
+    setDialogOpen(true);
+  };
+
+  const handleDeleteApplication = (app: UGApplication | PGApplication) => {
+    setApplicationToDelete(app);
+    setDeleteConfirmOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!applicationToDelete) return;
+
+    try {
+      const isUG = !('graduationScore' in applicationToDelete);
+      const endpoint = isUG ? `/user/ug-applications/${applicationToDelete._id}` : `/user/pg-applications/${applicationToDelete._id}`;
+
+      await api.delete(endpoint);
+
+      // Refresh the data
+      if (isUG) {
+        fetchUGApplications(ugCurrentPage);
+      } else {
+        fetchPGApplications();
+      }
+
+      setDeleteConfirmOpen(false);
+      setApplicationToDelete(null);
+    } catch (error) {
+      console.error('Error deleting application:', error);
+      alert('Failed to delete application');
+    }
+  };
+
+  const handleSaveEdit = async () => {
+    if (!selectedApplication || !editFormData) return;
+
+    try {
+      const isUG = !('graduationScore' in selectedApplication);
+      const endpoint = isUG ? `/user/ug-applications/${selectedApplication._id}` : `/user/pg-applications/${selectedApplication._id}`;
+
+      await api.put(endpoint, editFormData);
+
+      // Refresh the data
+      if (isUG) {
+        fetchUGApplications(ugCurrentPage);
+      } else {
+        fetchPGApplications();
+      }
+
+      setDialogOpen(false);
+      setIsEditing(false);
+      setEditFormData({});
+    } catch (error) {
+      console.error('Error updating application:', error);
+      alert('Failed to update application');
+    }
+  };
+
+
+  
+  const handleViewSession = (session: Session) => {
+    setSelectedSession(session);
+    setIsEditingSession(false);
+    setEditSessionFormData({});
+    setSessionDialogOpen(true);
+  };
+
+  const handleEditSession = (session: Session) => {
+    setSelectedSession(session);
+    setEditSessionFormData({ ...session });
+    setIsEditingSession(true);
+    setSessionDialogOpen(true);
+  };
+
+  const handleDeleteSession = (session: Session) => {
+    setSessionToDelete(session);
+    setSessionDeleteConfirmOpen(true);
+  };
+
+  const confirmDeleteSession = async () => {
+    if (!sessionToDelete) return;
+
+    try {
+      await api.delete(`/booking/${sessionToDelete._id}`);
+      fetchBookSessions();
+      setSessionDeleteConfirmOpen(false);
+      setSessionToDelete(null);
+    } catch (error) {
+      console.error('Error deleting session:', error);
+      alert('Failed to delete session');
+    }
+  };
+
+  const handleSaveSessionEdit = async () => {
+    if (!selectedSession || !editSessionFormData) return;
+
+    try {
+      const updatePayload = {
+        name: editSessionFormData.name,
+        email: editSessionFormData.email,
+        mobile: editSessionFormData.mobile,
+        studentClass: editSessionFormData.studentClass,
+        interest: editSessionFormData.interest
+      };
+
+      await api.put(`/booking/${selectedSession._id}`, updatePayload);
+      fetchBookSessions();
+      setSessionDialogOpen(false);
+      setIsEditingSession(false);
+      setEditSessionFormData({});
+    } catch (error) {
+      console.error('Error updating session:', error);
+      alert('Failed to update session');
+    }
   };
 
   const PaymentStatusBadge = ({ status }: { status: string }) => {
@@ -417,12 +708,16 @@ const AdminDashboard = () => {
   };
 
   const calculateStats = () => {
-    const totalForms = ugApplications.length + pgApplications.length;
+    const ugApps = Array.isArray(ugApplications) ? ugApplications : [];
+    const pgApps = Array.isArray(pgApplications) ? pgApplications : [];
+    const bookSess = Array.isArray(bookSessions) ? bookSessions : [];
+
+    const totalForms = ugApps.length + pgApps.length;
     const paidForms = [
-      ...ugApplications.filter(app => app.paymentStatus === 'success' || app.paymentStatus === 'paid'),
-      ...pgApplications.filter(app => app.paymentStatus === 'success' || app.paymentStatus === 'paid')
+      ...ugApps.filter(app => app.paymentStatus === 'success' || app.paymentStatus === 'paid'),
+      ...pgApps.filter(app => app.paymentStatus === 'success' || app.paymentStatus === 'paid')
     ].length;
-    const sessionCount = bookSessions.length;
+    const sessionCount = bookSess.length;
 
     const newStats: Stat[] = [
       { 
@@ -434,14 +729,14 @@ const AdminDashboard = () => {
       },
       { 
         label: "UG Applications", 
-        value: ugApplications.length.toString(), 
+        value: ugApps.length.toString(), 
         icon: GraduationCap, 
         color: "from-blue-500 to-blue-600", 
         change: "+8 this week" 
       },
       { 
         label: "PG Applications", 
-        value: pgApplications.length.toString(), 
+        value: pgApps.length.toString(), 
         icon: Users, 
         color: "from-purple-500 to-purple-600", 
         change: "+4 this week" 
@@ -600,22 +895,47 @@ const AdminDashboard = () => {
 
             <CardContent className="p-0">
               <Tabs defaultValue="ug" className="w-full">
-                <TabsList className="w-full sm:w-auto bg-orange-50 p-1 mx-4 mt-4">
-                  <TabsTrigger 
-                    value="ug" 
-                    className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-4 sm:px-6"
-                  >
-                    <GraduationCap className="w-4 h-4 mr-2" />
-                    UG ({ugApplications.length})
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="pg" 
-                    className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-4 sm:px-6"
-                  >
-                    <Users className="w-4 h-4 mr-2" />
-                    PG ({pgApplications.length})
-                  </TabsTrigger>
-                </TabsList>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 pt-4">
+                  <TabsList className="w-full sm:w-auto bg-orange-50 p-1">
+                    <TabsTrigger 
+                      value="ug" 
+                      className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-4 sm:px-6"
+                    >
+                      <GraduationCap className="w-4 h-4 mr-2" />
+                      UG ({ugApplications.length})
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="pg" 
+                      className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-4 sm:px-6"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      PG ({pgApplications.length})
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={handleDownloadUGPDF}
+                      className="border-orange-200 hover:bg-orange-50"
+                      disabled={loading.ug || ugApplications.length === 0}
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Download UG PDF
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={handleDownloadPGPDF}
+                      className="border-purple-200 hover:bg-purple-50"
+                      disabled={loading.pg || pgApplications.length === 0}
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Download PG PDF
+                    </Button>
+                  </div>
+                </div>
 
                 {/* UG Applications Table */}
                 <TabsContent value="ug" className="m-0">
@@ -643,8 +963,8 @@ const AdminDashboard = () => {
                                 </div>
                               </TableCell>
                             </TableRow>
-                          ) : getUgPaginatedData().length > 0 ? (
-                            getUgPaginatedData().map((app, index) => (
+                          ) : ugApplications.length > 0 ? (
+                            ugApplications.map((app, index) => (
                               <TableRow 
                                 key={app._id} 
                                 className="hover:bg-orange-50/50 transition-colors border-b border-orange-100"
@@ -708,14 +1028,33 @@ const AdminDashboard = () => {
                                 </TableCell>
                                 
                                 <TableCell className="px-4 py-3">
-                                  <div className="flex justify-center">
+                                  <div className="flex justify-center gap-2">
                                     <Button 
                                       variant="ghost" 
                                       size="sm"
                                       onClick={() => handleViewDetails(app)}
-                                      className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 h-8 w-8 p-0"
+                                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-100 h-8 w-8 p-0"
+                                      title="View Details"
                                     >
                                       <Eye className="w-4 h-4" />
+                                    </Button>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm"
+                                      onClick={() => handleEditApplication(app)}
+                                      className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 h-8 w-8 p-0"
+                                      title="Edit Application"
+                                    >
+                                      <Edit className="w-4 h-4" />
+                                    </Button>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm"
+                                      onClick={() => handleDeleteApplication(app)}
+                                      className="text-red-600 hover:text-red-700 hover:bg-red-100 h-8 w-8 p-0"
+                                      title="Delete Application"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
                                     </Button>
                                   </div>
                                 </TableCell>
@@ -736,11 +1075,12 @@ const AdminDashboard = () => {
                     </div>
                     
                     {/* UG Pagination */}
-                    {!loading.ug && ugApplications.length > 0 && (
+                    {!loading.ug && ugTotalPages > 1 && (
                       <Pagination
                         currentPage={ugCurrentPage}
-                        totalPages={getUgTotalPages()}
-                        onPageChange={setUgCurrentPage}
+                        totalPages={ugTotalPages}
+                        totalItems={ugTotalItems}
+                        onPageChange={(p) => fetchUGApplications(p)}
                         type="ug"
                       />
                     )}
@@ -773,8 +1113,8 @@ const AdminDashboard = () => {
                                 </div>
                               </TableCell>
                             </TableRow>
-                          ) : getPgPaginatedData().length > 0 ? (
-                            getPgPaginatedData().map((app, index) => (
+                          ) : pgApplications.length > 0 ? (
+                            pgApplications.map((app, index) => (
                               <TableRow 
                                 key={app._id} 
                                 className="hover:bg-orange-50/50 transition-colors border-b border-orange-100"
@@ -838,14 +1178,33 @@ const AdminDashboard = () => {
                                 </TableCell>
                                 
                                 <TableCell className="px-4 py-3">
-                                  <div className="flex justify-center">
+                                  <div className="flex justify-center gap-2">
                                     <Button 
                                       variant="ghost" 
                                       size="sm"
                                       onClick={() => handleViewDetails(app)}
-                                      className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 h-8 w-8 p-0"
+                                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-100 h-8 w-8 p-0"
+                                      title="View Details"
                                     >
                                       <Eye className="w-4 h-4" />
+                                    </Button>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm"
+                                      onClick={() => handleEditApplication(app)}
+                                      className="text-purple-600 hover:text-purple-700 hover:bg-purple-100 h-8 w-8 p-0"
+                                      title="Edit Application"
+                                    >
+                                      <Edit className="w-4 h-4" />
+                                    </Button>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm"
+                                      onClick={() => handleDeleteApplication(app)}
+                                      className="text-red-600 hover:text-red-700 hover:bg-red-100 h-8 w-8 p-0"
+                                      title="Delete Application"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
                                     </Button>
                                   </div>
                                 </TableCell>
@@ -865,15 +1224,6 @@ const AdminDashboard = () => {
                       </Table>
                     </div>
                     
-                    {/* PG Pagination */}
-                    {!loading.pg && pgApplications.length > 0 && (
-                      <Pagination
-                        currentPage={pgCurrentPage}
-                        totalPages={getPgTotalPages()}
-                        onPageChange={setPgCurrentPage}
-                        type="pg"
-                      />
-                    )}
                   </div>
                 </TabsContent>
               </Tabs>
@@ -961,9 +1311,21 @@ const AdminDashboard = () => {
                               </div>
                             </TableCell>
                             <TableCell className="px-4 py-3">
-                              <div className="flex justify-center">
-                                <Button variant="ghost" size="sm" className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 h-8 w-8 p-0">
+                              <div className="flex justify-center gap-2">
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  onClick={() => handleViewSession(session)}
+                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-100 h-8 w-8 p-0"
+                                  title="View Details"
+                                >
                                   <Eye className="w-4 h-4" />
+                                </Button>
+                                <Button variant="ghost" size="sm" onClick={() => handleEditSession(session)} className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 h-8 w-8 p-0" title="Edit Session">
+                                  <Edit className="w-4 h-4" />
+                                </Button>
+                                <Button variant="ghost" size="sm" onClick={() => handleDeleteSession(session)} className="text-red-600 hover:text-red-700 hover:bg-red-100 h-8 w-8 p-0" title="Delete Session">
+                                  <Trash2 className="w-4 h-4" />
                                 </Button>
                               </div>
                             </TableCell>
@@ -994,9 +1356,14 @@ const AdminDashboard = () => {
           {selectedApplication && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-2xl">Application Details</DialogTitle>
+                <DialogTitle className="text-2xl">
+                  {isEditing ? 'Edit Application' : 'Application Details'}
+                </DialogTitle>
                 <DialogDescription>
-                  Complete application information for {selectedApplication.name}
+                  {isEditing 
+                    ? `Editing application for ${selectedApplication.name}`
+                    : `Complete application information for ${selectedApplication.name}`
+                  }
                 </DialogDescription>
               </DialogHeader>
 
@@ -1013,39 +1380,92 @@ const AdminDashboard = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <div className="text-sm font-medium text-gray-600">Full Name</div>
-                        <div className="text-lg font-semibold">{selectedApplication.name}</div>
+                        {isEditing ? (
+                          <Input
+                            value={editFormData.name || ''}
+                            onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
+                            className="mt-1"
+                          />
+                        ) : (
+                          <div className="text-lg font-semibold">{selectedApplication.name}</div>
+                        )}
                       </div>
                       <div>
                         <div className="text-sm font-medium text-gray-600">Class</div>
-                        <div className="text-lg font-semibold text-orange-700">{selectedApplication.class}</div>
+                        {isEditing ? (
+                          <Input
+                            value={editFormData.class || ''}
+                            onChange={(e) => setEditFormData({ ...editFormData, class: e.target.value })}
+                            className="mt-1"
+                          />
+                        ) : (
+                          <div className="text-lg font-semibold text-orange-700">{selectedApplication.class}</div>
+                        )}
                       </div>
                     </div>
                     
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
                         <Mail className="w-4 h-4 text-gray-500" />
-                        <div>
+                        <div className="flex-1">
                           <div className="text-sm font-medium text-gray-600">Email</div>
-                          <div className="text-gray-800">{selectedApplication.email}</div>
+                          {isEditing ? (
+                            <Input
+                              type="email"
+                              value={editFormData.email || ''}
+                              onChange={(e) => setEditFormData({ ...editFormData, email: e.target.value })}
+                              className="mt-1"
+                            />
+                          ) : (
+                            <div className="text-gray-800">{selectedApplication.email}</div>
+                          )}
                         </div>
                       </div>
                       
                       <div className="flex items-center gap-2">
                         <Phone className="w-4 h-4 text-gray-500" />
-                        <div>
+                        <div className="flex-1">
                           <div className="text-sm font-medium text-gray-600">Mobile</div>
-                          <div className="text-gray-800">{selectedApplication.mobile}</div>
+                          {isEditing ? (
+                            <Input
+                              value={editFormData.mobile || ''}
+                              onChange={(e) => setEditFormData({ ...editFormData, mobile: e.target.value })}
+                              className="mt-1"
+                            />
+                          ) : (
+                            <div className="text-gray-800">{selectedApplication.mobile}</div>
+                          )}
                         </div>
                       </div>
                     </div>
                     
                     <div className="pt-4 border-t border-orange-100">
                       <div className="text-sm font-medium text-gray-600">Location</div>
-                      <div className="flex items-center gap-2 mt-2">
-                        <MapPin className="w-5 h-5 text-orange-600" />
-                        <span className="text-lg font-semibold text-gray-900">
-                          {selectedApplication.city}, {selectedApplication.state}
-                        </span>
+                      <div className="grid grid-cols-2 gap-4 mt-2">
+                        <div>
+                          <div className="text-xs text-gray-500">City</div>
+                          {isEditing ? (
+                            <Input
+                              value={editFormData.city || ''}
+                              onChange={(e) => setEditFormData({ ...editFormData, city: e.target.value })}
+                              className="mt-1"
+                            />
+                          ) : (
+                            <span className="text-lg font-semibold text-gray-900">{selectedApplication.city}</span>
+                          )}
+                        </div>
+                        <div>
+                          <div className="text-xs text-gray-500">State</div>
+                          {isEditing ? (
+                            <Input
+                              value={editFormData.state || ''}
+                              onChange={(e) => setEditFormData({ ...editFormData, state: e.target.value })}
+                              className="mt-1"
+                            />
+                          ) : (
+                            <span className="text-lg font-semibold text-gray-900">{selectedApplication.state}</span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -1063,17 +1483,43 @@ const AdminDashboard = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-blue-50 p-3 rounded-lg">
                         <div className="text-sm font-medium text-gray-600">10th Grade</div>
-                        <div className="text-2xl font-bold text-blue-700">{selectedApplication.grade10}%</div>
+                        {isEditing ? (
+                          <Input
+                            value={editFormData.grade10 || ''}
+                            onChange={(e) => setEditFormData({ ...editFormData, grade10: e.target.value })}
+                            className="mt-1"
+                            placeholder="%"
+                          />
+                        ) : (
+                          <div className="text-2xl font-bold text-blue-700">{selectedApplication.grade10}%</div>
+                        )}
                       </div>
                       <div className="bg-blue-50 p-3 rounded-lg">
                         <div className="text-sm font-medium text-gray-600">12th Grade</div>
-                        <div className="text-2xl font-bold text-blue-700">{selectedApplication.grade12}%</div>
+                        {isEditing ? (
+                          <Input
+                            value={editFormData.grade12 || ''}
+                            onChange={(e) => setEditFormData({ ...editFormData, grade12: e.target.value })}
+                            className="mt-1"
+                            placeholder="%"
+                          />
+                        ) : (
+                          <div className="text-2xl font-bold text-blue-700">{selectedApplication.grade12}%</div>
+                        )}
                       </div>
                     </div>
                     
                     <div>
                       <div className="text-sm font-medium text-gray-600">Stream</div>
-                      <div className="text-lg font-semibold text-gray-900">{selectedApplication.stream}</div>
+                      {isEditing ? (
+                        <Input
+                          value={editFormData.stream || ''}
+                          onChange={(e) => setEditFormData({ ...editFormData, stream: e.target.value })}
+                          className="mt-1"
+                        />
+                      ) : (
+                        <div className="text-lg font-semibold text-gray-900">{selectedApplication.stream}</div>
+                      )}
                     </div>
                     
                     {'graduationScore' in selectedApplication && (
@@ -1083,22 +1529,47 @@ const AdminDashboard = () => {
                           <div className="grid grid-cols-2 gap-4 mt-2">
                             <div className="bg-purple-50 p-3 rounded-lg">
                               <div className="text-sm font-medium text-gray-600">Score</div>
-                              <div className="text-2xl font-bold text-purple-700">
-                                {selectedApplication.graduationScore}%
-                              </div>
+                              {isEditing ? (
+                                <Input
+                                  value={editFormData.graduationScore || ''}
+                                  onChange={(e) => setEditFormData({ ...editFormData, graduationScore: e.target.value })}
+                                  className="mt-1"
+                                  placeholder="%"
+                                />
+                              ) : (
+                                <div className="text-2xl font-bold text-purple-700">
+                                  {selectedApplication.graduationScore}%
+                                </div>
+                              )}
                             </div>
                             <div className="bg-purple-50 p-3 rounded-lg">
                               <div className="text-sm font-medium text-gray-600">Passing Year</div>
-                              <div className="text-2xl font-bold text-purple-700">
-                                {selectedApplication.passingYear}
-                              </div>
+                              {isEditing ? (
+                                <Input
+                                  value={editFormData.passingYear || ''}
+                                  onChange={(e) => setEditFormData({ ...editFormData, passingYear: e.target.value })}
+                                  className="mt-1"
+                                />
+                              ) : (
+                                <div className="text-2xl font-bold text-purple-700">
+                                  {selectedApplication.passingYear}
+                                </div>
+                              )}
                             </div>
                           </div>
                           <div className="mt-3">
                             <div className="text-sm font-medium text-gray-600">Graduation Stream</div>
-                            <div className="text-lg font-semibold text-gray-900">
-                              {selectedApplication.graduationStream}
-                            </div>
+                            {isEditing ? (
+                              <Input
+                                value={editFormData.graduationStream || ''}
+                                onChange={(e) => setEditFormData({ ...editFormData, graduationStream: e.target.value })}
+                                className="mt-1"
+                              />
+                            ) : (
+                              <div className="text-lg font-semibold text-gray-900">
+                                {selectedApplication.graduationStream}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </>
@@ -1117,13 +1588,22 @@ const AdminDashboard = () => {
                   <CardContent className="pt-6 space-y-4">
                     <div className="bg-purple-50 p-4 rounded-lg">
                       <div className="flex items-center justify-between">
-                        <div>
+                        <div className="flex-1">
                           <div className="text-sm font-medium text-gray-600">Selected Exam Date</div>
                           <div className="flex items-center gap-2 mt-1">
                             <CalendarDays className="w-5 h-5 text-purple-600" />
-                            <span className="text-xl font-bold text-gray-900">
-                              {selectedApplication.examDate}
-                            </span>
+                            {isEditing ? (
+                              <Input
+                                type="date"
+                                value={editFormData.examDate || ''}
+                                onChange={(e) => setEditFormData({ ...editFormData, examDate: e.target.value })}
+                                className="flex-1"
+                              />
+                            ) : (
+                              <span className="text-xl font-bold text-gray-900">
+                                {selectedApplication.examDate}
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -1151,7 +1631,19 @@ const AdminDashboard = () => {
                       <div>
                         <div className="text-sm font-medium text-gray-600">Payment Status</div>
                         <div className="mt-2">
-                          <PaymentStatusBadge status={selectedApplication.paymentStatus} />
+                          {isEditing ? (
+                            <select
+                              value={editFormData.paymentStatus || ''}
+                              onChange={(e) => setEditFormData({ ...editFormData, paymentStatus: e.target.value })}
+                              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                            >
+                              <option value="pending">Pending</option>
+                              <option value="completed">Completed</option>
+                              <option value="failed">Failed</option>
+                            </select>
+                          ) : (
+                            <PaymentStatusBadge status={selectedApplication.paymentStatus} />
+                          )}
                         </div>
                       </div>
                       <div className="text-right">
@@ -1184,20 +1676,246 @@ const AdminDashboard = () => {
               </div>
 
               <div className="flex justify-end gap-4 pt-6 border-t">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setDialogOpen(false)}
-                  className="border-orange-300 hover:bg-orange-50"
-                >
-                  Close
-                </Button>
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download PDF
-                </Button>
+                {isEditing ? (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setIsEditing(false);
+                        setEditFormData({});
+                      }}
+                      className="border-gray-300 hover:bg-gray-50"
+                    >
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={handleSaveEdit}
+                      className="bg-orange-500 hover:bg-orange-600 text-white"
+                    >
+                      Save Changes
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setDialogOpen(false)}
+                      className="border-orange-300 hover:bg-orange-50"
+                    >
+                      Close
+                    </Button>
+                    <Button 
+                      className="bg-orange-500 hover:bg-orange-600 text-white"
+                      onClick={handleDownloadApplicationPDF}
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Download PDF
+                    </Button>
+                  </>
+                )}
               </div>
             </>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
+        <DialogContent className="w-[95vw] max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-red-600">Confirm Deletion</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete the application for <strong>{applicationToDelete?.name}</strong>? 
+              This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex justify-end gap-4 pt-4">
+            <Button 
+              variant="outline" 
+              onClick={() => setDeleteConfirmOpen(false)}
+              className="border-gray-300 hover:bg-gray-50"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={confirmDelete}
+              className="bg-red-500 hover:bg-red-600 text-white"
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              Delete Application
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Session Details/Edit Dialog */}
+      <Dialog open={sessionDialogOpen} onOpenChange={setSessionDialogOpen}>
+        <DialogContent className="w-[95vw] max-w-2xl">
+          {selectedSession && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl">
+                  {isEditingSession ? 'Edit Session' : 'Session Details'}
+                </DialogTitle>
+                <DialogDescription>
+                  {isEditingSession 
+                    ? `Editing session for ${selectedSession.name}`
+                    : `Session details for ${selectedSession.name}`
+                  }
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid grid-cols-1 gap-6">
+                <Card className="border-orange-200">
+                  <CardContent className="pt-6 space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <div className="text-sm font-medium text-gray-600">Full Name</div>
+                        {isEditingSession ? (
+                          <Input
+                            value={editSessionFormData.name || ''}
+                            onChange={(e) => setEditSessionFormData({ ...editSessionFormData, name: e.target.value })}
+                            className="mt-1"
+                          />
+                        ) : (
+                          <div className="text-lg font-semibold">{selectedSession.name}</div>
+                        )}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-600">Class</div>
+                        {isEditingSession ? (
+                          <Input
+                            value={editSessionFormData.studentClass || ''}
+                            onChange={(e) => setEditSessionFormData({ ...editSessionFormData, studentClass: e.target.value })}
+                            className="mt-1"
+                          />
+                        ) : (
+                          <div className="text-lg font-semibold text-orange-700">{selectedSession.studentClass}</div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-gray-500" />
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-gray-600">Email</div>
+                          {isEditingSession ? (
+                            <Input
+                              type="email"
+                              value={editSessionFormData.email || ''}
+                              onChange={(e) => setEditSessionFormData({ ...editSessionFormData, email: e.target.value })}
+                              className="mt-1"
+                            />
+                          ) : (
+                            <div className="text-gray-800">{selectedSession.email}</div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-4 h-4 text-gray-500" />
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-gray-600">Mobile</div>
+                          {isEditingSession ? (
+                            <Input
+                              value={editSessionFormData.mobile || ''}
+                              onChange={(e) => setEditSessionFormData({ ...editSessionFormData, mobile: e.target.value })}
+                              className="mt-1"
+                            />
+                          ) : (
+                            <div className="text-gray-800">{selectedSession.mobile}</div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="text-sm font-medium text-gray-600">Interest</div>
+                        {isEditingSession ? (
+                          <Input
+                            value={editSessionFormData.interest || ''}
+                            onChange={(e) => setEditSessionFormData({ ...editSessionFormData, interest: e.target.value })}
+                            className="mt-1"
+                          />
+                        ) : (
+                          <Badge variant="outline" className="mt-1 border-green-300 text-green-700">
+                            {selectedSession.interest}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div>
+                         <div className="text-sm font-medium text-gray-600">Requested On</div>
+                         <div className="text-gray-800">{formatDate(selectedSession.createdAt)}</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="flex justify-end gap-4 pt-6 border-t">
+                {isEditingSession ? (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setIsEditingSession(false);
+                        setEditSessionFormData({});
+                      }}
+                      className="border-gray-300 hover:bg-gray-50"
+                    >
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={handleSaveSessionEdit}
+                      className="bg-orange-500 hover:bg-orange-600 text-white"
+                    >
+                      Save Changes
+                    </Button>
+                  </>
+                ) : (
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setSessionDialogOpen(false)}
+                    className="border-orange-300 hover:bg-orange-50"
+                  >
+                    Close
+                  </Button>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Session Delete Confirmation Dialog */}
+      <Dialog open={sessionDeleteConfirmOpen} onOpenChange={setSessionDeleteConfirmOpen}>
+        <DialogContent className="w-[95vw] max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-red-600">Confirm Deletion</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete the session request for <strong>{sessionToDelete?.name}</strong>? 
+              This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex justify-end gap-4 pt-4">
+            <Button 
+              variant="outline" 
+              onClick={() => setSessionDeleteConfirmOpen(false)}
+              className="border-gray-300 hover:bg-gray-50"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={confirmDeleteSession}
+              className="bg-red-500 hover:bg-red-600 text-white"
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              Delete Session
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
