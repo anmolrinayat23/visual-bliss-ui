@@ -145,7 +145,7 @@ const AnnouncementPopup = () => {
 
             {/* Content */}
             <div className="relative p-5 md:p-6">
-              {/* Header badge */}
+              {/* Header badge - Highlighted */}
               <motion.div
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -158,9 +158,24 @@ const AnnouncementPopup = () => {
                 >
                   <Flame className="w-5 h-5 text-orange-400" />
                 </motion.div>
-                <span className="text-xs font-bold text-transparent bg-gradient-to-r from-orange-400 via-primary to-amber-400 bg-clip-text uppercase tracking-widest">
-                  EM-MAT Round 1 PG
-                </span>
+                
+                {/* Highlighted Badge */}
+                <motion.div
+                  animate={{ 
+                    boxShadow: [
+                      "0 0 10px rgba(249, 115, 22, 0.5)",
+                      "0 0 20px rgba(249, 115, 22, 0.8)",
+                      "0 0 10px rgba(249, 115, 22, 0.5)"
+                    ]
+                  }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="relative px-4 py-1.5 bg-gradient-to-r from-primary/20 via-orange-500/30 to-amber-500/20 rounded-full border border-primary/60"
+                >
+                  <span className="text-sm md:text-base font-extrabold text-white uppercase tracking-widest drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]">
+                    EM-MAT Round 1 PG
+                  </span>
+                </motion.div>
+                
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
