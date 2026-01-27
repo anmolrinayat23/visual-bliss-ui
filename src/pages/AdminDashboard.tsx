@@ -117,7 +117,7 @@ const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedApplication, setSelectedApplication] = useState<UGApplication | PGApplication | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editFormData, setEditFormData] = useState<Partial<UGApplication | PGApplication>>({});
+  const [editFormData, setEditFormData] = useState<Partial<UGApplication & PGApplication>>({});
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [applicationToDelete, setApplicationToDelete] = useState<UGApplication | PGApplication | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
