@@ -278,56 +278,9 @@ const Courses = ({ showFooter = true }) => {
           <div className="container mx-auto max-w-7xl">
             {/* Header Section */}
             <div className="text-center mb-12">
-              <div className="flex justify-between items-center mb-6">
-                <h1 className="text-4xl mt-8 md:text-5xl font-bold text-gray-900">
-                  Courses Offered
-                </h1>
-                
-                {/* Settings Button */}
-                {/* <div className="relative">
-                  <Button
-                    onClick={sequenceMode ? exitSequenceMode : startSequenceMode}
-                    className={`${
-                      sequenceMode 
-                        ? "bg-red-500 hover:bg-red-600" 
-                        : "bg-gray-600 hover:bg-gray-700"
-                    } text-white font-medium transition-all duration-300`}
-                  >
-                    {sequenceMode ? "Exit Sequence" : "Sequence Mode"}
-                  </Button>
-                  
-                  {sequenceMode && (
-                    <div className="absolute top-full right-0 mt-2 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-10 min-w-48">
-                      <p className="text-sm text-gray-600 mb-2">
-                        Click on course titles to add them to sequence
-                      </p>
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          onClick={prevCourse}
-                          disabled={currentSequenceIndex === 0}
-                          className="flex-1 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300"
-                        >
-                          Previous
-                        </Button>
-                        <Button
-                          size="sm"
-                          onClick={nextCourse}
-                          disabled={currentSequenceIndex === sequenceCourses.length - 1}
-                          className="flex-1 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300"
-                        >
-                          Next
-                        </Button>
-                      </div>
-                      {sequenceCourses.length > 0 && (
-                        <p className="text-xs text-gray-500 mt-2 text-center">
-                          {currentSequenceIndex + 1} of {sequenceCourses.length}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div> */}
-              </div>
+              <h1 className="text-4xl mt-8 md:text-5xl font-bold text-gray-900 text-center">
+                Courses Offered
+              </h1>
 
               <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
                 Discover your path to success with our comprehensive range of undergraduate and postgraduate programs.
