@@ -219,7 +219,8 @@ const BookSession = ({ showFooter = true }) => {
                   <Button
                     size="lg"
                     type="submit"
-                    className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-md rounded-xl transform hover:scale-105"
+                    disabled={!name || !mobile || !email || !studentClass || !interest}
+                    className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-md rounded-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
                   >
                     Book Free Session
                   </Button>

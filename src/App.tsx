@@ -22,6 +22,7 @@ import Account from "./pages/Account";
 import AdminDashboard from "./pages/AdminDashboard";
 import Accountpage from './pages/Accountpage';
 import AdminAuth from "./components/AdminAuth";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,7 @@ const App = () => (
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
