@@ -154,12 +154,9 @@ const Footer = () => {
               © {currentYear} Educate Me. All rights reserved.
             </p>
             <div className="flex gap-6">
-              {/* <Link to="/privacy" className="text-sm text-gray-400 hover:text-primary transition-colors">
+              <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-primary transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-sm text-gray-400 hover:text-primary transition-colors">
-                Terms of Service
-              </Link> */}
             </div>
           </div>
         </div>
