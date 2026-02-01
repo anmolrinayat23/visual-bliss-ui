@@ -163,7 +163,7 @@ const AnnouncementPopup = () => {
                 >
                   <Trophy className="w-6 h-6 text-amber-400" />
                   <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-primary via-orange-400 to-amber-400 bg-clip-text text-transparent">
-                    EM-MAT PG
+                    EM-MAT PG ROUND 2
                   </h3>
                   <Trophy className="w-6 h-6 text-amber-400" />
                 </motion.div>
@@ -236,7 +236,7 @@ const AnnouncementPopup = () => {
                     />
                     <span className="relative flex items-center justify-center gap-2">
                       <Sparkles className="w-4 h-4" />
-                      Register Now for EM-MAT
+                      Register Now for EM-MAT Round 2
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Button>
