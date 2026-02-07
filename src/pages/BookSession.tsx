@@ -20,12 +20,30 @@ const BookSession = ({ showFooter = true }) => {
   const [email, setEmail] = useState("");
   const [studentClass, setStudentClass] = useState("");
   const [interest, setInterest] = useState("");
+  const [touched, setTouched] = useState({ mobile: false, email: false });
+
+  // ----------------------------
+  // VALIDATION HELPERS
+  // ----------------------------
+  const isValidMobile = (value: string) => /^[0-9]{10}$/.test(value);
+  const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+  const mobileError = touched.mobile && mobile && !isValidMobile(mobile) 
+    ? "Please enter a valid 10-digit mobile number" 
+    : "";
+  const emailError = touched.email && email && !isValidEmail(email) 
+    ? "Please enter a valid email address" 
+    : "";
+
+  const isFormValid = name && isValidMobile(mobile) && isValidEmail(email) && studentClass && interest;
 
   // ----------------------------
   // SUBMIT HANDLER
   // ----------------------------
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isFormValid) return;
 
     const data = {
       name,
@@ -57,6 +75,7 @@ const BookSession = ({ showFooter = true }) => {
       setEmail("");
       setStudentClass("");
       setInterest("");
+      setTouched({ mobile: false, email: false });
 
     } catch (error) {
       console.log("Error:", error);
@@ -151,24 +170,28 @@ const BookSession = ({ showFooter = true }) => {
                     <div className="relative">
                       <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                       <Input
-                        placeholder="Enter your number"
+                        placeholder="Enter your 10-digit number"
                         value={mobile}
-                        onChange={(e) => setMobile(e.target.value)}
-                        className="pl-10 h-12 rounded-xl"
+                        onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                        onBlur={() => setTouched(prev => ({ ...prev, mobile: true }))}
+                        className={`pl-10 h-12 rounded-xl ${mobileError ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                       />
                     </div>
+                    {mobileError && <p className="text-sm text-red-500">{mobileError}</p>}
                   </div>
 
                   {/* Email */}
                   <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-gray-700">Email Address</Label>
+                    <Label className="text-sm font-semibold text-gray-700">Email Address *</Label>
                     <Input
                       type="email"
                       placeholder="you@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="h-12 rounded-xl"
+                      onBlur={() => setTouched(prev => ({ ...prev, email: true }))}
+                      className={`h-12 rounded-xl ${emailError ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                     />
+                    {emailError && <p className="text-sm text-red-500">{emailError}</p>}
                   </div>
 
                   {/* Class */}
@@ -219,7 +242,7 @@ const BookSession = ({ showFooter = true }) => {
                   <Button
                     size="lg"
                     type="submit"
-                    disabled={!name || !mobile || !email || !studentClass || !interest}
+                    disabled={!isFormValid}
                     className="w-full h-14 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-md rounded-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
                   >
                     Book Free Session
