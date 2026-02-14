@@ -86,8 +86,8 @@ const AccountPage = () => {
   const createApi = () => {
     const token = localStorage.getItem("token");
     return axios.create({
-      baseURL: 'http://localhost:7000',
-      // baseURL: 'https://educate-me.in/api',
+      // baseURL: 'http://localhost:7000',
+      baseURL: 'https://educate-me.in/api',
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const AccountPage = () => {
 
     console.log("PROFILE API RESPONSE →", data);
 
-    const user = data.data; // ✅ FIX
+    const user = data.data; 
 
     const DEFAULT_AVATAR = "/avtar.webp";
 

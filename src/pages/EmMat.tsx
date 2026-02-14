@@ -390,7 +390,7 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                             type="email"
                             value={ugFormData.email}
                             onChange={(e) => handleUgChange('email', e.target.value)}
-                            placeholder="you@example.com"
+                            placeholder="add email address"
                             className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
@@ -634,7 +634,7 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                             type="email"
                             value={pgFormData.email}
                             onChange={(e) => handlePgChange('email', e.target.value)}
-                            placeholder="you@example.com"
+                            placeholder="add your email adress"
                             className="h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300"
                           />
                         </div>
@@ -760,7 +760,6 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                           className="w-full h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300 px-3 bg-white"
                         >
                           <option value="">Choose Exam Date</option>
-                          <option value="2026-02-01">1st February 2026</option>
                           <option value="2026-03-08">8th March 2026</option>
                           <option value="2026-05-10">10th May 2026</option>
                         </select>

@@ -185,7 +185,7 @@ const BookSession = ({ showFooter = true }) => {
                     <Label className="text-sm font-semibold text-gray-700">Email Address *</Label>
                     <Input
                       type="email"
-                      placeholder="you@example.com"
+                      placeholder="Enter your email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onBlur={() => setTouched(prev => ({ ...prev, email: true }))}

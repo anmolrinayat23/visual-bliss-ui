@@ -275,7 +275,7 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
                               id="login-email"
                               name="email"
                               type="email"
-                              placeholder="you@example.com"
+                              placeholder="Enter your email address"
                               className="pl-12 h-14 border-2 border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all rounded-xl"
                               required
                             />
@@ -395,7 +395,7 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
                               id="signup-email"
                               name="email"
                               type="email"
-                              placeholder="you@example.com"
+                              placeholder="add your email adress"
                               className="pl-12 h-14 border-2 border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all rounded-xl"
                               required
                             />
