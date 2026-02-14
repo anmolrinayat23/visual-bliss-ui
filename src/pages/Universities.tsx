@@ -79,7 +79,7 @@ const universities: University[] = [
   { name: "International School of Management Studies", shortName: "ISMS", location: "Ambegaon Budruk, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "/International School of Management Studies.jpeg" },
   { name: "ISBS Gurgaon", shortName: "ISBS", location: "Gurgaon, Haryana", city: "Gurgaon", state: "Haryana", logo: "/ISBS Gurgaon.jpeg" },
   { name: "Indus Business School", shortName: "IIEBM", location: "Wakad, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "/Indus Business School.jpeg" },
-  { name: "Indian School of Business and Research", shortName: "ISBR", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", logo: "/Indian School of Business and Research.gif" },
+  { name: "Indian School of Business and Research", shortName: "ISB&M", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", logo: "/Indian School of Business and Research.gif" },
   { name: "IMS Unison University", shortName: "IMS", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", logo: "/IMS Unison University.jpeg" },
   { name: "Imperial School of Business", shortName: "Imperial", location: "Hinjewadi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "/Imperial School of Business.jpeg" },
   { name: "IILM Institute Jaipur", shortName: "IILM Jaipur", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan", logo: "/IILM Institute Jaipur.jpeg" },

@@ -1247,10 +1247,10 @@ const AdminDashboard = () => {
                   </CardTitle>
                   <CardDescription>Booked counselling session requests</CardDescription>
                 </div>
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+                {/* <Button className="bg-orange-500 hover:bg-orange-600 text-white">
                   <Download className="w-4 h-4 mr-2" />
                   Export
-                </Button>
+                </Button> */}
               </div>
             </CardHeader>
             <CardContent>
