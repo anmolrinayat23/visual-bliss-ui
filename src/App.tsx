@@ -14,6 +14,7 @@ import EmMat from "./pages/EmMat";
 import BookSession from "./pages/BookSession";
 import About from "./pages/About";
 import Explore from "./pages/Explore";
+import AUBMedicine from "./pages/AUBMedicine";
 import NotFound from "./pages/NotFound";
 import TeamMemberDetail from "./pages/TeamMemberDetail";
 import Auth from "./pages/Auth";
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/universities" element={<Universities />} />
+          <Route path="/aub-medicine" element={<AUBMedicine />} />
 
           <Route 
             path="/em-mat" 

@@ -36,12 +36,12 @@ const Services = ({ showFooter = true }) => {
   const services = [
     {
       icon: Lightbulb,
-      title: "Expert feedback",
+      title: "Medical Admission",
       description:
-        "Educate-Me offers students exclusive access to an extensive network of distinguished guest faculty, comprising doctoral experts from renowned institutions Pan India",
+        "EducateMe guides aspiring doctors through the complete medical admission process — from university selection and application to visa documentation — partnering with globally accredited institutions like the American University of Barbados to make your MBBS/MD dream a reality.",
       button: "Apply link",
       buttonVariant: "default" as const,
-      link: "/em-mat", // ✅ navigate here on click
+      link: "/aub-medicine",
     },
     {
       icon: Compass,
