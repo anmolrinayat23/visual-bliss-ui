@@ -269,10 +269,13 @@ const AUBMedicine = () => {
                     <Award className="w-12 h-12 text-primary" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-                    Dr. Eshaa Ahirwar
+                    Dr. Esha Ahirwar
                   </h3>
-                  <p className="text-primary font-semibold mb-5 text-sm tracking-wider uppercase">
-                    (MD)
+                  <p className="text-primary font-semibold mb-1 text-sm tracking-wider uppercase">
+                    Director — Medical Education
+                  </p>
+                  <p className="text-muted-foreground text-sm mb-5">
+                    ECFMG Certified
                   </p>
                   <div className="flex items-center justify-center gap-2 text-muted-foreground bg-muted/50 rounded-full px-5 py-2.5 mx-auto w-fit">
                     <Phone className="w-4 h-4 text-primary" />
