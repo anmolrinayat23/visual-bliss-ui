@@ -237,6 +237,253 @@ const AUBMedicine = () => {
           </div>
         </section>
 
+        {/* ───────── PROGRAMS OFFERED ───────── */}
+        <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-72 h-72 bg-[hsl(200,60%,40%)]/5 rounded-full blur-3xl" />
+
+          <div className="container mx-auto max-w-6xl relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-14"
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
+                Curriculum
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">
+                Programs Offered
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Two pathway options designed for different academic backgrounds
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* 5½ Year MD Program */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <Card className="h-full bg-card border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-[var(--shadow-hover)] transition-all duration-300 group">
+                  <div className="h-1.5 bg-gradient-to-r from-primary via-[hsl(30,95%,58%)] to-primary" />
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        <GraduationCap className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-foreground">5½ Year MD Program</h3>
+                        <p className="text-xs text-primary font-semibold tracking-widest uppercase">For 10+2 Pass-outs</p>
+                      </div>
+                    </div>
+
+                    {/* Phase: Pre Medical */}
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                        <h4 className="text-sm font-bold text-foreground tracking-wide uppercase">Pre Medical Program</h4>
+                        <span className="ml-auto text-xs text-muted-foreground bg-muted/60 px-2.5 py-0.5 rounded-full">4 semesters × 15 weeks</span>
+                      </div>
+                      <div className="grid grid-cols-4 gap-2 mb-4">
+                        {["Semester I", "Semester II", "Semester III", "Semester IV"].map((s, i) => (
+                          <div key={i} className="text-center py-2.5 px-1 rounded-lg bg-muted/50 border border-border/50 text-xs font-medium text-foreground group-hover:border-primary/20 transition-colors">
+                            {s}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center my-2">
+                      <div className="w-px h-6 bg-gradient-to-b from-primary to-primary/30" />
+                    </div>
+
+                    {/* Phase: Basic Science */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-[hsl(200,70%,50%)]" />
+                        <h4 className="text-sm font-bold text-foreground tracking-wide uppercase">Basic Science Program</h4>
+                        <span className="ml-auto text-xs text-muted-foreground bg-muted/60 px-2.5 py-0.5 rounded-full">5 semesters × 16 weeks</span>
+                      </div>
+                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-2">
+                        {["Semester I", "Semester II", "Semester III", "Semester IV", "Semester V"].map((s, i) => (
+                          <div key={i} className="text-center py-2.5 px-1 rounded-lg bg-muted/50 border border-border/50 text-xs font-medium text-foreground">
+                            {s}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-center">
+                        <span className="inline-block text-xs font-semibold text-[hsl(200,70%,50%)] bg-[hsl(200,70%,50%)]/10 px-3 py-1 rounded-full">
+                          USMLE Step-1 (Optional)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center my-2">
+                      <div className="w-px h-6 bg-gradient-to-b from-[hsl(200,70%,50%)] to-primary/30" />
+                    </div>
+
+                    {/* Phase: Clinical Science */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                        <h4 className="text-sm font-bold text-foreground tracking-wide uppercase">Clinical Science Program</h4>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+                        <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-foreground text-center">
+                          Core Rotation <span className="text-muted-foreground">(48 Weeks)</span>
+                        </div>
+                        <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-foreground text-center">
+                          Elective Rotation <span className="text-muted-foreground">(24 Weeks)</span>
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <span className="inline-block text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1 rounded-full">
+                          USMLE Step-2 (Optional)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center my-2">
+                      <div className="w-px h-6 bg-gradient-to-b from-green-500 to-primary/30" />
+                    </div>
+
+                    {/* Final */}
+                    <div className="text-center space-y-2">
+                      <div className="inline-block px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary/15 to-[hsl(30,95%,58%)]/15 border border-primary/20 text-foreground font-bold text-sm">
+                        🎓 Earn your MD Degree
+                      </div>
+                      <div className="flex justify-center">
+                        <div className="w-px h-4 bg-primary/30" />
+                      </div>
+                      <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">USMLE Step-3</span>
+                      <div className="flex justify-center">
+                        <div className="w-px h-4 bg-primary/30" />
+                      </div>
+                      <div className="inline-block px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-500/15 to-green-600/15 border border-green-500/20 text-green-700 dark:text-green-400 font-bold text-sm">
+                        🏥 Residency in USA
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+
+              {/* 4 Year MD Program */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <Card className="h-full bg-card border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-[var(--shadow-hover)] transition-all duration-300 group">
+                  <div className="h-1.5 bg-gradient-to-r from-[hsl(200,70%,50%)] via-primary to-[hsl(200,70%,50%)]" />
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(200,70%,50%)]/20 to-[hsl(200,70%,50%)]/5 flex items-center justify-center">
+                        <GraduationCap className="w-6 h-6 text-[hsl(200,70%,50%)]" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-foreground">4 Year MD Program</h3>
+                        <p className="text-xs text-[hsl(200,70%,50%)] font-semibold tracking-widest uppercase">For College Graduates</p>
+                      </div>
+                    </div>
+
+                    {/* No Pre Medical */}
+                    <div className="mt-6 mb-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+                        <h4 className="text-sm font-bold text-muted-foreground tracking-wide uppercase">Pre Medical Program</h4>
+                        <span className="ml-auto text-xs font-semibold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">Not Required</span>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center my-2">
+                      <div className="w-px h-6 bg-gradient-to-b from-muted-foreground/20 to-[hsl(200,70%,50%)]" />
+                    </div>
+
+                    {/* Phase: Basic Science */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-[hsl(200,70%,50%)]" />
+                        <h4 className="text-sm font-bold text-foreground tracking-wide uppercase">Basic Science Program</h4>
+                        <span className="ml-auto text-xs text-muted-foreground bg-muted/60 px-2.5 py-0.5 rounded-full">5 semesters × 16 weeks</span>
+                      </div>
+                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-2">
+                        {["Semester I", "Semester II", "Semester III", "Semester IV", "Semester V"].map((s, i) => (
+                          <div key={i} className="text-center py-2.5 px-1 rounded-lg bg-muted/50 border border-border/50 text-xs font-medium text-foreground">
+                            {s}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-center">
+                        <span className="inline-block text-xs font-semibold text-[hsl(200,70%,50%)] bg-[hsl(200,70%,50%)]/10 px-3 py-1 rounded-full">
+                          USMLE Step-1 (Optional)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center my-2">
+                      <div className="w-px h-6 bg-gradient-to-b from-[hsl(200,70%,50%)] to-green-500" />
+                    </div>
+
+                    {/* Phase: Clinical Science */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                        <h4 className="text-sm font-bold text-foreground tracking-wide uppercase">Clinical Science Program</h4>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+                        <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-foreground text-center">
+                          Core Rotation <span className="text-muted-foreground">(48 Weeks)</span>
+                        </div>
+                        <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-foreground text-center">
+                          Elective Rotation <span className="text-muted-foreground">(24 Weeks)</span>
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <span className="inline-block text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1 rounded-full">
+                          USMLE Step-2 (Optional)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center my-2">
+                      <div className="w-px h-6 bg-gradient-to-b from-green-500 to-primary/30" />
+                    </div>
+
+                    {/* Final */}
+                    <div className="text-center space-y-2">
+                      <div className="inline-block px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary/15 to-[hsl(30,95%,58%)]/15 border border-primary/20 text-foreground font-bold text-sm">
+                        🎓 Earn your MD Degree
+                      </div>
+                      <div className="flex justify-center">
+                        <div className="w-px h-4 bg-primary/30" />
+                      </div>
+                      <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">USMLE Step-3</span>
+                      <div className="flex justify-center">
+                        <div className="w-px h-4 bg-primary/30" />
+                      </div>
+                      <div className="inline-block px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-500/15 to-green-600/15 border border-green-500/20 text-green-700 dark:text-green-400 font-bold text-sm">
+                        🏥 Residency in USA
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* ───────── ADMISSION PROCESS ───────── */}
         <section className="py-16 md:py-24 px-4 sm:px-6 bg-muted/30 relative overflow-hidden">
           {/* Decorative */}
