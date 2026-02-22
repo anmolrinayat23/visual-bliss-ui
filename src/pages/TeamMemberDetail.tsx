@@ -45,6 +45,23 @@ Dr. Sinha is widely recognized as a thought leader, consultant, and motivational
         "Publications in SCOPUS-indexed journals",
         "Associated with NSDC, MSME projects, and AIMA"
       ]
+
+    },
+    "shiny-chaturvedi": {
+      name: "Ms. Shiny Chaturvedi",
+      role: "Administrative Head",
+      image: "/shinyy_chaturvedi.png",
+      fullDescription: `Educate Me proudly welcomes Ms. Shiny Chaturvedi as the Administrative Head, bringing her research-driven academic perspective and strong educational administration expertise to strengthen institutional excellence and student-focused growth.\n\nMs. Shiny Chaturvedi is a research-oriented education administrator with a strong academic foundation in institutional coordination and scholarly engagement. As a research student and contributor to an ISBN-indexed publication, she brings analytical depth and academic rigor to educational administration.\n\nHer professional experience reflects a commitment to inclusive and community-centered education through social entrepreneurship initiatives and academic outreach programs. She has contributed to educational and social development projects, including institutional collaborations and inclusive learning support.\n\nAs Administrative Head, she oversees academic documentation, operational coordination, and institutional processes, ensuring efficient administration aligned with research-driven and education-focused standards.\n\nCore Competencies\n\nAcademic Research & Scholarly Writing\nEducational Administration & Institutional Coordination\nInclusive & Community-Based Education\nOutreach Program Management\nDocumentation & Academic Compliance\nLeadership & Organizational Skills`,
+      achievements: [
+        "Academic Research & Scholarly Writing",
+        "Educational Administration & Institutional Coordination",
+        "Inclusive & Community-Based Education",
+        "Outreach Program Management",
+        "Documentation & Academic Compliance",
+        "Leadership & Organizational Skills",
+        "Research student, ISBN-indexed publication contributor",
+        "Experience in social entrepreneurship and academic outreach"
+      ]
     },
     "dr-vaishali-arora": {
       name: "Dr. Vaishali Arora",
@@ -140,6 +157,38 @@ With expertise in student development and academic counseling, Dr. Avinish plays
     },
 
     
+    "anirudh-tiwari": {
+      name: "Mr. Anirudh Tiwari",
+      role: "Assistant Manager – Admissions",
+      image: "/Anirudh_Tiwari.jpeg",
+      fullDescription: `Anirudh Tiwari is an admissions and student engagement professional with over 2 years of experience in counselling, enrollment strategy, and client relationship management. With a strong background in sales and executive roles across organizations like Reliance Insurance, Maxwell Trading, and Techno Task, he brings a consultative and learner-focused approach to the education sector.\n\nAt Educate Me, he plays a key role in driving student enrollment growth through strategic counselling, admissions funnel management, and data-driven conversion strategies. His work emphasizes personalized guidance, career mapping, and building strong relationships with students and parents to support informed academic decisions.\n\nKey Strengths\n\nAdmissions Strategy & Lead Conversion\nStudent Counselling & Career Guidance\nLearner-Centric Communication\nCRM & Data-Driven Follow-ups\nStakeholder Relationship Management\nTeam Coordination & Performance Focus\n\nProfessional Experience\n• 2+ Years of Experience in Sales & Executive Roles\n• Worked with Reliance Insurance, Maxwell Trading & Techno Task\n• Proven record of target achievement and client retention`,
+      achievements: [
+        "Admissions Strategy & Lead Conversion",
+        "Student Counselling & Career Guidance",
+        "Learner-Centric Communication",
+        "CRM & Data-Driven Follow-ups",
+        "Stakeholder Relationship Management",
+        "Team Coordination & Performance Focus",
+        "2+ Years of Experience in Sales & Executive Roles",
+        "Worked with Reliance Insurance, Maxwell Trading & Techno Task",
+        "Proven record of target achievement and client retention"
+      ]
+    },
+    "dr-esha-ahirwar": {
+      name: "Dr. Esha Ahirwar",
+      role: "International Medical Graduate & Academic Advisor",
+      image: "/Dr.Eashaa-ahirwar.PNG",
+      fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`,
+      achievements: [
+        "American University of Barbados graduate",
+        "Clinical rotations in Chicago teaching hospitals",
+        "Direct exposure to U.S. healthcare system",
+        "Mentored students for US licensing exams",
+        "Co-Founder of 4th Ventricle medical learning platform",
+        "Expert in global medical education pathways",
+        "Guides licensing preparation, international applications, and career planning"
+      ]
+    },
     "kajol-samtani": {
       name: "Ms. Kajol Samtani",
       role: "Academic Excellence Lead",
@@ -233,12 +282,19 @@ Fluent in French and certified in Taxation, Kajol blends analytical depth with c
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
             <div className="flex flex-col md:flex-row">
               {/* Image Section - Fixed at top */}
-              <div className="md:w-2/5 bg-gradient-to-br from-blue-500 to-orange-500 p-8 flex items-start justify-center order-1">
+              <div className={
+                `md:w-2/5 bg-gradient-to-br from-blue-500 to-orange-500 p-8 flex items-start justify-center order-1${member.name === "Dr. Esha Ahirwar" ? " mt-6" : ""}`
+              }>
                 <div className="w-64 h-64 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden mt-0">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover"
+                    className={
+                      member.name === "Dr. Esha Ahirwar"
+                        ? "w-full object-cover object-center"
+                        : "w-full h-full object-cover"
+                    }
+                    style={member.name === "Dr. Esha Ahirwar" ? { objectPosition: 'center', height: '151%' } : {}}
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none';
                     }}

@@ -215,6 +215,38 @@ const Courses = ({ showFooter = true }) => {
       category: "Medical Science",
       image: "/bscnursing_new.jpeg"
     },
+     {
+      title: "MMBS (MD)",
+      description:
+        "Master of Medical Science program for advanced medical education and research.",
+      buttonText: "Apply Now",
+      category: "Medical Science",
+      image: "/MBBS.png"
+    },
+         {
+      title: "M-Pharma",
+      description:
+        "Master of Pharmacy program for advanced pharmaceutical education and research.",
+      buttonText: "Apply Now",
+      category: "Medical Science",
+      image: "/Mpharma.png"
+    },
+             {
+      title: "B-Pharma",
+      description:
+        "Bachelor of Pharmacy program for foundational pharmaceutical education and practice.",
+      buttonText: "Apply Now",
+      category: "Medical Science",
+      image: "/Bpharma.png"
+    },
+                 {
+      title: "Forensic Science",
+      description:
+        "Bachelor of Forensic Science program for foundational forensic education and practice.",
+      buttonText: "Apply Now",
+      category: "Medical Science",
+      image: "/forensic.png"
+    },
   ];
 
   // Get unique categories for filtering

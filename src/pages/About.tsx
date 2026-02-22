@@ -76,6 +76,41 @@ const About = ({ showFooter = true }) => {
       highlight: "Academic brilliance combined with organizational excellence",
       fullDescription: `Kajol Samtani is an accomplished commerce professional and academic achiever from the Institute for Excellence in Higher Education (IEHE), Bhopal, where she secured 1st Rank in both B.Com (Accounts Hons.) and M.Com (Marketing Management) with distinction.`
     },
+      {
+        id: "dr-esha-ahirwar",
+        name: "Dr. Esha Ahirwar",
+        role: "International Medical Graduate & Academic Advisor",
+        description: "Internationally trained medical graduate with U.S. clinical exposure and expertise in global medical education pathways.",
+        achievement: "Co-Founder of 4th Ventricle, mentored students for US licensing exams, clinical rotations in Chicago, American University of Barbados graduate.",
+        avatar: "EA",
+        image: "/Dr.Eashaa-ahirwar.PNG",
+        highlight: "Cultivating confidence and credibility through strategic medical mentorship",
+        fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`
+      },
+
+    {
+      id: "anirudh-tiwari",
+      name: "Mr. Anirudh Tiwari",
+      role: "Assistant Manager – Admissions",
+      description: "Admissions and student engagement professional with 2+ years of experience in counselling, enrollment strategy, and client relationship management.",
+      achievement: "2+ years in sales & executive roles, worked with Reliance Insurance, Maxwell Trading & Techno Task, proven record of target achievement and client retention.",
+      avatar: "AT",
+      image: "/Anirudh_Tiwari.jpeg",
+      highlight: "Driving student enrollment growth through strategic counselling and data-driven conversion.",
+      fullDescription: `Anirudh Tiwari is an admissions and student engagement professional with over 2 years of experience in counselling, enrollment strategy, and client relationship management. With a strong background in sales and executive roles across organizations like Reliance Insurance, Maxwell Trading, and Techno Task, he brings a consultative and learner-focused approach to the education sector.\n\nAt Educate Me, he plays a key role in driving student enrollment growth through strategic counselling, admissions funnel management, and data-driven conversion strategies. His work emphasizes personalized guidance, career mapping, and building strong relationships with students and parents to support informed academic decisions.\n\nKey Strengths\n- Admissions Strategy & Lead Conversion\n- Student Counselling & Career Guidance\n- Learner-Centric Communication\n- CRM & Data-Driven Follow-ups\n- Stakeholder Relationship Management\n- Team Coordination & Performance Focus\n\nProfessional Experience\n• 2+ Years of Experience in Sales & Executive Roles\n• Worked with Reliance Insurance, Maxwell Trading & Techno Task\n• Proven record of target achievement and client retention.`
+    },
+
+    {
+      id: "shiny-chaturvedi",
+      name: "Ms. Shiny Chaturvedi",
+      role: "Administrative Head",
+      description: "Research-driven education administrator with strong academic and institutional coordination expertise.",
+      achievement: "Research student, ISBN-indexed publication contributor, experience in social entrepreneurship and academic outreach.",
+      avatar: "SC",
+      image: "/shinyy_chaturvedi.png",
+      highlight: "Strengthening institutional excellence and student-focused growth.",
+      fullDescription: `Educate Me proudly welcomes Ms. Shiny Chaturvedi as the Administrative Head, bringing her research-driven academic perspective and strong educational administration expertise to strengthen institutional excellence and student-focused growth.\n\nMs. Shiny Chaturvedi is a research-oriented education administrator with a strong academic foundation in institutional coordination and scholarly engagement. As a research student and contributor to an ISBN-indexed publication, she brings analytical depth and academic rigor to educational administration.\n\nHer professional experience reflects a commitment to inclusive and community-centered education through social entrepreneurship initiatives and academic outreach programs. She has contributed to educational and social development projects, including institutional collaborations and inclusive learning support.\n\nAs Administrative Head, she oversees academic documentation, operational coordination, and institutional processes, ensuring efficient administration aligned with research-driven and education-focused standards.\n\nCore Competencies\n- Academic Research & Scholarly Writing\n- Educational Administration & Institutional Coordination\n- Inclusive & Community-Based Education\n- Outreach Program Management\n- Documentation & Academic Compliance\n- Leadership & Organizational Skills`
+    },
     // {
     //   id: "sulekha-sarkar",
     //   name: "Ms. Sulekha Sarkar",
@@ -192,7 +227,12 @@ const About = ({ showFooter = true }) => {
                           <img
                             src={member.image}
                             alt={member.name}
-                            className="w-full h-full object-cover"
+                            className={
+                              member.name === "Dr. Esha Ahirwar"
+                                ? "w-full object-cover object-center"
+                                : "w-full h-full object-cover"
+                            }
+                            style={member.name === "Dr. Esha Ahirwar" ? { objectPosition: 'center', height: '151%' } : {}}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
                               const nextSibling = target.nextSibling as HTMLElement;

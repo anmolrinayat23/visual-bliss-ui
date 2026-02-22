@@ -477,6 +477,7 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                             <option value="2026-02-01">5th April 2026</option>
                             <option value="2026-03-08">3rd May 2026</option>
                             <option value="2026-05-10">7th June 2026</option>
+                               <option value="Mentorship">Mentorship</option>
                           </select>
                         </div>
                       </div>
@@ -762,6 +763,7 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                           <option value="">Choose Exam Date</option>
                           <option value="2026-03-08">8th March 2026</option>
                           <option value="2026-05-10">10th May 2026</option>
+                            <option value="Mentorship">Mentorship</option>
                         </select>
                       </div>
 

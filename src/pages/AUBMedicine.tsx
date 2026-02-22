@@ -65,7 +65,7 @@ const AUBMedicine = () => {
               >
                 <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-white/10 backdrop-blur-md border border-white/20 p-3 shadow-[0_0_60px_hsla(24,95%,62%,0.15)]">
                   <img
-                    src="/aub-logo.png"
+                    src="/aub.jpg"
                     alt="American University of Barbados Logo"
                     className="w-full h-full object-contain rounded-full"
                   />
@@ -266,7 +266,8 @@ const AUBMedicine = () => {
 
                 <div className="relative z-10">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mx-auto mb-5 ring-4 ring-primary/10 group-hover:ring-primary/20 transition-all duration-300">
-                    <Award className="w-12 h-12 text-primary" />
+                    {/* <Award className="w-12 h-2 text-primary" /> */}
+                    <img src="./Dr.Eashaa-ahirwar.PNG" alt="" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
                     Dr. Esha Ahirwar

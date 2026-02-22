@@ -96,6 +96,11 @@ const universities: University[] = [
   { name: "ASM Institute of International Business and Research", shortName: "ASM IIBR", location: "Pimpri, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "/ASM Institute of International Business and Research.jpeg" },
   { name: "Aureole School of Business Management", shortName: "ASBM", location: "Ambi, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "/Aureole School of Business Management.png" },
   { name: "AKEMI Business School", shortName: "AKEMI", location: "Marunji Road, Pune, Maharashtra", city: "Pune", state: "Maharashtra", logo: "/AKEMI Business School.png" },
+  { name: "Ashoka University", shortName: "Ashoka", location: "Sonepat, Haryana", city: "Sonepat", state: "Haryana", logo: "/Ashoka University.webp" },
+    { name: "Prestige University", shortName: "Prestige", location: "Indore", city: "Indore", state: "Madhya Pradesh", logo: "/Prestige University.webp" },
+        { name: "Amity University", shortName: "Amity", location: "Gwalior, Madhya Pradesh", city: "Gwalior", state: "Madhya Pradesh", logo: "/Amity University.webp" },
+              { name: "Renaissance University", shortName: "Renaissance", location: "Indore, Madhya Pradesh", city: "Indore", state: "Madhya Pradesh", logo: "/Renaissance University.webp" },
+                      { name: "SP Jain School of Global Management (SPJSGM)", shortName: "SPJSGM", location: "Mumbai, Maharashtra", city: "Mumbai", state: "Maharashtra", logo: "/SP Jain School of Global Management.webp" },
 ];
 
 const statesList = [...new Set(universities.map(u => u.state))].sort();
