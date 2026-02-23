@@ -610,11 +610,11 @@ const AUBMedicine = () => {
                       {/* Photo frame with glow */}
                       <div className="relative">
                         <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(30,95%,58%)]/40 blur-xl animate-pulse-ring" />
-                        <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden ring-4 ring-primary/30 shadow-[0_0_60px_hsla(24,95%,62%,0.25)]">
+                        <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-full overflow-hidden ring-4 ring-primary/30 shadow-[0_0_60px_hsla(24,95%,62%,0.25)]">
                           <img
                             src="/Dr.Eashaa-ahirwar.PNG"
                             alt="Dr. Esha Ahirwar"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover object-top"
                           />
                         </div>
                         {/* Badge */}
