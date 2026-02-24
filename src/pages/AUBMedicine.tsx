@@ -174,7 +174,7 @@ const AUBMedicine = () => {
               >
                 {[
                   { label: "CAAM-HP Accredited", icon: ShieldCheck },
-                  { label: "ECFMG Certified", icon: Award },
+                  { label: "Listed in World Directory of Medical Schools", icon: Award },
                   { label: "US-Style Curriculum", icon: BookOpen },
                 ].map((stat, i) => (
                   <div
@@ -317,11 +317,6 @@ const AUBMedicine = () => {
                           </div>
                         ))}
                       </div>
-                      <div className="text-center">
-                        <span className="inline-block text-xs font-semibold text-[hsl(200,70%,50%)] bg-[hsl(200,70%,50%)]/10 px-3 py-1 rounded-full">
-                          USMLE Step-1 (Optional)
-                        </span>
-                      </div>
                     </div>
 
                     {/* Arrow */}
@@ -342,11 +337,6 @@ const AUBMedicine = () => {
                         <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-foreground text-center">
                           Elective Rotation <span className="text-muted-foreground">(24 Weeks)</span>
                         </div>
-                      </div>
-                      <div className="text-center">
-                        <span className="inline-block text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1 rounded-full">
-                          USMLE Step-2 (Optional)
-                        </span>
                       </div>
                     </div>
 
@@ -423,11 +413,6 @@ const AUBMedicine = () => {
                           </div>
                         ))}
                       </div>
-                      <div className="text-center">
-                        <span className="inline-block text-xs font-semibold text-[hsl(200,70%,50%)] bg-[hsl(200,70%,50%)]/10 px-3 py-1 rounded-full">
-                          USMLE Step-1 (Optional)
-                        </span>
-                      </div>
                     </div>
 
                     {/* Arrow */}
@@ -448,11 +433,6 @@ const AUBMedicine = () => {
                         <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-foreground text-center">
                           Elective Rotation <span className="text-muted-foreground">(24 Weeks)</span>
                         </div>
-                      </div>
-                      <div className="text-center">
-                        <span className="inline-block text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1 rounded-full">
-                          USMLE Step-2 (Optional)
-                        </span>
                       </div>
                     </div>
 
@@ -617,10 +597,6 @@ const AUBMedicine = () => {
                             className="w-full h-full object-cover object-top"
                           />
                         </div>
-                        {/* Badge */}
-                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary to-[hsl(30,95%,55%)] text-primary-foreground text-xs font-bold tracking-wide shadow-lg whitespace-nowrap">
-                          ECFMG Certified
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -630,8 +606,11 @@ const AUBMedicine = () => {
                     <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
                       Dr. Esha Ahirwar
                     </h3>
-                    <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-6">
+                    <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-2">
                       Director — Medical Education
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-6">
+                      ECFMG Certified · Foreign Medical Graduate · MP State Rank 5
                     </p>
 
                     <div className="space-y-4 text-muted-foreground text-sm sm:text-base leading-relaxed">
@@ -751,7 +730,7 @@ const AUBMedicine = () => {
                   by the Caribbean Accreditation Authority for Education in
                   Medicine and other Health Professions (CAAM-HP), and listed in
                   the World Directory of Medical Schools. It operates a US-style
-                  curriculum and is ECFMG certified, with clinical rotations
+                  curriculum with clinical rotations
                   available in Barbados and the United States.
                 </p>
 
@@ -760,7 +739,6 @@ const AUBMedicine = () => {
                     "Licensed by Ministry of Education, Barbados",
                     "Accredited by CAAM-HP",
                     "Listed in World Directory of Medical Schools",
-                    "ECFMG Certified",
                     "US-Style Curriculum",
                     "Clinical Rotations in USA & Caribbean",
                   ].map((item, i) => (
