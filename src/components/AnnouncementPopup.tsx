@@ -4,8 +4,32 @@ import { X, Sparkles, ArrowRight, Trophy, Star, Gift } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
+const TARGET_DATE = new Date("2026-03-08T00:00:00+05:30").getTime();
+
+const useCountdown = () => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const calc = () => {
+      const diff = Math.max(0, TARGET_DATE - Date.now());
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    calc();
+    const id = setInterval(calc, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return timeLeft;
+};
+
 const AnnouncementPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const countdown = useCountdown();
 
   useEffect(() => {
     const showTimer = setTimeout(() => {
@@ -216,6 +240,37 @@ const AnnouncementPopup = () => {
                     <Gift className="w-6 h-6 text-amber-400" />
                   </motion.div>
                 </div>
+              </motion.div>
+
+              {/* Countdown Timer */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex justify-center gap-3 mb-5"
+              >
+                {[
+                  { label: "Days", value: countdown.days },
+                  { label: "Hrs", value: countdown.hours },
+                  { label: "Min", value: countdown.minutes },
+                  { label: "Sec", value: countdown.seconds },
+                ].map((item) => (
+                  <div key={item.label} className="flex flex-col items-center">
+                    <motion.div
+                      key={item.value}
+                      initial={{ scale: 1.2 }}
+                      animate={{ scale: 1 }}
+                      className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/10 border border-primary/30 flex items-center justify-center backdrop-blur-sm"
+                    >
+                      <span className="text-xl md:text-2xl font-black text-white">
+                        {String(item.value).padStart(2, "0")}
+                      </span>
+                    </motion.div>
+                    <span className="text-[10px] md:text-xs text-orange-300 font-semibold mt-1 uppercase tracking-wider">
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
               </motion.div>
 
               {/* CTA Button */}
