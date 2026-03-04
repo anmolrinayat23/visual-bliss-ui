@@ -79,7 +79,7 @@ const About = ({ showFooter = true }) => {
       {
         id: "dr-esha-ahirwar",
         name: "Dr. Esha Ahirwar",
-        role: "International Medical Graduate & Academic Advisor",
+        role: "Director of Medical Admissions ",
         description: "Internationally trained medical graduate with U.S. clinical exposure and expertise in global medical education pathways.",
         achievement: "Co-Founder of 4th Ventricle, mentored students for US licensing exams, clinical rotations in Chicago, American University of Barbados graduate.",
         avatar: "EA",

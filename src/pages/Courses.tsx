@@ -216,9 +216,9 @@ const Courses = ({ showFooter = true }) => {
       image: "/bscnursing_new.jpeg"
     },
      {
-      title: "MMBS (MD)",
+      title: "MBBS (MD)",
       description:
-        "Master of Medical Science program for advanced medical education and research.",
+        "Bachelor of Medicine, Bachelor of Surgery (MBBS) program for comprehensive medical education and clinical training.",
       buttonText: "Apply Now",
       category: "Medical Science",
       image: "/MBBS.png"
@@ -240,9 +240,9 @@ const Courses = ({ showFooter = true }) => {
       image: "/Bpharma.png"
     },
                  {
-      title: "Forensic Science",
+      title: "Forensic Sciences",
       description:
-        "Bachelor of Forensic Science program for foundational forensic education and practice.",
+        "Bachelor of Forensic Sciences program for foundational forensic education and practice.",
       buttonText: "Apply Now",
       category: "Medical Science",
       image: "/forensic.png"
