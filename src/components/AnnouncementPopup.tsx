@@ -242,36 +242,6 @@ const AnnouncementPopup = () => {
                 </div>
               </motion.div>
 
-              {/* Countdown Timer */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="flex justify-center gap-3 mb-5"
-              >
-                {[
-                  { label: "Days", value: countdown.days },
-                  { label: "Hrs", value: countdown.hours },
-                  { label: "Min", value: countdown.minutes },
-                  { label: "Sec", value: countdown.seconds },
-                ].map((item) => (
-                  <div key={item.label} className="flex flex-col items-center">
-                    <motion.div
-                      key={item.value}
-                      initial={{ scale: 1.2 }}
-                      animate={{ scale: 1 }}
-                      className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/10 border border-primary/30 flex items-center justify-center backdrop-blur-sm"
-                    >
-                      <span className="text-xl md:text-2xl font-black text-white">
-                        {String(item.value).padStart(2, "0")}
-                      </span>
-                    </motion.div>
-                    <span className="text-[10px] md:text-xs text-orange-300 font-semibold mt-1 uppercase tracking-wider">
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
-              </motion.div>
 
               {/* CTA Button */}
               <motion.div
