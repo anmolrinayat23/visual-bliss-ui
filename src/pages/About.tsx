@@ -22,6 +22,17 @@ const About = ({ showFooter = true }) => {
       fullDescription: `As the Founder and CEO of Educate Me, I am driven by a vision to revolutionize education accessibility and career readiness for students across India and beyond. With a strong foundation in educational leadership and admissions strategy, I built Educate Me as a mission-led platform empowering learners to make informed academic and career decisions through mentorship, technology, and outcome-driven guidance.`
     },
     {
+      id: "dr-esha-ahirwar",
+      name: "Dr. Esha Ahirwar",
+      role: "Director of Medical Admissions ",
+      description: "Internationally trained medical graduate with U.S. clinical exposure and expertise in global medical education pathways.",
+      achievement: "Co-Founder of 4th Ventricle, mentored students for US licensing exams, clinical rotations in Chicago, American University of Barbados graduate.",
+      avatar: "EA",
+      image: "/Dr.Eashaa-ahirwar.PNG",
+      highlight: "Cultivating confidence and credibility through strategic medical mentorship",
+      fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`
+    },
+    {
       id: "dr-awanish-sinha",
       name: "Dr. Awanish Kumar Sinha",
       role: "Guest Faculty Expert - Finance",
@@ -76,18 +87,6 @@ const About = ({ showFooter = true }) => {
       highlight: "Academic brilliance combined with organizational excellence",
       fullDescription: `Kajol Samtani is an accomplished commerce professional and academic achiever from the Institute for Excellence in Higher Education (IEHE), Bhopal, where she secured 1st Rank in both B.Com (Accounts Hons.) and M.Com (Marketing Management) with distinction.`
     },
-      {
-        id: "dr-esha-ahirwar",
-        name: "Dr. Esha Ahirwar",
-        role: "Director of Medical Admissions ",
-        description: "Internationally trained medical graduate with U.S. clinical exposure and expertise in global medical education pathways.",
-        achievement: "Co-Founder of 4th Ventricle, mentored students for US licensing exams, clinical rotations in Chicago, American University of Barbados graduate.",
-        avatar: "EA",
-        image: "/Dr.Eashaa-ahirwar.PNG",
-        highlight: "Cultivating confidence and credibility through strategic medical mentorship",
-        fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`
-      },
-
     {
       id: "anirudh-tiwari",
       name: "Mr. Anirudh Tiwari",

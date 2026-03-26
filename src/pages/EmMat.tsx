@@ -474,9 +474,8 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                             className="w-full h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300 px-3 bg-white"
                           >
                             <option value="">Choose Exam Date</option>
-                            <option value="2026-02-01">5th April 2026</option>
-                            <option value="2026-03-08">3rd May 2026</option>
-                            <option value="2026-05-10">7th June 2026</option>
+                            <option value="2026-05-18">18TH MAY - UG 1ST ATTEMPT </option>
+                            <option value="2026-06-14">14TH JUNE 2ND ATTEMPT</option>
                                <option value="Mentorship">Mentorship</option>
                           </select>
                         </div>
@@ -761,7 +760,7 @@ const saveUrl = `${import.meta.env.VITE_API_URL}/user/pg-applications/createpg`;
                           className="w-full h-14 border-2 border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 rounded-xl transition-all duration-300 px-3 bg-white"
                         >
                           <option value="">Choose Exam Date</option>
-                          <option value="2026-03-08">8th March 2026</option>
+
                           <option value="2026-05-10">10th May 2026</option>
                             <option value="Mentorship">Mentorship</option>
                         </select>

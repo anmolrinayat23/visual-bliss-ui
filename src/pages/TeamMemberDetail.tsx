@@ -15,11 +15,11 @@ const TeamMemberDetail = () => {
       image: "/nikhil.jpg",
       fullDescription: `As the Founder and CEO of Educate Me, I am driven by a vision to revolutionize education accessibility and career readiness for students across India and beyond. With a strong foundation in educational leadership and admissions strategy, I built Educate Me as a mission-led platform empowering learners to make informed academic and career decisions through mentorship, technology, and outcome-driven guidance.
 
-I combine entrepreneurial passion with strategic insight, with hands-on experience leading MBA admissions across top universities such as Sharda University and Bennett University (The Times Group), I developed deep expertise in student acquisition, academic counseling, and strategic enrollment growth at a PAN India level. 
+    I combine entrepreneurial passion with strategic insight, with hands-on experience leading MBA admissions across top universities such as Sharda University and Bennett University (The Times Group), I developed deep expertise in student acquisition, academic counseling, and strategic enrollment growth at a PAN India level. 
 
-Having personally guided thousands of students toward their career goals, I founded Educate Me with a mission far greater than business—to democratize education, provide transparent mentorship, and build a future-ready generation, transforming challenges into opportunities for growth. My journey reflects a commitment to nation-building through education—enabling thousands of aspiring professionals to unlock their potential, secure career-defining opportunities, and step into the global workforce with confidence.
+    Having personally guided thousands of students toward their career goals, I founded Educate Me with a mission far greater than business—to democratize education, provide transparent mentorship, and build a future-ready generation, transforming challenges into opportunities for growth. My journey reflects a commitment to nation-building through education—enabling thousands of aspiring professionals to unlock their potential, secure career-defining opportunities, and step into the global workforce with confidence.
 
-I am not just building a company; I am building a movement—to educate, empower, and elevate.`,
+    I am not just building a company; I am building a movement—to educate, empower, and elevate.`,
       achievements: [
         "IIHM Kolkata graduate with international exposure in Portland, USA",
         "5+ years in education leadership at Bennett & Sharda University",
@@ -28,15 +28,30 @@ I am not just building a company; I am building a movement—to educate, empower
         "Expert in student acquisition and strategic enrollment growth"
       ]
     },
+    "dr-esha-ahirwar": {
+      name: "Dr. Esha Ahirwar",
+      role: "Director of Medical Admissions",
+      image: "/Dr.Eashaa-ahirwar.PNG",
+      fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`,
+      achievements: [
+        "American University of Barbados graduate",
+        "Clinical rotations in Chicago teaching hospitals",
+        "Direct exposure to U.S. healthcare system",
+        "Mentored students for US licensing exams",
+        "Co-Founder of 4th Ventricle medical learning platform",
+        "Expert in global medical education pathways",
+        "Guides licensing preparation, international applications, and career planning"
+      ]
+    },
     "dr-awanish-sinha": {
       name: "Dr. Awanish Kumar Sinha",
       role: "Guest Faculty Expert - Finance",
       image: "/pp.jpg",
       fullDescription: `Welcome Dr. Awanish Kumar Sinha, a distinguished academician and seasoned banking and financial services expert, as our esteemed guest lecturer at Educate Me. Dr. Sinha brings over two decades of rich professional experience across the BFSI sector, having held key leadership roles with reputed institutions such as Yes Bank, ABN AMRO, and HDFC Bank.
 
-A Ph.D. in Finance with extensive expertise in Non-Performing Assets and their impact on financial performance, Dr. Sinha has also made remarkable contributions to academia as a permanent faculty member at Sharda University, where he led critical initiatives in accreditation, curriculum development, and industry-academia collaborations. His work spans diverse domains including corporate banking, treasury management, trade finance, risk management, insurance, and global financial strategies.
+    A Ph.D. in Finance with extensive expertise in Non-Performing Assets and their impact on financial performance, Dr. Sinha has also made remarkable contributions to academia as a permanent faculty member at Sharda University, where he led critical initiatives in accreditation, curriculum development, and industry-academia collaborations. His work spans diverse domains including corporate banking, treasury management, trade finance, risk management, insurance, and global financial strategies.
 
-Dr. Sinha is widely recognized as a thought leader, consultant, and motivational trainer, actively associated with national institutions including the National Skill Development Corporation, MSME projects, and AIMA. His publications in SCOPUS-indexed journals and his commitment to building financial acumen among professionals make him an inspiring voice in the industry.`,
+    Dr. Sinha is widely recognized as a thought leader, consultant, and motivational trainer, actively associated with national institutions including the National Skill Development Corporation, MSME projects, and AIMA. His publications in SCOPUS-indexed journals and his commitment to building financial acumen among professionals make him an inspiring voice in the industry.`,
       achievements: [
         "Ph.D. in Finance with expertise in Non-Performing Assets",
         "Over two decades in BFSI sector leadership roles",
@@ -172,21 +187,6 @@ With expertise in student development and academic counseling, Dr. Avinish plays
         "2+ Years of Experience in Sales & Executive Roles",
         "Worked with Reliance Insurance, Maxwell Trading & Techno Task",
         "Proven record of target achievement and client retention"
-      ]
-    },
-    "dr-esha-ahirwar": {
-      name: "Dr. Esha Ahirwar",
-      role: "Director of Medical Admissions",
-      image: "/Dr.Eashaa-ahirwar.PNG",
-      fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`,
-      achievements: [
-        "American University of Barbados graduate",
-        "Clinical rotations in Chicago teaching hospitals",
-        "Direct exposure to U.S. healthcare system",
-        "Mentored students for US licensing exams",
-        "Co-Founder of 4th Ventricle medical learning platform",
-        "Expert in global medical education pathways",
-        "Guides licensing preparation, international applications, and career planning"
       ]
     },
     "kajol-samtani": {
