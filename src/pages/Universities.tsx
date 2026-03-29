@@ -245,6 +245,26 @@ const Universities = () => {
 
   const displayedUgUniversities = ugShowAll ? filteredUgUniversities : filteredUgUniversities.slice(0, 12);
 
+  const handleImageError = (uniName: string) => {
+    setImageErrors(prev => new Set(prev).add(uniName));
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.05 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1, y: 0, scale: 1,
+      transition: { type: "spring" as const, stiffness: 100, damping: 12 },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/30 to-blue-50">
       <AnnouncementPopup />
