@@ -221,8 +221,9 @@ const Universities = () => {
   const [selectedState, setSelectedState] = useState<string>("All");
   const [showAll, setShowAll] = useState(false);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const [ugSearch, setUgSearch] = useState("");
+  const [ugCategoryFilter, setUgCategoryFilter] = useState<string>("All");
+  const [ugShowAll, setUgShowAll] = useState(false);
 
   const filteredUniversities = pgUniversities.filter((uni) => {
     const matchesSearch = uni.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -234,35 +235,15 @@ const Universities = () => {
 
   const displayedUniversities = showAll ? filteredUniversities : filteredUniversities.slice(0, 12);
 
-  const filteredUgCategories = ugCategories.map(cat => ({
-    ...cat,
-    universities: cat.universities.filter(u =>
-      u.name.toLowerCase().includes(ugSearch.toLowerCase())
-    ),
-  })).filter(cat => cat.universities.length > 0);
+  const filteredUgUniversities = ugUniversities.filter((uni) => {
+    const matchesSearch = uni.name.toLowerCase().includes(ugSearch.toLowerCase()) ||
+      uni.location.toLowerCase().includes(ugSearch.toLowerCase()) ||
+      (uni.shortName?.toLowerCase().includes(ugSearch.toLowerCase()) ?? false);
+    const matchesCategory = ugCategoryFilter === "All" || uni.category === ugCategoryFilter;
+    return matchesSearch && matchesCategory;
+  });
 
-  const handleImageError = (uniName: string) => {
-    setImageErrors(prev => new Set(prev).add(uniName));
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.05 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1, y: 0, scale: 1,
-      transition: { type: "spring" as const, stiffness: 100, damping: 12 },
-    },
-  };
-
-  // Get all UG university names for hero logos
-  const allUgNames = ugCategories.flatMap(c => c.universities).map(u => u.name);
+  const displayedUgUniversities = ugShowAll ? filteredUgUniversities : filteredUgUniversities.slice(0, 12);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/30 to-blue-50">
