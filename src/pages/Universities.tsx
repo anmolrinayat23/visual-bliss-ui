@@ -18,17 +18,7 @@ interface University {
   logo?: string;
 }
 
-interface UGUniversity {
-  name: string;
-  fee: string;
-  placement: string;
-}
 
-interface UGCategory {
-  title: string;
-  icon: string;
-  universities: UGUniversity[];
-}
 
 // PG Universities (existing)
 const pgUniversities: University[] = [
