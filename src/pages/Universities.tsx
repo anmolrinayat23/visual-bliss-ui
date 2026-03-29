@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
@@ -265,24 +265,62 @@ const Universities = () => {
         <section className="relative overflow-hidden py-20 md:py-28">
           <div className="absolute inset-0 bg-slate-900" />
           
-          {/* Logo Collage - split PG and UG */}
-          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4 opacity-90">
-            {pgUniversities.slice(0, 40).map((uni, index) => (
-              <motion.div 
-                key={`pg-logo-${index}`}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.02, duration: 0.4 }}
-                className="aspect-square bg-white rounded-xl p-3 shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300"
+          {/* Animated floating particles */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={`particle-${i}`}
+                className="absolute w-2 h-2 rounded-full bg-orange-400/30"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  x: [0, Math.random() * 20 - 10, 0],
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 4,
+                  repeat: Infinity,
+                  delay: Math.random() * 3,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Continuous scrolling logo marquee */}
+          <div className="absolute inset-0 flex flex-col justify-center gap-4 opacity-20">
+            {[0, 1, 2, 3].map((row) => (
+              <motion.div
+                key={`marquee-row-${row}`}
+                className="flex gap-4 whitespace-nowrap"
+                animate={{ x: row % 2 === 0 ? ["0%", "-50%"] : ["-50%", "0%"] }}
+                transition={{
+                  duration: 30 + row * 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
               >
-                {uni.logo && (
-                  <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
-                )}
+                {[...pgUniversities, ...pgUniversities].slice(0, 20).map((uni, index) => (
+                  <div
+                    key={`marquee-${row}-${index}`}
+                    className="flex-shrink-0 w-16 h-16 bg-white rounded-xl p-2 shadow-lg flex items-center justify-center"
+                  >
+                    {uni.logo ? (
+                      <img src={uni.logo} alt="" className="w-full h-full object-contain" />
+                    ) : (
+                      <span className="text-xs font-bold text-primary">{uni.shortName?.charAt(0)}</span>
+                    )}
+                  </div>
+                ))}
               </motion.div>
             ))}
           </div>
           
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/70 to-slate-900/95" />
           
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
@@ -292,22 +330,41 @@ const Universities = () => {
               className="text-center max-w-4xl mx-auto"
             >
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: 0 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-orange-500 backdrop-blur-md rounded-full text-white font-medium mb-6 border border-orange-400/50 shadow-xl"
               >
-                <Building2 className="w-5 h-5" />
+                <motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
+                  <Building2 className="w-5 h-5" />
+                </motion.div>
                 <span>Our Partner Network</span>
               </motion.div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl">
-                <span className="bg-gradient-to-r from-orange-400 via-primary to-amber-400 bg-clip-text text-transparent">Tied Up Universities</span>
-              </h1>
+              <motion.h1
+                className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.7 }}
+              >
+                <motion.span
+                  className="bg-gradient-to-r from-orange-400 via-primary to-amber-400 bg-clip-text text-transparent inline-block"
+                  animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  style={{ backgroundSize: "200% 200%" }}
+                >
+                  Tied Up Universities
+                </motion.span>
+              </motion.h1>
               
-              <p className="text-lg md:text-xl text-orange-100 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
+              <motion.p
+                className="text-lg md:text-xl text-orange-100 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
                 Access a powerful network of top universities and institutions across India, connected through exclusive admission partnerships for world-class education.
-              </p>
+              </motion.p>
 
               {/* PG / UG Toggle */}
               <motion.div
@@ -317,28 +374,32 @@ const Universities = () => {
                 className="flex justify-center mb-10"
               >
                 <div className="bg-white/10 backdrop-blur-lg rounded-full p-1.5 border border-white/20 shadow-2xl flex gap-1">
-                  <button
+                  <motion.button
                     onClick={() => { setActiveTab("pg"); setShowAll(false); }}
                     className={`relative px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 ${
                       activeTab === "pg"
-                        ? "bg-gradient-to-r from-primary to-orange-500 text-white shadow-lg scale-105"
+                        ? "bg-gradient-to-r from-primary to-orange-500 text-white shadow-lg"
                         : "text-white/70 hover:text-white hover:bg-white/10"
                     }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <GraduationCap className="w-5 h-5 inline-block mr-2 -mt-0.5" />
                     PG Universities
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     onClick={() => { setActiveTab("ug"); setShowAll(false); }}
                     className={`relative px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 ${
                       activeTab === "ug"
-                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg scale-105"
+                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
                         : "text-white/70 hover:text-white hover:bg-white/10"
                     }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <BookOpen className="w-5 h-5 inline-block mr-2 -mt-0.5" />
                     UG Universities
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
 
@@ -350,22 +411,30 @@ const Universities = () => {
                 className="flex flex-row justify-center gap-4 md:gap-6"
               >
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileHover={{ scale: 1.08, y: -8 }}
                   className="bg-gradient-to-br from-primary/30 to-orange-600/30 backdrop-blur-lg rounded-2xl p-5 md:p-6 border border-orange-500/40 shadow-2xl hover:border-orange-400 transition-all duration-300 group min-w-[140px] md:min-w-[160px]"
                 >
-                  <GraduationCap className="w-7 h-7 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                  <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+                    <GraduationCap className="w-7 h-7 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                  </motion.div>
                   <div className="text-3xl md:text-4xl font-bold text-orange-400 drop-shadow-md">150+</div>
                   <div className="text-sm text-orange-200 mt-1">Partner Universities</div>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileHover={{ scale: 1.08, y: -8 }}
                   className="relative bg-gradient-to-br from-amber-500/40 via-primary/50 to-orange-600/40 backdrop-blur-lg rounded-2xl p-5 md:p-6 border-2 border-amber-400/60 shadow-2xl hover:border-amber-300 transition-all duration-300 group min-w-[140px] md:min-w-[160px] overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-amber-400/30 rounded-full blur-xl group-hover:bg-amber-400/50 transition-all duration-300" />
+                  <motion.div
+                    className="absolute -top-4 -right-4 w-16 h-16 bg-amber-400/30 rounded-full blur-xl"
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  />
                   <div className="relative z-10">
-                    <MapPin className="w-8 h-8 text-amber-300 mx-auto mb-3 group-hover:scale-110 group-hover:text-amber-200 transition-all duration-300" />
+                    <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}>
+                      <MapPin className="w-8 h-8 text-amber-300 mx-auto mb-3 group-hover:scale-110 group-hover:text-amber-200 transition-all duration-300" />
+                    </motion.div>
                     <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-amber-200 via-orange-300 to-amber-200 bg-clip-text text-transparent drop-shadow-lg tracking-wide">
                       Pan India
                     </div>
@@ -429,7 +498,8 @@ const Universities = () => {
                 <motion.div
                   variants={containerVariants}
                   initial="hidden"
-                  animate="visible"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                 >
                   {displayedUniversities.map((uni, index) => (
@@ -577,7 +647,8 @@ const Universities = () => {
                 <motion.div
                   variants={containerVariants}
                   initial="hidden"
-                  animate="visible"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                 >
                   {displayedUgUniversities.map((uni, index) => (
