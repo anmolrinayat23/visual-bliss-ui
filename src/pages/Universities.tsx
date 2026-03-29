@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { MapPin, Search, Building2, GraduationCap, Users, ChevronDown, IndianRupee, TrendingUp, BookOpen } from "lucide-react";
+import { MapPin, Search, Building2, GraduationCap, ChevronDown, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
