@@ -544,140 +544,109 @@ const Universities = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.4 }}
             >
-              {/* UG Search */}
+              {/* UG Filter Section */}
               <section className="container mx-auto px-4 mb-8">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-blue-200/50"
+                  className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-primary/10"
                 >
-                  <div className="text-center mb-4">
-                    <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                      UG EM-MAT Tied Up Universities
-                    </h2>
-                    <p className="text-muted-foreground mt-1">Explore undergraduate programs with fee & placement details</p>
-                  </div>
-                  <div className="relative max-w-xl mx-auto">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <Input
-                      placeholder="Search UG universities..."
-                      value={ugSearch}
-                      onChange={(e) => setUgSearch(e.target.value)}
-                      className="pl-12 py-6 text-base rounded-xl border-2 border-blue-200 focus:border-blue-500 transition-colors"
-                    />
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col md:flex-row gap-4 items-center">
+                      <div className="relative flex-1 w-full">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                        <Input
+                          placeholder="Search UG universities by name or location..."
+                          value={ugSearch}
+                          onChange={(e) => setUgSearch(e.target.value)}
+                          className="pl-12 py-6 text-base rounded-xl border-2 border-primary/20 focus:border-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {ugCategoryList.map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => { setUgCategoryFilter(cat); setUgShowAll(false); }}
+                          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                            ugCategoryFilter === cat
+                              ? "bg-gradient-to-r from-primary to-orange-500 text-white shadow-md"
+                              : "bg-gray-100 text-foreground hover:bg-gray-200"
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               </section>
 
-              {/* UG Categories */}
-              <section className="container mx-auto px-4 space-y-6">
-                {filteredUgCategories.map((category, catIndex) => (
-                  <motion.div
-                    key={category.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: catIndex * 0.08 }}
-                  >
-                    <Card className="overflow-hidden border-0 shadow-xl rounded-2xl bg-white/95 backdrop-blur-sm">
-                      {/* Category Header */}
-                      <button
-                        onClick={() => setExpandedCategory(expandedCategory === category.title ? null : category.title)}
-                        className="w-full p-5 md:p-6 flex items-center justify-between hover:bg-gray-50/50 transition-colors"
-                      >
-                        <div className="flex items-center gap-4">
-                          <motion.span
-                            className="text-3xl md:text-4xl"
-                            whileHover={{ scale: 1.2, rotate: 10 }}
-                            transition={{ type: "spring" }}
-                          >
-                            {category.icon}
-                          </motion.span>
-                          <div className="text-left">
-                            <h3 className="text-lg md:text-xl font-bold text-foreground">{category.title}</h3>
-                            <p className="text-sm text-muted-foreground">{category.universities.length} universities</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-medium">
-                            {category.universities.length} colleges
-                          </span>
-                          <motion.div
-                            animate={{ rotate: expandedCategory === category.title ? 180 : 0 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            <ChevronDown className="w-6 h-6 text-muted-foreground" />
-                          </motion.div>
-                        </div>
-                      </button>
-
-                      {/* Category Content */}
-                      <AnimatePresence>
-                        {expandedCategory === category.title && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-4 md:px-6 pb-6">
-                              {/* Table Header */}
-                              <div className="grid grid-cols-3 gap-4 p-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-xl text-white text-sm font-bold">
-                                <div className="flex items-center gap-2">
-                                  <Building2 className="w-4 h-4" />
-                                  University
-                                </div>
-                                <div className="flex items-center gap-2 justify-center">
-                                  <IndianRupee className="w-4 h-4" />
-                                  Avg. Fee
-                                </div>
-                                <div className="flex items-center gap-2 justify-center">
-                                  <TrendingUp className="w-4 h-4" />
-                                  Avg. Placement
-                                </div>
+              {/* UG Universities Grid - same as PG */}
+              <section className="container mx-auto px-4">
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                >
+                  {displayedUgUniversities.map((uni, index) => (
+                    <motion.div key={`${uni.name}-${uni.category}-${index}`} variants={itemVariants}>
+                      <Card className="group h-full overflow-hidden bg-white/90 backdrop-blur-sm border-2 border-transparent hover:border-primary/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-2xl">
+                        <CardContent className="p-6 flex flex-col h-full">
+                          <div className="relative mb-4">
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-orange-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md overflow-hidden">
+                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-orange-500 flex items-center justify-center">
+                                <span className="text-white font-bold text-lg">
+                                  {(uni.shortName || uni.name).charAt(0)}
+                                </span>
                               </div>
-
-                              {/* Table Rows */}
-                              {category.universities.map((uni, uniIndex) => (
-                                <motion.div
-                                  key={uni.name}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: uniIndex * 0.04 }}
-                                  className={`grid grid-cols-3 gap-4 p-3 md:p-4 items-center border-b border-gray-100 last:border-0 hover:bg-blue-50/50 transition-colors ${
-                                    uniIndex % 2 === 0 ? "bg-gray-50/50" : "bg-white"
-                                  }`}
-                                >
-                                  <div className="font-semibold text-foreground text-sm md:text-base">
-                                    {uni.name}
-                                  </div>
-                                  <div className="text-center">
-                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-xs md:text-sm font-medium">
-                                      ₹{uni.fee}
-                                    </span>
-                                  </div>
-                                  <div className="text-center">
-                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 text-xs md:text-sm font-medium">
-                                      {uni.placement}
-                                    </span>
-                                  </div>
-                                </motion.div>
-                              ))}
                             </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </Card>
-                  </motion.div>
-                ))}
+                            <span className="absolute top-0 right-0 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                              {uni.category}
+                            </span>
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-bold text-foreground text-lg mb-1 group-hover:text-primary transition-colors line-clamp-2">
+                              {uni.shortName || uni.name}
+                            </h3>
+                            {uni.name !== uni.shortName && uni.shortName && (
+                              <p className="text-sm text-muted-foreground mb-3 line-clamp-1">
+                                {uni.name}
+                              </p>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-auto pt-4 border-t border-gray-100">
+                            <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                            <span className="line-clamp-1">{uni.location}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </motion.div>
 
-                {filteredUgCategories.length === 0 && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-                    <div className="w-24 h-24 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Search className="w-12 h-12 text-blue-400" />
+                {filteredUgUniversities.length > 12 && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-center mt-12">
+                    <Button
+                      onClick={() => setUgShowAll(!ugShowAll)}
+                      size="lg"
+                      variant="outline"
+                      className="rounded-full px-8 py-6 text-base font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl group"
+                    >
+                      {ugShowAll ? "Show Less" : "Show All Universities"}
+                      <ChevronDown className={`ml-2 w-5 h-5 transition-transform duration-300 ${ugShowAll ? "rotate-180" : ""}`} />
+                    </Button>
+                  </motion.div>
+                )}
+
+                {filteredUgUniversities.length === 0 && (
+                  <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-16">
+                    <div className="w-24 h-24 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center">
+                      <Search className="w-12 h-12 text-primary/50" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground mb-2">No Universities Found</h3>
-                    <p className="text-muted-foreground">Try a different search term</p>
+                    <p className="text-muted-foreground">Try adjusting your search or filters</p>
                   </motion.div>
                 )}
               </section>
