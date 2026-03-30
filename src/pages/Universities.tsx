@@ -265,21 +265,45 @@ const Universities = () => {
         <section className="relative overflow-hidden py-20 md:py-28">
           <div className="absolute inset-0 bg-slate-900" />
           
-          {/* Logo Collage - split PG and UG */}
-          <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 p-4 opacity-90">
-            {pgUniversities.slice(0, 40).map((uni, index) => (
-              <motion.div 
-                key={`pg-logo-${index}`}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.02, duration: 0.4 }}
-                className="aspect-square bg-white rounded-xl p-3 shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              >
-                {uni.logo && (
-                  <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
-                )}
-              </motion.div>
-            ))}
+          {/* Logo Collage - 10 per row, 5 PG + 5 UG each row, animated marquee */}
+          <div className="absolute inset-0 overflow-hidden opacity-90">
+            <div className="flex flex-col gap-2 p-3 h-full">
+              {Array.from({ length: 8 }).map((_, rowIndex) => {
+                const pgStart = (rowIndex * 5) % pgUniversities.length;
+                const ugStart = (rowIndex * 5) % ugUniversities.length;
+                const rowPG = Array.from({ length: 5 }, (_, i) => pgUniversities[(pgStart + i) % pgUniversities.length]);
+                const rowUG = Array.from({ length: 5 }, (_, i) => ugUniversities[(ugStart + i) % ugUniversities.length]);
+                const rowItems = [...rowPG, ...rowUG];
+                const isEven = rowIndex % 2 === 0;
+                return (
+                  <motion.div
+                    key={`row-${rowIndex}`}
+                    className="flex gap-2 min-w-0"
+                    animate={{ x: isEven ? [0, -40, 0] : [0, 40, 0] }}
+                    transition={{ duration: 20 + rowIndex * 2, repeat: Infinity, ease: "linear" }}
+                  >
+                    {rowItems.map((uni, colIndex) => (
+                      <motion.div
+                        key={`logo-${rowIndex}-${colIndex}`}
+                        initial={{ opacity: 0, scale: 0.5, rotate: -5 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        transition={{ delay: rowIndex * 0.08 + colIndex * 0.03, duration: 0.5 }}
+                        whileHover={{ scale: 1.15, zIndex: 10, boxShadow: "0 8px 30px rgba(0,0,0,0.3)" }}
+                        className="flex-1 min-w-0 aspect-square bg-white/95 rounded-xl p-2 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-300"
+                      >
+                        {uni.logo ? (
+                          <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" loading="lazy" />
+                        ) : (
+                          <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/20 to-orange-100 flex items-center justify-center">
+                            <span className="text-primary font-bold text-xs md:text-sm">{(uni.shortName || uni.name).slice(0, 4)}</span>
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
           
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/90" />
