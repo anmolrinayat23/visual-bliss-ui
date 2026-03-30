@@ -262,51 +262,68 @@ const Universities = () => {
 
       <main className="pt-24 pb-16">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-20 md:py-28">
-          <div className="absolute inset-0 bg-slate-900" />
+        <section className="relative overflow-hidden py-24 md:py-32 min-h-[600px] md:min-h-[700px]">
+          {/* Deep rich background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
           
-          {/* Logo Collage - 10 per row, 5 PG + 5 UG each row, animated marquee */}
-          <div className="absolute inset-0 overflow-hidden opacity-90">
-            <div className="flex flex-col gap-2 p-3 h-full">
-              {Array.from({ length: 8 }).map((_, rowIndex) => {
-                const pgStart = (rowIndex * 5) % pgUniversities.length;
-                const ugStart = (rowIndex * 5) % ugUniversities.length;
-                const rowPG = Array.from({ length: 5 }, (_, i) => pgUniversities[(pgStart + i) % pgUniversities.length]);
-                const rowUG = Array.from({ length: 5 }, (_, i) => ugUniversities[(ugStart + i) % ugUniversities.length]);
-                const rowItems = [...rowPG, ...rowUG];
-                const isEven = rowIndex % 2 === 0;
-                return (
+          {/* Animated glowing orbs */}
+          <motion.div
+            className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[120px]"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute bottom-10 right-10 w-96 h-96 bg-orange-500/15 rounded-full blur-[150px]"
+            animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 8, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[200px]"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 10, repeat: Infinity }}
+          />
+
+          {/* Infinite scrolling logo marquee rows */}
+          <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-3 py-4">
+            {Array.from({ length: 6 }).map((_, rowIndex) => {
+              const pgStart = (rowIndex * 8) % pgUniversities.length;
+              const ugStart = (rowIndex * 8) % ugUniversities.length;
+              const rowPG = Array.from({ length: 5 }, (_, i) => pgUniversities[(pgStart + i) % pgUniversities.length]);
+              const rowUG = Array.from({ length: 5 }, (_, i) => ugUniversities[(ugStart + i) % ugUniversities.length]);
+              const rowItems = [...rowPG, ...rowUG];
+              const duplicated = [...rowItems, ...rowItems]; // duplicate for seamless loop
+              const isEven = rowIndex % 2 === 0;
+              const speed = 30 + rowIndex * 5;
+
+              return (
+                <div key={`row-${rowIndex}`} className="relative overflow-hidden">
                   <motion.div
-                    key={`row-${rowIndex}`}
-                    className="flex gap-2 min-w-0"
-                    animate={{ x: isEven ? [0, -40, 0] : [0, 40, 0] }}
-                    transition={{ duration: 20 + rowIndex * 2, repeat: Infinity, ease: "linear" }}
+                    className="flex gap-3 w-max"
+                    animate={{ x: isEven ? ["0%", "-50%"] : ["-50%", "0%"] }}
+                    transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
                   >
-                    {rowItems.map((uni, colIndex) => (
+                    {duplicated.map((uni, colIndex) => (
                       <motion.div
                         key={`logo-${rowIndex}-${colIndex}`}
-                        initial={{ opacity: 0, scale: 0.5, rotate: -5 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ delay: rowIndex * 0.08 + colIndex * 0.03, duration: 0.5 }}
-                        whileHover={{ scale: 1.15, zIndex: 10, boxShadow: "0 8px 30px rgba(0,0,0,0.3)" }}
-                        className="flex-1 min-w-0 aspect-square bg-white/95 rounded-xl p-2 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-300"
+                        whileHover={{ scale: 1.2, y: -8, zIndex: 20 }}
+                        className="w-16 h-16 md:w-20 md:h-20 flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-2.5 border border-white/10 hover:border-primary/50 hover:bg-white/20 flex items-center justify-center cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(249,115,22,0.3)]"
                       >
                         {uni.logo ? (
-                          <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" loading="lazy" />
+                          <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain rounded-lg opacity-70 hover:opacity-100 transition-opacity" loading="lazy" />
                         ) : (
-                          <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/20 to-orange-100 flex items-center justify-center">
-                            <span className="text-primary font-bold text-xs md:text-sm">{(uni.shortName || uni.name).slice(0, 4)}</span>
-                          </div>
+                          <span className="text-white/60 font-bold text-[10px] md:text-xs text-center leading-tight">{(uni.shortName || uni.name).slice(0, 5)}</span>
                         )}
                       </motion.div>
                     ))}
                   </motion.div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-          
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/90" />
+
+          {/* Gradient overlays for depth */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-900/50 to-slate-950/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-transparent to-slate-950/70" />
           
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
