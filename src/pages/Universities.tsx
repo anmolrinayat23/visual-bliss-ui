@@ -108,8 +108,8 @@ const pgUniversities: University[] = [
 // UG Universities as flat list with category tags
 const ugUniversities: (University & { category: string })[] = [
   // BTech
-  { name: "Manipal University", shortName: "MANIPAL", location: "All Campuses", city: "Manipal", state: "Karnataka", category: "BTech", logo: "/ug-logos/manipal.png" },
-  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BTech", logo: "/ug-logos/bennett.png" },
+  { name: "Manipal University", shortName: "MANIPAL", location: "All Campuses", city: "Manipal", state: "Karnataka", category: "BTech", logo: "/Manipal University.jpeg" },
+  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BTech", logo: "/BENNETT UNIVERSITY.webp" },
   { name: "Thapar Institute of Technology", shortName: "THAPAR", location: "Patiala, Punjab", city: "Patiala", state: "Punjab", category: "BTech", logo: "/ug-logos/thapar.png" },
   { name: "VIT Bhopal", shortName: "VIT", location: "Bhopal, Madhya Pradesh", city: "Bhopal", state: "Madhya Pradesh", category: "BTech", logo: "/ug-logos/vit.png" },
   { name: "MANIT Bhopal", shortName: "MANIT", location: "Bhopal, Madhya Pradesh", city: "Bhopal", state: "Madhya Pradesh", category: "BTech", logo: "/ug-logos/manit.png" },
