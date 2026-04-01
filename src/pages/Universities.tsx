@@ -283,39 +283,39 @@ const Universities = () => {
             transition={{ duration: 10, repeat: Infinity }}
           />
 
-          {/* Infinite scrolling logo marquee rows */}
+          {/* Scrolling logo marquee rows - CSS animation for performance */}
           <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-3 py-4">
-            {Array.from({ length: 6 }).map((_, rowIndex) => {
-              const pgStart = (rowIndex * 8) % pgUniversities.length;
-              const ugStart = (rowIndex * 8) % ugUniversities.length;
+            {Array.from({ length: 4 }).map((_, rowIndex) => {
+              const pgStart = (rowIndex * 10) % pgUniversities.length;
+              const ugStart = (rowIndex * 10) % ugUniversities.length;
               const rowPG = Array.from({ length: 5 }, (_, i) => pgUniversities[(pgStart + i) % pgUniversities.length]);
               const rowUG = Array.from({ length: 5 }, (_, i) => ugUniversities[(ugStart + i) % ugUniversities.length]);
               const rowItems = [...rowPG, ...rowUG];
-              const duplicated = [...rowItems, ...rowItems]; // duplicate for seamless loop
+              const duplicated = [...rowItems, ...rowItems];
               const isEven = rowIndex % 2 === 0;
-              const speed = 30 + rowIndex * 5;
+              const speed = 40 + rowIndex * 8;
 
               return (
                 <div key={`row-${rowIndex}`} className="relative overflow-hidden">
-                  <motion.div
+                  <div
                     className="flex gap-3 w-max"
-                    animate={{ x: isEven ? ["0%", "-50%"] : ["-50%", "0%"] }}
-                    transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+                    style={{
+                      animation: `marquee-${isEven ? 'left' : 'right'} ${speed}s linear infinite`,
+                    }}
                   >
                     {duplicated.map((uni, colIndex) => (
-                      <motion.div
+                      <div
                         key={`logo-${rowIndex}-${colIndex}`}
-                        whileHover={{ scale: 1.2, y: -8, zIndex: 20 }}
-                        className="w-16 h-16 md:w-20 md:h-20 flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-2.5 border border-white/10 hover:border-primary/50 hover:bg-white/20 flex items-center justify-center cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(249,115,22,0.3)]"
+                        className="w-16 h-16 md:w-20 md:h-20 flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-2.5 border border-white/10 hover:border-primary/50 hover:bg-white/20 flex items-center justify-center cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:scale-110"
                       >
                         {uni.logo ? (
                           <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain rounded-lg opacity-70 hover:opacity-100 transition-opacity" loading="lazy" />
                         ) : (
                           <span className="text-white/60 font-bold text-[10px] md:text-xs text-center leading-tight">{(uni.shortName || uni.name).slice(0, 5)}</span>
                         )}
-                      </motion.div>
+                      </div>
                     ))}
-                  </motion.div>
+                  </div>
                 </div>
               );
             })}
