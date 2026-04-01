@@ -109,7 +109,7 @@ const pgUniversities: University[] = [
 const ugUniversities: (University & { category: string })[] = [
   // BTech
   { name: "Manipal University", shortName: "MANIPAL", location: "All Campuses", city: "Manipal", state: "Karnataka", category: "BTech", logo: "/ug-logos/manipal.png" },
-  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BTech", logo: "/ug-logos/bennett.png" },
+  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BTech", logo: "/Bennett University.jpeg" },
   { name: "Thapar Institute of Technology", shortName: "THAPAR", location: "Patiala, Punjab", city: "Patiala", state: "Punjab", category: "BTech", logo: "/ug-logos/thapar.png" },
   { name: "VIT Bhopal", shortName: "VIT", location: "Bhopal, Madhya Pradesh", city: "Bhopal", state: "Madhya Pradesh", category: "BTech", logo: "/ug-logos/vit.png" },
   { name: "MANIT Bhopal", shortName: "MANIT", location: "Bhopal, Madhya Pradesh", city: "Bhopal", state: "Madhya Pradesh", category: "BTech", logo: "/ug-logos/manit.png" },
@@ -133,7 +133,7 @@ const ugUniversities: (University & { category: string })[] = [
   { name: "Christ University", shortName: "CHRIST", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Commerce", logo: "/ug-logos/christ.png" },
   { name: "Jain University", shortName: "JAIN", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Commerce", logo: "/ug-logos/jain.png" },
   { name: "Ashoka University", shortName: "Ashoka", location: "Sonepat, Haryana", city: "Sonepat", state: "Haryana", category: "Commerce", logo: "/ug-logos/ashoka.png" },
-  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Commerce", logo: "/ug-logos/bennett.png" },
+  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Commerce", logo: "/Bennett University.jpeg" },
   { name: "IMS Ghaziabad", shortName: "IMS", location: "Ghaziabad, Uttar Pradesh", city: "Ghaziabad", state: "Uttar Pradesh", category: "Commerce", logo: "/ug-logos/ims.png" },
   { name: "Graphic Era University", shortName: "GEU", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", category: "Commerce", logo: "/ug-logos/geu.png" },
   { name: "UPES Dehradun", shortName: "UPES", location: "Dehradun, Uttarakhand", city: "Dehradun", state: "Uttarakhand", category: "Commerce", logo: "/ug-logos/upes.png" },
@@ -183,13 +183,13 @@ const ugUniversities: (University & { category: string })[] = [
   { name: "Parul University", shortName: "Parul", location: "Vadodara, Gujarat", city: "Vadodara", state: "Gujarat", category: "BPT", logo: "/ug-logos/parul.png" },
   { name: "GLA University", shortName: "GLA", location: "Mathura, Uttar Pradesh", city: "Mathura", state: "Uttar Pradesh", category: "BPT", logo: "/ug-logos/gla.png" },
   // Liberal Arts
-  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Liberal Arts", logo: "/ug-logos/bennett.png" },
+  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "Liberal Arts", logo: "/Bennett University.jpeg" },
   { name: "Symbiosis School of Liberal Arts", shortName: "SSLA", location: "Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Liberal Arts", logo: "/ug-logos/ssla.png" },
   { name: "Jain University", shortName: "JAIN", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Liberal Arts", logo: "/ug-logos/jain.png" },
   { name: "KREA University", shortName: "KREA", location: "Sri City, Andhra Pradesh", city: "Sri City", state: "Andhra Pradesh", category: "Liberal Arts", logo: "/ug-logos/krea.png" },
   { name: "Ashoka University", shortName: "Ashoka", location: "Sonepat, Haryana", city: "Sonepat", state: "Haryana", category: "Liberal Arts", logo: "/ug-logos/ashoka.png" },
   // BA
-  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BA", logo: "/ug-logos/bennett.png" },
+  { name: "Bennett University", shortName: "BENNETT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BA", logo: "/Bennett University.jpeg" },
   { name: "Manav Rachna University", shortName: "MRU", location: "Faridabad, Haryana", city: "Faridabad", state: "Haryana", category: "BA", logo: "/ug-logos/mru.png" },
   { name: "NIMS Jaipur", shortName: "NIMS", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan", category: "BA", logo: "/ug-logos/nims.png" },
   { name: "Apex University", shortName: "Apex", location: "Jaipur, Rajasthan", city: "Jaipur", state: "Rajasthan", category: "BA", logo: "/ug-logos/apex.png" },
