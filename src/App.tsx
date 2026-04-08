@@ -24,6 +24,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Accountpage from './pages/Accountpage';
 import AdminAuth from "./components/AdminAuth";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AdsLandingPage from "./pages/AdsLandingPage";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +77,7 @@ const App = () => (
           <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/ads_data_landingpage" element={<AdsLandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
