@@ -24,6 +24,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Accountpage from './pages/Accountpage';
 import AdminAuth from "./components/AdminAuth";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AdsLandingPage from "./pages/AdsLandingPage";
 
 const queryClient = new QueryClient();
 
