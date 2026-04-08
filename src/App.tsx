@@ -77,6 +77,7 @@ const App = () => (
           <Route path="/team/:id" element={<TeamMemberDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/ads_data_landingpage" element={<AdsLandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
