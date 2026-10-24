@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import Services from "./Services";
 import Courses from "./Courses";
+import SessionGallery from "@/components/SessionGallery";
 import EmMat from "./EmMat";
 import BookSession from "./BookSession";
 import About from "./About";
@@ -35,6 +36,7 @@ const Index = () => {
           {/* <EmMat showFooter={false}/> */}
           {/* <BookSession showFooter={false}/> */}
           <About showFooter={false}/>
+          <SessionGallery />
         </main>
         
         <Footer />
