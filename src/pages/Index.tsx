@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 import Services from "./Services";
 import Courses from "./Courses";
 import SessionGallery from "@/components/SessionGallery";
+import SuccessStories from "@/components/SuccessStories";
 import EmMat from "./EmMat";
 import BookSession from "./BookSession";
 import About from "./About";
@@ -31,6 +32,7 @@ const Index = () => {
         <Header />
         <main className="pt-16">
           <Hero />
+          <SuccessStories />
           <Services showFooter={false}/>
           <Courses showFooter={false}/>
           {/* <EmMat showFooter={false}/> */}

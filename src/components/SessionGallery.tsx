@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { Video, Users, MessageCircle, Presentation, Sparkles } from "lucide-react";
 
-import g1 from "@/assets/gallery_1.jpg.asset.json";
-import g2 from "@/assets/gallery_2.jpg.asset.json";
-import g3 from "@/assets/gallery_3.jpg.asset.json";
-import g4 from "@/assets/gallery_4.jpg.asset.json";
-import g5 from "@/assets/gallery_5.jpg.asset.json";
-import g6 from "@/assets/gallery_6.jpg.asset.json";
-import g7 from "@/assets/gallery_7.jpg.asset.json";
-import g8 from "@/assets/gallery_8.jpg.asset.json";
-import g9 from "@/assets/gallery_9.jpg.asset.json";
+// Keep gallery files in the repository instead of relying on Lovable's
+// platform-only /__l5e asset URLs. Vite fingerprints these files for builds.
+import g1 from "@/assets/gallery/gallery_1.jpg";
+import g2 from "@/assets/gallery/gallery_2.jpg";
+import g3 from "@/assets/gallery/gallery_3.jpg";
+import g4 from "@/assets/gallery/gallery_4.jpg";
+import g5 from "@/assets/gallery/gallery_5.jpg";
+import g6 from "@/assets/gallery/gallery_6.jpg";
+import g8 from "@/assets/gallery/gallery_8.jpg";
+import g9 from "@/assets/gallery/gallery_9.jpg";
 
 type Session = {
   src: string;
@@ -20,14 +21,14 @@ type Session = {
 };
 
 const sessions: Session[] = [
-  { src: g2.url, title: "Live Classroom Session", tag: "Group Mentorship", icon: Users, span: "lg:col-span-8" },
-  { src: g1.url, title: "Small Group Mentoring", tag: "Mentorship", icon: Users, span: "lg:col-span-4" },
-  { src: g4.url, title: "Expert Guidance Call", tag: "One-on-One", icon: Video, span: "lg:col-span-4" },
-  { src: g6.url, title: "One-on-One Counselling", tag: "One-on-One", icon: MessageCircle, span: "lg:col-span-4" },
-  { src: g9.url, title: "Mindset & Career Workshop", tag: "Workshop", icon: Presentation, span: "lg:col-span-4" },
-  { src: g8.url, title: "Full Batch Live Class", tag: "Group Mentorship", icon: Users, span: "lg:col-span-5" },
-  { src: g5.url, title: "Batch Mentorship Class", tag: "Mentorship", icon: Users, span: "lg:col-span-4" },
-  { src: g3.url, title: "Interactive Learning", tag: "Live Class", icon: Sparkles, span: "lg:col-span-3" },
+  { src: g2, title: "Live Classroom Session", tag: "Group Mentorship", icon: Users, span: "lg:col-span-8" },
+  { src: g1, title: "Small Group Mentoring", tag: "Mentorship", icon: Users, span: "lg:col-span-4" },
+  { src: g4, title: "Expert Guidance Call", tag: "One-on-One", icon: Video, span: "lg:col-span-4" },
+  { src: g6, title: "One-on-One Counselling", tag: "One-on-One", icon: MessageCircle, span: "lg:col-span-4" },
+  { src: g9, title: "Mindset & Career Workshop", tag: "Workshop", icon: Presentation, span: "lg:col-span-4" },
+  { src: g8, title: "Full Batch Live Class", tag: "Group Mentorship", icon: Users, span: "lg:col-span-5" },
+  { src: g5, title: "Batch Mentorship Class", tag: "Mentorship", icon: Users, span: "lg:col-span-4" },
+  { src: g3, title: "Interactive Learning", tag: "Live Class", icon: Sparkles, span: "lg:col-span-3" },
 ];
 
 const SessionGallery = () => {
