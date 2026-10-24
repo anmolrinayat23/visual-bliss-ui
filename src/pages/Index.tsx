@@ -36,6 +36,7 @@ const Index = () => {
           {/* <EmMat showFooter={false}/> */}
           {/* <BookSession showFooter={false}/> */}
           <About showFooter={false}/>
+          <SessionGallery />
         </main>
         
         <Footer />
