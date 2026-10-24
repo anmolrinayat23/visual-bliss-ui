@@ -126,6 +126,7 @@ const ugUniversities: (University & { category: string })[] = [
   { name: "Chandigarh University", shortName: "CU", location: "Chandigarh, Punjab", city: "Chandigarh", state: "Punjab", category: "BTech", logo: "/chandigarh.png" },
   { name: "PIET University", shortName: "PIET", location: "Panipat, Haryana", city: "Panipat", state: "Haryana", category: "BTech", logo: "/piet.jfif" },
   { name: "GNIOT Greater Noida", shortName: "GNIOT", location: "Greater Noida, Uttar Pradesh", city: "Greater Noida", state: "Uttar Pradesh", category: "BTech", logo: "/gniot.png" },
+  { name: "Indian Institute of Science Education and Research Bhopal", shortName: "IISER", location: "Bhopal, MP", city: "Bhopal", state: "Madhya Pradesh", category: "BTech", logo: "/Research.jpeg" },
   // Commerce
   { name: "Mount Carmel College", shortName: "MCC", location: "Bangalore, Karnataka", city: "Bangalore", state: "Karnataka", category: "Commerce", logo: "/Mount Carmel College.jfif" },
   { name: "SCMS Pune (BBA)", shortName: "SCMS", location: "Pune, Maharashtra", city: "Pune", state: "Maharashtra", category: "Commerce", logo: "/scms.jfif" },

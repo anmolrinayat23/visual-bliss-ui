@@ -28,21 +28,21 @@ const TeamMemberDetail = () => {
         "Expert in student acquisition and strategic enrollment growth"
       ]
     },
-    "dr-esha-ahirwar": {
-      name: "Dr. Esha Ahirwar",
-      role: "Director of Medical Admissions",
-      image: "/Dr.Eashaa-ahirwar.PNG",
-      fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`,
-      achievements: [
-        "American University of Barbados graduate",
-        "Clinical rotations in Chicago teaching hospitals",
-        "Direct exposure to U.S. healthcare system",
-        "Mentored students for US licensing exams",
-        "Co-Founder of 4th Ventricle medical learning platform",
-        "Expert in global medical education pathways",
-        "Guides licensing preparation, international applications, and career planning"
-      ]
-    },
+    // "dr-esha-ahirwar": {
+    //   name: "Dr. Esha Ahirwar",
+    //   role: "Director of Medical Admissions",
+    //   image: "/Dr.Eashaa-ahirwar.PNG",
+    //   fullDescription: `Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.\n\nHaving personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.\n\nAs Co-Founder of 4th Ventricle, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.\n\nHer advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.`,
+    //   achievements: [
+    //     "American University of Barbados graduate",
+    //     "Clinical rotations in Chicago teaching hospitals",
+    //     "Direct exposure to U.S. healthcare system",
+    //     "Mentored students for US licensing exams",
+    //     "Co-Founder of 4th Ventricle medical learning platform",
+    //     "Expert in global medical education pathways",
+    //     "Guides licensing preparation, international applications, and career planning"
+    //   ]
+    // },
     "dr-awanish-sinha": {
       name: "Dr. Awanish Kumar Sinha",
       role: "Guest Faculty Expert - Finance",
@@ -171,24 +171,24 @@ With expertise in student development and academic counseling, Dr. Avinish plays
       ]
     },
 
-    
-    "anirudh-tiwari": {
-      name: "Mr. Anirudh Tiwari",
-      role: "Assistant Manager – Admissions",
-      image: "/Anirudh_Tiwari.jpeg",
-      fullDescription: `Anirudh Tiwari is an admissions and student engagement professional with over 2 years of experience in counselling, enrollment strategy, and client relationship management. With a strong background in sales and executive roles across organizations like Reliance Insurance, Maxwell Trading, and Techno Task, he brings a consultative and learner-focused approach to the education sector.\n\nAt Educate Me, he plays a key role in driving student enrollment growth through strategic counselling, admissions funnel management, and data-driven conversion strategies. His work emphasizes personalized guidance, career mapping, and building strong relationships with students and parents to support informed academic decisions.\n\nKey Strengths\n\nAdmissions Strategy & Lead Conversion\nStudent Counselling & Career Guidance\nLearner-Centric Communication\nCRM & Data-Driven Follow-ups\nStakeholder Relationship Management\nTeam Coordination & Performance Focus\n\nProfessional Experience\n• 2+ Years of Experience in Sales & Executive Roles\n• Worked with Reliance Insurance, Maxwell Trading & Techno Task\n• Proven record of target achievement and client retention`,
-      achievements: [
-        "Admissions Strategy & Lead Conversion",
-        "Student Counselling & Career Guidance",
-        "Learner-Centric Communication",
-        "CRM & Data-Driven Follow-ups",
-        "Stakeholder Relationship Management",
-        "Team Coordination & Performance Focus",
-        "2+ Years of Experience in Sales & Executive Roles",
-        "Worked with Reliance Insurance, Maxwell Trading & Techno Task",
-        "Proven record of target achievement and client retention"
-      ]
-    },
+
+    // "anirudh-tiwari": {
+    //   name: "Mr. Anirudh Tiwari",
+    //   role: "Assistant Manager – Admissions",
+    //   image: "/Anirudh_Tiwari.jpeg",
+    //   fullDescription: `Anirudh Tiwari is an admissions and student engagement professional with over 2 years of experience in counselling, enrollment strategy, and client relationship management. With a strong background in sales and executive roles across organizations like Reliance Insurance, Maxwell Trading, and Techno Task, he brings a consultative and learner-focused approach to the education sector.\n\nAt Educate Me, he plays a key role in driving student enrollment growth through strategic counselling, admissions funnel management, and data-driven conversion strategies. His work emphasizes personalized guidance, career mapping, and building strong relationships with students and parents to support informed academic decisions.\n\nKey Strengths\n\nAdmissions Strategy & Lead Conversion\nStudent Counselling & Career Guidance\nLearner-Centric Communication\nCRM & Data-Driven Follow-ups\nStakeholder Relationship Management\nTeam Coordination & Performance Focus\n\nProfessional Experience\n• 2+ Years of Experience in Sales & Executive Roles\n• Worked with Reliance Insurance, Maxwell Trading & Techno Task\n• Proven record of target achievement and client retention`,
+    //   achievements: [
+    //     "Admissions Strategy & Lead Conversion",
+    //     "Student Counselling & Career Guidance",
+    //     "Learner-Centric Communication",
+    //     "CRM & Data-Driven Follow-ups",
+    //     "Stakeholder Relationship Management",
+    //     "Team Coordination & Performance Focus",
+    //     "2+ Years of Experience in Sales & Executive Roles",
+    //     "Worked with Reliance Insurance, Maxwell Trading & Techno Task",
+    //     "Proven record of target achievement and client retention"
+    //   ]
+    // },
     "kajol-samtani": {
       name: "Ms. Kajol Samtani",
       role: "Academic Excellence Lead",
@@ -210,35 +210,35 @@ Fluent in French and certified in Taxation, Kajol blends analytical depth with c
         "Organized Commercio 2k23 and RBI Outreach Program"
       ]
     },
-//     "sulekha-sarkar": {
-//       name: "Ms. Sulekha Sarkar",
-//       role: "Administrative Supervisor",
-//       image: "/sulekha.jpg",
-//       fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.
+    //     "sulekha-sarkar": {
+    //       name: "Ms. Sulekha Sarkar",
+    //       role: "Administrative Supervisor",
+    //       image: "/sulekha.jpg",
+    //       fullDescription: `Ms. Sulekha Sarkar brings over a decade of experience in student interaction, counselling, and academic administration. With extensive exposure to student support and tutoring, she has successfully guided learners through their educational journeys with patience and precision.
 
-// Known for her empathetic approach and strong administrative skills, Ms. Sarkar is dedicated to mentoring young minds and helping them realize their full potential. Her patient guidance and deep understanding of student needs make her an exceptional leader in our counseling department, ensuring every student receives personalized attention and support throughout their educational journey.`,
-//       achievements: [
-//         "Over a decade of experience in student counseling and academic administration",
-//         "Expert in guiding educational journeys with empathy and precision",
-//         "Strong administrative skills and dedicated mentoring approach"
-//       ]
-//     },
-//     "sanjana-sharma": {
-//       name: "Mrs.Sanjana Sharma",
-//       role: "Senior Educational Counsellor",
-//       image: "/sajana.jpg",
-// fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
+    // Known for her empathetic approach and strong administrative skills, Ms. Sarkar is dedicated to mentoring young minds and helping them realize their full potential. Her patient guidance and deep understanding of student needs make her an exceptional leader in our counseling department, ensuring every student receives personalized attention and support throughout their educational journey.`,
+    //       achievements: [
+    //         "Over a decade of experience in student counseling and academic administration",
+    //         "Expert in guiding educational journeys with empathy and precision",
+    //         "Strong administrative skills and dedicated mentoring approach"
+    //       ]
+    //     },
+    //     "sanjana-sharma": {
+    //       name: "Mrs.Sanjana Sharma",
+    //       role: "Senior Educational Counsellor",
+    //       image: "/sajana.jpg",
+    // fullDescription: `Mrs. Sanjana Sharma is a passionate and empathetic Senior Educational Counsellor who believes that every student has a unique story waiting to unfold. With years of experience across creative and corporate fields, she brings warmth, understanding, and practical insight to every counselling session.
 
-// Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
+    // Known for her friendly approach and positive energy, Sanjana helps students discover their strengths, explore their interests, and make confident choices about their education and careers. She blends creativity with guidance, turning challenges into opportunities for growth.
 
-// At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`,
-// achievements: [
-//   "Passionate and empathetic Senior Educational Counsellor",
-//   "Experienced across creative and corporate fields",
-//   "Helps students discover strengths and make confident educational & career choices"
-// ]
+    // At Educate Me, Sanjana’s mission is simple — to inspire learners to believe in themselves and to guide them toward a future filled with purpose, confidence, and success.`,
+    // achievements: [
+    //   "Passionate and empathetic Senior Educational Counsellor",
+    //   "Experienced across creative and corporate fields",
+    //   "Helps students discover strengths and make confident educational & career choices"
+    // ]
 
-//     }
+    //     }
   };
 
   const member = teamMembers[id];

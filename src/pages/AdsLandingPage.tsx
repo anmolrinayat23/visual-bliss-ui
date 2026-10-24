@@ -1,7 +1,55 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import api from "@/lib/api";
 
 const AdsLandingPage = () => {
+  const navigate = useNavigate();
   const [countdown, setCountdown] = useState({ days: "--", hours: "--", minutes: "--", seconds: "--" });
+  
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    city: "",
+    email: "",
+    examPreparing: "Select an option",
+    lookingFor: "Select an option"
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Submitting form with data:", formData);
+    
+    // Basic validation
+    if (formData.examPreparing === "Select an option" || formData.lookingFor === "Select an option") {
+      toast.error("Please select all options");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await api.post("/ads/register", formData);
+      if (response.data.success) {
+        toast.success("Registration Successful! We will contact you soon.");
+        // Short delay for the toast to be seen
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    } catch (error: any) {
+      console.error("Registration error:", error);
+      toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     const examDate = new Date("2026-05-18T00:00:00").getTime();
@@ -299,73 +347,119 @@ const AdsLandingPage = () => {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
+
       <div className="ads-landing">
         {/* Topbar */}
         <div className="topbar">
+          <img src="/logo.png" alt="Educate Me Logo" style={{height:28,marginRight:10,verticalAlign:'middle'}} />
           <span className="pulse-dot"></span>
-          🎯 EM-MAT UG Exam — 18th May 2026 &nbsp;|&nbsp; <strong>Limited Seats</strong> — Register Now!
+          <span style={{fontWeight:700, color:'#FF9100', fontSize:16, marginRight:8}}>EM-MAT UG Exam <span style={{background:'#fff3e0',color:'#FF6D00',padding:'2px 8px',borderRadius:6,marginLeft:8}}>EXAM DATE: 18th May 2026</span></span>
+          <span style={{marginLeft:8}}><strong>Limited Seats</strong> | Register Now!</span>
         </div>
 
         {/* Hero */}
         <section className="hero">
           <div className="al-container">
             <div className="hero-content">
-              <div className="hero-badge">🎓 UG EM-MAT Exam 2026 · Registrations Open</div>
+              <div className="hero-badge">🎓 UG EM-MAT Exam 2026 | Registrations Open</div>
               <h1>Didn't Clear JEE or NEET?<br />Your Career <span>Isn't Over.</span></h1>
               <p className="hero-sub">
-                Take the EM-MAT exam and unlock 1,000+ alternative college options across Engineering, Management, Medical & Design — with expert 1-on-1 career mentorship.
+                Take the EM-MAT exam and unlock <span style={{color:'#FF9100',fontWeight:700}}>160+ Institutes pan India</span> across Engineering, Management, Medical, Arts, Humanities & Design with expert 1-on-1 career mentorship.
               </p>
               <div className="hero-stats">
-                <div className="hero-stat"><div className="num">1,000+</div><div className="label">College Options</div></div>
-                <div className="hero-stat"><div className="num">4</div><div className="label">Career Streams</div></div>
+                <div className="hero-stat"><div className="num">160+</div><div className="label">Institutes Pan India</div></div>
+                <div className="hero-stat"><div className="num">5</div><div className="label">Career Streams</div></div>
                 <div className="hero-stat"><div className="num">1-on-1</div><div className="label">Career Mentorship</div></div>
               </div>
               <div className="hero-trust">✅ Trusted by students across Madhya Pradesh & beyond</div>
+              <div style={{marginTop:24, background:'#fff3e0', borderRadius:10, padding:'12px 18px', color:'#0B1D3A', fontWeight:700, fontSize:16, boxShadow:'0 2px 8px #ff910033'}}>
+                <img src="/aub-logo.png" alt="AUB Logo" style={{height:32,verticalAlign:'middle',marginRight:10}} />
+                <span style={{color:'#FF6D00'}}>Tied with American University of Barbados (CAAM-HP accredited) & US Residency opportunities for all medical aspirants!</span>
+              </div>
             </div>
 
             <div className="form-card">
               <h3 className="form-title">Register for EM-MAT Exam</h3>
-              <p className="form-subtitle">Exam Date: <strong>18th May 2026</strong> · Limited Seats Available</p>
-              <div className="seats-left">🔥 Only limited seats remaining — register now!</div>
-              <form onSubmit={(e) => e.preventDefault()}>
+              <p className="form-subtitle" style={{fontWeight:700, color:'#FF9100', fontSize:18}}>EXAM DATE: <span style={{background:'#fff3e0',padding:'2px 8px',borderRadius:6}}>18th May 2026</span> | Limited Seats Available</p>
+              <div className="seats-left">🔥 Only limited seats remaining, register now!</div>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label>Full Name *</label>
-                  <input type="text" placeholder="Enter your full name" required />
+                  <input 
+                    type="text" 
+                    name="name"
+                    placeholder="Enter your full name" 
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required 
+                  />
                 </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label>Phone Number *</label>
-                    <input type="tel" placeholder="+91 XXXXX XXXXX" required />
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      placeholder="+91 XXXXX XXXXX" 
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required 
+                    />
                   </div>
                   <div className="form-group">
                     <label>City *</label>
-                    <input type="text" placeholder="Your city" required />
+                    <input 
+                      type="text" 
+                      name="city"
+                      placeholder="Your city" 
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      required 
+                    />
                   </div>
                 </div>
                 <div className="form-group">
                   <label>Email Address *</label>
-                  <input type="email" placeholder="you@email.com" required />
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="you@email.com" 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required 
+                  />
                 </div>
                 <div className="form-group">
                   <label>Which exam were you preparing for?</label>
-                  <select>
+                  <select 
+                    name="examPreparing"
+                    value={formData.examPreparing}
+                    onChange={handleInputChange}
+                  >
                     <option>Select an option</option>
                     <option>JEE</option>
                     <option>NEET</option>
+                    <option>CUET</option>
                     <option>Board Exams Only</option>
                     <option>Other</option>
                   </select>
                 </div>
                 <div className="form-group">
                   <label>What are you looking for?</label>
-                  <select>
+                  <select 
+                    name="lookingFor"
+                    value={formData.lookingFor}
+                    onChange={handleInputChange}
+                  >
                     <option>Select an option</option>
                     <option>Alternative College Options</option>
                     <option>1-on-1 Career Mentorship</option>
                     <option>Details on the EM-MAT Exam</option>
                   </select>
                 </div>
-                <button type="submit" className="btn-primary">Register Now — Secure Your Seat →</button>
+                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? "Registering..." : "Register Now — Secure Your Seat →"}
+                </button>
               </form>
               <p className="form-footer">🔒 Your information is secure. We'll never share your data.</p>
             </div>
@@ -376,13 +470,14 @@ const AdsLandingPage = () => {
         <section className="countdown-section fade-up">
           <div className="al-container">
             <div className="countdown-label">Exam Countdown</div>
+            <img src="/hero-bg.jpg" alt="Exam Banner" style={{width:'100%',maxWidth:600,borderRadius:16,margin:'0 auto 18px',display:'block',boxShadow:'0 4px 24px #0b1d3a22'}} />
             <div className="countdown-grid">
               <div className="cd-box"><div className="num">{countdown.days}</div><div className="lbl">Days</div></div>
               <div className="cd-box"><div className="num">{countdown.hours}</div><div className="lbl">Hours</div></div>
               <div className="cd-box"><div className="num">{countdown.minutes}</div><div className="lbl">Minutes</div></div>
               <div className="cd-box"><div className="num">{countdown.seconds}</div><div className="lbl">Seconds</div></div>
             </div>
-            <p className="exam-date-text">Exam Date: <strong>18th May 2026</strong> · Don't miss the registration window</p>
+            <p className="exam-date-text" style={{fontWeight:700, color:'#FF6D00', fontSize:18}}>EXAM DATE: <span style={{background:'#fff3e0',padding:'2px 8px',borderRadius:6}}>18th May 2026</span> <span style={{color:'#0B1D3A',fontWeight:400}}>| Don't miss the registration window</span></p>
           </div>
         </section>
 
@@ -414,12 +509,13 @@ const AdsLandingPage = () => {
           <div className="al-container">
             <div className="section-tag">✦ ABOUT THE EXAM</div>
             <h2>What is the UG EM-MAT Exam?</h2>
-            <p className="desc">The Educate Me Management Aptitude Test (EM-MAT) is your gateway to top colleges across India. One exam. Multiple career paths. Whether it's engineering, management, medicine, or design — EM-MAT gives you the platform to prove your potential.</p>
+            <img src="/BookCounselling.png" alt="Students" style={{width:'100%',maxWidth:700,borderRadius:16,margin:'0 auto 24px',display:'block',boxShadow:'0 4px 24px #0b1d3a22'}} />
+            <p className="desc">The Educate Me Management Aptitude Test (EM-MAT) is your gateway to top colleges across India. One exam. Multiple career paths. Whether it's engineering, management, medicine, arts, humanities, or design, EM-MAT gives you the platform to prove your potential.</p>
             <div className="feature-grid">
-              <div className="feature-card"><div className="f-icon">📝</div><h4>Single Exam, Multiple Streams</h4><p>One test covers aptitude, logical reasoning & subject knowledge — valid across all major streams.</p></div>
-              <div className="feature-card"><div className="f-icon">🏆</div><h4>Scholarship Opportunities</h4><p>Top scorers are eligible for merit-based scholarships at partner institutions.</p></div>
+              <div className="feature-card"><div className="f-icon">📝</div><h4>Single Exam, Multiple Streams</h4><p>One test covers aptitude, logical reasoning & subject knowledge across all major streams.</p></div>
+              <div className="feature-card"><div className="f-icon">🏆</div><h4>Scholarship pathway</h4><p>Top scorers can avail good scholarships on their academic profile at partner institutions.</p></div>
               <div className="feature-card"><div className="f-icon">💻</div><h4>Online & Offline Mode</h4><p>Appear from Bhopal office or take it online from anywhere in India.</p></div>
-              <div className="feature-card"><div className="f-icon">🎓</div><h4>Accepted by 1,000+ Colleges</h4><p>Partner institutions across India recognize EM-MAT scores for direct admission.</p></div>
+              <div className="feature-card"><div className="f-icon">🎓</div><h4>Accepted by 160+ Institutes pan India</h4><p>Partner institutions across India recognize EM-MAT scores for direct admission.</p></div>
               <div className="feature-card"><div className="f-icon">📊</div><h4>Career Assessment Included</h4><p>Get a detailed aptitude report + career mapping with your exam results.</p></div>
               <div className="feature-card"><div className="f-icon">🤝</div><h4>Expert Mentorship</h4><p>Every registrant gets a complimentary 1-on-1 session with career counsellors.</p></div>
             </div>
@@ -445,12 +541,13 @@ const AdsLandingPage = () => {
           <div className="al-container">
             <div className="section-tag">✦ YOUR PATH, YOUR CHOICE</div>
             <h2>Explore Career Streams</h2>
-            <p className="desc">EM-MAT covers all major UG career paths. Pick your stream — we'll guide you to the right college.</p>
+            <p className="desc">EM-MAT covers all major UG career paths. Pick your stream and we'll guide you to the right college.</p>
             <div className="stream-grid">
-              <div className="stream-card"><div className="s-icon">⚙️</div><h4>Engineering</h4><p>B.Tech, B.E. & more — Computer Science, Mechanical, Civil, Electronics</p></div>
-              <div className="stream-card"><div className="s-icon">📈</div><h4>Management</h4><p>BBA, B.Com, Integrated MBA — Finance, Marketing, HR & more</p></div>
-              <div className="stream-card"><div className="s-icon">🏥</div><h4>Medical & Allied</h4><p>MBBS alternatives, BDS, Pharmacy, Nursing, Physiotherapy & more</p></div>
-              <div className="stream-card"><div className="s-icon">🎨</div><h4>Design & Creative</h4><p>B.Des, Animation, Fashion, Interior Design, UX/UI & more</p></div>
+              <div className="stream-card"><img src="/btech_new.jpeg" alt="Engineering" className="s-icon" style={{width:48,height:48,objectFit:'cover',borderRadius:8,marginBottom:12}} /><h4>Engineering</h4><p>B.Tech, B.E. & more (CSE, Mechanical, Civil, Electronics)</p></div>
+              <div className="stream-card"><img src="/bba_new.jpeg" alt="Management" className="s-icon" style={{width:48,height:48,objectFit:'cover',borderRadius:8,marginBottom:12}} /><h4>Management</h4><p>BBA, B.Com, Integrated MBA (Finance, Marketing, HR & more)</p></div>
+              <div className="stream-card"><img src="/MBBS.png" alt="Medical" className="s-icon" style={{width:48,height:48,objectFit:'cover',borderRadius:8,marginBottom:12}} /><h4>Medical & Allied</h4><p>MBBS alternatives, BDS, Pharmacy, Nursing, Physiotherapy & more</p></div>
+              <div className="stream-card"><img src="/art.png" alt="Arts" className="s-icon" style={{width:48,height:48,objectFit:'cover',borderRadius:8,marginBottom:12}} /><h4>Arts & Humanities</h4><p>BA, Liberal Arts, Psychology, Sociology, English, Law & more</p></div>
+              <div className="stream-card"><img src="/bdesign_new.jpeg" alt="Design" className="s-icon" style={{width:48,height:48,objectFit:'cover',borderRadius:8,marginBottom:12}} /><h4>Design & Creative</h4><p>B.Des, Animation, Fashion, Interior Design, UX/UI & more</p></div>
             </div>
           </div>
         </section>

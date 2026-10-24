@@ -4,7 +4,7 @@ import { X, Sparkles, ArrowRight, Trophy, Star, Gift } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
-const TARGET_DATE = new Date("2026-03-08T00:00:00+05:30").getTime();
+const TARGET_DATE = new Date("2026-05-25T00:00:00+05:30").getTime();
 
 const useCountdown = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -51,8 +51,7 @@ const AnnouncementPopup = () => {
   };
 
   return (
-    <>
-    </>
+    <></>
     // <AnimatePresence>
     //   {isVisible && (
     //     <motion.div
@@ -74,7 +73,7 @@ const AnnouncementPopup = () => {
     //         transition={{ duration: 2, repeat: Infinity }}
     //         className="absolute inset-0 rounded-2xl"
     //       />
-          
+
     //       <div className="relative bg-gradient-to-br from-hero-dark via-gray-900 to-hero-dark border border-primary/40 rounded-2xl overflow-hidden shadow-2xl">
     //         {/* Animated particles */}
     //         <div className="absolute inset-0 overflow-hidden">
@@ -164,12 +163,12 @@ const AnnouncementPopup = () => {
     //               className="relative px-5 py-2 bg-gradient-to-r from-primary via-orange-500 to-amber-500 rounded-full"
     //             >
     //               <span className="text-sm md:text-base font-extrabold text-white uppercase tracking-widest">
-    //                 8th March 2026
+    //                 25th May 2026
     //               </span>
     //             </motion.div>
     //           </motion.div>
 
-    //           {/* Main Title with EM-MAT PG highlighted */}
+    //           {/* Main Title with EM-MAT UG highlighted */}
     //           <motion.div
     //             initial={{ y: 20, opacity: 0 }}
     //             animate={{ y: 0, opacity: 1 }}
@@ -189,7 +188,7 @@ const AnnouncementPopup = () => {
     //             >
     //               <Trophy className="w-6 h-6 text-amber-400" />
     //               <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-primary via-orange-400 to-amber-400 bg-clip-text text-transparent">
-    //                 EM-MAT PG ROUND 2
+    //                 EM-MAT UG ROUND 2
     //               </h3>
     //               <Trophy className="w-6 h-6 text-amber-400" />
     //             </motion.div>
@@ -209,7 +208,7 @@ const AnnouncementPopup = () => {
     //                 className="relative"
     //               >
     //                 <p className="text-lg md:text-xl font-bold text-white leading-snug">
-    //                   High Merit, High Rewards
+    //                   📅 Exam on 25th May — Countdown Begins!
     //                 </p>
     //                 <motion.div
     //                   animate={{ 
@@ -219,13 +218,10 @@ const AnnouncementPopup = () => {
     //                   className="mt-2 px-4 py-2 bg-gradient-to-r from-primary/20 via-orange-500/30 to-amber-500/20 rounded-lg border border-primary/40 bg-[length:200%_100%]"
     //                 >
     //                   <p className="text-sm md:text-base text-orange-200 font-medium">
-    //                     Secure Your Scholarship for
+    //                     Let Education Help You Realise Your Potential and Turn It Into Opportunity
     //                   </p>
     //                   <p className="text-base md:text-lg font-bold text-white">
-    //                     PAN India Institutes
-    //                   </p>
-    //                   <p className="text-sm text-orange-300 font-semibold mt-1">
-    //                     This March!
+    //                     COUNTDOWN FOR UG EM-MAT
     //                   </p>
     //                 </motion.div>
     //               </motion.div>
@@ -244,6 +240,36 @@ const AnnouncementPopup = () => {
     //             </div>
     //           </motion.div>
 
+    //           {/* Countdown Timer */}
+    //           <motion.div
+    //             initial={{ opacity: 0, y: 10 }}
+    //             animate={{ opacity: 1, y: 0 }}
+    //             transition={{ delay: 0.5 }}
+    //             className="flex justify-center gap-3 mb-5"
+    //           >
+    //             {[
+    //               { label: "Days", value: countdown.days },
+    //               { label: "Hrs", value: countdown.hours },
+    //               { label: "Min", value: countdown.minutes },
+    //               { label: "Sec", value: countdown.seconds },
+    //             ].map((item) => (
+    //               <div key={item.label} className="flex flex-col items-center">
+    //                 <motion.div
+    //                   key={item.value}
+    //                   initial={{ scale: 1.2 }}
+    //                   animate={{ scale: 1 }}
+    //                   className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/10 border border-primary/30 flex items-center justify-center backdrop-blur-sm"
+    //                 >
+    //                   <span className="text-xl md:text-2xl font-black text-white">
+    //                     {String(item.value).padStart(2, "0")}
+    //                   </span>
+    //                 </motion.div>
+    //                 <span className="text-[10px] md:text-xs text-orange-300 font-semibold mt-1 uppercase tracking-wider">
+    //                   {item.label}
+    //                 </span>
+    //               </div>
+    //             ))}
+    //           </motion.div>
 
     //           {/* CTA Button */}
     //           <motion.div
@@ -263,7 +289,7 @@ const AnnouncementPopup = () => {
     //                 />
     //                 <span className="relative flex items-center justify-center gap-2">
     //                   <Sparkles className="w-4 h-4" />
-    //                   Register Now for EM-MAT Round 2
+    //                   Register Now for EM-MAT UG
     //                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
     //                 </span>
     //               </Button>

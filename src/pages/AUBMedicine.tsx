@@ -541,104 +541,7 @@ const AUBMedicine = () => {
           </div>
         </section>
 
-        {/* ───────── MENTORSHIP — DR. ESHA ───────── */}
-        <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/4 rounded-full blur-3xl" />
-
-          <div className="container mx-auto max-w-6xl relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-14"
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
-                Your Mentor
-              </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">
-                Mentorship Led By
-              </h2>
-              <p className="text-muted-foreground">
-                Expert guidance for your medical career
-              </p>
-            </motion.div>
-
-            {/* Mentor Profile Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <Card className="relative bg-card border border-border/50 overflow-hidden shadow-[var(--shadow-soft)]">
-                {/* Top accent */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-[hsl(30,95%,58%)] to-primary" />
-
-                <div className="flex flex-col lg:flex-row">
-                  {/* Photo Side */}
-                  <div className="lg:w-2/5 relative bg-gradient-to-br from-[hsl(210,50%,10%)] to-[hsl(24,30%,12%)] flex items-center justify-center p-8 sm:p-12 min-h-[320px]">
-                    {/* Decorative rings */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-64 h-64 rounded-full border border-primary/10 animate-spin-slow" />
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-80 h-80 rounded-full border border-white/5" />
-                    </div>
-
-                    <div className="relative z-10">
-                      {/* Photo frame with glow */}
-                      <div className="relative">
-                        <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(30,95%,58%)]/40 blur-xl animate-pulse-ring" />
-                        <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-full overflow-hidden ring-4 ring-primary/30 shadow-[0_0_60px_hsla(24,95%,62%,0.25)]">
-                          <img
-                            src="/Dr.Eashaa-ahirwar.PNG"
-                            alt="Dr. Esha Ahirwar"
-                            className="w-full h-full object-cover object-top"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Info Side */}
-                  <div className="lg:w-3/5 p-8 sm:p-10 lg:p-12">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
-                      Dr. Esha Ahirwar
-                    </h3>
-                    <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-2">
-                      Director — Medical Education
-                    </p>
-                    <p className="text-xs text-muted-foreground mb-6">
-                      ECFMG Certified · Foreign Medical Graduate · MP State Rank 5
-                    </p>
-
-                    <div className="space-y-4 text-muted-foreground text-sm sm:text-base leading-relaxed">
-                      <p>
-                        Dr. Esha Ahirwar is an internationally trained medical graduate whose academic foundation was shaped at the American University of Barbados, School of Medicine, where her education included integrated clinical rotations across multiple teaching hospitals in Chicago. This cross-border training provided her with direct exposure to the U.S. healthcare system and a nuanced understanding of global medical education pathways.
-                      </p>
-                      <p>
-                        Having personally navigated U.S. licensing examinations and competitive academic transitions, she brings a clear understanding of the preparation, positioning, and discipline required for international advancement. Her perspective is informed not only by structured training, but by experience within high-performance academic environments.
-                      </p>
-                      <p>
-                        As Co-Founder of <span className="text-foreground font-semibold">4th Ventricle</span>, a peer-driven medical learning platform, Dr. Esha has mentored students through structured exam preparation and strategic clinical progression. Through this work, she recognized that success is rarely a matter of potential — it is often a matter of clarity, direction, and informed guidance at pivotal stages.
-                      </p>
-                      <p>
-                        Her advisory philosophy blends strategic precision with thoughtful mentorship. She focuses on simplifying complex processes, strengthening professional profiles, and aligning decisions with long-term academic vision. Whether guiding licensing preparation, international applications, or career planning, her commitment remains consistent: cultivating confidence through preparation and credibility through intention.
-                      </p>
-                    </div>
-
-                    <div className="mt-6 flex items-center gap-2 text-muted-foreground bg-muted/50 rounded-full px-5 py-2.5 w-fit">
-                      <Phone className="w-4 h-4 text-primary" />
-                      <span className="text-sm">Contact details shared upon inquiry</span>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          </div>
-        </section>
-
+        {/* Mentorship section removed as requested */}
         {/* ───────── USPs ───────── */}
         <section className="py-16 md:py-24 px-4 sm:px-6 bg-muted/30 relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -652,13 +555,13 @@ const AUBMedicine = () => {
               className="text-center mb-14"
             >
               <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
-                Why Dr. Esha
+                Why Choose Us
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">
                 Unique Strengths & Expertise
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                What sets Dr. Esha Ahirwar's mentorship apart
+                What sets our mentorship apart
               </p>
             </motion.div>
 

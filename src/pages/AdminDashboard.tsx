@@ -85,6 +85,17 @@ interface Session {
   __v?: number;
 }
 
+interface AdsRegistration {
+  _id: string;
+  name: string;
+  phone: string;
+  city: string;
+  email: string;
+  examPreparing: string;
+  lookingFor: string;
+  registrationDate: string;
+}
+
 interface AdminData {
   name: string;
   email: string;
@@ -114,6 +125,7 @@ const AdminDashboard = () => {
   const [ugApplications, setUgApplications] = useState<UGApplication[]>([]);
   const [pgApplications, setPgApplications] = useState<PGApplication[]>([]);
   const [bookSessions, setBookSessions] = useState<Session[]>([]);
+  const [adsRegistrations, setAdsRegistrations] = useState<AdsRegistration[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedApplication, setSelectedApplication] = useState<UGApplication | PGApplication | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -126,7 +138,8 @@ const AdminDashboard = () => {
     stats: true,
     ug: true,
     pg: true,
-    sessions: true
+    sessions: true,
+    ads: true
   });
 
   // Session State
@@ -144,6 +157,9 @@ const AdminDashboard = () => {
   const [pgTotalPages, setPgTotalPages] = useState(1);
   const [ugTotalItems, setUgTotalItems] = useState(0);
   const [pgTotalItems, setPgTotalItems] = useState(0);
+  const [adsCurrentPage, setAdsCurrentPage] = useState(1);
+  const [adsTotalPages, setAdsTotalPages] = useState(1);
+  const [adsTotalItems, setAdsTotalItems] = useState(0);
   const itemsPerPage = 10;
 
   const api = axios.create({
@@ -394,6 +410,30 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchAdsRegistrations = async (page?: number) => {
+    try {
+      setLoading(prev => ({ ...prev, ads: true }));
+      const token = getAuthToken();
+      const usePage = page || adsCurrentPage || 1;
+      const response = await api.get("/ads/all", {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { page: usePage, limit: itemsPerPage, search: searchTerm }
+      });
+
+      if (response.data.success) {
+        setAdsRegistrations(response.data.data);
+        setAdsTotalPages(response.data.pagination.totalPages);
+        setAdsTotalItems(response.data.pagination.totalItems);
+        setAdsCurrentPage(usePage);
+      }
+    } catch (error) {
+      console.error("Error fetching ads registrations:", error);
+      setAdsRegistrations([]);
+    } finally {
+      setLoading(prev => ({ ...prev, ads: false }));
+    }
+  };
+
 
   
   const handleDownloadUGPDF = async () => {
@@ -444,6 +484,41 @@ const AdminDashboard = () => {
       console.error('Error downloading PG PDF:', error);
       // You could add a toast notification here
     }
+  };
+
+  const handleDownloadAdsCSV = () => {
+    if (adsRegistrations.length === 0) return;
+
+    // Define CSV headers
+    const headers = ["Name", "Email", "Phone", "City", "Exam Preparing For", "Looking For", "Registration Date"];
+    
+    // Map data to CSV rows
+    const rows = adsRegistrations.map(reg => [
+      reg.name,
+      reg.email,
+      reg.phone,
+      reg.city,
+      reg.examPreparing,
+      reg.lookingFor,
+      formatDate(reg.registrationDate)
+    ]);
+
+    // Construct CSV content
+    const csvContent = [
+      headers.join(","),
+      ...rows.map(row => row.map(cell => `"${(cell || "").toString().replace(/"/g, '""')}"`).join(","))
+    ].join("\n");
+
+    // Create blob and download link
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `Ads_Registrations_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
 
@@ -632,7 +707,10 @@ const AdminDashboard = () => {
     if (!sessionToDelete) return;
 
     try {
-      await api.delete(`/booking/${sessionToDelete._id}`);
+      const token = getAuthToken();
+      await api.delete(`/booking/${sessionToDelete._id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       fetchBookSessions();
       setSessionDeleteConfirmOpen(false);
       setSessionToDelete(null);
@@ -646,6 +724,7 @@ const AdminDashboard = () => {
     if (!selectedSession || !editSessionFormData) return;
 
     try {
+      const token = getAuthToken();
       const updatePayload = {
         name: editSessionFormData.name,
         email: editSessionFormData.email,
@@ -654,7 +733,9 @@ const AdminDashboard = () => {
         interest: editSessionFormData.interest
       };
 
-      await api.put(`/booking/${selectedSession._id}`, updatePayload);
+      await api.put(`/booking/${selectedSession._id}`, updatePayload, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       fetchBookSessions();
       setSessionDialogOpen(false);
       setIsEditingSession(false);
@@ -765,7 +846,8 @@ const AdminDashboard = () => {
           fetchAdminProfile(),
           fetchUGApplications(),
           fetchPGApplications(),
-          fetchBookSessions()
+          fetchBookSessions(),
+          fetchAdsRegistrations()
         ]);
       } catch (error) {
         console.error("Error fetching all data:", error);
@@ -1345,6 +1427,158 @@ const AdminDashboard = () => {
                   </Table>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Ads Landing Page Leads Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-8"
+        >
+          <Card className="border-orange-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
+            <CardHeader className="border-b border-orange-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-orange-100 rounded-lg">
+                    <Users className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl sm:text-2xl text-gray-900">
+                      Ads Landing Page Leads
+                    </CardTitle>
+                    <CardDescription>Direct registrations from visual-bliss-ui</CardDescription>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={handleDownloadAdsCSV}
+                    className="border-green-200 hover:bg-green-50 text-green-700 font-semibold"
+                    disabled={loading.ads || adsRegistrations.length === 0}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Download Leads Data (CSV)
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader className="bg-orange-50/50">
+                    <TableRow>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3">No.</TableHead>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3">Student Name</TableHead>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3">Contact Info</TableHead>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3">City</TableHead>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3">Exam</TableHead>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3">Interested In</TableHead>
+                      <TableHead className="font-semibold text-orange-900 px-4 py-3 text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {loading.ads ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-20">
+                          <Loader2 className="w-8 h-8 animate-spin mx-auto text-orange-500 mb-2" />
+                          <span className="text-gray-500">Loading leads...</span>
+                        </TableCell>
+                      </TableRow>
+                    ) : adsRegistrations.length > 0 ? (
+                      adsRegistrations.map((reg, index) => (
+                        <TableRow key={reg._id} className="hover:bg-orange-50/30 transition-colors">
+                          <TableCell className="px-4 py-3 font-mono text-xs text-gray-400">
+                            {(adsCurrentPage - 1) * itemsPerPage + index + 1}
+                          </TableCell>
+                          <TableCell className="px-4 py-3 font-medium text-gray-900">
+                            {reg.name}
+                          </TableCell>
+                          <TableCell className="px-4 py-3">
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-1 text-xs text-gray-600">
+                                <Mail className="w-3 h-3" /> {reg.email}
+                              </div>
+                              <div className="flex items-center gap-1 text-xs text-gray-600">
+                                <Phone className="w-3 h-3" /> {reg.phone}
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell className="px-4 py-3">
+                            <div className="flex items-center gap-1 text-sm text-gray-600">
+                              <MapPin className="w-3 h-3 text-orange-400" /> {reg.city}
+                            </div>
+                          </TableCell>
+                          <TableCell className="px-4 py-3">
+                            <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-100">
+                              {reg.examPreparing}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="px-4 py-3 text-sm text-gray-600">
+                            {reg.lookingFor}
+                          </TableCell>
+                          <TableCell className="px-4 py-3 text-right">
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              onClick={async () => {
+                                if(confirm("Delete this lead permanently?")) {
+                                  try {
+                                    await api.delete(`/ads/${reg._id}`);
+                                    fetchAdsRegistrations();
+                                  } catch (err) {
+                                    alert("Delete failed");
+                                  }
+                                }
+                              }}
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-20 text-gray-400">
+                          No registration leads found yet.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              
+              {!loading.ads && adsTotalPages > 1 && (
+                <div className="px-4 py-3 bg-orange-50/30 border-t border-orange-100 flex items-center justify-between">
+                  <p className="text-xs text-gray-500 italic">
+                    Showing {(adsCurrentPage-1)*itemsPerPage + 1} to {Math.min(adsCurrentPage*itemsPerPage, adsTotalItems)} of {adsTotalItems} leads
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() => fetchAdsRegistrations(adsCurrentPage - 1)}
+                      disabled={adsCurrentPage === 1}
+                    >
+                      Prev
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() => fetchAdsRegistrations(adsCurrentPage + 1)}
+                      disabled={adsCurrentPage === adsTotalPages}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </motion.div>
