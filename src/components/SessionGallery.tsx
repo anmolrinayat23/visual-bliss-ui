@@ -71,7 +71,7 @@ const SessionGallery = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.12, ease: "easeOut" }}
               viewport={{ once: true, margin: "-60px" }}
-              className={`${s.span} sm:col-span-1 lg:col-span-${s.span.split("-")[2]}`}
+              className={`${s.span} sm:col-span-1`}
             >
               <div className="group relative h-56 sm:h-60 md:h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer ring-1 ring-gray-200 hover:ring-orange-300">
                 <img
