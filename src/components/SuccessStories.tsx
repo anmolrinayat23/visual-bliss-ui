@@ -17,6 +17,7 @@ import {
   Pause,
   Play,
   Sparkles,
+  Star,
   X,
   ZoomIn,
   ZoomOut,
@@ -53,15 +54,19 @@ const banners = [
 
 type Banner = (typeof banners)[number];
 
+const destinations = ["IIM Jammu", "Great Lakes", "NMIMS", "SOIL", "XISS", "GIBS", "IILM", "GL Bajaj"];
+
 function BannerCard({
   banner,
   index,
   animate,
+  activeOnMobile,
   onOpen,
 }: {
   banner: Banner;
   index: number;
   animate: boolean;
+  activeOnMobile: boolean;
   onOpen: (index: number, trigger: HTMLButtonElement) => void;
 }) {
   const rotateX = useMotionValue(0);
@@ -90,7 +95,7 @@ function BannerCard({
 
   return (
     <motion.article
-      className={`success-story success-story--${index + 1}`}
+      className={`success-story success-story--${index + 1}${activeOnMobile ? " success-story--mobile-active" : ""}`}
       initial={false}
       whileInView={animate ? { opacity: [0.4, 1], y: [40, 0] } : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
@@ -99,10 +104,10 @@ function BannerCard({
       <div className="success-story__chapter">
         <span className="success-story__number">{banner.chapter}</span>
         <div>
-          <p className="success-story__eyebrow">THE NEXT CHAPTER</p>
+          <p className="success-story__eyebrow">CHAPTER {banner.chapter} / CLASS OF 2026</p>
           <h3>{banner.title}</h3>
         </div>
-        <ArrowDown size={20} aria-hidden="true" />
+        <span className="success-story__chapter-label">{index === 0 ? "18 stories" : "9 stories"}<ArrowDown size={16} aria-hidden="true" /></span>
       </div>
 
       <div className="success-story__perspective">
@@ -127,6 +132,7 @@ function BannerCard({
                   loading="lazy"
                   decoding="async"
                 />
+                <span className="success-story__hover-hint" aria-hidden="true"><Maximize2 size={18} /> Take a closer look</span>
               </span>
               <span className="success-story__caption">
                 <span>
@@ -154,6 +160,7 @@ const SuccessStories = () => {
   const inView = useInView(sectionRef, { amount: 0.1 });
   const reducedMotion = useReducedMotion();
   const [paused, setPaused] = useState(false);
+  const [mobileBatch, setMobileBatch] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [zoomed, setZoomed] = useState(false);
   const animate = !reducedMotion && !paused && inView && selected === null;
@@ -187,6 +194,11 @@ const SuccessStories = () => {
           <span className="success-stories__orb success-stories__orb--one" />
           <span className="success-stories__orb success-stories__orb--two" />
           <span className="success-stories__watermark">2026</span>
+          <svg className="success-stories__orbits" viewBox="0 0 1440 1400" fill="none" preserveAspectRatio="none">
+            <ellipse cx="720" cy="690" rx="830" ry="420" transform="rotate(-24 720 690)" />
+            <ellipse cx="720" cy="690" rx="860" ry="450" transform="rotate(-24 720 690)" />
+            <ellipse className="success-stories__orbit-trail" cx="720" cy="690" rx="830" ry="420" transform="rotate(-24 720 690)" />
+          </svg>
           <Sparkles className="success-stories__spark success-stories__spark--one" />
           <Sparkles className="success-stories__spark success-stories__spark--two" />
           <span className="success-stories__dot success-stories__dot--one" />
@@ -195,7 +207,7 @@ const SuccessStories = () => {
 
         <div className="success-stories__container">
           <div className="success-stories__topline">
-            <span className="success-stories__kicker"><span /> THE EDUCATE ME YEARBOOK</span>
+            <span className="success-stories__kicker"><span /> THE EDUCATE ME SUCCESS EDIT</span>
             {!reducedMotion && (
               <button
                 type="button"
@@ -212,26 +224,44 @@ const SuccessStories = () => {
 
           <div className="success-stories__heading-row">
             <div>
-              <div className="success-stories__edition"><GraduationCap size={17} aria-hidden="true" /> CLASS OF 2026</div>
+              <div className="success-stories__edition"><GraduationCap size={17} aria-hidden="true" /> REAL PEOPLE. REAL POSSIBILITIES.</div>
               <h2 id="success-stories-title">
-                Big dreams.<br />
-                <span>Beautiful beginnings.</span>
+                Ambition, meet<br />
+                <span>your next chapter.<svg viewBox="0 0 600 24" fill="none" aria-hidden="true"><path d="M4 15C170 1 350 1 592 8M150 22C280 12 430 11 560 14" /></svg></span>
               </h2>
             </div>
             <div className="success-stories__intro">
-              <p>From the first conversation<br className="success-stories__desktop-break" /> to the next big milestone.</p>
-              <p>Meet the faces behind our story. Two batches, countless ambitions, and a future full of possibility.</p>
-              <span className="success-stories__handwritten">This is just the beginning <ArrowDown size={19} aria-hidden="true" /></span>
+              <div className="success-stories__stat"><span>27<span>✦</span></span><p>student stories.<br />One shared beginning.</p></div>
+              <p>From “what’s next?” to a whole new world. Meet the students taking their next step with Educate Me.</p>
+              <span className="success-stories__handwritten">And we’re just getting started <ArrowDown size={19} aria-hidden="true" /></span>
             </div>
+          </div>
+
+          <div className="success-stories__batch-switcher" role="group" aria-label="Choose a student batch">
+            {banners.map((banner, index) => (
+              <button key={banner.chapter} type="button" aria-pressed={mobileBatch === index} onClick={() => setMobileBatch(index)}>
+                <span>{banner.batch}</span><span>{index === 0 ? "PG · 2026" : "Class of 2026"}</span>
+              </button>
+            ))}
           </div>
 
           <div className="success-stories__gallery">
             {banners.map((banner, index) => (
-              <BannerCard key={banner.chapter} banner={banner} index={index} animate={animate} onOpen={openBanner} />
+              <BannerCard key={banner.chapter} banner={banner} index={index} animate={animate} activeOnMobile={mobileBatch === index} onOpen={openBanner} />
             ))}
             <div className="success-stories__seal" aria-hidden="true">
+              <svg className="success-stories__seal-ring" viewBox="0 0 120 120"><defs><path id="success-seal-circle" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs><text><textPath href="#success-seal-circle" textLength="276">REAL STORIES ✦ BRIGHTER FUTURES ✦ </textPath></text></svg>
               <Sparkles size={22} />
-              <span>POTENTIAL<br /><strong>INTO PROGRESS</strong></span>
+              <span>MADE OF<br /><strong>AMBITION</strong></span>
+            </div>
+          </div>
+
+          <div className="success-stories__destinations">
+            <p>NEW CHAPTERS. INCREDIBLE DESTINATIONS.</p>
+            <div className="success-stories__marquee" role="img" aria-label={`Student destinations featured in the banners include ${destinations.join(", ")}.`}>
+              <div className="success-stories__marquee-track" aria-hidden="true">
+                {[0, 1].map((copy) => <div key={copy} className="success-stories__marquee-group">{destinations.map((name) => <span key={name}>{name}<Star size={13} /></span>)}</div>)}
+              </div>
             </div>
           </div>
 
@@ -239,12 +269,12 @@ const SuccessStories = () => {
             <div className="success-stories__closing-copy">
               <span className="success-stories__closing-icon"><GraduationCap size={25} aria-hidden="true" /></span>
               <div>
-                <p>Your story could be next.</p>
-                <span>Let’s find the path that’s right for you.</span>
+                <p>The next story? <em>Make it yours.</em></p>
+                <span>Your ambitions deserve a great beginning.</span>
               </div>
             </div>
             <Link to="/session" className="success-stories__cta">
-              Start your journey <ArrowUpRight size={20} aria-hidden="true" />
+              Let’s write your story <ArrowUpRight size={20} aria-hidden="true" />
             </Link>
           </div>
           <p className="success-stories__footnote">BHOPAL <span>✦</span> NOIDA <span>✦</span> PUNE <span className="success-stories__footnote-line" /> ONE SHARED VISION.</p>

@@ -8,6 +8,7 @@ import Services from "./Services";
 import Courses from "./Courses";
 import SessionGallery from "@/components/SessionGallery";
 import SuccessStories from "@/components/SuccessStories";
+import GoogleReviews from "@/components/GoogleReviews";
 import EmMat from "./EmMat";
 import BookSession from "./BookSession";
 import About from "./About";
@@ -39,6 +40,7 @@ const Index = () => {
           {/* <BookSession showFooter={false}/> */}
           <About showFooter={false}/>
           <SessionGallery />
+          <GoogleReviews />
         </main>
         
         <Footer />
