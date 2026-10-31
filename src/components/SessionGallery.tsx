@@ -2,19 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import {
-  ArrowDownLeft, ArrowLeft, ArrowRight, ArrowUpRight, Camera, Check,
+  ArrowDownLeft, ArrowLeft, ArrowRight, ArrowUpRight, Camera,
   Expand, MessageCircle, Pause, Play, Presentation, Sparkles, Users,
   X, ZoomIn, ZoomOut,
 } from "lucide-react";
-import g1 from "@/assets/gallery/gallery_1.jpg";
-import g2 from "@/assets/gallery/gallery_2.jpg";
-import g3 from "@/assets/gallery/gallery_3.jpg";
-import g4 from "@/assets/gallery/gallery_4.jpg";
-import g5 from "@/assets/gallery/gallery_5.jpg";
-import g6 from "@/assets/gallery/gallery_6.jpg";
-import g7 from "@/assets/gallery/gallery_7.jpg";
-import g8 from "@/assets/gallery/gallery_8.jpg";
-import g9 from "@/assets/gallery/gallery_9.jpg";
+import classroom from "@/assets/sessions/session-054-classroom.png";
+import conversation from "@/assets/sessions/session-098-discussion.png";
+import interactiveWorkshop from "@/assets/sessions/session-040-faculty-workshop.png";
+import community from "@/assets/sessions/session-091-community.png";
+import familyGuidance from "@/assets/sessions/session-073-family-guidance.png";
+import familyConversation from "@/assets/sessions/session-076-family-guidance.png";
+import familyCounselling from "@/assets/sessions/session-085-family-guidance.png";
+import facultyWorkshop from "@/assets/sessions/session-007-faculty-workshop.png";
 import "./SessionGallery.css";
 
 const filters = ["All moments", "Mentorship", "Personal guidance", "Workshops"] as const;
@@ -27,25 +26,36 @@ type Session = {
   alt: string;
   width: number;
   height: number;
+  crop: { x: number; y: number; width: number; height: number };
 };
 
-// Original photographs travel with the build; no platform-only image URLs.
+// Byte-for-byte originals from the user's Screenshots folder. Preview bounds
+// hide browser/desktop chrome with CSS; the viewer always opens the full file.
 const featured: Session = {
-  id: "full-class", src: g8, title: "A room full of possibility.", category: "Mentorship",
-  alt: "Students and an Educate Me mentor sharing a live online classroom session in a video-call grid.",
-  width: 1366, height: 600,
+  id: "full-class", src: classroom, title: "A classroom full of possibility.", category: "Mentorship",
+  alt: "An Educate Me group session with students and their mentor in a large video-call grid.",
+  width: 1366, height: 768, crop: { x: 8, y: 120, width: 1350, height: 544 },
 };
 const sessions: Session[] = [
-  { id: "classroom", src: g2, title: "Learning, together.", category: "Mentorship", alt: "Educate Me students and mentors in a group video-call classroom.", width: 1078, height: 610 },
-  { id: "guidance", src: g4, title: "A little expert perspective.", category: "Personal guidance", alt: "A student discussing their next steps with experts on an Educate Me guidance call.", width: 1058, height: 610 },
-  { id: "mindset", src: g9, title: "A fresh way to think.", category: "Workshops", alt: "A Mindset Shift presentation from an Educate Me workshop, exploring ownership of learning and meaningful work.", width: 905, height: 528 },
-  { id: "small-group", src: g1, title: "Space for every question.", category: "Mentorship", alt: "A small group of students and their mentor in an Educate Me online discussion.", width: 1058, height: 610 },
-  { id: "counselling", src: g6, title: "Your goals. Your conversation.", category: "Personal guidance", alt: "A student speaking during a personal Educate Me counselling session.", width: 1095, height: 472 },
-  { id: "batch", src: g5, title: "Growing as a community.", category: "Mentorship", alt: "Students joining an Educate Me group learning session over a video call.", width: 1078, height: 610 },
-  { id: "interactive", src: g3, title: "Ideas into understanding.", category: "Mentorship", alt: "Students taking notes while their Educate Me mentor leads an interactive session.", width: 1056, height: 610 },
-  { id: "connections", src: g7, title: "Different faces. Shared ambition.", category: "Mentorship", alt: "A full grid of students connecting with an Educate Me mentor during a live class.", width: 1048, height: 610 },
+  { id: "community", src: community, title: "Different faces. Shared ambition.", category: "Mentorship", alt: "Students and their Educate Me mentor connecting in a classroom video-call grid.", width: 1366, height: 768, crop: { x: 13, y: 145, width: 1040, height: 480 } },
+  { id: "small-group", src: conversation, title: "Learning grows through conversation.", category: "Mentorship", alt: "Five participants smiling and talking together during a small-group Educate Me session.", width: 1366, height: 768, crop: { x: 13, y: 145, width: 1040, height: 480 } },
+  { id: "family-guidance", src: familyGuidance, title: "Planning the next step, together.", category: "Personal guidance", alt: "An Educate Me guidance call with two participants sharing one camera, a faculty member and a mentor.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },
+  { id: "family-conversation", src: familyConversation, title: "Guidance that includes the family.", category: "Personal guidance", alt: "A student and an accompanying participant sharing a camera during a guidance conversation with two mentors.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },
+  { id: "family-counselling", src: familyCounselling, title: "A shared conversation. A clearer plan.", category: "Personal guidance", alt: "Three participants sharing one video tile in an Educate Me guidance conversation with a faculty member and mentor.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },
+  { id: "faculty-workshop", src: facultyWorkshop, title: "Learn with faculty. Grow with confidence.", category: "Workshops", alt: "A faculty member, students and an Educate Me mentor participating in a teacher-led group session.", width: 1366, height: 768, crop: { x: 14, y: 141, width: 1338, height: 523 } },
+  { id: "interactive-workshop", src: interactiveWorkshop, title: "Expert perspectives. Fresh possibilities.", category: "Workshops", alt: "A teacher speaking with students and an Educate Me mentor in an interactive group video session.", width: 1366, height: 768, crop: { x: 16, y: 147, width: 1335, height: 509 } },
 ];
 const allSessions = [featured, ...sessions];
+
+function SessionPreview({ session, fit = false }: { session: Session; fit?: boolean }) {
+  return <span className="session-journal__viewport" style={{ aspectRatio: `${session.crop.width} / ${session.crop.height}`, width: fit ? `${Math.min(1, (session.crop.width / session.crop.height) / (16 / 9)) * 100}%` : "100%" }}>
+    <img
+      src={session.src} alt={session.alt} width={session.width} height={session.height}
+      loading="lazy" decoding="async"
+      style={{ width: `${session.width / session.crop.width * 100}%`, left: `${-session.crop.x / session.crop.width * 100}%`, top: `${-session.crop.y / session.crop.height * 100}%` }}
+    />
+  </span>;
+}
 const categoryIcons = { Mentorship: Users, "Personal guidance": MessageCircle, Workshops: Presentation };
 
 const SessionGallery = () => {
@@ -109,7 +119,7 @@ const SessionGallery = () => {
     <>
       <section id="live-sessions" ref={sectionRef} className="session-journal" aria-labelledby="session-journal-title" data-animated={animate}>
         <div className="session-journal__decoration" aria-hidden="true">
-          <span className="session-journal__wash" />
+          <span className="session-journal__wash" /><span className="session-journal__background-word">TOGETHER.</span>
           <svg className="session-journal__thread" viewBox="0 0 1440 1400" fill="none" preserveAspectRatio="none"><path d="M-40 500C240 260 460 420 590 300S1130 80 1270 360S1110 750 1330 940S1570 1160 1350 1380" /></svg>
           <Sparkles className="session-journal__spark session-journal__spark--one" />
           <Sparkles className="session-journal__spark session-journal__spark--two" />
@@ -117,43 +127,35 @@ const SessionGallery = () => {
         <div className="session-journal__container">
           <div className="session-journal__topline">
             <span><Camera size={15} aria-hidden="true" /><span>INSIDE EDUCATE ME</span><span className="session-journal__topline-divider" /><span className="session-journal__journal-label">THE SESSION JOURNAL</span></span>
-            {!reducedMotion && <button type="button" className="session-journal__motion-toggle" onClick={() => setPaused((value) => !value)} aria-label="Pause gallery animations" aria-pressed={paused}>
-              {paused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{paused ? "Motion paused" : "Pause motion"}</span>
+            {!reducedMotion && <button type="button" className="session-journal__motion-toggle" onClick={() => setPaused((value) => !value)} aria-label={paused ? "Resume gallery animations" : "Pause gallery animations"} aria-pressed={paused}>
+              {paused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{paused ? "Resume motion" : "Pause motion"}</span>
             </button>}
           </div>
 
           <div className="session-journal__heading">
             <div>
-              <p className="session-journal__eyebrow">A CLOSER LOOK AT THE JOURNEY</p>
-              <h2 id="session-journal-title">Glimpses of our<br /><em>Live Sessions.<svg viewBox="0 0 480 18" fill="none" aria-hidden="true"><path d="M3 11C120 1 300 1 475 8M135 17C240 9 340 9 432 13" /></svg></em></h2>
+              <p className="session-journal__eyebrow">REAL MOMENTS. REAL CONNECTIONS.</p>
+              <h2 id="session-journal-title">Inside our<br /><em>Live Sessions.<svg viewBox="0 0 480 18" fill="none" aria-hidden="true"><path d="M3 11C120 1 300 1 475 8M135 17C240 9 340 9 432 13" /></svg></em></h2>
             </div>
             <div className="session-journal__intro">
-              <p>The questions. The conversations.<br />The moments that move us forward.</p>
-              <span>Step inside our mentorship classes, personal guidance calls and workshops. This is what learning together looks like.</span>
-              <span className="session-journal__handwritten">Real people. A little more possibility.<ArrowDownLeft size={24} aria-hidden="true" /></span>
+              <p>A screen full of people.<br />A world of possibility.</p>
+              <span>From personal guidance to practical workshops, take a look at the conversations moving our students forward.</span>
+              <span className="session-journal__handwritten">This is where it begins.<ArrowDownLeft size={24} aria-hidden="true" /></span>
             </div>
           </div>
 
           <div className="session-journal__feature">
-            <motion.div className="session-journal__feature-frame" initial={false} whileInView={reducedMotion || paused ? { opacity: 1, y: 0 } : { opacity: [0.4, 1], y: [24, 0] }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.65 }}>
-              <div className="session-journal__frame-top"><span className="session-journal__frame-dots" aria-hidden="true"><i /><i /><i /></span><span>THE CLASSROOM, UP CLOSE</span><Camera size={14} aria-hidden="true" /></div>
+            <motion.div className="session-journal__feature-frame" initial={false} whileInView={reducedMotion || paused ? { opacity: 1, y: 0 } : { opacity: [0.5, 1], y: [24, 0] }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reducedMotion || paused ? 0 : 0.7 }}>
+              <div className="session-journal__frame-top"><span className="session-journal__frame-dots" aria-hidden="true"><i /><i /><i /></span><span>THE CLASSROOM, UP CLOSE</span><Camera size={15} aria-hidden="true" /></div>
               <button type="button" className="session-journal__feature-photo" onClick={(event) => openPhoto(featured, event.currentTarget, allSessions)} aria-label="View featured classroom photo" aria-haspopup="dialog">
-                <img src={featured.src} alt={featured.alt} width={featured.width} height={featured.height} loading="lazy" decoding="async" />
-                <span className="session-journal__feature-open"><Expand size={18} aria-hidden="true" /><span>Step inside</span></span>
+                <SessionPreview session={featured} />
+                <span className="session-journal__feature-open"><Expand size={15} aria-hidden="true" /><span>Open the full moment</span><ArrowUpRight size={17} aria-hidden="true" /></span>
               </button>
-              <div className="session-journal__feature-caption"><div><span className="session-journal__eyebrow">IN FOCUS / GROUP MENTORSHIP</span><h3>{featured.title}</h3></div><span className="session-journal__snapshot">A moment from our sessions</span></div>
+              <div className="session-journal__feature-caption"><div><span className="session-journal__eyebrow">GROUP MENTORSHIP / LEARNING TOGETHER</span><h3>{featured.title}</h3></div><span className="session-journal__snapshot">One classroom.<br />So many possibilities.</span></div>
             </motion.div>
-            <aside className="session-journal__fieldnote">
-              <span className="session-journal__tape" aria-hidden="true" />
-              <span className="session-journal__note-label"><Sparkles size={15} aria-hidden="true" /> MORE THAN A CLASS</span>
-              <p>Good questions.<br />Real connections.<br /><em>New beginnings.</em></p>
-              <span className="session-journal__note-copy">Behind every next step is a conversation that makes things a little clearer.</span>
-              <div className="session-journal__note-list"><span><Check size={14} aria-hidden="true" /> Room for your questions</span><span><Check size={14} aria-hidden="true" /> Guidance for your goals</span><span><Check size={14} aria-hidden="true" /> Learning with a community</span></div>
-              <svg className="session-journal__note-star" viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M40 5L45 29L64 14L52 35L76 40L52 45L66 66L45 52L40 76L35 52L14 66L29 45L5 40L29 35L15 15L35 29Z" /></svg>
-            </aside>
           </div>
 
-          <div className="session-journal__gallery-heading"><div><span className="session-journal__eyebrow">THE MOMENTS IN BETWEEN</span><h3>A window into our world.</h3></div><span className="session-journal__gallery-hint"><Expand size={14} aria-hidden="true" /> Tap any photo to explore</span></div>
+          <div className="session-journal__gallery-heading"><div><span className="session-journal__eyebrow">THE SESSION COLLECTION</span><h3>A closer look at the journey.</h3></div><span className="session-journal__gallery-hint"><Expand size={14} aria-hidden="true" /> Tap any photo to explore</span></div>
           <div className="session-journal__filter-row">
             <div className="session-journal__filters" role="group" aria-label="Filter session photos">
               {filters.map((item) => <button key={item} type="button" className="session-journal__filter" aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}<span>{item === "All moments" ? sessions.length : sessions.filter((session) => session.category === item).length}</span></button>)}
@@ -161,7 +163,7 @@ const SessionGallery = () => {
             <span className="session-journal__result-count" aria-live="polite">{String(visibleSessions.length).padStart(2, "0")} moments to explore</span>
           </div>
 
-          <div ref={photosRef} className="session-journal__photos" onScroll={updateScroll} role="region" aria-label="Session photographs" tabIndex={0}>
+          <div ref={photosRef} className="session-journal__photos" data-layout={filter === "All moments" ? "all" : visibleSessions.length === 2 ? "pair" : "filtered"} onScroll={updateScroll} role="region" aria-label="Session photographs" tabIndex={0}>
             <AnimatePresence initial={false} mode="popLayout" onExitComplete={() => requestAnimationFrame(updateScroll)}>
               {visibleSessions.map((session, index) => {
                 const Icon = categoryIcons[session.category];
@@ -174,8 +176,8 @@ const SessionGallery = () => {
                   onClick={(event) => openPhoto(session, event.currentTarget, visibleSessions)}
                   aria-label={`View ${session.title} photo`} aria-haspopup="dialog"
                 >
-                  <span className="session-journal__card-image"><img src={session.src} alt={session.alt} width={session.width} height={session.height} loading="lazy" decoding="async" /><span className="session-journal__card-expand"><Expand size={17} aria-hidden="true" /></span><span className="session-journal__photo-index" aria-hidden="true">{String(sessions.indexOf(session) + 1).padStart(2, "0")}</span></span>
-                  <span className="session-journal__card-body"><span className="session-journal__card-category"><Icon size={12} aria-hidden="true" />{session.category}</span><span className="session-journal__card-title">{session.title}</span><span className="session-journal__card-footer">A moment at Educate Me<ArrowUpRight size={16} aria-hidden="true" /></span></span>
+                  <span className="session-journal__card-image"><SessionPreview session={session} fit /><span className="session-journal__card-expand"><Expand size={17} aria-hidden="true" /></span><span className="session-journal__photo-index" aria-hidden="true">{String(sessions.indexOf(session) + 1).padStart(2, "0")}</span></span>
+                  <span className="session-journal__card-body"><span className="session-journal__card-category"><Icon size={12} aria-hidden="true" />{session.category}</span><span className="session-journal__card-title">{session.title}</span><span className="session-journal__card-footer">Explore this moment<ArrowUpRight size={16} aria-hidden="true" /></span></span>
                 </motion.button>;
               })}
             </AnimatePresence>

@@ -1,14 +1,7 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import {
-  motion,
-  useInView,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from "framer-motion";
-import {
-  ArrowDown,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
@@ -17,7 +10,6 @@ import {
   Pause,
   Play,
   Sparkles,
-  Star,
   X,
   ZoomIn,
   ZoomOut,
@@ -54,7 +46,12 @@ const banners = [
 
 type Banner = (typeof banners)[number];
 
-const destinations = ["IIM Jammu", "Great Lakes", "NMIMS", "SOIL", "XISS", "GIBS", "IILM", "GL Bajaj"];
+const destinations = [
+  { name: "Great Lakes", logo: "/Great Lakes Institute of Management.png" },
+  { name: "NMIMS", logo: "/NMIMS School of Business Management.png" },
+  { name: "SOIL", logo: "/SOIL Institute of Management.jpg" },
+  { name: "GL Bajaj", logo: "/GL Bajaj Institute of Management.jpeg" },
+];
 
 function BannerCard({
   banner,
@@ -69,84 +66,47 @@ function BannerCard({
   activeOnMobile: boolean;
   onOpen: (index: number, trigger: HTMLButtonElement) => void;
 }) {
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const tiltX = useSpring(rotateX, { stiffness: 180, damping: 24 });
-  const tiltY = useSpring(rotateY, { stiffness: 180, damping: 24 });
-
-  const resetTilt = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-  };
-
-  useEffect(() => {
-    if (!animate) {
-      rotateX.set(0);
-      rotateY.set(0);
-    }
-  }, [animate, rotateX, rotateY]);
-
-  const handlePointerMove = (event: PointerEvent<HTMLButtonElement>) => {
-    if (!animate || event.pointerType !== "mouse") return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    rotateX.set(((event.clientY - bounds.top) / bounds.height - 0.5) * -4);
-    rotateY.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 4);
-  };
-
   return (
     <motion.article
       className={`success-story success-story--${index + 1}${activeOnMobile ? " success-story--mobile-active" : ""}`}
       initial={false}
-      whileInView={animate ? { opacity: [0.4, 1], y: [40, 0] } : { opacity: 1, y: 0 }}
+      whileInView={animate ? { opacity: [0.65, 1], y: [24, 0] } : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.75, delay: index * 0.15 }}
+      transition={{ duration: animate ? 0.7 : 0, delay: animate ? index * 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="success-story__chapter">
-        <span className="success-story__number">{banner.chapter}</span>
-        <div>
-          <p className="success-story__eyebrow">CHAPTER {banner.chapter} / CLASS OF 2026</p>
-          <h3>{banner.title}</h3>
+      <div className="success-story__frame">
+        <span className="success-story__tape" aria-hidden="true" />
+        <div className="success-story__chapter">
+          <span className="success-story__number">CHAPTER {banner.chapter}</span>
+          <span className="success-story__chapter-label">{index === 0 ? "18" : "9"} student stories <Sparkles size={13} aria-hidden="true" /></span>
         </div>
-        <span className="success-story__chapter-label">{index === 0 ? "18 stories" : "9 stories"}<ArrowDown size={16} aria-hidden="true" /></span>
-      </div>
-
-      <div className="success-story__perspective">
-        <div className="success-story__float">
-          <motion.div style={{ rotateX: tiltX, rotateY: tiltY }}>
-            <button
-              type="button"
-              className="success-story__poster"
-              onPointerMove={handlePointerMove}
-              onPointerLeave={resetTilt}
-              onBlur={resetTilt}
-              onClick={(event) => onOpen(index, event.currentTarget)}
-              aria-label={`View ${banner.batch} success banner full screen`}
-              aria-haspopup="dialog"
-            >
-              <span className="success-story__image">
-                <img
-                  src={banner.src}
-                  alt={banner.alt}
-                  width={banner.width}
-                  height={banner.height}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="success-story__hover-hint" aria-hidden="true"><Maximize2 size={18} /> Take a closer look</span>
-              </span>
-              <span className="success-story__caption">
-                <span>
-                  <span className="success-story__batch">{banner.batch}</span>
-                  <span className="success-story__year">{banner.year}</span>
-                </span>
-                <span className="success-story__expand">
-                  <span>Explore the banner</span>
-                  <Maximize2 size={17} aria-hidden="true" />
-                </span>
-              </span>
-            </button>
-          </motion.div>
-        </div>
+        <button
+          type="button"
+          className="success-story__poster"
+          onClick={(event) => onOpen(index, event.currentTarget)}
+          aria-label={`View ${banner.batch} success banner full screen`}
+          aria-haspopup="dialog"
+        >
+          <span className="success-story__image">
+            <img
+              src={banner.src}
+              alt={banner.alt}
+              width={banner.width}
+              height={banner.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="success-story__hover-hint" aria-hidden="true"><Maximize2 size={17} /> A closer look</span>
+          </span>
+          <span className="success-story__caption">
+            <span>
+              <span className="success-story__batch">{banner.batch}</span>
+              <span className="success-story__year">{banner.year}</span>
+            </span>
+            <span className="success-story__expand"><Maximize2 size={17} aria-hidden="true" /></span>
+          </span>
+        </button>
+        <h3 className="success-story__title">{banner.title}</h3>
       </div>
       <p className="success-story__note">{banner.caption}</p>
     </motion.article>
@@ -191,93 +151,91 @@ const SuccessStories = () => {
         data-animated={animate}
       >
         <div className="success-stories__ambient" aria-hidden="true">
-          <span className="success-stories__orb success-stories__orb--one" />
-          <span className="success-stories__orb success-stories__orb--two" />
-          <span className="success-stories__watermark">2026</span>
-          <svg className="success-stories__orbits" viewBox="0 0 1440 1400" fill="none" preserveAspectRatio="none">
-            <ellipse cx="720" cy="690" rx="830" ry="420" transform="rotate(-24 720 690)" />
-            <ellipse cx="720" cy="690" rx="860" ry="450" transform="rotate(-24 720 690)" />
-            <ellipse className="success-stories__orbit-trail" cx="720" cy="690" rx="830" ry="420" transform="rotate(-24 720 690)" />
-          </svg>
-          <Sparkles className="success-stories__spark success-stories__spark--one" />
-          <Sparkles className="success-stories__spark success-stories__spark--two" />
-          <span className="success-stories__dot success-stories__dot--one" />
-          <span className="success-stories__dot success-stories__dot--two" />
+          <span className="success-stories__paper-grid" />
+          <span className="success-stories__edge-word">POSSIBILITIES</span>
         </div>
 
         <div className="success-stories__container">
           <div className="success-stories__topline">
-            <span className="success-stories__kicker"><span /> THE EDUCATE ME SUCCESS EDIT</span>
-            {!reducedMotion && (
-              <button
-                type="button"
-                className="success-stories__motion-toggle"
-                onClick={() => setPaused((value) => !value)}
-                aria-pressed={paused}
-                aria-label="Pause success story animations"
-              >
-                {paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
-                <span>{paused ? "Motion paused" : "Pause motion"}</span>
-              </button>
-            )}
-          </div>
-
-          <div className="success-stories__heading-row">
-            <div>
-              <div className="success-stories__edition"><GraduationCap size={17} aria-hidden="true" /> REAL PEOPLE. REAL POSSIBILITIES.</div>
-              <h2 id="success-stories-title">
-                Ambition, meet<br />
-                <span>your next chapter.<svg viewBox="0 0 600 24" fill="none" aria-hidden="true"><path d="M4 15C170 1 350 1 592 8M150 22C280 12 430 11 560 14" /></svg></span>
-              </h2>
-            </div>
-            <div className="success-stories__intro">
-              <div className="success-stories__stat"><span>27<span>✦</span></span><p>student stories.<br />One shared beginning.</p></div>
-              <p>From “what’s next?” to a whole new world. Meet the students taking their next step with Educate Me.</p>
-              <span className="success-stories__handwritten">And we’re just getting started <ArrowDown size={19} aria-hidden="true" /></span>
+            <span className="success-stories__kicker"><GraduationCap size={18} aria-hidden="true" /> EDUCATE ME <span>/</span> THE SUCCESS EDIT</span>
+            <div className="success-stories__topline-actions">
+              <span className="success-stories__class">REAL PEOPLE. REMARKABLE BEGINNINGS.</span>
+              {!reducedMotion && (
+                <button
+                  type="button"
+                  className="success-stories__motion-toggle"
+                  onClick={() => setPaused((value) => !value)}
+                  aria-pressed={paused}
+                  aria-label={paused ? "Resume success story animations" : "Pause success story animations"}
+                >
+                  {paused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}
+                  <span>{paused ? "Resume motion" : "Pause motion"}</span>
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="success-stories__batch-switcher" role="group" aria-label="Choose a student batch">
-            {banners.map((banner, index) => (
-              <button key={banner.chapter} type="button" aria-pressed={mobileBatch === index} onClick={() => setMobileBatch(index)}>
-                <span>{banner.batch}</span><span>{index === 0 ? "PG · 2026" : "Class of 2026"}</span>
-              </button>
-            ))}
-          </div>
+          <div className="success-stories__showcase">
+            <motion.div
+              className="success-stories__intro"
+              initial={false}
+              whileInView={reducedMotion || paused ? { opacity: 1, y: 0 } : { opacity: [0.5, 1], y: [24, 0] }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: reducedMotion || paused ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="success-stories__edition"><span /> OUR STUDENTS. OUR PRIDE.</span>
+              <h2 id="success-stories-title">They dreamed.<br /><em>They did it.<svg viewBox="0 0 430 26" fill="none" aria-hidden="true"><path pathLength="1" d="M5 14C114 1 282 3 423 10M101 24C183 15 290 16 377 18" /></svg></em></h2>
+              <p className="success-stories__lead">Big ambitions. Brave first steps.<br /><strong>And a future that’s looking bright.</strong></p>
+              <div className="success-stories__admissions">
+                <p className="success-stories__admissions-label">OUR BATCH STUDENTS ARE JOINING</p>
+                <p className="success-stories__admissions-value"><strong>Tier 1 <span>&amp;</span> Tier 2</strong><span> colleges.</span></p>
+                <GraduationCap className="success-stories__admissions-icon" size={34} aria-hidden="true" />
+              </div>
+              <Link to="/session" className="success-stories__cta">Let’s write your story <span><ArrowUpRight size={20} aria-hidden="true" /></span></Link>
+              <div className="success-stories__personal-note"><span>A little guidance.<br />A whole new beginning.</span><svg viewBox="0 0 100 75" fill="none" aria-hidden="true"><path d="M4 12C25 49 65 58 89 20M71 23L92 14L95 36" /></svg></div>
+            </motion.div>
 
-          <div className="success-stories__gallery">
-            {banners.map((banner, index) => (
-              <BannerCard key={banner.chapter} banner={banner} index={index} animate={animate} activeOnMobile={mobileBatch === index} onOpen={openBanner} />
-            ))}
-            <div className="success-stories__seal" aria-hidden="true">
-              <svg className="success-stories__seal-ring" viewBox="0 0 120 120"><defs><path id="success-seal-circle" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs><text><textPath href="#success-seal-circle" textLength="276">REAL STORIES ✦ BRIGHTER FUTURES ✦ </textPath></text></svg>
-              <Sparkles size={22} />
-              <span>MADE OF<br /><strong>AMBITION</strong></span>
+            <div className="success-stories__exhibition">
+              <div className="success-stories__scene" aria-hidden="true">
+                <span className="success-stories__sun" />
+                <svg className="success-stories__flight" viewBox="0 0 800 700" fill="none"><path d="M35 440C-15 205 268 71 502 137S815 431 636 589S146 678 117 533" /></svg>
+                <svg className="success-stories__asterisk success-stories__asterisk--one" viewBox="0 0 90 90" fill="none"><path d="M45 3V87M3 45H87M15 15L75 75M15 75L75 15" /></svg>
+                <svg className="success-stories__asterisk success-stories__asterisk--two" viewBox="0 0 90 90" fill="none"><path d="M45 3V87M3 45H87M15 15L75 75M15 75L75 15" /></svg>
+                <span className="success-stories__confetti success-stories__confetti--one" />
+                <span className="success-stories__confetti success-stories__confetti--two" />
+              </div>
+              <div className="success-stories__class-note"><span /> THE CLASS OF <strong>2026</strong></div>
+
+              <div className="success-stories__batch-switcher" role="group" aria-label="Choose a student batch">
+                {banners.map((banner, index) => (
+                  <button key={banner.chapter} type="button" aria-pressed={mobileBatch === index} onClick={() => setMobileBatch(index)}>
+                    <span>{banner.batch}</span><span>{banner.year}</span><ArrowUpRight size={14} aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+
+              <div className="success-stories__gallery" role="group" aria-label="Success stories from two student batches">
+                {banners.map((banner, index) => (
+                  <BannerCard key={banner.chapter} banner={banner} index={index} animate={animate} activeOnMobile={mobileBatch === index} onOpen={openBanner} />
+                ))}
+              </div>
+              <div className="success-stories__exhibition-note"><span>Real faces. Really proud moments.</span><span><Maximize2 size={13} aria-hidden="true" /> Tap a banner. Meet the achievers.</span></div>
             </div>
           </div>
 
           <div className="success-stories__destinations">
-            <p>NEW CHAPTERS. INCREDIBLE DESTINATIONS.</p>
-            <div className="success-stories__marquee" role="img" aria-label={`Student destinations featured in the banners include ${destinations.join(", ")}.`}>
+            <div className="success-stories__destinations-heading"><span>NEW CAMPUS. NEW POSSIBILITIES.</span><h3>From here,<br /><em>to incredible places.</em></h3></div>
+            <div className="success-stories__marquee" role="img" aria-label={`A few student destinations featured in the banners: ${destinations.map((item) => item.name).join(", ")}.`}>
               <div className="success-stories__marquee-track" aria-hidden="true">
-                {[0, 1].map((copy) => <div key={copy} className="success-stories__marquee-group">{destinations.map((name) => <span key={name}>{name}<Star size={13} /></span>)}</div>)}
+                {[0, 1].map((copy) => (
+                  <div key={copy} className="success-stories__marquee-group">
+                    {destinations.map((destination) => <span key={destination.name}><img src={destination.logo} alt="" loading="lazy" decoding="async" /><span>{destination.name}</span></span>)}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-
-          <div className="success-stories__closing">
-            <div className="success-stories__closing-copy">
-              <span className="success-stories__closing-icon"><GraduationCap size={25} aria-hidden="true" /></span>
-              <div>
-                <p>The next story? <em>Make it yours.</em></p>
-                <span>Your ambitions deserve a great beginning.</span>
-              </div>
-            </div>
-            <Link to="/session" className="success-stories__cta">
-              Let’s write your story <ArrowUpRight size={20} aria-hidden="true" />
-            </Link>
-          </div>
-          <p className="success-stories__footnote">BHOPAL <span>✦</span> NOIDA <span>✦</span> PUNE <span className="success-stories__footnote-line" /> ONE SHARED VISION.</p>
+          <p className="success-stories__footnote"><span>Different dreams. One shared beginning. <ArrowUpRight size={13} aria-hidden="true" /></span></p>
         </div>
       </section>
 

@@ -43,17 +43,17 @@ const About = ({ showFooter = true }) => {
       highlight: "Thought leader shaping financial acumen and industry readiness",
       fullDescription: `Welcome Dr. Awanish Kumar Sinha, a distinguished academician and seasoned banking and financial services expert, as our esteemed guest lecturer at Educate Me. Dr. Sinha brings over two decades of rich professional experience across the BFSI sector, having held key leadership roles with reputed institutions such as Yes Bank, ABN AMRO, and HDFC Bank.`
     },
-    {
-      id: "dr-vaishali-arora",
-      name: "Dr. Vaishali Arora",
-      role: "Visiting Faculty Expert Law & Management",
-      description: "Accomplished legal scholar specializing in Media Law, Women & Criminal Law with extensive research publications.",
-      achievement: "Ph.D. from Indian Law Institute, UGC-NET scholar with 10+ publications and edited books with global publishers.",
-      avatar: "VA",
-      image: "/DR VAISHALI ARORA.PNG",
-      highlight: "Empowering next-generation legal professionals with excellence",
-      fullDescription: `We are privileged to welcome Dr. Vaishali Arora, an accomplished legal academic and distinguished expert in Media Law and Women & Criminal Law. A graduate of the University of Delhi in both Commerce and Law, Dr. Arora pursued her LL.M from GGSIP University and went on to achieve her Ph.D. from the prestigious Indian Law Institute, New Delhi.`
-    },
+    // {
+    //   id: "dr-vaishali-arora",
+    //   name: "Dr. Vaishali Arora",
+    //   role: "Visiting Faculty Expert Law & Management",
+    //   description: "Accomplished legal scholar specializing in Media Law, Women & Criminal Law with extensive research publications.",
+    //   achievement: "Ph.D. from Indian Law Institute, UGC-NET scholar with 10+ publications and edited books with global publishers.",
+    //   avatar: "VA",
+    //   image: "/DR VAISHALI ARORA.PNG",
+    //   highlight: "Empowering next-generation legal professionals with excellence",
+    //   fullDescription: `We are privileged to welcome Dr. Vaishali Arora, an accomplished legal academic and distinguished expert in Media Law and Women & Criminal Law. A graduate of the University of Delhi in both Commerce and Law, Dr. Arora pursued her LL.M from GGSIP University and went on to achieve her Ph.D. from the prestigious Indian Law Institute, New Delhi.`
+    // },
     {
       id: "mrs-shilpa-vishnoi",
       name: "Mrs. Shilpa Agrawal Vishnoi",
@@ -65,17 +65,17 @@ const About = ({ showFooter = true }) => {
       highlight: "Inspiring curiosity and building confident, curious learners",
       fullDescription: `We are proud to welcome Mrs. Shilpa Agrawal Vishnoi, a visionary educator with over three decades of excellence in Physics education, as an Expert Guest Faculty at Educate Me. A dynamic mentor and lifelong learner, she has been a cornerstone of academic excellence and student empowerment since 1995.`
     },
-    {
-      id: "dr-deepa-kumari",
-      name: "Dr. Deepa Kumari",
-      role: "Expert Guest Faculty - Corporate Communication & Entrepreneurial Development",
-      description: "Innovation-driven mentor with 18+ years expertise in entrepreneurship development and strategic business leadership.",
-      achievement: "MBA & Ph.D., certified entrepreneurship trainer with Wadhwani Foundation, 20+ research publications.",
-      avatar: "DK",
-      image: "/dipali.jpg",
-      highlight: "Transforming student potential into startup reality",
-      fullDescription: `At Educate Me, we proudly welcome Dr. Deepa Kumari, an accomplished academic leader and innovation-driven mentor with 18+ years of expertise in entrepreneurship development, corporate communication, and strategic leadership.`
-    },
+    // {
+    //   id: "dr-deepa-kumari",
+    //   name: "Dr. Deepa Kumari",
+    //   role: "Expert Guest Faculty - Corporate Communication & Entrepreneurial Development",
+    //   description: "Innovation-driven mentor with 18+ years expertise in entrepreneurship development and strategic business leadership.",
+    //   achievement: "MBA & Ph.D., certified entrepreneurship trainer with Wadhwani Foundation, 20+ research publications.",
+    //   avatar: "DK",
+    //   image: "/dipali.jpg",
+    //   highlight: "Transforming student potential into startup reality",
+    //   fullDescription: `At Educate Me, we proudly welcome Dr. Deepa Kumari, an accomplished academic leader and innovation-driven mentor with 18+ years of expertise in entrepreneurship development, corporate communication, and strategic leadership.`
+    // },
     {
       id: "kajol-samtani",
       name: "Ms. Kajol Samtani",
@@ -99,17 +99,17 @@ const About = ({ showFooter = true }) => {
     //   fullDescription: `Anirudh Tiwari is an admissions and student engagement professional with over 2 years of experience in counselling, enrollment strategy, and client relationship management. With a strong background in sales and executive roles across organizations like Reliance Insurance, Maxwell Trading, and Techno Task, he brings a consultative and learner-focused approach to the education sector.\n\nAt Educate Me, he plays a key role in driving student enrollment growth through strategic counselling, admissions funnel management, and data-driven conversion strategies. His work emphasizes personalized guidance, career mapping, and building strong relationships with students and parents to support informed academic decisions.\n\nKey Strengths\n- Admissions Strategy & Lead Conversion\n- Student Counselling & Career Guidance\n- Learner-Centric Communication\n- CRM & Data-Driven Follow-ups\n- Stakeholder Relationship Management\n- Team Coordination & Performance Focus\n\nProfessional Experience\n• 2+ Years of Experience in Sales & Executive Roles\n• Worked with Reliance Insurance, Maxwell Trading & Techno Task\n• Proven record of target achievement and client retention.`
     // },
 
-    {
-      id: "shiny-chaturvedi",
-      name: "Ms. Shiny Chaturvedi",
-      role: "Administrative Head",
-      description: "Research-driven education administrator with strong academic and institutional coordination expertise.",
-      achievement: "Research student, ISBN-indexed publication contributor, experience in social entrepreneurship and academic outreach.",
-      avatar: "SC",
-      image: "/shinyy_chaturvedi.png",
-      highlight: "Strengthening institutional excellence and student-focused growth.",
-      fullDescription: `Educate Me proudly welcomes Ms. Shiny Chaturvedi as the Administrative Head, bringing her research-driven academic perspective and strong educational administration expertise to strengthen institutional excellence and student-focused growth.\n\nMs. Shiny Chaturvedi is a research-oriented education administrator with a strong academic foundation in institutional coordination and scholarly engagement. As a research student and contributor to an ISBN-indexed publication, she brings analytical depth and academic rigor to educational administration.\n\nHer professional experience reflects a commitment to inclusive and community-centered education through social entrepreneurship initiatives and academic outreach programs. She has contributed to educational and social development projects, including institutional collaborations and inclusive learning support.\n\nAs Administrative Head, she oversees academic documentation, operational coordination, and institutional processes, ensuring efficient administration aligned with research-driven and education-focused standards.\n\nCore Competencies\n- Academic Research & Scholarly Writing\n- Educational Administration & Institutional Coordination\n- Inclusive & Community-Based Education\n- Outreach Program Management\n- Documentation & Academic Compliance\n- Leadership & Organizational Skills`
-    },
+    // {
+    //   id: "shiny-chaturvedi",
+    //   name: "Ms. Shiny Chaturvedi",
+    //   role: "Administrative Head",
+    //   description: "Research-driven education administrator with strong academic and institutional coordination expertise.",
+    //   achievement: "Research student, ISBN-indexed publication contributor, experience in social entrepreneurship and academic outreach.",
+    //   avatar: "SC",
+    //   image: "/shinyy_chaturvedi.png",
+    //   highlight: "Strengthening institutional excellence and student-focused growth.",
+    //   fullDescription: `Educate Me proudly welcomes Ms. Shiny Chaturvedi as the Administrative Head, bringing her research-driven academic perspective and strong educational administration expertise to strengthen institutional excellence and student-focused growth.\n\nMs. Shiny Chaturvedi is a research-oriented education administrator with a strong academic foundation in institutional coordination and scholarly engagement. As a research student and contributor to an ISBN-indexed publication, she brings analytical depth and academic rigor to educational administration.\n\nHer professional experience reflects a commitment to inclusive and community-centered education through social entrepreneurship initiatives and academic outreach programs. She has contributed to educational and social development projects, including institutional collaborations and inclusive learning support.\n\nAs Administrative Head, she oversees academic documentation, operational coordination, and institutional processes, ensuring efficient administration aligned with research-driven and education-focused standards.\n\nCore Competencies\n- Academic Research & Scholarly Writing\n- Educational Administration & Institutional Coordination\n- Inclusive & Community-Based Education\n- Outreach Program Management\n- Documentation & Academic Compliance\n- Leadership & Organizational Skills`
+    // },
     // {
     //   id: "sulekha-sarkar",
     //   name: "Ms. Sulekha Sarkar",

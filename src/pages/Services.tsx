@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Lightbulb, Compass, Award, GraduationCap } from "lucide-react";
+import { Compass, Award, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom"; // ✅ import navigation
 
@@ -34,15 +34,6 @@ const Services = ({ showFooter = true }) => {
   const navigate = useNavigate(); 
 
   const services = [
-    {
-      icon: Lightbulb,
-      title: "Medical Admission",
-      description:
-        "EducateMe guides aspiring doctors through the complete medical admission process — from university selection and application to visa documentation — partnering with globally accredited institutions like the American University of Barbados to make your MBBS/MD dream a reality.",
-      button: "Apply link",
-      buttonVariant: "default" as const,
-      link: "/aub-medicine",
-    },
     {
       icon: Compass,
       title: "Student Couselling",
@@ -102,33 +93,43 @@ const Services = ({ showFooter = true }) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 sm:gap-6"
+              className="flex flex-wrap justify-center items-stretch gap-6"
             >
               {services.map((service, index) => (
-                <motion.div key={index} variants={itemVariants}>
-                  <Card className="p-4 sm:p-6 border border-gray-200 hover:border-blue-300 transition-all duration-300 hover:shadow-lg group hover:scale-105">
-                    <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 group-hover:scale-110 transition-all duration-300">
-                        <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+                // Widths account for the 1.5rem gap so rows fill exactly; wrapping
+                // with justify-center keeps a leftover card centred instead of
+                // stranding it on the left of a half-empty row.
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="flex w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+                >
+                  <Card className="group flex w-full flex-col p-6 border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 group-hover:scale-110 transition-all duration-300">
+                        <service.icon className="w-6 h-6 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                          {service.description}
-                        </p>
-                      </div>
+                      <h3 className="flex-1 text-lg sm:text-xl font-semibold text-gray-900 pt-1.5 group-hover:text-blue-600 transition-colors duration-300">
+                        {service.title}
+                      </h3>
                     </div>
 
-                    <Button
-                      variant={service.buttonVariant}
-                      className="w-full mt-3 sm:mt-4 group-hover:shadow-md transition-all duration-300 text-sm sm:text-base"
-                      size="sm"
-                      onClick={() => navigate(service.link)} // ✅ navigate on click
-                    >
-                      {service.button}
-                    </Button>
+                    <p className="mt-4 text-sm sm:text-base text-gray-600 leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    {/* mt-auto pins the button to the card floor so buttons align
+                        across cards of differing text length. */}
+                    <div className="mt-auto pt-6">
+                      <Button
+                        variant={service.buttonVariant}
+                        className="w-full group-hover:shadow-md transition-all duration-300 text-sm sm:text-base"
+                        size="sm"
+                        onClick={() => navigate(service.link)} // ✅ navigate on click
+                      >
+                        {service.button}
+                      </Button>
+                    </div>
                   </Card>
                 </motion.div>
               ))}

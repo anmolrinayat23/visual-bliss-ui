@@ -12,13 +12,6 @@ export type GoogleReview = {
 // are deduplicated. These are featured reviews, not the profile's total count.
 export const googleReviews: GoogleReview[] = [
   {
-    id: "siddharth-sen",
-    name: "Siddharth Sen",
-    rating: 5,
-    text: "Excellent support and guidance for MBA admissions. The team is dedicated, transparent, and genuinely helps students make informed decisions. Highly recommended!",
-    isExcerpt: false,
-  },
-  {
     id: "shalini-varshney",
     name: "Shalini Varshney",
     rating: 5,
@@ -74,13 +67,6 @@ export const googleReviews: GoogleReview[] = [
     rating: 5,
     text: "A huge thank you to Nikhil Sir and the Educate Me team for being such an important part of my MBA journey. Nikhil Sir helped me immensely with interview preparation through multiple mock sessions, detailed feedback, and by patiently",
     isExcerpt: true,
-  },
-  {
-    id: "pooja-sewaramani",
-    name: "Pooja Sewaramani",
-    rating: 5,
-    text: "Amazing support right mentorship and lot of truthful talks I am a fan of honesty and I believe I got that with educate me",
-    isExcerpt: false,
   },
   {
     id: "ishika-shukla",
