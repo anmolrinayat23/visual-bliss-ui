@@ -8,8 +8,15 @@ export type GoogleReview = {
 };
 
 // Transcribed from the owner's supplied Google review screenshots.
-// Text hidden behind Google's "More" is not reconstructed. Repeated screenshots
-// are deduplicated. These are featured reviews, not the profile's total count.
+// Text hidden behind Google's "More" is not reconstructed — those entries carry
+// isExcerpt: true and render with a trailing ellipsis. Repeated screenshots are
+// deduplicated. Ratings-only entries (no written comment) are not listed here
+// because a card needs text to show. These are featured reviews, not the
+// profile's total count.
+//
+// Display order: the first seven are the owner's requested running order
+// (Shalini, Ashutosh, Khushi, Shivangi, Saanvi, Naman, Ambika); the rest follow
+// in Google's own listing order.
 export const googleReviews: GoogleReview[] = [
   {
     id: "shalini-varshney",
@@ -20,17 +27,52 @@ export const googleReviews: GoogleReview[] = [
     perspective: "A parent's perspective",
   },
   {
-    id: "pratyaksh-mehta",
-    name: "Pratyaksh Mehta",
+    id: "ashutosh-rastogi",
+    name: "ASHUTOSH RASTOGI",
     rating: 5,
-    text: "The team was professional, responsive, and made college admissions smooth and stress-free. Highly recommended",
+    text: "Started as a student, I found a brother in Nikhil Sir, who supports me in every single step. Nikhil Sir truly contributed to what I am doing right now. If anyone is seeing this, God has sent you a direction, go for it! ❤️",
     isExcerpt: false,
+  },
+  {
+    id: "khushi-agarwal",
+    name: "khushi agarwal",
+    rating: 5,
+    text: "A huge thank you to Nikhil Sir and the Educate Me team for being such an important part of my MBA journey. Nikhil Sir helped me immensely with interview preparation through multiple mock sessions, detailed feedback, and by patiently",
+    isExcerpt: true,
+  },
+  {
+    id: "shivangi-srivastavaa",
+    name: "Shivangi Srivastavaa",
+    rating: 5,
+    text: "I’m Shivangi, and I enrolled in the mentorship program for my MBA GDPI preparation. Looking back, it was one of the best decisions I made.",
+    isExcerpt: true,
+  },
+  {
+    id: "saanvi",
+    name: "Saanvi",
+    rating: 5,
+    text: "Joining Educate Me for MBA interview preparation turned out to be one of the best decisions in my journey. The sessions were interactive, well-structured, and honestly felt more personal",
+    isExcerpt: true,
   },
   {
     id: "naman-varshney",
     name: "Naman Varshney",
     rating: 5,
     text: "I joined educate me just after giving my cat sir help me immensely in my interview prep and how to tackle an interview it give me immense confidence and I was able to crack the interview sir also guided me which University and college is best for my future career path thank you sir for all your guidance",
+    isExcerpt: false,
+  },
+  {
+    id: "ambika-bhatnagar",
+    name: "Ambika Bhatnagar",
+    rating: 5,
+    text: "Educate me is an institution of absolute guidance to bright kids who have challenges in deciding the right path for future in context to their caliber, passion and zeal.",
+    isExcerpt: true,
+  },
+  {
+    id: "pratyaksh-mehta",
+    name: "Pratyaksh Mehta",
+    rating: 5,
+    text: "The team was professional, responsive, and made college admissions smooth and stress-free. Highly recommended",
     isExcerpt: false,
   },
   {
@@ -59,13 +101,6 @@ export const googleReviews: GoogleReview[] = [
     name: "JITENDRA KUMAR",
     rating: 5,
     text: "This is a really great platform. I would especially like to thank Nikhil Sir for guiding me so well right from the beginning. Ever since I joined this platform, he and all the counselors have always been very supportive and have guided me",
-    isExcerpt: true,
-  },
-  {
-    id: "khushi-agarwal",
-    name: "khushi agarwal",
-    rating: 5,
-    text: "A huge thank you to Nikhil Sir and the Educate Me team for being such an important part of my MBA journey. Nikhil Sir helped me immensely with interview preparation through multiple mock sessions, detailed feedback, and by patiently",
     isExcerpt: true,
   },
   {
@@ -122,6 +157,76 @@ export const googleReviews: GoogleReview[] = [
     name: "Ayush Agrawal",
     rating: 5,
     text: "Very good guidance excellent support from the teachers. It's a genuine and trustable educational platform",
+    isExcerpt: false,
+  },
+  {
+    id: "bhavya-vats",
+    name: "Bhavya Vats",
+    rating: 5,
+    text: "Joining Educate Me has been one of the most valuable decisions I've made. Thanks to Nikhil Bhaiya, I not only secured admission to my MBA college but also underwent a complete transformation in my personality.",
+    isExcerpt: true,
+  },
+  {
+    id: "anmol-rinayat",
+    name: "Cse022 - Anmol Rinayat",
+    rating: 5,
+    text: "Great counselling efforts by mentor and right career support most genuine options and honest feedback strongly recommend there mentorship program",
+    isExcerpt: false,
+  },
+  {
+    id: "tanish-sethi",
+    name: "Tanish Sethi",
+    rating: 5,
+    text: "A very good experience with their counselling, regular sessions with amazing faculty",
+    isExcerpt: false,
+  },
+  {
+    id: "jinaansh-jain",
+    name: "Jinaansh Jain",
+    rating: 5,
+    text: "They understood my problems and helped me in every way possible",
+    isExcerpt: false,
+  },
+  {
+    id: "gajendra-singh-tomar",
+    name: "Gajendra Singh Tomar",
+    rating: 5,
+    text: "Had a great knowledge gaining mentoring session",
+    isExcerpt: false,
+  },
+  {
+    id: "chaitanya-sawarkar",
+    name: "Chaitanya Sawarkar",
+    rating: 5,
+    text: "Great experience with nikhil sir so much things are learned from him Great mentor",
+    isExcerpt: false,
+  },
+  {
+    id: "aarjav-jain",
+    name: "Aarjav Jain",
+    rating: 5,
+    text: "They guides well through uncertainty of choices, helps with communication required out there",
+    isExcerpt: false,
+  },
+  {
+    id: "hunky-fitness-junkie",
+    name: "Hunky Fitness Junkie",
+    rating: 5,
+    text: "The counselling was smooth and literally genuine choices",
+    isExcerpt: false,
+  },
+  {
+    id: "vinay-tm",
+    name: "Vinay TM",
+    rating: 5,
+    text: "Educate me really help me for my career growth.",
+    isExcerpt: false,
+  },
+  {
+    id: "aashi-gupta",
+    name: "Aashi Gupta",
+    rating: 5,
+    text: "good platform for 12th pass confusing students to choose there college and also for there higher studies",
     isExcerpt: false,
   },
 ];

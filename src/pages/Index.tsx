@@ -35,11 +35,11 @@ const Index = () => {
           <Hero />
           <SuccessStories />
           <Services showFooter={false}/>
+          <SessionGallery />
           <Courses showFooter={false}/>
           {/* <EmMat showFooter={false}/> */}
           {/* <BookSession showFooter={false}/> */}
           <About showFooter={false}/>
-          <SessionGallery />
           <GoogleReviews />
         </main>
         

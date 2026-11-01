@@ -14,6 +14,10 @@ import familyGuidance from "@/assets/sessions/session-073-family-guidance.png";
 import familyConversation from "@/assets/sessions/session-076-family-guidance.png";
 import familyCounselling from "@/assets/sessions/session-085-family-guidance.png";
 import facultyWorkshop from "@/assets/sessions/session-007-faculty-workshop.png";
+import financeFaculty from "@/assets/sessions/session-041-faculty-workshop.png";
+import facultyConversation from "@/assets/sessions/session-065-faculty-workshop.png";
+import mindsetWorkshop from "@/assets/sessions/session-059-mindset-workshop.png";
+import learningWorkshop from "@/assets/sessions/session-061-learning-workshop.png";
 import "./SessionGallery.css";
 
 const filters = ["All moments", "Mentorship", "Personal guidance", "Workshops"] as const;
@@ -44,6 +48,10 @@ const sessions: Session[] = [
   { id: "family-counselling", src: familyCounselling, title: "A shared conversation. A clearer plan.", category: "Personal guidance", alt: "Three participants sharing one video tile in an Educate Me guidance conversation with a faculty member and mentor.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },
   { id: "faculty-workshop", src: facultyWorkshop, title: "Learn with faculty. Grow with confidence.", category: "Workshops", alt: "A faculty member, students and an Educate Me mentor participating in a teacher-led group session.", width: 1366, height: 768, crop: { x: 14, y: 141, width: 1338, height: 523 } },
   { id: "interactive-workshop", src: interactiveWorkshop, title: "Expert perspectives. Fresh possibilities.", category: "Workshops", alt: "A teacher speaking with students and an Educate Me mentor in an interactive group video session.", width: 1366, height: 768, crop: { x: 16, y: 147, width: 1335, height: 509 } },
+  { id: "finance-faculty", src: financeFaculty, title: "Guidance from someone who has been there.", category: "Workshops", alt: "A guest faculty member addressing students and an Educate Me mentor during a live group workshop.", width: 1366, height: 768, crop: { x: 12, y: 130, width: 1342, height: 545 } },
+  { id: "faculty-conversation", src: facultyConversation, title: "A conversation that sharpens direction.", category: "Workshops", alt: "A guest faculty member talking with a student and an Educate Me mentor in a focused three-way session.", width: 1366, height: 768, crop: { x: 12, y: 160, width: 1342, height: 470 } },
+  { id: "mindset-workshop", src: mindsetWorkshop, title: "A shift in how you see learning.", category: "Workshops", alt: "A Mindset Shift slide shared during an Educate Me workshop, beside a grid of attending students.", width: 1366, height: 768, crop: { x: 10, y: 132, width: 1346, height: 512 } },
+  { id: "learning-workshop", src: learningWorkshop, title: "Small habits. Steady progress.", category: "Workshops", alt: "A Drive Your Learning slide on study habits shared in an Educate Me workshop with students attending.", width: 1366, height: 768, crop: { x: 10, y: 110, width: 1346, height: 545 } },
 ];
 const allSessions = [featured, ...sessions];
 

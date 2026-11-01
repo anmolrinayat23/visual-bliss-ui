@@ -144,7 +144,7 @@ const GoogleReviews = () => {
             <p><span /> In their own words <span className="google-reviews__featured-count">{googleReviews.length} featured reviews</span></p>
             <div className="google-reviews__controls">
               {!expanded && !reducedMotion && <button type="button" className="google-reviews__autoplay-toggle" onClick={() => setPaused((value) => !value)} aria-label={paused ? "Play review slideshow" : "Pause review slideshow"} aria-pressed={paused} aria-controls="google-review-list">{paused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}{paused ? "Play slideshow" : "Pause slideshow"}</button>}
-              <button type="button" className="google-reviews__all-toggle" aria-expanded={expanded} aria-controls="google-review-list" onClick={() => setExpanded((value) => !value)}>{expanded ? <ArrowLeft size={14} aria-hidden="true" /> : <LayoutGrid size={14} aria-hidden="true" />}{expanded ? "Back to carousel" : `View all ${googleReviews.length} reviews`}</button>
+              <button type="button" className="google-reviews__all-toggle" aria-expanded={expanded} aria-controls="google-review-list" onClick={() => setExpanded((value) => !value)}>{expanded ? <ArrowLeft size={14} aria-hidden="true" /> : <LayoutGrid size={14} aria-hidden="true" />}{expanded ? "Back to carousel" : "View all reviews"}</button>
             </div>
           </div>
 
