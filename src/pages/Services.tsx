@@ -50,7 +50,7 @@ const Services = ({ showFooter = true }) => {
         "Earn essential certificates to master the basics, gain program-specific skills, and boost your resume—all while preparing to excel in your chosen domain from admissions itself.",
       button: "Explore",
       buttonVariant: "outline" as const,
-      link: "/em-mat",
+      link: "/explore",
     },
     {
       icon: GraduationCap,

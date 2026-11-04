@@ -116,7 +116,8 @@
 .google-review-dialog__person { display: flex; align-items: center; gap: 13px; }
 .google-review-dialog__title { font-size: 17px; line-height: 1.5; font-weight: 600; }
 .google-review-dialog__person p { margin-top: 4px; font-size: 10px; color: hsl(25 8% 43%); }
-.google-review-dialog__body { margin-top: 20px; font-size: 16px; line-height: 1.95; overflow-wrap: anywhere; }
+/* pre-line keeps the paragraph breaks reviewers typed in their Google reviews. */
+.google-review-dialog__body { margin-top: 20px; font-size: 16px; line-height: 1.95; overflow-wrap: anywhere; white-space: pre-line; }
 .google-review-dialog__note { margin-top: 22px; padding-top: 16px; border-top: 1px solid hsl(29 23% 84%); font-size: 10px; line-height: 1.8; color: hsl(25 8% 43%); }
 .google-review-dialog__source-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 9px; font-size: 11px; font-weight: 500; color: var(--reviews-orange); text-decoration: underline; text-underline-offset: 2px; }
 .google-review-dialog__source-link:hover { color: hsl(14 80% 45%); }
