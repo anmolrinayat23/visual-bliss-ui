@@ -17,6 +17,11 @@ function ReviewStars({ rating }: { rating: number }) {
 // How long a page of reviews stays on screen before the slideshow advances.
 const AUTOPLAY_DELAY_MS = 1800;
 
+// Educate Me's Google Business profile. Set this and the dialog offers a link to
+// the complete review for any entry whose full text we do not hold. Empty hides
+// the link rather than rendering a dead one.
+const GOOGLE_REVIEWS_URL = "";
+
 function initials(name: string) {
   const words = name.trim().split(/\s+/);
   return `${words[0][0]}${words.length > 1 ? words[words.length - 1][0] : ""}`.toUpperCase();
@@ -109,6 +114,10 @@ const GoogleReviews = () => {
 
   const totalPages = Math.ceil(googleReviews.length / position.perPage);
   const currentPage = Math.min(totalPages - 1, Math.round(position.first / position.perPage));
+  // The dialog shows the complete review when we have it. Without fullText an
+  // excerpt can only repeat the card text, so say so instead of implying more.
+  const selectedBody = selected?.fullText ?? selected?.text ?? "";
+  const selectedIsPartial = !!selected && selected.isExcerpt && !selected.fullText;
 
   return (
     <>
@@ -172,7 +181,7 @@ const GoogleReviews = () => {
         <Dialog.Portal><Dialog.Overlay className="google-review-dialog__overlay" /><Dialog.Content className="google-review-dialog" onCloseAutoFocus={(event) => { event.preventDefault(); openerRef.current?.focus({ preventScroll: true }); }}>
           {selected && <>
             <div className="google-review-dialog__header"><div className="google-review-dialog__source"><GoogleWordmark /><span>Review</span></div><Dialog.Close aria-label="Close review"><X size={21} aria-hidden="true" /></Dialog.Close></div>
-            <div className="google-review-dialog__content"><div className="google-review-dialog__person"><span className={`google-review-avatar google-review-avatar--${googleReviews.indexOf(selected) % 5}`} aria-hidden="true">{initials(selected.name)}</span><div><Dialog.Title className="google-review-dialog__title">{selected.name}</Dialog.Title><Dialog.Description>{selected.perspective ?? "Shared on Google"}</Dialog.Description></div></div><ReviewStars rating={selected.rating} /><blockquote className="google-review-dialog__body">{selected.text}{selected.isExcerpt ? "…" : ""}</blockquote><div className="google-review-dialog__note">{selected.isExcerpt ? "Review excerpt — this review continues on Google." : "In the reviewer’s own words."}</div></div>
+            <div className="google-review-dialog__content"><div className="google-review-dialog__person"><span className={`google-review-avatar google-review-avatar--${googleReviews.indexOf(selected) % 5}`} aria-hidden="true">{initials(selected.name)}</span><div><Dialog.Title className="google-review-dialog__title">{selected.name}</Dialog.Title><Dialog.Description>{selected.perspective ?? "Shared on Google"}</Dialog.Description></div></div><ReviewStars rating={selected.rating} /><blockquote className="google-review-dialog__body">{selectedBody}{selectedIsPartial ? "…" : ""}</blockquote><div className="google-review-dialog__note">{selectedIsPartial ? <>This is how the review opens on Google. Google keeps the remainder behind its own “More” link, so we show only what the reviewer's public card displays.{GOOGLE_REVIEWS_URL !== "" && <a className="google-review-dialog__source-link" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer">Read it in full on Google<ArrowUpRight size={13} aria-hidden="true" /></a>}</> : "In the reviewer’s own words."}</div></div>
             <Dialog.Close className="google-review-dialog__done">Back to the stories<ChevronDown size={17} aria-hidden="true" /></Dialog.Close>
           </>}
         </Dialog.Content></Dialog.Portal>

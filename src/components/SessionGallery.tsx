@@ -18,6 +18,10 @@ import financeFaculty from "@/assets/sessions/session-041-faculty-workshop.png";
 import facultyConversation from "@/assets/sessions/session-065-faculty-workshop.png";
 import mindsetWorkshop from "@/assets/sessions/session-059-mindset-workshop.png";
 import learningWorkshop from "@/assets/sessions/session-061-learning-workshop.png";
+import financeMentorship from "@/assets/sessions/session-017-finance-mentorship.png";
+import practiceReview from "@/assets/sessions/session-066-practice-review.png";
+import studentPresentation from "@/assets/sessions/session-096-student-presentation.png";
+import mentorConversation from "@/assets/sessions/session-023-mentor-conversation.png";
 import "./SessionGallery.css";
 
 const filters = ["All moments", "Mentorship", "Personal guidance", "Workshops"] as const;
@@ -43,6 +47,10 @@ const featured: Session = {
 const sessions: Session[] = [
   { id: "community", src: community, title: "Different faces. Shared ambition.", category: "Mentorship", alt: "Students and their Educate Me mentor connecting in a classroom video-call grid.", width: 1366, height: 768, crop: { x: 13, y: 145, width: 1040, height: 480 } },
   { id: "small-group", src: conversation, title: "Learning grows through conversation.", category: "Mentorship", alt: "Five participants smiling and talking together during a small-group Educate Me session.", width: 1366, height: 768, crop: { x: 13, y: 145, width: 1040, height: 480 } },
+  { id: "finance-mentorship", src: financeMentorship, title: "Concepts that finally click.", category: "Mentorship", alt: "Five participants in an Educate Me finance mentorship call, with key funding concepts listed in the chat panel.", width: 1366, height: 768, crop: { x: 12, y: 140, width: 1342, height: 515 } },
+  { id: "practice-review", src: practiceReview, title: "Every answer, talked through.", category: "Mentorship", alt: "An Educate Me mentor reviewing practice test questions on a shared screen with attending participants.", width: 1366, height: 768, crop: { x: 8, y: 168, width: 1352, height: 517 } },
+  { id: "student-presentation", src: studentPresentation, title: "When the student takes the lead.", category: "Mentorship", alt: "A student presenting a marketing funnel document to peers and an Educate Me mentor during a live session.", width: 1366, height: 768, crop: { x: 44, y: 48, width: 1320, height: 552 } },
+  { id: "mentor-conversation", src: mentorConversation, title: "Guidance from across the industry.", category: "Mentorship", alt: "A guest faculty member speaking with participants and an Educate Me mentor in a small-group video call.", width: 1366, height: 768, crop: { x: 12, y: 130, width: 1342, height: 545 } },
   { id: "family-guidance", src: familyGuidance, title: "Planning the next step, together.", category: "Personal guidance", alt: "An Educate Me guidance call with two participants sharing one camera, a faculty member and a mentor.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },
   { id: "family-conversation", src: familyConversation, title: "Guidance that includes the family.", category: "Personal guidance", alt: "A student and an accompanying participant sharing a camera during a guidance conversation with two mentors.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },
   { id: "family-counselling", src: familyCounselling, title: "A shared conversation. A clearer plan.", category: "Personal guidance", alt: "Three participants sharing one video tile in an Educate Me guidance conversation with a faculty member and mentor.", width: 1366, height: 768, crop: { x: 113, y: 141, width: 859, height: 489 } },

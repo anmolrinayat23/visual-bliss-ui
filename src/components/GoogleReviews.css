@@ -118,6 +118,8 @@
 .google-review-dialog__person p { margin-top: 4px; font-size: 10px; color: hsl(25 8% 43%); }
 .google-review-dialog__body { margin-top: 20px; font-size: 16px; line-height: 1.95; overflow-wrap: anywhere; }
 .google-review-dialog__note { margin-top: 22px; padding-top: 16px; border-top: 1px solid hsl(29 23% 84%); font-size: 10px; line-height: 1.8; color: hsl(25 8% 43%); }
+.google-review-dialog__source-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 9px; font-size: 11px; font-weight: 500; color: var(--reviews-orange); text-decoration: underline; text-underline-offset: 2px; }
+.google-review-dialog__source-link:hover { color: hsl(14 80% 45%); }
 .google-review-dialog__done { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 53px; flex-shrink: 0; padding: 14px 20px; border-top: 1px solid hsl(29 23% 87%); border-radius: 0 0 17px 17px; color: hsl(22 68% 37%); background: hsl(30 68% 94%); font-size: 11px; font-weight: 500; }
 .google-review-dialog button:focus-visible { outline: 3px solid hsl(23 91% 48%); outline-offset: -4px; }
 

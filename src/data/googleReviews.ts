@@ -2,7 +2,15 @@ export type GoogleReview = {
   id: string;
   name: string;
   rating: number;
+  /** The card text. For an excerpt this is only the opening of the review. */
   text: string;
+  /**
+   * The complete review, shown in the dialog when it is known. Fill this in for
+   * any entry with isExcerpt: true and the dialog will show the whole review
+   * instead of repeating the shortened card text. Copy it from Google after
+   * expanding that review's "More" link.
+   */
+  fullText?: string;
   isExcerpt: boolean;
   perspective?: string;
 };
