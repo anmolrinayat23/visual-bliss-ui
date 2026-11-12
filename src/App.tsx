@@ -24,6 +24,8 @@ import Accountpage from './pages/Accountpage';
 import AdminAuth from "./components/AdminAuth";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdsLandingPage from "./pages/AdsLandingPage";
+import IqArena from "./pages/IqArena";
+import IqArenaRegister from "./pages/IqArenaRegister";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +78,9 @@ const App = () => (
           <Route path="/account" element={<Account />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/ads_data_landingpage" element={<AdsLandingPage />} />
+          <Route path="/iq-arena" element={<IqArena />} />
+          {/* Register page handles its own login redirect so users return here after signing in */}
+          <Route path="/iq-arena/register" element={<IqArenaRegister />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

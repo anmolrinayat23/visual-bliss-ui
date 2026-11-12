@@ -31,6 +31,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import jsPDF from 'jspdf';
+import IqArenaAdminSection from "@/components/admin/IqArenaAdminSection";
 
 // Types
 interface UGApplication {
@@ -941,6 +942,9 @@ const AdminDashboard = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* IQ Arena 2027 Registrations */}
+        <IqArenaAdminSection />
 
         {/* Main Applications Table */}
         <motion.div

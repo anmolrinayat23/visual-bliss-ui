@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,11 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  // Optional ?redirect=/path (internal paths only). Defaults to the existing /em-mat behaviour.
+  const redirectParam = searchParams.get("redirect");
+  const redirectTo =
+    redirectParam && /^\/(?![\/\\])/.test(redirectParam) ? redirectParam : "/em-mat";
 
   const features = [
     { icon: BookOpen, title: "Expert Courses", description: "Access premium learning resources" },
@@ -41,7 +46,7 @@ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
       localStorage.setItem("token", res.data.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.data));
 
-      navigate("/em-mat"); // success
+      navigate(redirectTo); // success
     } else {
       alert(res.data.message);
     }
@@ -75,7 +80,7 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
       localStorage.setItem("token", res.data.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.data));
 
-      navigate("/em-mat");
+      navigate(redirectTo);
     } else {
       alert(res.data.message);
     }

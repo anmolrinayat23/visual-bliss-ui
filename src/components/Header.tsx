@@ -23,6 +23,7 @@ const Header = () => {
     { label: "Courses", href: "/courses" },
     { label: "Universities", href: "/universities" },
     { label: "EM-MAT", href: "/em-mat" },
+    { label: "IQ Arena", href: "/iq-arena", highlight: true },
     { label: "Book-Session", href: "/session" },
     { label: "Explore", href: "/explore" },
     { label: "About Us", href: "/about" },
@@ -55,15 +56,29 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center">
             <div className="flex items-center gap-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className="relative text-md font-semibold text-foreground hover:text-primary transition-all px-2 py-1 rounded-md hover:bg-primary/5"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) =>
+                item.highlight ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="relative text-md font-extrabold px-2 py-1 rounded-md hover:bg-primary/5 transition-all bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 bg-clip-text text-transparent"
+                  >
+                    {item.label}
+                    <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-orange-500" />
+                    </span>
+                  </Link>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="relative text-md font-semibold text-foreground hover:text-primary transition-all px-2 py-1 rounded-md hover:bg-primary/5"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </div>
           </nav>
 
@@ -119,9 +134,14 @@ const Header = () => {
         key={item.label}
         to={item.href}
         onClick={closeMobileMenu}
-        className="text-base font-semibold py-3 border-b"
+        className="text-base font-semibold py-3 border-b flex items-center gap-2"
       >
         {item.label}
+        {item.highlight && (
+          <span className="rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+            New
+          </span>
+        )}
       </Link>
     ))}
 
