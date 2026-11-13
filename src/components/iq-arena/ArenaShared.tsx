@@ -1,7 +1,29 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import { IQ_ARENA, TERMS } from "@/lib/iqArena";
+
+/**
+ * A light streak that sweeps across a button every few seconds to draw the eye.
+ * The parent needs `relative overflow-hidden`; put the button's label in a `relative` span so it stays on top.
+ * Renders nothing when the visitor has reduced motion turned on.
+ */
+export const ShineSweep = ({ tone = "white", delay = 0 }: { tone?: "white" | "orange"; delay?: number }) => {
+  const reduceMotion = useReducedMotion();
+  if (reduceMotion) return null;
+  return (
+    <motion.span
+      aria-hidden
+      className={`pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent to-transparent ${
+        tone === "white" ? "via-white/50" : "via-orange-400/40"
+      }`}
+      style={{ skewX: -12 }}
+      initial={{ x: "-150%" }}
+      animate={{ x: ["-150%", "400%"] }}
+      transition={{ duration: 1.1, repeat: Infinity, repeatDelay: 2.8, ease: "easeInOut", delay }}
+    />
+  );
+};
 
 /** Layered glow + grid backdrop used across IQ Arena sections. */
 export const ArenaBackground = ({ variant = "default" }: { variant?: "default" | "violet" | "subtle" }) => (
@@ -45,20 +67,14 @@ export const SectionHeading = ({
   subtitle?: ReactNode;
   align?: "center" | "left";
 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-80px" }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-    className={`mb-14 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}`}
-  >
+  <div className={`mb-14 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}`}>
     <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-orange-200">
       <span className="h-1.5 w-1.5 rounded-full bg-orange-400 shadow-[0_0_12px_2px_rgba(251,146,60,0.8)]" />
       {eyebrow}
     </p>
     <h2 className="text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">{title}</h2>
     {subtitle && <p className="mt-5 text-base leading-relaxed text-white/60 sm:text-lg">{subtitle}</p>}
-  </motion.div>
+  </div>
 );
 
 const getRemaining = (target: number) => {
@@ -137,7 +153,7 @@ export const IqArenaTerms = () => (
       <Link to="/privacy-policy" className="font-semibold text-orange-300 underline-offset-4 hover:underline">
         Privacy Policy
       </Link>
-      . Presented by {IQ_ARENA.organizer} in collaboration with {IQ_ARENA.collaborationPartner}. Event partner:{" "}
+      . Presented by {IQ_ARENA.organizer} in association with {IQ_ARENA.collaborationPartner}. Event partner:{" "}
       {IQ_ARENA.eventPartner}.
     </p>
   </div>

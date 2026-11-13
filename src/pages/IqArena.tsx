@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowRight, Award, Brain, Briefcase, Building2, CalendarDays, Camera, Crown, FileText, Flame, Gift,
@@ -10,7 +10,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
-  ArenaBackground, Countdown, GradientText, IqArenaTerms, SectionHeading,
+  ArenaBackground, Countdown, GradientText, IqArenaTerms, SectionHeading, ShineSweep,
 } from "@/components/iq-arena/ArenaShared";
 import {
   AFTER_PARTY, ASSESSMENT_PILLARS, AUTH_REDIRECT_PATH, FAQS, IQ_ARENA, PERKS, PRIZES, REGISTER_PATH, ROUNDS,
@@ -36,20 +36,83 @@ const PARTY_GRADIENTS = [
   "from-fuchsia-500 to-violet-700",
 ];
 
+// Logos live in frontend/public. If a file is missing, the card falls back to its icon.
+const PARTNERS = [
+  { label: "Presented by", name: IQ_ARENA.organizer, logo: "/logo.png", icon: GraduationCap },
+  { label: "In association with", name: IQ_ARENA.collaborationPartner, logo: "/career-critics-logo.png", icon: Target },
+  { label: "Event partner", name: IQ_ARENA.eventPartner, logo: "/sparsh-global-business-school-logo.png", icon: Building2 },
+];
+
+const PartnerLogo = ({ src, alt, icon: Icon }: { src: string; alt: string; icon: typeof Brain }) => {
+  const [failed, setFailed] = useState(false);
+  return (
+    <div className="grid h-16 w-28 shrink-0 place-items-center overflow-hidden rounded-xl bg-white p-1.5 shadow-lg shadow-black/30 ring-1 ring-white/10">
+      {failed ? (
+        <Icon className="h-7 w-7 text-orange-500" />
+      ) : (
+        <img
+          src={src}
+          alt={`${alt} logo`}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="h-[52px] w-[100px] object-contain"
+        />
+      )}
+    </div>
+  );
+};
+
 const MARQUEE = [
   "Think Big", "Play Smart", "Own the Future", "5 Rounds", "One Champion",
   `${formatINR(IQ_ARENA.prizePool)} in prizes`, IQ_ARENA.eventDateLabel, IQ_ARENA.region,
 ];
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
+const SHORT_EVENT_DATE = new Date(IQ_ARENA.eventDateISO).toLocaleDateString("en-IN", {
+  day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata",
 });
+
+/**
+ * Rounds timeline line. The cards are always visible; only this line fills with orange as the
+ * visitor scrolls through the section. Shown fully filled when reduced motion is on.
+ */
+const RoundsLine = ({ target }: { target: RefObject<HTMLDivElement> }) => {
+  const reduceMotion = useReducedMotion();
+  // The glowing tip tracks a point 80% down the screen, so the line is complete as the final round comes into view.
+  const { scrollYProgress } = useScroll({ target, offset: ["start 80%", "end 80%"] });
+  const tipTop = useTransform(scrollYProgress, (v) => `${v * 100}%`);
+  return (
+    <div aria-hidden className="pointer-events-none absolute bottom-0 left-6 top-0 w-0.5 -translate-x-1/2 lg:left-1/2">
+      <div className="absolute inset-0 rounded-full bg-white/10" />
+      <motion.div
+        className="absolute inset-0 origin-top rounded-full bg-gradient-to-b from-amber-300 via-orange-500 to-rose-500 shadow-[0_0_12px_rgba(249,115,22,0.7)]"
+        style={{ scaleY: reduceMotion ? 1 : scrollYProgress }}
+      />
+      {!reduceMotion && (
+        <motion.span
+          className="absolute left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-200 shadow-[0_0_16px_4px_rgba(251,191,36,0.8)]"
+          style={{ top: tipTop }}
+        />
+      )}
+    </div>
+  );
+};
 
 const IqArena = () => {
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
+
+  // Sticky mobile Register bar: shown once the hero's Register button has scrolled away,
+  // hidden again whenever another Register button or the footer is on screen.
+  const heroCtaRef = useRef<HTMLDivElement>(null);
+  const pricingCtaRef = useRef<HTMLButtonElement>(null);
+  const finalCtaRef = useRef<HTMLButtonElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const heroCtaVisible = useInView(heroCtaRef, { initial: true });
+  const pricingCtaVisible = useInView(pricingCtaRef);
+  const finalCtaVisible = useInView(finalCtaRef);
+  const footerVisible = useInView(footerRef);
+  const showStickyCta = !heroCtaVisible && !pricingCtaVisible && !finalCtaVisible && !footerVisible;
 
   useEffect(() => {
     document.title = "IQ Arena 2027 — Quiz Championship | Educate Me";
@@ -116,14 +179,16 @@ const IqArena = () => {
                 ))}
               </div>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <div ref={heroCtaRef} className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <button
                   onClick={goRegister}
                   className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 px-8 py-4 text-base font-extrabold text-white shadow-[0_10px_40px_-5px_rgba(249,115,22,0.6)] transition-all hover:scale-[1.03] hover:shadow-[0_14px_50px_-5px_rgba(249,115,22,0.8)] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
                 >
-                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                  Register Now — {formatINR(IQ_ARENA.registrationFee)}
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ShineSweep delay={1} />
+                  <span className="relative inline-flex items-center gap-2">
+                    Register Now — {formatINR(IQ_ARENA.registrationFee)}
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </span>
                 </button>
                 <button
                   onClick={() => scrollTo("rounds")}
@@ -204,28 +269,18 @@ const IqArena = () => {
       <section className="relative py-16">
         <div className="container mx-auto px-4">
           <div className="grid gap-4 md:grid-cols-3">
-            {[
-              { label: "Presented by", name: IQ_ARENA.organizer, logo: "/logo.png", icon: GraduationCap },
-              { label: "In collaboration with", name: IQ_ARENA.collaborationPartner, icon: Target },
-              { label: "Event partner", name: IQ_ARENA.eventPartner, icon: Building2 },
-            ].map((p, i) => (
-              <motion.div
+            {PARTNERS.map((p, i) => (
+              <div
                 key={p.label}
-                {...fadeUp(i * 0.1)}
+
                 className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-orange-400/30 hover:bg-white/[0.05]"
               >
-                {p.logo ? (
-                  <img src={p.logo} alt={p.name} className="h-14 w-14 rounded-xl bg-white object-cover p-1" />
-                ) : (
-                  <div className="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-orange-500/25 to-violet-500/20 ring-1 ring-white/10">
-                    <p.icon className="h-6 w-6 text-orange-200" />
-                  </div>
-                )}
+                <PartnerLogo src={p.logo} alt={p.name} icon={p.icon} />
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">{p.label}</p>
                   <p className="mt-0.5 text-lg font-extrabold text-white">{p.name}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -247,9 +302,9 @@ const IqArena = () => {
             {ASSESSMENT_PILLARS.map((p, i) => {
               const Icon = PILLAR_ICONS[p.key];
               return (
-                <motion.div
+                <div
                   key={p.key}
-                  {...fadeUp(i * 0.08)}
+
                   className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-orange-400/40"
                 >
                   <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-orange-500/10 blur-2xl transition-opacity group-hover:opacity-100" />
@@ -258,7 +313,7 @@ const IqArena = () => {
                   </div>
                   <h3 className="relative text-base font-bold leading-snug text-white">{p.title}</h3>
                   <p className="relative mt-2 text-sm leading-relaxed text-white/55">{p.text}</p>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -296,9 +351,9 @@ const IqArena = () => {
                 ],
               },
             ].map((c, i) => (
-              <motion.div
+              <div
                 key={c.title}
-                {...fadeUp(i * 0.1)}
+
                 className="rounded-3xl border border-white/10 bg-[#0d0d17] p-7 shadow-xl shadow-black/30"
               >
                 <div className="mb-5 flex items-center gap-3">
@@ -315,7 +370,7 @@ const IqArena = () => {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -335,19 +390,15 @@ const IqArena = () => {
             }
           />
 
-          <div className="relative mx-auto max-w-5xl">
-            <div className="absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-orange-500/0 via-orange-500/60 to-orange-500/0 lg:left-1/2" />
+          <div ref={timelineRef} className="relative mx-auto max-w-5xl">
+            <RoundsLine target={timelineRef} />
             {ROUNDS.map((r, i) => {
               const Icon = ROUND_ICONS[i];
               const even = i % 2 === 0;
               const finale = i === ROUNDS.length - 1;
               return (
-                <motion.div
+                <div
                   key={r.no}
-                  initial={{ opacity: 0, x: even ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
                   className={`relative mb-8 pl-16 lg:mb-12 lg:w-1/2 ${even ? "lg:pl-0 lg:pr-14" : "lg:ml-auto lg:pl-14"}`}
                 >
                   <div
@@ -393,7 +444,7 @@ const IqArena = () => {
                     <p className="relative mt-1 text-sm font-semibold text-white/75">{r.subtitle}</p>
                     <p className="relative mt-3 text-sm leading-relaxed text-white/55">{r.text}</p>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -425,7 +476,9 @@ const IqArena = () => {
                       text: "text-amber-200",
                       glow: "shadow-[0_0_80px_-10px_rgba(251,191,36,0.55)]",
                       step: "h-28",
-                      icon: Crown,
+                      icon: Trophy,
+                      dash: "border-amber-200/60",
+                      badge: "ring-amber-300 text-amber-200",
                     }
                   : p.rank === 2
                     ? {
@@ -436,6 +489,8 @@ const IqArena = () => {
                         glow: "shadow-[0_0_60px_-15px_rgba(203,213,225,0.4)]",
                         step: "h-20",
                         icon: Medal,
+                        dash: "border-slate-200/45",
+                        badge: "ring-slate-300 text-slate-100",
                       }
                     : {
                         ring: "border-orange-400/40",
@@ -444,13 +499,15 @@ const IqArena = () => {
                         text: "text-orange-200",
                         glow: "shadow-[0_0_60px_-15px_rgba(234,88,12,0.45)]",
                         step: "h-14",
-                        icon: Medal,
+                        icon: Award,
+                        dash: "border-orange-300/45",
+                        badge: "ring-orange-400 text-orange-200",
                       };
               const Icon = theme.icon;
               return (
-                <motion.div
+                <div
                   key={p.rank}
-                  {...fadeUp(i * 0.12)}
+
                   className={`flex flex-col ${p.rank === 1 ? "order-first md:order-none" : ""}`}
                 >
                   <div
@@ -461,13 +518,55 @@ const IqArena = () => {
                     {p.rank === 1 && (
                       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent" />
                     )}
-                    <div
-                      className={`mx-auto grid place-items-center rounded-full bg-gradient-to-br ${theme.medal} shadow-xl ${
-                        p.rank === 1 ? "h-24 w-24" : "h-20 w-20"
-                      }`}
+                    {/* Animated medal: floats, ring rotates, shine sweeps across. Static when reduced motion is on. */}
+                    <motion.div
+                      className={`relative mx-auto ${p.rank === 1 ? "mt-5 h-24 w-24" : "h-20 w-20"}`}
+                      animate={reduceMotion ? undefined : { y: [0, -8, 0], rotate: [0, -4, 4, 0] }}
+                      transition={{ duration: p.rank === 1 ? 3.2 : 3.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
                     >
-                      <Icon className={`${p.rank === 1 ? "h-11 w-11" : "h-9 w-9"} text-black/70`} />
-                    </div>
+                      <span
+                        aria-hidden
+                        className={`absolute -inset-1 rounded-full bg-gradient-to-br ${theme.medal} opacity-50 blur-xl ${
+                          reduceMotion ? "" : "animate-pulse"
+                        }`}
+                      />
+                      <motion.span
+                        aria-hidden
+                        className={`absolute -inset-2.5 rounded-full border-2 border-dashed ${theme.dash}`}
+                        animate={reduceMotion ? undefined : { rotate: p.rank === 2 ? -360 : 360 }}
+                        transition={{ duration: p.rank === 1 ? 12 : 16, repeat: Infinity, ease: "linear" }}
+                      />
+                      <div
+                        className={`relative grid h-full w-full place-items-center overflow-hidden rounded-full bg-gradient-to-br ${theme.medal} shadow-xl ring-4 ring-black/20`}
+                      >
+                        {!reduceMotion && (
+                          <motion.span
+                            aria-hidden
+                            className="absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/70 to-transparent"
+                            animate={{ x: ["-150%", "350%"] }}
+                            transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 2.8, ease: "easeInOut", delay: 0.8 + i * 0.6 }}
+                          />
+                        )}
+                        <Icon className={`relative ${p.rank === 1 ? "h-11 w-11" : "h-9 w-9"} text-black/70`} />
+                      </div>
+                      {p.rank === 1 && (
+                        <Crown
+                          aria-hidden
+                          className="absolute -top-7 left-1/2 h-7 w-7 -translate-x-1/2 fill-amber-300/40 text-amber-200 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]"
+                        />
+                      )}
+                      {p.rank === 1 && !reduceMotion && (
+                        <>
+                          <Sparkles aria-hidden className="absolute -left-4 top-1 h-4 w-4 animate-sparkle text-amber-200" />
+                          <Star aria-hidden className="absolute -right-4 bottom-3 h-3.5 w-3.5 animate-sparkle fill-amber-200 text-amber-200 [animation-delay:0.7s]" />
+                        </>
+                      )}
+                      <span
+                        className={`absolute -bottom-1 -right-1 grid h-8 w-8 place-items-center rounded-full bg-[#0b0b12] text-sm font-black ring-2 ${theme.badge}`}
+                      >
+                        {p.rank}
+                      </span>
+                    </motion.div>
                     <p className={`mt-5 text-xs font-bold uppercase tracking-[0.3em] ${theme.text}`}>{p.position}</p>
                     <h3 className="mt-1 text-xl font-black uppercase tracking-tight text-white">{p.title}</h3>
                     <p className={`mt-4 font-black tracking-tight text-white ${p.rank === 1 ? "text-5xl lg:text-6xl" : "text-4xl"}`}>
@@ -488,7 +587,7 @@ const IqArena = () => {
                   >
                     <span className="text-4xl font-black text-white/15">{p.rank}</span>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -510,21 +609,20 @@ const IqArena = () => {
             {PERKS.map((perk, i) => {
               const Icon = PERK_ICONS[perk.key];
               return (
-                <motion.div
+                <div
                   key={perk.key}
-                  {...fadeUp((i % 5) * 0.06)}
+
                   className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-orange-400/40 hover:bg-white/[0.06]"
                 >
                   <Icon className="h-6 w-6 text-orange-300 transition-transform group-hover:scale-110" />
                   <h3 className="mt-4 text-sm font-bold text-white">{perk.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-white/50">{perk.text}</p>
-                </motion.div>
+                </div>
               );
             })}
           </div>
 
-          <motion.blockquote
-            {...fadeUp(0.1)}
+          <blockquote
             className="relative mx-auto mt-16 max-w-3xl rounded-3xl border border-orange-400/20 bg-gradient-to-br from-orange-500/10 via-transparent to-violet-500/10 px-8 py-10 text-center"
           >
             <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-7xl font-black leading-none text-orange-400/60">“</span>
@@ -534,7 +632,7 @@ const IqArena = () => {
             <p className="mt-4 text-sm font-bold uppercase tracking-[0.2em] text-orange-300">
               At IQ Arena, everyone walks away with something worth celebrating.
             </p>
-          </motion.blockquote>
+          </blockquote>
         </div>
       </section>
 
@@ -553,14 +651,21 @@ const IqArena = () => {
               </>
             }
           />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          {/* 6-col grid on desktop: the three short cards share row 1, the two long-description cards share row 2. */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
             {AFTER_PARTY.map((item, i) => {
               const Icon = PARTY_ICONS[item.key];
+              const isLong = item.key === "founders" || item.key === "dj";
+              const span = isLong
+                ? "sm:col-span-2 lg:col-span-3"
+                : item.key === "win"
+                  ? "sm:col-span-2 lg:col-span-2"
+                  : "lg:col-span-2";
               return (
-                <motion.div
+                <div
                   key={item.key}
-                  {...fadeUp(i * 0.08)}
-                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-fuchsia-400/40"
+
+                  className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-fuchsia-400/40 ${span}`}
                 >
                   <div
                     className={`mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br ${PARTY_GRADIENTS[i]} shadow-lg transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110`}
@@ -568,13 +673,13 @@ const IqArena = () => {
                     <Icon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="mt-5 text-base font-black uppercase tracking-wide text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/55">{item.text}</p>
-                </motion.div>
+                  <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-white/55">{item.text}</p>
+                </div>
               );
             })}
           </div>
 
-          <motion.div {...fadeUp(0.1)} className="mt-16 text-center">
+          <div className="mt-16 text-center">
             <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-2xl font-black uppercase tracking-tight sm:text-4xl">
               <span>Think Big.</span>
               <span className="text-orange-400">Play Smart.</span>
@@ -584,15 +689,14 @@ const IqArena = () => {
             <p className="mt-5 text-white/55">
               Come for the challenge. Stay for the connections. Leave with stories worth telling.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ───────────────────────── PRICING CTA */}
       <section id="register" className="relative scroll-mt-24 py-24">
         <div className="container mx-auto px-4">
-          <motion.div
-            {...fadeUp()}
+          <div
             className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] border border-orange-400/30 bg-gradient-to-br from-[#1a0f0a] via-[#0f0b16] to-[#160a14] p-8 shadow-[0_0_100px_-20px_rgba(249,115,22,0.5)] sm:p-12"
           >
             <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-orange-500/25 blur-3xl" />
@@ -644,18 +748,22 @@ const IqArena = () => {
                   </div>
                 </div>
                 <button
+                  ref={pricingCtaRef}
                   onClick={goRegister}
-                  className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 py-4 text-base font-extrabold text-white shadow-[0_10px_40px_-5px_rgba(249,115,22,0.6)] transition-all hover:scale-[1.02]"
+                  className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 py-4 text-base font-extrabold text-white shadow-[0_10px_40px_-5px_rgba(249,115,22,0.6)] transition-all hover:scale-[1.02]"
                 >
-                  Register Now
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ShineSweep delay={0.4} />
+                  <span className="relative inline-flex items-center gap-2">
+                    Register Now
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </span>
                 </button>
                 <p className="mt-4 flex items-center justify-center gap-2 text-xs text-white/45">
                   <ShieldCheck className="h-3.5 w-3.5" /> Secure payment via Razorpay · One registration per participant
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -688,8 +796,7 @@ const IqArena = () => {
             title={<>The rules of the <GradientText>Arena</GradientText></>}
             subtitle="Please read these terms carefully. You must accept them before completing your registration."
           />
-          <motion.div
-            {...fadeUp()}
+          <div
             className="rounded-3xl border border-white/10 bg-[#0d0d17] p-6 shadow-xl shadow-black/30 sm:p-10"
           >
             <div className="mb-8 flex items-center gap-3 text-white/60">
@@ -697,7 +804,7 @@ const IqArena = () => {
               <span className="text-sm font-semibold">IQ Arena 2027 — Participant Terms & Conditions</span>
             </div>
             <IqArenaTerms />
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -705,7 +812,7 @@ const IqArena = () => {
       <section className="relative overflow-hidden py-24">
         <ArenaBackground />
         <div className="container relative mx-auto px-4 text-center">
-          <motion.div {...fadeUp()}>
+          <div>
             <PartyPopper className="mx-auto h-12 w-12 text-orange-300" />
             <h2 className="mx-auto mt-6 max-w-3xl text-4xl font-black leading-tight text-white sm:text-6xl">
               Think big. Play smart. <GradientText>Own the future.</GradientText>
@@ -715,18 +822,57 @@ const IqArena = () => {
               {IQ_ARENA.eventDateLabel}.
             </p>
             <button
+              ref={finalCtaRef}
               onClick={goRegister}
-              className="group mt-10 inline-flex items-center gap-2 rounded-2xl bg-white px-10 py-4 text-base font-extrabold text-black shadow-[0_10px_50px_-10px_rgba(255,255,255,0.5)] transition-all hover:scale-[1.04]"
+              className="group relative mt-10 inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-white px-10 py-4 text-base font-extrabold text-black shadow-[0_10px_50px_-10px_rgba(255,255,255,0.5)] transition-all hover:scale-[1.04]"
             >
-              Register for IQ Arena 2027
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ShineSweep tone="orange" delay={0.8} />
+              <span className="relative inline-flex items-center gap-2">
+                Register for IQ Arena 2027
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </span>
             </button>
-          </motion.div>
+          </div>
         </div>
       </section>
       </main>
 
-      <Footer />
+      <div ref={footerRef}>
+        <Footer />
+      </div>
+
+      {/* Sticky Register bar, phones only (hidden from md up) */}
+      <AnimatePresence>
+        {showStickyCta && (
+          <motion.div
+            key="sticky-cta"
+            initial={reduceMotion ? { opacity: 0 } : { y: "110%" }}
+            animate={reduceMotion ? { opacity: 1 } : { y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { y: "110%" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#07070d]/90 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-lg md:hidden"
+          >
+            <div className="flex items-center gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-extrabold text-white">{IQ_ARENA.eventName}</p>
+                <p className="truncate text-xs text-white/55">
+                  {SHORT_EVENT_DATE} · {formatINR(IQ_ARENA.totalPayable)} incl. fees
+                </p>
+              </div>
+              <button
+                onClick={goRegister}
+                className="relative inline-flex shrink-0 items-center gap-1.5 overflow-hidden rounded-xl bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 px-5 py-3 text-sm font-extrabold text-white shadow-[0_8px_30px_-6px_rgba(249,115,22,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
+              >
+                <ShineSweep />
+                <span className="relative inline-flex items-center gap-1.5">
+                  Register Now
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

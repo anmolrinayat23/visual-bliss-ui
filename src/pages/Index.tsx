@@ -13,6 +13,7 @@ import EmMat from "./EmMat";
 import BookSession from "./BookSession";
 import About from "./About";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
+import IqArenaSpotlight from "@/components/iq-arena/IqArenaSpotlight";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ const Index = () => {
         <Header />
         <main className="pt-16">
           <Hero />
+          <IqArenaSpotlight />
           <SuccessStories />
           <Services showFooter={false}/>
           <SessionGallery />

@@ -13,8 +13,8 @@ export const IQ_ARENA = {
   venue: "Sparsh Business School, Noida",
   region: "Delhi NCR",
   organizer: "Educate Me",
-  collaborationPartner: "Career Critics",
-  eventPartner: "Sparsh Business School, Noida",
+  collaborationPartner: "Career Critics", // shown as "In association with"
+  eventPartner: "Sparsh Business School",
   prizePool: 90000,
   contactEmail: "admissions@educate-me.in",
   contactPhone: "7974163158",
@@ -115,8 +115,8 @@ export const AFTER_PARTY = [
   { key: "refuel", title: "Refuel & Relax", text: "Refreshments for all participants." },
   { key: "campus", title: "Campus Takeover", text: "Explore the host university with a guided campus tour." },
   { key: "win", title: "The Big Win Moment", text: "Celebrate our champions at the grand award ceremony." },
-  { key: "founders", title: "Founders Unplugged", text: "Dinner, conversations and an interactive session with Educate Me and Career Critics Founders." },
-  { key: "dj", title: "Let's Get Loud!", text: "DJ night, music, dance and unforgettable memories." },
+  { key: "founders", title: "Founders Unplugged", text: "Got 100 questions about your Master's? Stop Googling everything! Join the founders of Career Critics & Educate Me for real conversations, honest answers, a little career reality check and a round table where no question is too awkward." },
+  { key: "dj", title: "Let's Get Loud!", text: "Done exercising your brains? Now it's time to let loose! Join us at Sparsh Business School for an exclusive fun-filled experience packed with crazy activities, unexpected challenges, laughter and unlimited energy. No lectures, no case studies, no academics – just pure fun. And trust us, you don't want to miss this!" },
 ] as const;
 
 export const FAQS = [

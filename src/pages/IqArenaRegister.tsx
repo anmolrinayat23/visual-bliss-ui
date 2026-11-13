@@ -301,7 +301,7 @@ const SuccessView = ({ registration }: { registration: Registration }) => {
     { icon: CalendarDays, label: "Quiz date", value: `${IQ_ARENA.eventDay}, ${IQ_ARENA.eventDateLabel}` },
     { icon: MapPin, label: "Venue", value: `${IQ_ARENA.venue} (${IQ_ARENA.region})` },
     { icon: Sparkles, label: "Presented by", value: IQ_ARENA.organizer },
-    { icon: Target, label: "In collaboration with", value: IQ_ARENA.collaborationPartner },
+    { icon: Target, label: "In association with", value: IQ_ARENA.collaborationPartner },
     { icon: Building2, label: "Event partner", value: IQ_ARENA.eventPartner },
     { icon: Clock, label: "Mode", value: "Offline — in-person attendance" },
   ];
@@ -1076,7 +1076,7 @@ const IqArenaRegister = () => {
                     </div>
 
                     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 text-xs leading-relaxed text-white/50">
-                      Presented by <span className="font-bold text-white/80">{IQ_ARENA.organizer}</span> · In collaboration
+                      Presented by <span className="font-bold text-white/80">{IQ_ARENA.organizer}</span> · In association
                       with <span className="font-bold text-white/80">{IQ_ARENA.collaborationPartner}</span> · Event partner{" "}
                       <span className="font-bold text-white/80">{IQ_ARENA.eventPartner}</span>
                     </div>
