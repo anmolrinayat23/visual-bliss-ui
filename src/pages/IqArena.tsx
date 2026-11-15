@@ -37,25 +37,41 @@ const PARTY_GRADIENTS = [
 ];
 
 // Logos live in frontend/public. If a file is missing, the card falls back to its icon.
+// The "Presented by" card is featured: bigger, highlighted, with a larger logo.
 const PARTNERS = [
-  { label: "Presented by", name: IQ_ARENA.organizer, logo: "/logo.png", icon: GraduationCap },
-  { label: "In association with", name: IQ_ARENA.collaborationPartner, logo: "/career-critics-logo.png", icon: Target },
-  { label: "Event partner", name: IQ_ARENA.eventPartner, logo: "/sparsh-global-business-school-logo.png", icon: Building2 },
+  {
+    label: "Presented by",
+    name: IQ_ARENA.organizer,
+    tagline: "Where Potential Becomes Progress",
+    logo: "/educate-me-logo-cropped.png",
+    icon: GraduationCap,
+    featured: true,
+  },
+  { label: "In association with", name: IQ_ARENA.collaborationPartner, logo: "/career-critics-logo.png", icon: Target, featured: false },
+  { label: "Event partner", name: IQ_ARENA.eventPartner, logo: "/sparsh-global-business-school-logo.png", icon: Building2, featured: false },
 ];
 
-const PartnerLogo = ({ src, alt, icon: Icon }: { src: string; alt: string; icon: typeof Brain }) => {
+const PartnerLogo = ({
+  src, alt, icon: Icon, featured = false,
+}: { src: string; alt: string; icon: typeof Brain; featured?: boolean }) => {
   const [failed, setFailed] = useState(false);
   return (
-    <div className="grid h-16 w-28 shrink-0 place-items-center overflow-hidden rounded-xl bg-white p-1.5 shadow-lg shadow-black/30 ring-1 ring-white/10">
+    <div
+      className={`grid shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ${
+        featured
+          ? "h-24 w-24 p-1.5 shadow-orange-500/40 ring-orange-300/60 sm:h-28 sm:w-28"
+          : "h-16 w-28 rounded-xl p-1.5 shadow-black/30 ring-white/10"
+      }`}
+    >
       {failed ? (
-        <Icon className="h-7 w-7 text-orange-500" />
+        <Icon className={`${featured ? "h-10 w-10" : "h-7 w-7"} text-orange-500`} />
       ) : (
         <img
           src={src}
           alt={`${alt} logo`}
           loading="lazy"
           onError={() => setFailed(true)}
-          className="h-[52px] w-[100px] object-contain"
+          className={featured ? "h-[84px] w-[84px] object-contain sm:h-[100px] sm:w-[100px]" : "h-[52px] w-[100px] object-contain"}
         />
       )}
     </div>
@@ -115,7 +131,7 @@ const IqArena = () => {
   const showStickyCta = !heroCtaVisible && !pricingCtaVisible && !finalCtaVisible && !footerVisible;
 
   useEffect(() => {
-    document.title = "IQ Arena 2027 — Quiz Championship | Educate Me";
+    document.title = "IQ Arena 2027: Quiz Championship | Educate Me";
   }, []);
 
   const goRegister = () => {
@@ -186,7 +202,7 @@ const IqArena = () => {
                 >
                   <ShineSweep delay={1} />
                   <span className="relative inline-flex items-center gap-2">
-                    Register Now — {formatINR(IQ_ARENA.registrationFee)}
+                    Register Now for {formatINR(IQ_ARENA.registrationFee)}
                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </span>
                 </button>
@@ -249,7 +265,7 @@ const IqArena = () => {
 
       {/* ───────────────────────── MARQUEE */}
       <div className="relative -my-2 overflow-hidden py-4">
-        <div className="-rotate-1 border-y border-orange-300/30 bg-gradient-to-r from-orange-600 via-amber-500 to-rose-500 py-4 shadow-[0_0_60px_rgba(249,115,22,0.35)]">
+        <div className="border-y border-orange-300/30 bg-gradient-to-r from-orange-600 via-amber-500 to-rose-500 py-4 shadow-[0_0_60px_rgba(249,115,22,0.35)]">
           <motion.div
             className="flex w-max gap-10 whitespace-nowrap"
             animate={{ x: ["0%", "-50%"] }}
@@ -268,20 +284,37 @@ const IqArena = () => {
       {/* ───────────────────────── PARTNERS */}
       <section className="relative py-16">
         <div className="container mx-auto px-4">
-          <div className="grid gap-4 md:grid-cols-3">
-            {PARTNERS.map((p, i) => (
-              <div
-                key={p.label}
-
-                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-orange-400/30 hover:bg-white/[0.05]"
-              >
-                <PartnerLogo src={p.logo} alt={p.name} icon={p.icon} />
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">{p.label}</p>
-                  <p className="mt-0.5 text-lg font-extrabold text-white">{p.name}</p>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
+            {PARTNERS.map((p) =>
+              p.featured ? (
+                <div
+                  key={p.label}
+                  className="relative flex items-center gap-5 overflow-hidden rounded-3xl border border-orange-400/50 bg-gradient-to-br from-orange-500/20 via-amber-500/10 to-transparent p-5 shadow-[0_0_60px_-12px_rgba(249,115,22,0.55)] md:col-span-2 lg:col-span-1 sm:p-6"
+                >
+                  <div aria-hidden className="pointer-events-none absolute -left-10 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-orange-500/30 blur-3xl" />
+                  <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-200/80 to-transparent" />
+                  <div className="relative">
+                    <PartnerLogo src={p.logo} alt={p.name} icon={p.icon} featured />
+                  </div>
+                  <div className="relative min-w-0">
+                    <p className="text-xs font-black uppercase tracking-[0.25em] text-orange-300">{p.label}</p>
+                    <p className="mt-1 text-2xl font-black leading-tight text-white sm:text-3xl">{p.name}</p>
+                    <p className="mt-1 text-sm font-semibold text-amber-200/80">{p.tagline}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ) : (
+                <div
+                  key={p.label}
+                  className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-orange-400/30 hover:bg-white/[0.05]"
+                >
+                  <PartnerLogo src={p.logo} alt={p.name} icon={p.icon} />
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">{p.label}</p>
+                    <p className="mt-0.5 text-lg font-extrabold text-white">{p.name}</p>
+                  </div>
+                </div>
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -296,7 +329,7 @@ const IqArena = () => {
                 It's not just about getting <GradientText>answers right.</GradientText>
               </>
             }
-            subtitle="It's about how you think, lead, communicate and stand out! Not just the right answers — IQ ARENA will assess:"
+            subtitle="It's about how you think, lead, communicate and stand out! Not just the right answers. IQ ARENA will assess:"
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {ASSESSMENT_PILLARS.map((p, i) => {
@@ -337,7 +370,7 @@ const IqArena = () => {
                 icon: MapPin,
                 title: "Event location",
                 points: [
-                  `${IQ_ARENA.region} — ${IQ_ARENA.venue}.`,
+                  `${IQ_ARENA.venue} (${IQ_ARENA.region}).`,
                   `${IQ_ARENA.eventDay}, ${IQ_ARENA.eventDateLabel}. Offline event, in-person attendance.`,
                 ],
               },
@@ -711,7 +744,7 @@ const IqArena = () => {
                 <ul className="mt-7 space-y-3">
                   {[
                     `${IQ_ARENA.eventDay}, ${IQ_ARENA.eventDateLabel}`,
-                    `${IQ_ARENA.venue} (${IQ_ARENA.region}) — offline`,
+                    `${IQ_ARENA.venue} (${IQ_ARENA.region}), offline event`,
                     "Instant confirmation by email after payment",
                     "Certificate, goodies, networking & DJ night",
                   ].map((t) => (
@@ -801,7 +834,7 @@ const IqArena = () => {
           >
             <div className="mb-8 flex items-center gap-3 text-white/60">
               <FileText className="h-5 w-5 text-orange-300" />
-              <span className="text-sm font-semibold">IQ Arena 2027 — Participant Terms & Conditions</span>
+              <span className="text-sm font-semibold">IQ Arena 2027: Participant Terms & Conditions</span>
             </div>
             <IqArenaTerms />
           </div>

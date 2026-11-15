@@ -1,4 +1,4 @@
-// IQ Arena 2027 — display constants. The server (backend/config/iqArena.js) is the source of
+// IQ Arena 2027 display constants. The server (backend/config/iqArena.js) is the source of
 // truth for the amount charged; these values are for display only and must be kept in sync.
 
 export const IQ_ARENA = {
@@ -87,7 +87,7 @@ export const PRIZES = [
     position: "1st Position",
     title: "The Ultimate Champion",
     amount: 50000,
-    perks: ["Cash prize awarded on the spot", "Exclusive GOLD MEDAL", "THE EM-IQ ARENA CUP — the ultimate trophy!"],
+    perks: ["Cash prize awarded on the spot", "Exclusive GOLD MEDAL", "THE EM-IQ ARENA CUP, the ultimate trophy!"],
   },
   {
     rank: 3,
@@ -116,7 +116,7 @@ export const AFTER_PARTY = [
   { key: "campus", title: "Campus Takeover", text: "Explore the host university with a guided campus tour." },
   { key: "win", title: "The Big Win Moment", text: "Celebrate our champions at the grand award ceremony." },
   { key: "founders", title: "Founders Unplugged", text: "Got 100 questions about your Master's? Stop Googling everything! Join the founders of Career Critics & Educate Me for real conversations, honest answers, a little career reality check and a round table where no question is too awkward." },
-  { key: "dj", title: "Let's Get Loud!", text: "Done exercising your brains? Now it's time to let loose! Join us at Sparsh Business School for an exclusive fun-filled experience packed with crazy activities, unexpected challenges, laughter and unlimited energy. No lectures, no case studies, no academics – just pure fun. And trust us, you don't want to miss this!" },
+  { key: "dj", title: "Let the Chaos Begin!", text: "Done exercising your brains? Now it's time to let loose! Join us at Sparsh Business School for an exclusive fun-filled experience packed with crazy activities, unexpected challenges, laughter and unlimited energy. No lectures, no case studies, no academics, just pure fun. And trust us, you don't want to miss this!" },
 ] as const;
 
 export const FAQS = [
@@ -134,7 +134,7 @@ export const FAQS = [
   },
   {
     q: "How much does it cost?",
-    a: `The registration fee is ₹${IQ_ARENA.registrationFee} plus a ₹${IQ_ARENA.platformCharge} platform fee — ₹${IQ_ARENA.totalPayable} in total, paid securely online through Razorpay.`,
+    a: `The registration fee is ₹${IQ_ARENA.registrationFee} plus a ₹${IQ_ARENA.platformCharge} platform fee (₹${IQ_ARENA.totalPayable} in total), paid securely online through Razorpay.`,
   },
   {
     q: "How are participants selected?",

@@ -346,7 +346,7 @@ const IqArenaSpotlight = () => {
             >
               <ShineSweep delay={0.6} />
               <span className="relative inline-flex items-center gap-2">
-                Register Now — {formatINR(IQ_ARENA.registrationFee)}
+                Register Now for {formatINR(IQ_ARENA.registrationFee)}
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </span>
             </button>
